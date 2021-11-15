@@ -1,7 +1,11 @@
-import hashlib
+import re
 
+f = open("companies.txt", "r")
+test = f.read().split("\n")
+f.close()
 
-salt = "EXAMPLESALT"
-stdPassword = hashlib.sha256(salt.encode() + b'password123').hexdigest()
+newArray = []
+for each in test:
+    newArray.append(re.sub('[^A-Za-z0-9]+', '', each) + ".co.uk")
 
-print(stdPassword)
+print(newArray)
