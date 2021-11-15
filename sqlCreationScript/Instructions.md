@@ -1,4 +1,4 @@
-#How to run
+# How to run
 
 - Run the python file with:
 py tablePopulator.py 
