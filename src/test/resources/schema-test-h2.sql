@@ -203,12 +203,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`UserStampLinks`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`UserStampLinks` (
-    `User_Stamp_Link_Id` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `mydb`.`UserStampBoards` (
+    `User_Stamp_Board_Id` INT NOT NULL AUTO_INCREMENT,
     `User_Id` INT NOT NULL,
     `Stamp_Board_Id` INT NOT NULL,
     `User_Stamp_Position` INT NOT NULL,
-    PRIMARY KEY (`User_Stamp_Link_Id`, `User_Id`, `Stamp_Board_Id`),
+    PRIMARY KEY (`User_Stamp_Board_Id`, `User_Id`, `Stamp_Board_Id`),
     INDEX `fk_UserStampLinks_Users1_idx` (`User_Id` ASC) VISIBLE,
     INDEX `fk_UserStampLinks_StampBoards1_idx` (`Stamp_Board_Id` ASC) VISIBLE,
     CONSTRAINT `fk_UserStampLinks_Users1`
