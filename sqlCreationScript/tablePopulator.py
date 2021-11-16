@@ -78,7 +78,7 @@ def companyPopulator(amount):
     # Randomly select amount of companies
     companyNames = []
     for i in range(0, amount):
-        companyNames.append(tempCompanyNames[random.randint(0, len(tempCompanyNames))])
+        companyNames.append(tempCompanyNames[random.randint(0, len(tempCompanyNames)-1)])
 
     # Get full list of countries, might need amending (lots of potentially unused countries)
     f = open("countries.txt", "r")
