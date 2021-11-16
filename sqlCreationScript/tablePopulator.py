@@ -2,6 +2,8 @@ import re
 import random
 import hashlib
 
+global current_user_id
+current_user_id = 2
 
 # Where pos = position on line, total = total elements in line, fileName is the file name and concat is to remove some
 # random text from surnames.csv
@@ -39,6 +41,7 @@ def createInsert(data, table, columns):
 #
 # Returns a list of complete insert statements
 def namePopulator(amount, userType):
+    global current_user_id
     # READ NAMES FROM FILE
     forenameList = nameReader(2, 5, "forenames.csv")
     surnameList = nameReader(0, 10, "surnames.csv", True)
@@ -59,10 +62,18 @@ def namePopulator(amount, userType):
     insertArray = []
     # Generate email from name, randomise 2fa status and append insert statement to array each iteration
     for i in range(0, amount):
-        twoFAMethod = random.randint(0, 1)
+        twoFAMethod = random.randint(1, 2)
         email = newForenames[i] + newSurnames[i] + "@email.com"
-        stringInsert = '"' + newForenames[i] + '","' + newSurnames[i] + '","' + email + '","' + stdPassword + '","' + profilePic + '",' + str(twoFAMethod) + "," + str(userType)
-        insertArray.append(createInsert(stringInsert, "Users", "User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id, User_Permission_Id"))
+        stringInsert = '"' + newForenames[i] + '","' + newSurnames[i] + '","' + email + '","' + stdPassword + '","' + profilePic + '",' + str(twoFAMethod)
+        insertArray.append(createInsert(stringInsert, "Users", "User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id"))
+
+    tempAmount = current_user_id
+    while current_user_id < (tempAmount+amount-1):
+        # print(current_user_id)
+        # print(current_user_id+amount)
+        stringInsert = str(current_user_id) + ',' + '1' + ',' + str(userType)
+        insertArray.append(createInsert(stringInsert, "UserPermissions", "User_ID, Shop_ID, Admin_Type_Id"))
+        current_user_id = current_user_id + 1
 
     return insertArray
 
