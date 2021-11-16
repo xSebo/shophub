@@ -95,11 +95,7 @@ def companyPopulator(amount):
     for i in range(0, amount):
         earnings = random.randint(0, 40000)
 
-        print(str(i) + " = index")
-        print(str(len(companyNames)) + " = companyNames")
-        print(str(len(websiteArray)) + " = websiteArray")
-        countryi = random.randint(0, len(countries))
-        print(str(countryi) + " = countriesindex, " + str(len(countries)) + " = countries length")
+        countryi = random.randint(0, len(countries)-1)
 
         stringInsert = '"' + companyNames[i] + '","' + websiteArray[i] + '","' + str(earnings) + '","' + countries[countryi] + '",' + str(random.randint(1, 2))
         insertArray.append(createInsert(stringInsert, "Shops", "Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active"))
