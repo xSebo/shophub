@@ -7,6 +7,7 @@
 	<link th:replace="fragments/nav.html :: nav-css"/>
 	<link rel="stylesheet" href="/css/index.css">
 	<link rel="stylesheet" href="/css/reward_card.css">
+	<link rel="stylesheet" href="/css/business_container.css">
 </head>
 <body>
 	<div th:replace="fragments/nav.html :: nav"></div>
@@ -49,7 +50,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="reward_card_img"></div>
+					<div class="reward_card_img" style="background-image: url('imgs/coke.jpg')"></div>
 				</div>
 			</div>
 
@@ -57,15 +58,50 @@
 		</div>
 	</div>
 	<div class="search_bar section">
-		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
+		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-direction-column mb-4">
 			<h1 class="title is-3">Where else can I earn rewards?</h1>
-			<div class="control has-icons-left" style="width: 60%;">
+			<div class="control has-icons-left mb-2" style="width: 60%;">
 				<input class="input" type="text" placeholder="Enter Brands or keywords e.g. Vegan, Clothing etc..">
 				<span class="icon is-small is-left">
 					<i class="fas fa-search"></i>
 				</span>
 			</div>
+			<div class="field is-grouped is-grouped-multiline" style="width: 60%;">
+				<div class="control">
+					<div class="tags has-addons">
+						<span class="tag gradient">Alex Smith</span>
+						<a class="tag is-delete"></a>
+					</div>
+				</div>
+			</div>
 		</div>
+
+		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-wrap-wrap">
+			<div class="business_container box">
+				<div class="image" style="background-image: url('imgs/coffee.jpg')"></div>
+				<div class="content">
+					<h1 class="title is-4 mb-1">Cafe Nero</h1>
+					<p class="mb-1">Free coffee at 6 stamps</p>
+					<div class="is-full-width" style="display:flex;justify-content: space-between;align-items: center">
+						<div class="level-left">
+								<span class="icon is-small is-left ml-1 mr-1">
+									<i class="fas fa-gift"></i>
+								</span>
+							<p>6</p>
+						</div>
+						<div class="level-right">
+							<button class="button is-rounded gradient">
+								View Shop
+								<span class="icon is-small is-left ml-1">
+										<i class="fas fa-arrow-right"></i>
+									</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </body>
 </html>

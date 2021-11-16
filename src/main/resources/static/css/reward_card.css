@@ -22,4 +22,7 @@
     background-color: red;
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
 }
