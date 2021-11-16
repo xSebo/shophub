@@ -43,11 +43,18 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`UserPermissions` (
     `User_Permission_Id` INT NOT NULL AUTO_INCREMENT,
-    `Shop_Id` INT NULL,
+    `User_Id` INT NOT NULL,
+    `Shop_Id` INT NOT NULL,
     `Admin_Type_Id` INT NOT NULL,
-    PRIMARY KEY (`User_Permission_Id`, `Shop_Id`, `Admin_Type_Id`),
+    PRIMARY KEY (`User_Permission_Id`, `User_Id`, `Shop_Id`, `Admin_Type_Id`),
+    INDEX `fk_UserPermissions_Users1_idx` (`User_Id` ASC) VISIBLE,
     INDEX `fk_UserPermissions_Shops1_idx` (`Shop_Id` ASC) VISIBLE,
     INDEX `fk_UserPermissions_AdminTypes1_idx` (`Admin_Type_Id` ASC) VISIBLE,
+    CONSTRAINT `fk_UserPermissions_Users1`
+        FOREIGN KEY (`User_Id`)
+            REFERENCES `mydb`.`Users` (`User_Id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
     CONSTRAINT `fk_UserPermissions_Shops1`
         FOREIGN KEY (`Shop_Id`)
             REFERENCES `mydb`.`Shops` (`Shop_Id`)
@@ -72,20 +79,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
     `User_Password` VARCHAR(150) NOT NULL,
     `User_Profile_Picture` VARCHAR(45) NOT NULL,
     `Two_Factor_Method_Id` INT NOT NULL,
-    `User_Permission_Id` INT NOT NULL,
     `User_Reset_Code` VARCHAR(45) NULL,
     `User_Reset_Code_Expiry` DATETIME NULL,
-    PRIMARY KEY (`User_Id`, `Two_Factor_Method_Id`, `User_Permission_Id`),
+    PRIMARY KEY (`User_Id`, `Two_Factor_Method_Id`),
     INDEX `fk_Users_TwoFactorMethods_idx` (`Two_Factor_Method_Id` ASC) VISIBLE,
-    INDEX `fk_Users_UserTypes1_idx` (`User_Permission_Id` ASC) VISIBLE,
         CONSTRAINT `fk_Users_TwoFactorMethods`
             FOREIGN KEY (`Two_Factor_Method_Id`)
                 REFERENCES `mydb`.`TwoFactorMethods` (`Two_Factor_Method_Id`)
-                ON DELETE NO ACTION
-                ON UPDATE NO ACTION,
-        CONSTRAINT `fk_Users_UserTypes1`
-            FOREIGN KEY (`User_Permission_Id`)
-                REFERENCES `mydb`.`UserPermissions` (`User_Permission_Id`)
                 ON DELETE NO ACTION
                 ON UPDATE NO ACTION)
 ENGINE = InnoDB;
