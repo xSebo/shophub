@@ -16,8 +16,21 @@ h1.title.is-1{
     background: linear-gradient(90deg, rgba(1,126,255,1) 0%, rgba(0,76,255,1) 100%);
 }
 
-.modal_footer{
+.modal-header{
+    padding:15px 20px;
+}
+
+url-centering{
+    padding:30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.modal-footer{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    padding:10px 20px;
 }
