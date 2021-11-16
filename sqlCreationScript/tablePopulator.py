@@ -31,8 +31,8 @@ def nameReader(pos, total, fileName, concat=False):
 # Where data is the values (formatted) to be inserted, and table is the table to apply the changes
 #
 # Returns a complete insert statement
-def createInsert(data, table):
-    tempString = 'INSERT INTO ' + table + ' VALUES ' + '(' + data + ');'
+def createInsert(data, table, columns):
+    tempString = 'INSERT INTO ' + table +  " (" + columns + ")" + ' VALUES ' + '(' + data + ');'
     return tempString
 
 # Where amount is how many names to compile, and usertype is the type of user you'd like to generate (1,2,3)
@@ -62,7 +62,7 @@ def namePopulator(amount, userType):
         twoFAMethod = random.randint(0, 1)
         email = newForenames[i] + newSurnames[i] + "@email.com"
         stringInsert = '"' + newForenames[i] + '","' + newSurnames[i] + '","' + email + '","' + stdPassword + '","' + profilePic + '",' + str(twoFAMethod) + "," + str(userType)
-        insertArray.append(createInsert(stringInsert, "Users"))
+        insertArray.append(createInsert(stringInsert, "Users", "User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id, User_Permission_Id"))
 
     return insertArray
 
@@ -95,14 +95,14 @@ def companyPopulator(amount):
     for i in range(0, amount):
         earnings = random.randint(0, 40000)
 
-        #print(str(i) + " = index")
-        #print(str(len(companyNames)) + " = companyNames")
-        #print(str(len(websiteArray)) + " = websiteArray")
-        #countryi = random.randint(0, len(countries))
-        #print(str(countryi) + " = countriesindex, " + str(len(countries)) + " = countries length")
+        print(str(i) + " = index")
+        print(str(len(companyNames)) + " = companyNames")
+        print(str(len(websiteArray)) + " = websiteArray")
+        countryi = random.randint(0, len(countries))
+        print(str(countryi) + " = countriesindex, " + str(len(countries)) + " = countries length")
 
         stringInsert = '"' + companyNames[i] + '","' + websiteArray[i] + '","' + str(earnings) + '","' + countries[countryi] + '",' + str(random.randint(1, 2))
-        insertArray.append(createInsert(stringInsert, "Shops"))
+        insertArray.append(createInsert(stringInsert, "Shops", "Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active"))
 
     return insertArray
 
