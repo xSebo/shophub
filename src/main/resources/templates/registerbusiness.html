@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<script>
+    let progressAmount=0
+    function progress(){
+        if(progressAmount < 100){
+            progressAmount += 20
+            // console.log(progressAmount)
+            document.getElementById("progressBar").children[0].style.width = progressAmount + "%"
+        }
+    }
+</script>
+
 <head>
     <title>ShopHub | Register business</title>
     <link th:replace="fragments/libs.html :: bulma"/>
@@ -24,6 +36,9 @@
                 <button class="delete" aria-label="close"
                         onclick="document.getElementById('modal').classList.remove('is-active')"></button>
             </header>
+            <div id="progressBar" class="progressBar">
+                <div></div>
+            </div>
             <section class="modal-card-body url-centering">
                 <h5 class="title is-5" style="text-align:center">Enter your shop URL</h5>
                 <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
@@ -34,7 +49,7 @@
                 </p>
             </section>
             <footer class="modal-card-foot modal-footer">
-                <button class="button is-success">Next</button>
+                <button class="button is-success" onclick="progress();">Next</button>
             </footer>
         </div>
     </div>
