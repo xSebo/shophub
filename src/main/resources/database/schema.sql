@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
     `User_First_Name` VARCHAR(45) NOT NULL,
     `User_Last_Name` VARCHAR(45) NOT NULL,
     `User_Email` VARCHAR(45) NOT NULL,
-    `User_Password` VARCHAR(45) NOT NULL,
+    `User_Password` VARCHAR(150) NOT NULL,
     `User_Profile_Picture` VARCHAR(45) NOT NULL,
     `Two_Factor_Method_Id` INT NOT NULL,
     `User_Permission_Id` INT NOT NULL,
