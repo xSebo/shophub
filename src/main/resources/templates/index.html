@@ -58,40 +58,23 @@
 					<i class="fas fa-search"></i>
 				</span>
 			</div>
+			<!--Tags-->
 			<div class="field is-grouped is-grouped-multiline" style="width: 60%;">
-				<div class="control">
-					<div class="tags has-addons">
-						<span class="tag gradient">Alex Smith</span>
-						<a class="tag is-delete"></a>
-					</div>
-				</div>
+				<div th:replace="fragments/tag.html :: tag(text='Test')"></div>
+				<div th:replace="fragments/tag.html :: tag(text='Vegan')"></div>
+				<div th:replace="fragments/tag.html :: tag(text='Food')"></div>
+				<div th:replace="fragments/tag.html :: tag(text='John')"></div>
 			</div>
 		</div>
 
 		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-wrap-wrap">
-			<div class="business_container box">
-				<div class="image" style="background-image: url('imgs/coffee.jpg')"></div>
-				<div class="content">
-					<h1 class="title is-4 mb-1">Cafe Nero</h1>
-					<p class="mb-1">Free coffee at 6 stamps</p>
-					<div class="is-full-width" style="display:flex;justify-content: space-between;align-items: center">
-						<div class="level-left">
-								<span class="icon is-small is-left ml-1 mr-1">
-									<i class="fas fa-gift"></i>
-								</span>
-							<p>6</p>
-						</div>
-						<div class="level-right">
-							<button class="button is-rounded gradient">
-								View Shop
-								<span class="icon is-small is-left ml-1">
-										<i class="fas fa-arrow-right"></i>
-									</span>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
+			<!--Business Containers-->
+			<div th:replace="fragments/business_card.html :: business_card(
+				title='Cafe Not so',
+				reward_text='Free coffee at 6 stamps',
+				reward_amount=4,
+				img_path='imgs/coffee.jpg'
+			)"></div>
 		</div>
 
 	</div>
