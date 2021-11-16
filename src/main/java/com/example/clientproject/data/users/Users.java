@@ -33,7 +33,7 @@ public class Users {
 
     @ManyToMany
     @JoinTable(
-            name="UserShopLinks",
+            name="User_Shop_Links",
             joinColumns = @JoinColumn(name="User_Id"),
             inverseJoinColumns = @JoinColumn(name="Shop_Id")
     )

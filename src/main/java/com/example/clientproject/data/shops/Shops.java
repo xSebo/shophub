@@ -32,7 +32,7 @@ public class Shops {
 
     @ManyToMany
     @JoinTable(
-            name="ShopTagLinks",
+            name="Shop_Tag_Links",
             joinColumns = @JoinColumn(name="Shop_Id"),
             inverseJoinColumns = @JoinColumn(name="Tag_Id")
     )
@@ -40,7 +40,7 @@ public class Shops {
 
     @ManyToMany
     @JoinTable(
-            name="RewardShopLinks",
+            name="Reward_Shop_Links",
             joinColumns=@JoinColumn(name="Shop_Id"),
             inverseJoinColumns = @JoinColumn(name="Reward_Id")
     )
