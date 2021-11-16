@@ -67,7 +67,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`UserPermissions` (
     `User_Permission_Id` INT NOT NULL AUTO_INCREMENT,
     `User_Id` INT NOT NULL,
-    `Shop_Id` INT NOT NULL,
+    `Shop_Id` INT,
     `Admin_Type_Id` INT NOT NULL,
     PRIMARY KEY (`User_Permission_Id`, `User_Id`, `Shop_Id`, `Admin_Type_Id`),
     INDEX `fk_UserPermissions_Users1_idx` (`User_Id` ASC) VISIBLE,
