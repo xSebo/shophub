@@ -27,31 +27,23 @@
 				</div>
 			</div>
 			<div class="horiz_scroll is-full-width mb-1">
-				<div class="reward_card">
-					<div class="reward_card_content">
-						<h1 class="title is-4 mb-1">Coca Cola</h1>
-						<p class="mb-1">You have 12 stamps!</p>
-						<progress class="progress mb-1" value="15" max="100"></progress>
-						<p class="mb-2">3 to next reward</p>
-						<div class="is-full-width" style="display:flex;justify-content: space-between;align-items: center">
-							<div class="level-left">
-								<span class="icon is-small is-left ml-1 mr-1">
-									<i class="fas fa-gift"></i>
-								</span>
-								<p>1/4</p>
-							</div>
-							<div class="level-right">
-								<button class="button is-rounded">
-									Explore
-									<span class="icon is-small is-left ml-1">
-										<i class="fas fa-arrow-right"></i>
-									</span>
-								</button>
-							</div>
-						</div>
-					</div>
-					<div class="reward_card_img" style="background-image: url('imgs/coke.jpg')"></div>
-				</div>
+				<!--Reward Card Here-->
+				<div th:replace="fragments/reward_card.html :: reward_card(
+					title='Coca Cola',
+					stamps=6,
+					next_reward=8,
+					reward_amount_obtained=2,
+					total_reward_amount=5,
+					img_path='imgs/coke.jpg'
+				)"></div>
+				<div th:replace="fragments/reward_card.html :: reward_card(
+					title='Cafe Nero',
+					stamps=2,
+					next_reward=4,
+					reward_amount_obtained=0,
+					total_reward_amount=4,
+					img_path='imgs/coffee.jpg'
+				)"></div>
 			</div>
 
 			<a href="/">See All ></a>
