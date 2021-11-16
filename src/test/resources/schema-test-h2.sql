@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`AdminTypes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`AdminTypes` (
-    `Admin_Type_Id` INT NOT NULL AUTO_INCREMENT,
+    `Admin_Type_Id` INT NOT NULL,
     `Admin_Type_Name` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`Admin_Type_Id`))
 ENGINE = InnoDB;
