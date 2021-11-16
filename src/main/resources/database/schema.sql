@@ -8,7 +8,7 @@ USE `mydb`;
 -- Table `mydb`.`TwoFactorMethods`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`TwoFactorMethods` (
-    `Two_Factor_Method_Id` INT NOT NULL,
+    `Two_Factor_Method_Id` INT NOT NULL AUTO_INCREMENT,
     `Two_Factor_Method_Name` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`Two_Factor_Method_Id`))
 ENGINE = InnoDB;
