@@ -222,12 +222,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`UserStampLinks` (
             ON DELETE NO ACTION
             ON UPDATE NO ACTION)
     ENGINE = InnoDB;
-    
-INSERT INTO twofactormethods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, "None");
-INSERT INTO twofactormethods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (2, "GAuth");
 
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ("","",0,"",0);
+INSERT INTO twofactormethods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, 'None');
+INSERT INTO twofactormethods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (2, 'GAuth');
 
-INSERT INTO AdminTypes (Admin_Type_Id, Admin_Type_Name) VALUES (1,"User");
-INSERT INTO AdminTypes (Admin_Type_Id, Admin_Type_Name) VALUES (2,"Business Admin");
-INSERT INTO AdminTypes (Admin_Type_Id, Admin_Type_Name) VALUES (3,"Super Admin");
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('','',0,'',0);
+
+INSERT INTO AdminTypes (Admin_Type_Id, Admin_Type_Name) VALUES (1,'User');
+INSERT INTO AdminTypes (Admin_Type_Id, Admin_Type_Name) VALUES (2,'Business Admin');
+INSERT INTO AdminTypes (Admin_Type_Id, Admin_Type_Name) VALUES (3,'Super Admin');

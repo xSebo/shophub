@@ -1,6 +1,8 @@
 -- -----------------------------------------------------
+-- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mydb`;
 CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8;
 USE `mydb`;
 
@@ -8,7 +10,7 @@ USE `mydb`;
 -- Table `mydb`.`TwoFactorMethods`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`TwoFactorMethods` (
-    `Two_Factor_Method_Id` INT NOT NULL AUTO_INCREMENT,
+    `Two_Factor_Method_Id` INT NOT NULL,
     `Two_Factor_Method_Name` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`Two_Factor_Method_Id`))
 ENGINE = InnoDB;
@@ -53,12 +55,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
     `User_Reset_Code_Expiry` DATETIME NULL,
     PRIMARY KEY (`User_Id`, `Two_Factor_Method_Id`),
     INDEX `fk_Users_TwoFactorMethods_idx` (`Two_Factor_Method_Id` ASC) VISIBLE,
-        CONSTRAINT `fk_Users_TwoFactorMethods`
-            FOREIGN KEY (`Two_Factor_Method_Id`)
-                REFERENCES `mydb`.`TwoFactorMethods` (`Two_Factor_Method_Id`)
-                ON DELETE NO ACTION
-                ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    CONSTRAINT `fk_Users_TwoFactorMethods`
+        FOREIGN KEY (`Two_Factor_Method_Id`)
+            REFERENCES `mydb`.`TwoFactorMethods` (`Two_Factor_Method_Id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -88,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`UserPermissions` (
             REFERENCES `mydb`.`AdminTypes` (`Admin_Type_Id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -172,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`RewardShopLinks` (
             REFERENCES `mydb`.`Rewards` (`Reward_Id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -219,4 +221,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`UserStampLinks` (
             REFERENCES `mydb`.`StampBoards` (`Stamp_Board_Id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
+ENGINE = InnoDB;
+
+INSERT INTO twofactormethods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, 'None');
+INSERT INTO twofactormethods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (2, 'GAuth');
+
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('','',0,'',0);
+
+INSERT INTO AdminTypes (Admin_Type_Id, Admin_Type_Name) VALUES (1,'User');
+INSERT INTO AdminTypes (Admin_Type_Id, Admin_Type_Name) VALUES (2,'Business Admin');
+INSERT INTO AdminTypes (Admin_Type_Id, Admin_Type_Name) VALUES (3,'Super Admin');
