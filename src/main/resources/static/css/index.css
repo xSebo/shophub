@@ -8,6 +8,10 @@
     white-space: nowrap;
 }
 
-.horiz_scroll *{
-    display: inline-block;
+.horiz_scroll > *{
+    display: inline-flex;
+}
+
+i.fas{
+    color: gray;
 }
