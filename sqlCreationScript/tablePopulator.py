@@ -32,7 +32,7 @@ def nameReader(pos, total, fileName, concat=False):
 #
 # Returns a complete insert statement
 def createInsert(data, table):
-    tempString = 'INSERT INTO ' + table + ' VALUES ' + '(' + data + ')'
+    tempString = 'INSERT INTO ' + table + ' VALUES ' + '(' + data + ');'
     return tempString
 
 # Where amount is how many names to compile, and usertype is the type of user you'd like to generate (1,2,3)
@@ -94,7 +94,14 @@ def companyPopulator(amount):
     insertArray = []
     for i in range(0, amount):
         earnings = random.randint(0, 40000)
-        stringInsert = '"' + companyNames[i] + '","' + websiteArray[i] + '","' + str(earnings) + '","' + countries[random.randint(0, len(countries))] + '",' + str(random.randint(1, 2))
+
+        #print(str(i) + " = index")
+        #print(str(len(companyNames)) + " = companyNames")
+        #print(str(len(websiteArray)) + " = websiteArray")
+        #countryi = random.randint(0, len(countries))
+        #print(str(countryi) + " = countriesindex, " + str(len(countries)) + " = countries length")
+
+        stringInsert = '"' + companyNames[i] + '","' + websiteArray[i] + '","' + str(earnings) + '","' + countries[countryi] + '",' + str(random.randint(1, 2))
         insertArray.append(createInsert(stringInsert, "Shops"))
 
     return insertArray
@@ -142,4 +149,3 @@ def createSQLscript():
 
 
 createSQLscript()
-
