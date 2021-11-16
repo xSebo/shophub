@@ -1,6 +1,7 @@
 package com.example.clientproject.data.users;
 
 import com.example.clientproject.data.shops.Shops;
+import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -36,4 +38,8 @@ public class Users {
             inverseJoinColumns = @JoinColumn(name="Shop_Id")
     )
     private List<Shops> favouriteShops;
+
+    @OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="User_Id", nullable = false)
+    private Set<StampBoards> stampBoards;
 }
