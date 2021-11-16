@@ -39,6 +39,29 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `mydb`.`Users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
+    `User_Id` INT NOT NULL AUTO_INCREMENT,
+    `User_First_Name` VARCHAR(45) NOT NULL,
+    `User_Last_Name` VARCHAR(45) NOT NULL,
+    `User_Email` VARCHAR(45) NOT NULL,
+    `User_Password` VARCHAR(150) NOT NULL,
+    `User_Profile_Picture` VARCHAR(45) NOT NULL,
+    `Two_Factor_Method_Id` INT NOT NULL,
+    `User_Reset_Code` VARCHAR(45) NULL,
+    `User_Reset_Code_Expiry` DATETIME NULL,
+    PRIMARY KEY (`User_Id`, `Two_Factor_Method_Id`),
+    INDEX `fk_Users_TwoFactorMethods_idx` (`Two_Factor_Method_Id` ASC) VISIBLE,
+        CONSTRAINT `fk_Users_TwoFactorMethods`
+            FOREIGN KEY (`Two_Factor_Method_Id`)
+                REFERENCES `mydb`.`TwoFactorMethods` (`Two_Factor_Method_Id`)
+                ON DELETE NO ACTION
+                ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `mydb`.`UserPermissions`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`UserPermissions` (
@@ -65,30 +88,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`UserPermissions` (
             REFERENCES `mydb`.`AdminTypes` (`Admin_Type_Id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Users`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
-    `User_Id` INT NOT NULL AUTO_INCREMENT,
-    `User_First_Name` VARCHAR(45) NOT NULL,
-    `User_Last_Name` VARCHAR(45) NOT NULL,
-    `User_Email` VARCHAR(45) NOT NULL,
-    `User_Password` VARCHAR(150) NOT NULL,
-    `User_Profile_Picture` VARCHAR(45) NOT NULL,
-    `Two_Factor_Method_Id` INT NOT NULL,
-    `User_Reset_Code` VARCHAR(45) NULL,
-    `User_Reset_Code_Expiry` DATETIME NULL,
-    PRIMARY KEY (`User_Id`, `Two_Factor_Method_Id`),
-    INDEX `fk_Users_TwoFactorMethods_idx` (`Two_Factor_Method_Id` ASC) VISIBLE,
-        CONSTRAINT `fk_Users_TwoFactorMethods`
-            FOREIGN KEY (`Two_Factor_Method_Id`)
-                REFERENCES `mydb`.`TwoFactorMethods` (`Two_Factor_Method_Id`)
-                ON DELETE NO ACTION
-                ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
