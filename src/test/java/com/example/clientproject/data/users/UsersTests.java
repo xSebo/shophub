@@ -1,5 +1,7 @@
 package com.example.clientproject.data.users;
 
+import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
+import com.example.clientproject.data.twoFactorMethods.TwoFactorMethodsRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -7,6 +9,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,10 +22,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UsersTests {
     @Autowired
     UsersRepo usersRepo;
+    @Autowired
+    TwoFactorMethodsRepo twoFactorMethodsRepo;
 
     @Test
     public void shouldGet160Users() throws Exception {
         List<Users> usersList = usersRepo.findAll();
         assertEquals(160, usersList.size());
+    }
+
+    @Test
+    public void shouldGet161UsersAfterInsert() throws Exception {
+        TwoFactorMethods twoFactorMethods = twoFactorMethodsRepo.findByTwoFactorMethodId(1).get();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        Users newUser = new Users("", "", "", "",
+                "", "",
+                LocalDateTime.now().format(formatter), twoFactorMethods);
+        Users users = usersRepo.save(newUser);
+
+        List<Users> usersList = usersRepo.findAll();
+        assertEquals(161, usersList.size());
     }
 }

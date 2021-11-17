@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -27,6 +28,19 @@ public class Users {
     private String userProfilePicture;
     private String userResetCode;
     private String userResetCodeExpiry;
+
+    public Users(String firstName, String surname, String email,
+                 String password, String profilePicture, String resetCode,
+                 String expiry, TwoFactorMethods aTwoFactorMethod) {
+        this.userFirstName = firstName;
+        this.userLastName = surname;
+        this.userEmail = email;
+        this.userPassword = password;
+        this.userProfilePicture = profilePicture;
+        this.userResetCode = resetCode;
+        this.userResetCodeExpiry = expiry;
+        this.twoFactorMethod = aTwoFactorMethod;
+    }
 
     @ManyToOne
     @JoinColumn(name="Two_Factor_Method_Id", nullable=false)
