@@ -93,33 +93,34 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`User_Favourite_Tags`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`User_Favourite_Tags` (
-                                                            `User_Favourite_Tag_Id` INT NOT NULL AUTO_INCREMENT,
-                                                            `User_Id` INT NOT NULL,
-                                                            `Tag_Id` INT NOT NULL,
-                                                            PRIMARY KEY (`User_Favourite_Tag_Id`, `User_Id`, `Tag_Id`),
-                                                            CONSTRAINT `fk_User_Favourite_Tags_Tags1`
-                                                                FOREIGN KEY (`Tag_Id`)
-                                                                    REFERENCES `mydb`.`Tags` (`Tag_Id`)
-                                                                    ON DELETE NO ACTION
-                                                                    ON UPDATE NO ACTION,
-                                                            CONSTRAINT `fk_User_Favourite_Tags_Users1`
-                                                                FOREIGN KEY (`User_Id`)
-                                                                    REFERENCES `mydb`.`Users` (`User_Id`)
-                                                                    ON DELETE NO ACTION
-                                                                    ON UPDATE NO ACTION
-)
-    ENGINE = InnoDB;
-
--- -----------------------------------------------------
 -- Table `mydb`.`Tags`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Tags` (
     `Tag_Id` INT NOT NULL AUTO_INCREMENT,
     `Tag_Name` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`Tag_Id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`User_Favourite_Tags`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`User_Favourite_Tags` (
+    `User_Favourite_Tag_Id` INT NOT NULL AUTO_INCREMENT,
+    `User_Id` INT NOT NULL,
+    `Tag_Id` INT NOT NULL,
+    PRIMARY KEY (`User_Favourite_Tag_Id`, `User_Id`, `Tag_Id`),
+    CONSTRAINT `fk_User_Favourite_Tags_Tags1`
+        FOREIGN KEY (`Tag_Id`)
+            REFERENCES `mydb`.`Tags` (`Tag_Id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
+    CONSTRAINT `fk_User_Favourite_Tags_Users1`
+        FOREIGN KEY (`User_Id`)
+            REFERENCES `mydb`.`Users` (`User_Id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+)
 ENGINE = InnoDB;
 
 
