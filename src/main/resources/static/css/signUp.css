@@ -25,6 +25,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 h1 {
@@ -72,20 +73,31 @@ h2 {
   margin-bottom: 20px;
 }
 
-h3 {
+.special-text {
   font-size: 35px;
   font-family: sans-serif;
   color: white;
   margin-bottom: 20px;
   text-align: center;
+  font-weight: 100;
 }
 
 .loginUp-Button {
   margin: 10px;
   background-color: transparent;
-  border-color: white;
-  color: white;
+  border-color: white
+  color: white !important;
   width: 140px;
   border-width: 2px;
   font-weight: bold;
+}
+
+.logo {
+  position: absolute !important;
+  top: 40px !important;
+}
+
+img {
+  position: absolute !important;
+  top: 40px !important;
 }
