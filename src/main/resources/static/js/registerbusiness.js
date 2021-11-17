@@ -27,3 +27,21 @@ function progress(){
     }
     setLoadingBar()
 }
+
+function getBusinessInfo(url){
+    fetch("http://localhost:8080/infoExtract?url=" + url)
+        .then(response => response.json())
+        .then(data => handleInfo(data));
+}
+
+function handleInfo(data){
+    let name = data.site_name;
+    let url = data.url;
+    let description = data.description;
+    if(description !== undefined){
+        description = unescape(description);
+    }
+    console.log(description);
+    console.log(url);
+    console.log(name);
+}
