@@ -10,7 +10,7 @@ import java.util.Arrays;
 @Controller
 public class SignInController {
 
-    @GetMapping("/register")
+    @GetMapping("/businessRegister")
     public String registerBusiness(Model model){
         ArrayList<String> categories = new ArrayList<>(Arrays.asList("Food and drink","Animals","Alcohol"));
         model.addAttribute("categories", categories);
