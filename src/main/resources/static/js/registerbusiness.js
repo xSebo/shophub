@@ -1,4 +1,5 @@
 var modalStage = 0
+var urlInput, urlPrefixInput = null;
 
 function setLoadingBar(){
     let progressAmount = (modalStage+1)*20
@@ -11,8 +12,15 @@ function setLoadingBar(){
 }
 
 function progress(){
+    urlInput = document.getElementById("business_register_url");
+    urlPrefixInput = document.getElementById("business_register_url_prefix");
+
     if(modalStage<5){
         modalStage += 1
+
+        if(modalStage == 1){
+            getBusinessInfo(urlPrefixInput.value + urlInput.value);
+        }
         let currentStageId = "modal_page" + modalStage.toString()
         let nextStageId = "modal_page"+ (modalStage+1).toString()
 

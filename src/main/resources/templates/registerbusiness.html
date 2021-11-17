@@ -31,12 +31,20 @@
             <section class="modal-card-body url-centering" id="modal_container">
                 <div id="modal_page1" class="modal_page">
                     <h5 class="title is-5" style="text-align:center">Enter your shop URL</h5>
-                    <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
-                        <input class="input" type="url" placeholder="Business URL" style="width:100%; align-content:center">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-link"></i>
-                        </span>
-                    </p>
+                    <div class="field has-addons" style="display: flex;justify-content: center">
+                        <p class="control">
+                            <span class="select">
+                              <select id="business_register_url_prefix">
+                                <option>https://</option>
+                                <option>http://</option>
+                              </select>
+                            </span>
+                        </p>
+                        <p class="control">
+                            <input class="input" type="url" placeholder="Business URL" style="width:100%; align-content:center"
+                                   id="business_register_url">
+                        </p>
+                    </div>
                 </div>
                 <div id="modal_page2" class="modal_page">
                     <h5 class="title is-5" style="text-align:center">Shop Name</h5>
