@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ShopHub | Register business</title>
+    <link th:replace="fragments/libs.html :: bulma"/>
+    <link th:replace="fragments/libs.html :: fa"/>
+    <link th:replace="fragments/nav.html :: nav-css"/>
+    <link rel="stylesheet" href="/css/registerbusiness.css">
+    <script src="/js/registerbusiness.js"></script>
+</head>
+<body>
+    <div th:replace="fragments/nav.html :: nav"></div>
+    <div class="noBusinessHolder">
+        <h1 class="title is-1 mb-6">Whoops? It looks like you aren't part of any businesses.</h1>
+        <button class="button is-link is-rounded gradient"
+                onclick="document.getElementById('modal').classList.add('is-active')">
+            Register A Business
+        </button>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card" style="width:40%">
+            <header class="modal-card-head modal-header">
+                <p class="modal-card-title" id="modal-title">Register a business 1/5</p>
+                <button class="delete" aria-label="close"
+                        onclick="document.getElementById('modal').classList.remove('is-active')"></button>
+            </header>
+            <div id="progressBar" class="progressBar">
+                <div style="width:20%"></div>
+            </div>
+            <section class="modal-card-body url-centering" id="modal_container">
+                <div id="modal_page1" class="modal_page">
+                    <h5 class="title is-5" style="text-align:center">Enter your shop URL</h5>
+                    <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
+                        <input class="input" type="url" placeholder="Business URL" style="width:100%; align-content:center">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-link"></i>
+                        </span>
+                    </p>
+                </div>
+                <div id="modal_page2" class="modal_page">
+                    <h5 class="title is-5" style="text-align:center">Shop Name</h5>
+                    <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
+                        <input class="input" style="width:100%; align-content:center">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-store"></i>
+                        </span>
+                    </p>
+                    <h5 class="title is-5" style="text-align:center">Description</h5>
+                    <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
+                        <textarea class="textarea"></textarea>
+                    </p>
+                </div>
+                <div id="modal_page3" class="modal_page">
+                    <h5 class="title is-5" style="text-align:center; margin-bottom: 2%">Choose a category</h5>
+                    <div id="categoryContainer">
+                        <div class="dropdown is-hoverable">
+                            <div class="dropdown-trigger">
+                                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                                        <span>Categories</span>
+                                        <span class="icon is-small">
+                                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                                <div class="dropdown-content">
+                                    <div th:each="category: ${categories}" class="dropdown-item">
+                                        <a th:text="${category}"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <footer class="modal-card-foot modal-footer">
+                <button class="button is-success" onclick="progress();">Next</button>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+.is-full-width{
+    width: 100%;
+}
+
+.horiz_scroll{
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.horiz_scroll *{
+    display: inline-block;
+}
