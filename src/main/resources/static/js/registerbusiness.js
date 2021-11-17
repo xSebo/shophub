@@ -6,6 +6,7 @@ function setLoadingBar(){
     if(progressAmount <= 100){
 
         document.getElementById("progressBar").children[0].style.width = progressAmount + "%"
+        document.getElementById("modal-title").innerHTML = "Register a business " + (modalStage+1).toString() + "/5"
     }
 }
 
