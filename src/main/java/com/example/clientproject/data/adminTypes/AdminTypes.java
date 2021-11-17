@@ -16,6 +16,6 @@ import javax.persistence.Id;
 public class AdminTypes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long adminTypeID;
+    private long adminTypeId;
     private String adminTypeName;
 }

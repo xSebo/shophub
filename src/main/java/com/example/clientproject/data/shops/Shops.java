@@ -18,7 +18,7 @@ import java.util.List;
 public class Shops {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private String shopID;
+    private String shopId;
     private String shopName;
     private String shopWebsite;
     private int shopEarnings;
