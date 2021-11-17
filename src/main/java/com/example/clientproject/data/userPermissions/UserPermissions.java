@@ -29,4 +29,10 @@ public class UserPermissions {
     @ManyToOne
     @JoinColumn(name="Admin_Type_Id", nullable = false)
     private AdminTypes adminType;
+
+    public UserPermissions(Users aUser, Shops aShop, AdminTypes anAdminType) {
+        this.user = aUser;
+        this.shop = aShop;
+        this.adminType = anAdminType;
+    }
 }

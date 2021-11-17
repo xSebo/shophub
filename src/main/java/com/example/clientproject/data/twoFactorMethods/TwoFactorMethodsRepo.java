@@ -10,5 +10,5 @@ public interface TwoFactorMethodsRepo extends JpaRepository<TwoFactorMethods, Lo
     List<TwoFactorMethods> findAll();
 
     @Query("select t from TwoFactorMethods t where t.twoFactorMethodId = ?1")
-    public Optional<TwoFactorMethods> findByTwoFactorMethodId(long twoFactorMethodId);
+    Optional<TwoFactorMethods> findByTwoFactorMethodId(long twoFactorMethodId);
 }
