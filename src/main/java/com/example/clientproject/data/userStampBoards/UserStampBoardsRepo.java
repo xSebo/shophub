@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserStampBoardsRepo extends JpaRepository<UserStampBoards, Long> {
     List<UserStampBoards> findAll();
+
+    UserStampBoards save(UserStampBoards userStampBoards);
 }

@@ -8,6 +8,8 @@ import java.util.List;
 public interface UserPermissionsRepo extends JpaRepository<UserPermissions, Long> {
     List<UserPermissions> findAll();
 
+    UserPermissions save(UserPermissions userPermissions);
+
     @Query("select u from UserPermissions u where u.user.userId = ?1")
     List<UserPermissions> findByUserId(long userId);
 

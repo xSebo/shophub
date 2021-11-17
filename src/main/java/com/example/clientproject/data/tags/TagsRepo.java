@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TagsRepo extends JpaRepository<Tags, Long> {
     List<Tags> findAll();
+
+    Tags save(Tags tags);
 }

@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface ShopsRepo extends JpaRepository<Shops, Long> {
     List<Shops> findAll();
 
+    Shops save(Shops shops);
+
     @Query("select s from Shops s where s.shopName = ?1")
     Optional<Shops> findByShopName(String shopName);
 

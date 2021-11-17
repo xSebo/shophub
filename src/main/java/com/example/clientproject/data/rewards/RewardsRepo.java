@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface RewardsRepo extends JpaRepository<StampBoards, Long> {
     List<StampBoards> findAll();
 
+    Rewards save(Rewards rewards);
+
     @Query("select r from Rewards r where r.rewardId = ?1")
     Optional<Rewards> findByRewardName(String rewardName);
 }

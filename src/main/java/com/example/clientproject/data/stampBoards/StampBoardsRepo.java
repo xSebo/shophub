@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface StampBoardsRepo extends JpaRepository<StampBoards, Long> {
     List<StampBoards> findAll();
+
+    StampBoards save(StampBoards stampBoards);
 }
