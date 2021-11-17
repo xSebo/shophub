@@ -1,5 +1,10 @@
 var modalStage = 0
-var urlInput, urlPrefixInput = null;
+var urlInput, urlPrefixInput, nameInput, descInput = null;
+
+function htmlDecode(input) {
+    var doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.documentElement.textContent;
+}
 
 function setLoadingBar(){
     let progressAmount = (modalStage+1)*20
@@ -14,11 +19,15 @@ function setLoadingBar(){
 function progress(){
     urlInput = document.getElementById("business_register_url");
     urlPrefixInput = document.getElementById("business_register_url_prefix");
+    nameInput = document.getElementById("business_register_name");
+    descInput = document.getElementById("business_register_desc");
 
     if(modalStage<5){
         modalStage += 1
 
         if(modalStage == 1){
+            nameInput.parentElement.classList.add("is-loading")
+            descInput.parentElement.classList.add("is-loading")
             getBusinessInfo(urlPrefixInput.value + urlInput.value);
         }
         let currentStageId = "modal_page" + modalStage.toString()
@@ -27,9 +36,6 @@ function progress(){
         let newHeight = (document.getElementById(nextStageId).offsetHeight)+40
         document.getElementById("modal_container").style.height = newHeight.toString()+"px"
 
-        console.log(currentStageId)
-        console.log(document.getElementById(currentStageId))
-        console.log(document.getElementById(currentStageId).style.transform)
         document.getElementById(currentStageId.toString()).style.transform = "translateX(-150%)"
         document.getElementById(nextStageId.toString()).style.transform = "translateX(0%)"
     }
@@ -43,13 +49,20 @@ function getBusinessInfo(url){
 }
 
 function handleInfo(data){
+    nameInput.parentElement.classList.remove("is-loading")
+    descInput.parentElement.classList.remove("is-loading")
+
     let name = data.site_name;
     let url = data.url;
     let description = data.description;
     if(description !== undefined){
-        description = unescape(description);
+        description = htmlDecode(unescape(description));
     }
-    console.log(description);
-    console.log(url);
-    console.log(name);
+
+    if(name !== undefined){
+        nameInput.value = name;
+    }
+    if(description !== undefined){
+        descInput.value = description;
+    }
 }
