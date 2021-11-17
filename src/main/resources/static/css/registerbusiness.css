@@ -81,3 +81,14 @@ url-centering{
     flex-direction: row;
     justify-content: center;
 }
+
+.socialInput{
+    width:100%;
+    margin-right:5%;
+}
+
+.socialContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
