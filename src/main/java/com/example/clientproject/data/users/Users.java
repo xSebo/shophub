@@ -2,6 +2,7 @@ package com.example.clientproject.data.users;
 
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.stampBoards.StampBoards;
+import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,4 +43,12 @@ public class Users {
     @OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="User_Id", nullable = false)
     private Set<StampBoards> stampBoards;
+
+    @ManyToMany
+    @JoinTable(
+            name="User_Favourite_Tags",
+            joinColumns = @JoinColumn(name="User_Id"),
+            inverseJoinColumns = @JoinColumn(name="Tag_Id")
+    )
+    private List<Tags> favouriteTags;
 }

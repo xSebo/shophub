@@ -1,6 +1,7 @@
 package com.example.clientproject.data.tags;
 
 import com.example.clientproject.data.shops.Shops;
+import com.example.clientproject.data.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,8 @@ public class Tags {
 
     @ManyToMany(mappedBy="shopTags")
     private List<Shops> relatedShops;
+
+    @ManyToMany(mappedBy="favouriteTags")
+    private List<Users> relatedUsers;
 
 }
