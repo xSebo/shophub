@@ -10,7 +10,7 @@ CREATE SCHEMA IF NOT EXISTS `mydb`;
 USE `mydb`;
 
 -- -----------------------------------------------------
--- Table `mydb`.`TwoFactorMethods`
+-- Table `mydb`.`Two_Factor_Methods`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Two_Factor_Methods` (
                                                            `Two_Factor_Method_Id` INT NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Shops` (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`AdminTypes`
+-- Table `mydb`.`Admin_Types`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Admin_Types` (
                                                     `Admin_Type_Id` INT NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`UserPermissions`
+-- Table `mydb`.`User_Permissions`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`User_Permissions` (
                                                          `User_Permission_Id` INT NOT NULL AUTO_INCREMENT,
@@ -101,9 +101,29 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Tags` (
                                              PRIMARY KEY (`Tag_Id`))
     ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `mydb`.`User_Favourite_Tags`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`User_Favourite_Tags` (
+    `User_Favourite_Tag_Id` INT NOT NULL AUTO_INCREMENT,
+    `User_Id` INT NOT NULL,
+    `Tag_Id` INT NOT NULL,
+    PRIMARY KEY (`User_Favourite_Tag_Id`, `User_Id`, `Tag_Id`),
+    CONSTRAINT `fk_User_Favourite_Tags_Tags1`
+        FOREIGN KEY (`Tag_Id`)
+            REFERENCES `mydb`.`Tags` (`Tag_Id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
+    CONSTRAINT `fk_User_Favourite_Tags_Users1`
+        FOREIGN KEY (`User_Id`)
+            REFERENCES `mydb`.`Users` (`User_Id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+)
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `mydb`.`ShopTagLinks`
+-- Table `mydb`.`Shop_Tag_Links`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Shop_Tag_Links` (
                                                        `Shop_Tag_Link_Id` INT NOT NULL AUTO_INCREMENT,
@@ -124,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Shop_Tag_Links` (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`StampBoards`
+-- Table `mydb`.`Stamp_Boards`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Stamp_Boards` (
                                                      `Stamp_Board_Id` INT NOT NULL AUTO_INCREMENT,
@@ -151,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Rewards` (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`RewardShopLinks`
+-- Table `mydb`.`Reward_Shop_Links`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Reward_Shop_Links` (
                                                           `Reward_Shop_Link_ID` INT NOT NULL AUTO_INCREMENT,
@@ -172,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Reward_Shop_Links` (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`UserShopLinks`
+-- Table `mydb`.`User_Shop_Links`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`User_Shop_Links` (
                                                         `User_Shop_Link_Id` INT NOT NULL AUTO_INCREMENT,
@@ -193,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User_Shop_Links` (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`UserStampLinks`
+-- Table `mydb`.`User_Stamp_Links`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`User_Stamp_Boards` (
                                                           `User_Stamp_Board_Id` INT NOT NULL AUTO_INCREMENT,
