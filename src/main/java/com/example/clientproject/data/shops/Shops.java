@@ -22,6 +22,7 @@ public class Shops {
     private String shopName;
     private String shopWebsite;
     private int shopEarnings;
+    private String shopImage;
     private String shopCountries;
 
     @Convert(converter = TinyIntToBoolean.class)

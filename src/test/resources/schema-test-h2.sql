@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Shops` (
     `Shop_Website` VARCHAR(45) NOT NULL,
     `Shop_Earnings` INT NOT NULL,
     `Shop_Countries` VARCHAR(150) NOT NULL,
+    `Shop_Image` VARCHAR(150),
     `Shop_Active` TINYINT NOT NULL,
     PRIMARY KEY (`Shop_Id`))
 ENGINE = InnoDB;
