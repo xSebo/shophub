@@ -24,4 +24,13 @@ public class ShopsTests {
         List<Shops> shopsList = shopsRepo.findAll();
         assertEquals(11, shopsList.size());
     }
+
+    @Test
+    public void shouldGet12ShopsAfterInsert() throws Exception {
+        Shops newShop = new Shops("", "", 0, "", "", true);
+        Shops shop = shopsRepo.save(newShop);
+
+        List<Shops> shopsList = shopsRepo.findAll();
+        assertEquals(12, shopsList.size());
+    }
 }

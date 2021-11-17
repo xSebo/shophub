@@ -28,6 +28,16 @@ public class Shops {
     @Convert(converter = TinyIntToBoolean.class)
     private boolean shopActive;
 
+    public Shops(String name, String website, int earnings,
+                 String image, String countries, boolean active) {
+        this.shopName = name;
+        this.shopWebsite = website;
+        this.shopEarnings = earnings;
+        this.shopImage = image;
+        this.shopCountries = countries;
+        this.shopActive = active;
+    }
+
     @ManyToMany(mappedBy="favouriteShops")
     private List<Users> favouriteUsers;
 
