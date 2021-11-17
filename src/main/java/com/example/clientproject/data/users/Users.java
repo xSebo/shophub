@@ -9,10 +9,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Users Entity
+ * Contains Getters, Setters, and constructors thanks to Lombok
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +32,17 @@ public class Users {
     private String userResetCode;
     private String userResetCodeExpiry;
 
+    /**
+     * Constructor
+     * @param firstName - user first name
+     * @param surname - user surname
+     * @param email - user email
+     * @param password - user password
+     * @param profilePicture - user profile picture
+     * @param resetCode - user password reset code
+     * @param expiry - user password reset code expiry date time
+     * @param aTwoFactorMethod - user two-factor authentication method
+     */
     public Users(String firstName, String surname, String email,
                  String password, String profilePicture, String resetCode,
                  String expiry, TwoFactorMethods aTwoFactorMethod) {

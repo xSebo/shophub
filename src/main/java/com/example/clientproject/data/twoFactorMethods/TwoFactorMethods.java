@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * TwoFactorMethods Entity
+ * Contains Getters, Setters, and constructors thanks to Lombok
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

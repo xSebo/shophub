@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * UserStampBoards Entity
+ * Contains Getters, Setters, and constructors thanks to Lombok
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

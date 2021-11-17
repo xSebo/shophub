@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * UserPermissions Entity
+ * Contains Getters, Setters, and constructors thanks to Lombok
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -8,6 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * StampBoards Entity
+ * Contains Getters, Setters, and constructors thanks to Lombok
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

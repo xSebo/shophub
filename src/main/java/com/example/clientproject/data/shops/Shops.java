@@ -11,6 +11,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Shops Entity
+ * Contains Getters, Setters, and constructors thanks to Lombok
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +32,15 @@ public class Shops {
     @Convert(converter = TinyIntToBoolean.class)
     private boolean shopActive;
 
+    /**
+     * Constructor which does not require an ID
+     * @param name - name of the shop
+     * @param website - shop website
+     * @param earnings - shop earnings
+     * @param image - shop image
+     * @param countries - shop countries
+     * @param active - shop active status
+     */
     public Shops(String name, String website, int earnings,
                  String image, String countries, boolean active) {
         this.shopName = name;
