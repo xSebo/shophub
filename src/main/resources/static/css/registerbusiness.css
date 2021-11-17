@@ -54,3 +54,24 @@ url-centering{
     width: 0;
     transition: width 200ms;
 }
+
+#modal_container{
+    position: relative;
+    display: flex;
+    height: 126px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+}
+
+.modal_page{
+    position:absolute;
+    transition:transform 200ms;
+    transform: translateX(150%);
+    width:100%;
+}
+
+#modal_page1{
+    transform: translateX(0%)
+}
