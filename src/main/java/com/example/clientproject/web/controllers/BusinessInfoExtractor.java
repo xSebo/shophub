@@ -16,13 +16,23 @@ import java.util.regex.Pattern;
 @RestController
 public class BusinessInfoExtractor {
 
+    /**
+     *
+     * @param url request param of url given
+     * @return result of calling getHTMLMeta
+     * @throws Exception
+     */
     @GetMapping("/infoExtract")
     public HashMap<String, String> testIndex(@RequestParam(value = "url") String url) throws Exception{
-        String urlToRead = "https://qwertybeerbox.co.uk/.json";
-
         return getHTMLMeta(url);
     }
 
+    /**
+     *
+     * @param urlToRead Must include "https://" the url of the shopify store to extract from
+     * @return returns a hashmap of key values that relate to the given url
+     * @throws Exception
+     */
     public static HashMap<String, String> getHTMLMeta(String urlToRead) throws Exception {
         HashMap<String, String> metaTags = new HashMap<>();
         StringBuilder result = new StringBuilder();
