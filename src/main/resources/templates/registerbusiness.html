@@ -28,143 +28,145 @@
             <div id="progressBar" class="progressBar">
                 <div style="width:20%"></div>
             </div>
+            <form id="businessForm" action="/" th:method="post">
             <section class="modal-card-body url-centering" id="modal_container">
-                <div id="modal_page1" class="modal_page">
-                    <h5 class="title is-5" style="text-align:center">Enter your shop URL</h5>
-                    <div class="field has-addons" style="display: flex;justify-content: center">
-                        <p class="control">
-                            <span class="select">
-                              <select id="business_register_url_prefix">
-                                <option>https://</option>
-                                <option>http://</option>
-                              </select>
+                    <div id="modal_page1" class="modal_page">
+                        <h5 class="title is-5" style="text-align:center">Enter your shop URL</h5>
+                        <div class="field has-addons" style="display: flex;justify-content: center">
+                            <p class="control">
+                                <span class="select">
+                                  <select id="business_register_url_prefix">
+                                    <option>https://</option>
+                                    <option>http://</option>
+                                  </select>
+                                </span>
+                            </p>
+                            <p class="control">
+                                <input class="input" type="url" name="business_register_url" placeholder="Business URL" style="width:100%; align-content:center"
+                                       id="business_register_url">
+                            </p>
+                        </div>
+                    </div>
+                    <div id="modal_page2" class="modal_page">
+                        <h5 class="title is-5" style="text-align:center">Shop Name</h5>
+                        <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
+                            <input class="input" style="width:100%; align-content:center" id="business_register_name" name="business_register_name">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-store"></i>
                             </span>
                         </p>
-                        <p class="control">
-                            <input class="input" type="url" placeholder="Business URL" style="width:100%; align-content:center"
-                                   id="business_register_url">
+                        <h5 class="title is-5" style="text-align:center">Description</h5>
+                        <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
+                            <textarea class="textarea" name="business_register_desc" id="business_register_desc"></textarea>
                         </p>
                     </div>
-                </div>
-                <div id="modal_page2" class="modal_page">
-                    <h5 class="title is-5" style="text-align:center">Shop Name</h5>
-                    <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
-                        <input class="input" style="width:100%; align-content:center" id="business_register_name">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-store"></i>
-                        </span>
-                    </p>
-                    <h5 class="title is-5" style="text-align:center">Description</h5>
-                    <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
-                        <textarea class="textarea" id="business_register_desc"></textarea>
-                    </p>
-                </div>
-                <div id="modal_page3" class="modal_page">
-                    <h5 class="title is-5" style="text-align:center; margin-bottom: 2%">Choose a category</h5>
-                    <div id="categoryContainer">
-                        <div class="dropdown is-hoverable">
-                            <div class="dropdown-trigger">
-                                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-                                        <span>Categories</span>
-                                        <span class="icon is-small">
-                                            <i class="fas fa-angle-down" aria-hidden="true"></i>
-                                        </span>
-                                    </button>
-                            </div>
-                            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-                                <div class="dropdown-content">
-                                    <div th:each="category: ${categories}" class="dropdown-item">
-                                        <a th:text="${category}"></a>
+                    <div id="modal_page3" class="modal_page">
+                        <h5 class="title is-5" style="text-align:center; margin-bottom: 2%">Choose a category</h5>
+                        <div id="categoryContainer">
+                            <div class="dropdown is-hoverable">
+                                <div class="dropdown-trigger">
+                                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                                            <span>Categories</span>
+                                            <span class="icon is-small">
+                                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                            </span>
+                                        </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                                    <div class="dropdown-content">
+                                        <div th:each="category: ${categories}" class="dropdown-item">
+                                            <a th:text="${category}"></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <h5 class="title is-5" style="text-align:center; margin-bottom: 2%">Add tags that describe your business</h5>
-                    <div style="width:100%;">
-                        <!-- Need to fix this, shouldn't be full width of modal -->
-                        <textarea maxlength="50" style="width:75%;" class="textarea" rows="2"></textarea>
-                    </div>
+                        <h5 class="title is-5" style="text-align:center; margin-bottom: 2%">Add tags that describe your business</h5>
+                        <div style="width:100%;">
+                            <!-- Need to fix this, shouldn't be full width of modal -->
+                            <textarea maxlength="50" style="width:75%;" class="textarea" rows="2"></textarea>
+                        </div>
 
-                </div>
-                <div id="modal_page4" class="modal_page">
-                    <h5 class="title is-5" style="text-align:center">Social Media Links</h5>
+                    </div>
+                    <div id="modal_page4" class="modal_page">
+                        <h5 class="title is-5" style="text-align:center">Social Media Links</h5>
 
-                    <div class="socialContainer">
-                        <span class="icon is-large is-left">
-                            <i class="fab fa-instagram"></i>
-                        </span>
-                        <div class="field has-addons" style="display: flex;justify-content: center">
-                            <p class="control">
-                                <input value="instagram.com/" class="input" disabled>
-                            </p>
-                            <p class="control">
-                                <input class="input" type="url" style="width:100%; align-content:center">
-                            </p>
-                        </div>
-<!--                        <input class="input socialInput">-->
-                    </div>
-                    <div class="socialContainer">
-                        <span class="icon is-large is-left">
-                            <i class="fab fa-facebook-f"></i>
-                        </span>
-                        <div class="field has-addons" style="display: flex;justify-content: center">
-                            <p class="control">
-                                <input value="facebook.com/" class="input" disabled>
-                            </p>
-                            <p class="control">
-                                <input class="input" type="url" style="width:100%; align-content:center">
-                            </p>
-                        </div>
-<!--                        <input class="input socialInput">-->
-                    </div>
-                    <div class="socialContainer">
-                        <span class="icon is-large is-left">
-                            <i class="fab fa-twitter"></i>
-                        </span>
-                        <div class="field has-addons" style="display: flex;justify-content: center">
-                            <p class="control">
-                                <input value="twitter.com/" class="input" disabled>
-                            </p>
-                            <p class="control">
-                                <input class="input" type="url" style="width:100%; align-content:center">
-                            </p>
-                        </div>
-<!--                        <input class="input socialInput">-->
-                    </div>
-                    <div class="socialContainer">
-                        <span class="icon is-large is-left">
-                            <i class="fab fa-tiktok"></i>
-                        </span>
-                        <div class="field has-addons" style="display: flex;justify-content: center">
-                            <p class="control">
-                                <input value="tiktok.com/@" class="input" disabled>
-                            </p>
-                            <p class="control">
-                                <input class="input" type="url" style="width:100%; align-content:center">
-                            </p>
-                        </div>
-<!--                        <input class="input socialInput">-->
-                    </div>
-                </div>
-                <div id="modal_page5" class="modal_page">
-                    <h5 class="title is-5" style="text-align:center">Average Monthly Sales</h5>
-                    <div class="socialContainer">
-                        <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
+                        <div class="socialContainer">
                             <span class="icon is-large is-left">
-                                <i class="fas fa-pound-sign"></i>
+                                <i class="fab fa-instagram"></i>
                             </span>
-                            <input class="input socialInput" style="margin-bottom:5%">
+                            <div class="field has-addons" style="display: flex;justify-content: center">
+                                <p class="control">
+                                    <input value="instagram.com/" class="input" disabled>
+                                </p>
+                                <p class="control">
+                                    <input class="input" name="instagram" type="url" style="width:100%; align-content:center">
+                                </p>
+                            </div>
+    <!--                        <input class="input socialInput">-->
+                        </div>
+                        <div class="socialContainer">
+                            <span class="icon is-large is-left">
+                                <i class="fab fa-facebook-f"></i>
+                            </span>
+                            <div class="field has-addons" style="display: flex;justify-content: center">
+                                <p class="control">
+                                    <input value="facebook.com/" class="input" disabled>
+                                </p>
+                                <p class="control">
+                                    <input class="input" name="facebook" type="url" style="width:100%; align-content:center">
+                                </p>
+                            </div>
+    <!--                        <input class="input socialInput">-->
+                        </div>
+                        <div class="socialContainer">
+                            <span class="icon is-large is-left">
+                                <i class="fab fa-twitter"></i>
+                            </span>
+                            <div class="field has-addons" style="display: flex;justify-content: center">
+                                <p class="control">
+                                    <input value="twitter.com/" class="input" disabled>
+                                </p>
+                                <p class="control">
+                                    <input class="input" name="twitter" type="url" style="width:100%; align-content:center">
+                                </p>
+                            </div>
+    <!--                        <input class="input socialInput">-->
+                        </div>
+                        <div class="socialContainer">
+                            <span class="icon is-large is-left">
+                                <i class="fab fa-tiktok"></i>
+                            </span>
+                            <div class="field has-addons" style="display: flex;justify-content: center">
+                                <p class="control">
+                                    <input value="tiktok.com/@" class="input" disabled>
+                                </p>
+                                <p class="control">
+                                    <input class="input" name="tiktok" type="url" style="width:100%; align-content:center">
+                                </p>
+                            </div>
+    <!--                        <input class="input socialInput">-->
+                        </div>
+                    </div>
+                    <div id="modal_page5" class="modal_page">
+                        <h5 class="title is-5" style="text-align:center">Average Monthly Sales</h5>
+                        <div class="socialContainer">
+                            <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
+                                <span class="icon is-large is-left">
+                                    <i class="fas fa-pound-sign"></i>
+                                </span>
+                                <input class="input socialInput" name="earnings" style="margin-bottom:5%">
+                            </p>
+                        </div>
+                        <p class="subtitle is-5" style="text-align: center; font-size:10px">
+                            We need to know this, so we can accurately start you on the correct pricing tier
                         </p>
                     </div>
-                    <p class="subtitle is-5" style="text-align: center; font-size:10px">
-                        We need to know this, so we can accurately start you on the correct pricing tier
-                    </p>
-                </div>
             </section>
             <footer class="modal-card-foot modal-footer">
-                <button class="button is-success" onclick="progress();">Next</button>
+                <button id="forwardButton" class="button is-success" onclick="progress();">Next</button>
             </footer>
+            </form>
         </div>
     </div>
 </body>

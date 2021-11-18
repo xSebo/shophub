@@ -22,6 +22,15 @@ function progress(){
     nameInput = document.getElementById("business_register_name");
     descInput = document.getElementById("business_register_desc");
 
+    if(document.getElementById("forwardButton").innerHTML == "Done"){
+        document.getElementById("businessForm").submit();
+    }
+
+    if(modalStage==3) {
+        document.getElementById("forwardButton").innerHTML = "Done"
+    }
+
+
     if(modalStage<5){
         modalStage += 1
 
