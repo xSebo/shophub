@@ -27,8 +27,6 @@ public class AccountRegister {
         this.surname = surname;
         this.email = email;
         this.password = password;
-
-
     }
 
     public void setPassword(String password) {
@@ -48,4 +46,5 @@ public class AccountRegister {
 
         //System.out.println(this.password);
     }
+
 }
