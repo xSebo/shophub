@@ -23,11 +23,15 @@ public class registerUserServiceStatic implements registerUserService{
         twoFactorMethods.setTwoFactorMethodId(ID);
         twoFactorMethods.setTwoFactorMethodName("None");
 
+        twoFactorMethodsRepo.save(twoFactorMethods);
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         Users newUser = new Users(accountDTO.getName(), accountDTO.getSurname(), accountDTO.getEmail(), accountDTO.getPassword(),
                 "", "",
                 LocalDateTime.now().format(formatter), twoFactorMethods);
-        Users users = usersRepo.save(newUser);
+        usersRepo.save(newUser);
+
+        System.out.println(usersRepo.findById(newUser.getUserId()));
 
     }
 }
