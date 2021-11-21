@@ -15,6 +15,7 @@ public class BusinessRegisterSaver {
 
         Shops shop = new Shops(business.getBusiness_register_name(),
                 business.getBusiness_register_url(),
+                business.getBusiness_register_desc(),
                 business.getEarnings(),
                 "shopPic.png",
                 "UK United Kingdom",

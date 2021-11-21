@@ -45,7 +45,7 @@ public class UserPermissionsTests {
 
     @Test
     public void shouldGet158PermissionsAfterInsert() throws Exception {
-        Shops newShop = new Shops("", "", 0, "", "", true);
+        Shops newShop = new Shops("", "", "", 0, "", "", true);
         shopsRepo.save(newShop);
         TwoFactorMethods twoFactorMethods = twoFactorMethodsRepo.findByTwoFactorMethodId(1).get();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

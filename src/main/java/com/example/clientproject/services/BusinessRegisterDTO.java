@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class BusinessRegisterDTO {
     String business_register_url;
     String business_register_name;
-    //String business_register_desc;
+    String business_register_desc;
     //String businessCategory;
     //ArrayList<String> businessTags;
     //String instagram;
@@ -24,7 +24,7 @@ public class BusinessRegisterDTO {
         this(
                 brf.getBusiness_register_url(),
                 brf.getBusiness_register_name(),
-                //brf.getBusiness_register_desc(),
+                brf.getBusiness_register_desc(),
                 //brf.getBusinessCategory(),
                 //brf.getBusinessTags(),
                 //brf.getInstagram(),

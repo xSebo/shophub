@@ -1,6 +1,3 @@
-SET MODE MYSQL;
-SET IGNORECASE=TRUE;
-
 -- -----------------------------------------------------
 -- -----------------------------------------------------
 -- Schema mydb
@@ -25,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Two_Factor_Methods` (
 CREATE TABLE IF NOT EXISTS `mydb`.`Shops` (
                                               `Shop_Id` INT NOT NULL AUTO_INCREMENT,
                                               `Shop_Name` VARCHAR(45) NOT NULL,
+                                              `Shop_Description` VARCHAR(250) NOT NULL,
                                               `Shop_Website` VARCHAR(45) NOT NULL,
                                               `Shop_Earnings` INT NOT NULL,
                                               `Shop_Countries` VARCHAR(150) NOT NULL,
@@ -237,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User_Stamp_Boards` (
 INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, 'None');
 INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (2, 'GAuth');
 
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('','',0,'',0);
+INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('','','',0,'',0);
 
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (1,'User');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (2,'Business Admin');
