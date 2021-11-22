@@ -15,7 +15,7 @@ public interface ShopsRepo extends JpaRepository<Shops, Long> {
      * FindAll method
      * @return list of Shops found
      */
-    List<Shops> findAll();
+//    List<Shops> findAll();
 
     /**
      * Save method

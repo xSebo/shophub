@@ -19,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name="shops")
 public class Shops {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
