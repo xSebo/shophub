@@ -52,8 +52,6 @@ public class SignInController {
             BindingResult bindingResult,
             Model model) {
 
-        System.out.println("Hello World");
-
         if (bindingResult.hasErrors()) {
             model.addAttribute("loggedIn", loggedIn);
             return "account-login.html";

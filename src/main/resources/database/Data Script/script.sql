@@ -66,5 +66,3 @@ INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_
 INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Murazik - Sanford','MurazikSanford.com','37089','RW Rwanda',1);
 INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Anderson - Franecki','AndersonFranecki.com','25125','SZ Swaziland',2);
 INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Erdman - Shields','ErdmanShields.com','35306','GM Gambia',2);
-
-SELECT * FROM USERS;
