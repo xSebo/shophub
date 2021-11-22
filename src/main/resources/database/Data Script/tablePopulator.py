@@ -50,7 +50,7 @@ def namePopulator(amount, userType):
     newForenames = []
     newSurnames = []
     for i in range(0, amount):
-        newForenames.append(forenameList[random.randint(0, len(forenameList))])
+        newForenames.append(re.sub('[^A-Za-z0-9]+', '', forenameList[random.randint(0, len(forenameList))]))
         newSurnames.append(surnameList[random.randint(0, len(surnameList))])
 
     # GENERATE EXAMPLE PASSWORD WITH SHA256 + SALT
@@ -93,8 +93,13 @@ def companyPopulator(amount):
 
     # Get full list of countries, might need amending (lots of potentially unused countries)
     f = open("countries.txt", "r")
-    countries = f.read().split("\n")
+    tempCountries = f.read().split("\n")
     f.close()
+
+    countries = []
+    for each in tempCountries:
+        each = each.replace("|"," ")
+        countries.append(re.sub('[^A-Za-z0-9 ]+', '', each))
 
     # Generate fake website from company name
     websiteArray = []
@@ -108,8 +113,8 @@ def companyPopulator(amount):
 
         countryi = random.randint(0, len(countries)-1)
 
-        stringInsert = '"' + companyNames[i] + '","' + websiteArray[i] + '","' + str(earnings) + '","' + countries[countryi] + '",' + str(random.randint(1, 2))
-        insertArray.append(createInsert(stringInsert, "Shops", "Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active"))
+        stringInsert = '"' + companyNames[i] + '","' + "" + '","' + websiteArray[i] + '","' + str(earnings) + '","' + countries[countryi] + '",' + str(random.randint(1, 2))
+        insertArray.append(createInsert(stringInsert, "Shops", "Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active"))
 
     return insertArray
 
