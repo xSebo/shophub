@@ -240,3 +240,5 @@ INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Sho
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (1,'User');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (2,'Business Admin');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (3,'Super Admin');
+
+INSERT INTO Tags (Tag_Name) VALUES ('Football');

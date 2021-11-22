@@ -4,6 +4,7 @@ import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
+import com.example.clientproject.services.TwoFactorAuthOBJ;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
