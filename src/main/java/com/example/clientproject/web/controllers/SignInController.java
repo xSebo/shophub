@@ -52,6 +52,8 @@ public class SignInController {
             BindingResult bindingResult,
             Model model) {
 
+        System.out.println("Hello World");
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("loggedIn", loggedIn);
             return "account-login.html";
@@ -63,12 +65,6 @@ public class SignInController {
             Random random = new SecureRandom();
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-            // Credits to user "Assylias" https://stackoverflow.com/questions/18142745/how-do-i-generate-a-salt-in-java-for-salted-hash
-            byte[] salt = new byte[16];
-            random.nextBytes(salt);
-            // For testing, removed random salt generator
-            // String generatedSalt = Base64.getEncoder().encodeToString(salt);
-
             // Check the password given (after encoding) and the user's DB password match
             boolean passwordMatch = usersDTOOptional
                     .get()
@@ -78,6 +74,7 @@ public class SignInController {
                                     loginForm
                                             // Commented for testing purposes
                                             //.getLoginPassword() + generatedSalt
+                                            // TODO - replace with getter for this user's random salt instead of "EXAMPLESALT"
                                             .getLoginPassword() + "EXAMPLESALT"
                             )
                     );

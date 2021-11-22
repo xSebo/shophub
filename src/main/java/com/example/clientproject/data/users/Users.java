@@ -28,6 +28,7 @@ public class Users {
     private String userLastName;
     private String userEmail;
     private String userPassword;
+    // TODO - implement a random salt generator and extra field here
     private String userProfilePicture;
     private String userResetCode;
     private String userResetCodeExpiry;

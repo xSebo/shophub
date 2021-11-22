@@ -10,11 +10,6 @@
     </head>
 
     <body>
-        <div th:replace="fragments/nav.html :: nav"></div>
-
-        <div class="alert alert-warning" th:if="${incorrectEmail}">Email Incorrect</div>
-        <div class="alert alert-warning" th:if="${incorrectPassword}">Password Incorrect</div>
-
         <div class="flex-container">
             <div class="signUpPart" style="flex-grow: 2;">
                 <img style="position: absolute; top: 45px" src="imgs/Logo.png" width="112" height="28" class="logo">
@@ -25,19 +20,35 @@
 
             <div class="vert-flex-container" style="flex-grow: 5;">
                 <h1 class="has-text-weight-bold">Start collecting rewards <br>today!</h1>
-                <form th:action="@{/login}" th:method="post" th:objects="${loginForm}">
-                    <div class="flex-container name-box-container">
-                        <div>
+                <form th:action="@{/login}" th:method="post" th:object="${loginForm}">
+                    <div>
+                        <div class="flex-container name-box-container">
                             <label th:for="loginEmail">Email:</label>
-                            <input class="input small-name-box" type="text" placeholder="Email" th:field="*{loginEmail}"/>
+                            <div class="flex-container name-box-container">
+                                <p class="control has-icons-left">
+                                    <input class="input" type="text" placeholder="Email" th:field="*{loginEmail}"/>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="alert alert-warning" th:if="${incorrectEmail}">Email Incorrect</div>
                             <div class="alert alert-warning" th:errors="*{loginEmail}" th:if="${#fields.hasErrors('loginEmail')}">Email Error</div>
                         </div>
 
                         <br>
 
-                        <div>
-                            <label th:for="loginPassword">Password:</label>
-                            <input class="input small-name-box" type="text" placeholder="Password" th:field="*{loginPassword}"/>
+                        <div class="flex-container name-box-container">
+                            <label th:for="loginPassword">Password:  </label>
+                            <div class="flex-container name-box-container">
+                                <p class="control has-icons-left">
+                                    <input class="input" type="text" placeholder="Password" th:field="*{loginPassword}"/>
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="alert alert-warning" th:if="${incorrectPassword}">Password Incorrect</div>
                             <div class="alert alert-warning" th:errors="*{loginPassword}" th:if="${#fields.hasErrors('loginPassword')}">Password Error</div>
                         </div>
                     </div>

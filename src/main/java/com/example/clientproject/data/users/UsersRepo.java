@@ -22,6 +22,7 @@ public interface UsersRepo extends JpaRepository<Users, Long> {
      * @param email - the email to search by
      * @return - an optional containing the user if one is found
      */
+    @Query("select u from Users u where u.userEmail = ?1")
     Optional<Users> findByUserEmail(String email);
 
     /**

@@ -15,7 +15,7 @@
     justify-content: space-between;
     align-items: center;
     height: auto;
-    width: 50%
+    width: 75%
 }
 
 .signUpPart {
@@ -61,6 +61,7 @@ input {
     margin: 10px;
     background-color: rgb(1,126,255);
     color: white;
+    align-items: center;
     width: 140px;
 }
 
