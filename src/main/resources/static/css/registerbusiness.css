@@ -78,6 +78,18 @@ url-centering{
 #categoryContainer{
     width:100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.socialInput{
+    width:100%;
+    margin-right:5%;
+}
+
+.socialContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }

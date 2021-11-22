@@ -27,7 +27,7 @@ public class ShopsTests {
 
     @Test
     public void shouldGet12ShopsAfterInsert() throws Exception {
-        Shops newShop = new Shops("", "", 0, "", "", true);
+        Shops newShop = new Shops("", "", "", 0, "", "", true);
         Shops shop = shopsRepo.save(newShop);
 
         List<Shops> shopsList = shopsRepo.findAll();

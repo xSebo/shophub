@@ -10,6 +10,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity security) throws Exception
     {
+        security.cors().and().csrf().disable();
         security.httpBasic().disable();
     }
 }
