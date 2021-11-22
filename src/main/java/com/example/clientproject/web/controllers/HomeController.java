@@ -17,6 +17,7 @@ public class HomeController {
     public String index(Model model){
         System.out.println(shopsRepo.findAll());
         model.addAttribute("shops", shopsRepo.findAll());
+        model.addAttribute("tags", new String[]{"Coffee", "Vegan", "Sustainable"});
 
         return "index";
     }

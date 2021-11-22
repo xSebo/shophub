@@ -60,17 +60,15 @@
 			</div>
 			<!--Tags-->
 			<div class="field is-grouped is-grouped-multiline" style="width: 60%;">
-				<div th:replace="fragments/tag.html :: tag(text='Test')"></div>
-				<div th:replace="fragments/tag.html :: tag(text='Vegan')"></div>
-				<div th:replace="fragments/tag.html :: tag(text='Food')"></div>
-				<div th:replace="fragments/tag.html :: tag(text='John')"></div>
+				<div th:each="tag: ${tags}" th:include="fragments/tag.html :: tag"
+					 th:with="text=${tag}"></div>
 			</div>
 		</div>
 
 		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-wrap-wrap">
-			<div th:each="shop: ${shops}" th:include="fragments/business_card.html :: business_card"
+			<div th:each="shop,i: ${shops}" th:include="fragments/business_card.html :: business_card"
 				 th:with="title=${shop.shopName}, reward_text='Free coffee at 6 stamps', reward_amount=4,
-				img_path='imgs/coffee.jpg'"></div>
+				img_path=${shop.shopImage}"></div>
 		</div>
 
 	</div>
