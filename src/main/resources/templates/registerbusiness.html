@@ -28,7 +28,7 @@
             <div id="progressBar" class="progressBar">
                 <div style="width:20%"></div>
             </div>
-            <form id="businessForm" action="/businessRegister" th:method="post">
+            <form name="businessForm" id="businessForm" action="/businessRegister" th:method="post">
             <section class="modal-card-body url-centering" id="modal_container">
                     <div id="modal_page1" class="modal_page">
                         <h5 class="title is-5" style="text-align:center">Enter your shop URL</h5>
@@ -69,10 +69,14 @@
                                 </select>
                             </div>
                         </div>
-                        <h5 class="title is-5" style="text-align:center; margin-bottom: 2%">Add tags that describe your business</h5>
-                        <div style="width:100%;">
+                        <h5 class="title is-5 mt-2" style="text-align:center; margin-bottom: 2%">Add tags that describe your business</h5>
+                        <div class="is-flex is-justify-content-center" style="width:100%;">
                             <!-- Need to fix this, shouldn't be full width of modal -->
-                            <textarea name="businessTags" maxlength="50" style="width:75%;" class="textarea" rows="2"></textarea>
+                            <input name="businessTagsInput" maxlength="50" style="width:75%;" class="input" oninput="addTag(event)"></input>
+                            <input hidden name="businessTags" id="businessTags"/>
+                            <div class = "is-grouped is-grouped-multiline" id="bulmaTags">
+
+                            </div>
                         </div>
 
                     </div>

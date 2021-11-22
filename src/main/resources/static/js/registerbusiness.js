@@ -75,3 +75,27 @@ function handleInfo(data){
         descInput.value = description;
     }
 }
+
+function addTag(e){
+    if(e.data==","){
+        let inputField = document.forms["businessForm"]["businessTagsInput"]
+        let text = inputField.value.slice(0,-1);
+        document.getElementById("bulmaTags").innerHTML += `
+        <div class="control mr-3">
+            <div class="tags has-addons">
+                <span class="tag gradient" style="color:white">${text}</span>
+                <a class="tag is-delete"></a>
+            </div>
+        </div>
+        `
+        let bTag = document.getElementById("businessTags")
+        if(bTag.value == ""){
+            bTag.value += (text)
+        }else{
+            bTag.value += "," + text
+        }
+
+        document.getElementById("businessTags").value += text + ","
+        inputField.value = ""
+    }
+}

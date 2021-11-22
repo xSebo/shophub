@@ -23,6 +23,7 @@ public class BusinessRegisterForm {
     int earnings;
 
     public void setTags(String tempTags){
+        System.out.println(tempTags);
         this.businessTags = new ArrayList(Arrays.asList(tempTags.split(",")));
     }
 
