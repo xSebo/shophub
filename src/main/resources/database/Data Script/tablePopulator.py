@@ -72,7 +72,7 @@ def namePopulator(amount, userType):
         # print(current_user_id)
         # print(current_user_id+amount)
         stringInsert = str(current_user_id) + ',' + '1' + ',' + str(userType)
-        insertArray.append(createInsert(stringInsert, "UserPermissions", "User_ID, Shop_ID, Admin_Type_Id"))
+        insertArray.append(createInsert(stringInsert, "user_permissions", "User_ID, Shop_ID, Admin_Type_Id"))
         current_user_id = current_user_id + 1
 
     return insertArray

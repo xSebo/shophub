@@ -68,13 +68,9 @@
 		</div>
 
 		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-wrap-wrap">
-			<!--Business Containers-->
-			<div th:replace="fragments/business_card.html :: business_card(
-				title='Cafe Not so',
-				reward_text='Free coffee at 6 stamps',
-				reward_amount=4,
-				img_path='imgs/coffee.jpg'
-			)"></div>
+			<div th:each="shop: ${shops}" th:include="fragments/business_card.html :: business_card"
+				 th:with="title=${shop.shopName}, reward_text='Free coffee at 6 stamps', reward_amount=4,
+				img_path='imgs/coffee.jpg'"></div>
 		</div>
 
 	</div>
