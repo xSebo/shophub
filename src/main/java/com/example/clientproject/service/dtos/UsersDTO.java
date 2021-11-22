@@ -1,7 +1,7 @@
 package com.example.clientproject.service.dtos;
 
 import com.example.clientproject.data.shops.Shops;
-import com.example.clientproject.data.stampBoards.StampBoards;
+import com.example.clientproject.data.userStampBoards.UserStampBoards;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
 import com.example.clientproject.data.users.Users;
@@ -24,7 +24,7 @@ public class UsersDTO {
     String userResetCodeExpiry;
     TwoFactorMethods twoFactorMethod;
     List<Shops> favouriteShops;
-    Set<StampBoards> stampBoards;
+    Set<UserStampBoards> userStampBoards;
     List<Tags> favouriteTags;
 
     public UsersDTO(Users user) {
@@ -39,7 +39,7 @@ public class UsersDTO {
                 user.getUserResetCodeExpiry(),
                 user.getTwoFactorMethod(),
                 user.getFavouriteShops(),
-                user.getStampBoards(),
+                user.getUserStampBoards(),
                 user.getFavouriteTags());
     }
 }

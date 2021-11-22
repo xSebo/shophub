@@ -3,6 +3,7 @@ package com.example.clientproject.web.controllers;
 import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.web.forms.LoginForm;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -52,30 +53,26 @@ public class SignInController {
             BindingResult bindingResult,
             Model model) {
 
+        System.out.println("Hello World");
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("loggedIn", loggedIn);
             return "account-login.html";
         }
 
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        System.out.println(passwordEncoder.encode("password123"));
+
         Optional<UsersDTO> usersDTOOptional = usersSearch.findByEmail(loginForm.getLoginEmail());
         // If the optional is present - the search found a user with that email
         if (usersDTOOptional.isPresent()) {
-            Random random = new SecureRandom();
-            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
             // Check the password given (after encoding) and the user's DB password match
-            boolean passwordMatch = usersDTOOptional
-                    .get()
-                    .getUserPassword()
-                    .equals(
-                            passwordEncoder.encode(
-                                    loginForm
-                                            // Commented for testing purposes
-                                            //.getLoginPassword() + generatedSalt
-                                            // TODO - replace with getter for this user's random salt instead of "EXAMPLESALT"
-                                            .getLoginPassword() + "EXAMPLESALT"
-                            )
-                    );
+            boolean passwordMatch = BCrypt.checkpw(
+                                    loginForm.getLoginPassword(),
+                                    usersDTOOptional
+                                            .get()
+                                            .getUserPassword()
+                            );
 
             // If they match, set the loggedIn flag to true
             if (passwordMatch) {
