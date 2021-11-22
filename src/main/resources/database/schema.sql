@@ -196,15 +196,15 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Reward_Shop_Links` (
 CREATE TABLE IF NOT EXISTS `mydb`.`User_Shop_Links` (
                                                         `User_Shop_Link_Id` INT NOT NULL AUTO_INCREMENT,
                                                         `Shop_Id` INT NOT NULL,
-                                                        `Users_User_Id` INT NOT NULL,
-                                                        PRIMARY KEY (`User_Shop_Link_Id`, `Shop_Id`, `Users_User_Id`),
+                                                        `User_Id` INT NOT NULL,
+                                                        PRIMARY KEY (`User_Shop_Link_Id`, `Shop_Id`, `User_Id`),
                                                         CONSTRAINT `fk_User_Shop_Links_Shops1`
                                                             FOREIGN KEY (`Shop_Id`)
                                                                 REFERENCES `mydb`.`Shops` (`Shop_Id`)
                                                                 ON DELETE NO ACTION
                                                                 ON UPDATE NO ACTION,
                                                         CONSTRAINT `fk_User_Shop_Links_Users1`
-                                                            FOREIGN KEY (`Users_User_Id`)
+                                                            FOREIGN KEY (`User_Id`)
                                                                 REFERENCES `mydb`.`Users` (`User_Id`)
                                                                 ON DELETE NO ACTION
                                                                 ON UPDATE NO ACTION)
@@ -240,3 +240,5 @@ INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Sho
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (1,'User');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (2,'Business Admin');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (3,'Super Admin');
+
+INSERT INTO Tags (Tag_Name) VALUES ('Football');
