@@ -28,7 +28,7 @@
             <div id="progressBar" class="progressBar">
                 <div style="width:20%"></div>
             </div>
-            <form name="businessForm" id="businessForm" action="/businessRegister" th:method="post">
+            <form name="businessForm" id="businessForm" action="/businessRegister" th:method="post" onsubmit="return false">
             <section class="modal-card-body url-centering" id="modal_container">
                     <div id="modal_page1" class="modal_page">
                         <h5 class="title is-5" style="text-align:center">Enter your shop URL</h5>
@@ -42,7 +42,7 @@
                                 </span>
                             </p>
                             <p class="control">
-                                <input class="input" type="url" name="business_register_url" placeholder="Business URL" style="width:100%; align-content:center"
+                                <input class="input" type="text" name="business_register_url" placeholder="Business URL" style="width:100%; align-content:center"
                                        id="business_register_url">
                             </p>
                         </div>
@@ -74,11 +74,12 @@
                             <!-- Need to fix this, shouldn't be full width of modal -->
                             <input name="businessTagsInput" maxlength="50" style="width:75%;" class="input" oninput="addTag(event)"></input>
                             <input hidden name="businessTags" id="businessTags"/>
-                            <div class = "is-grouped is-grouped-multiline" id="bulmaTags">
-
+                        </div>
+                        <div class = "field is-grouped is-grouped-multiline p-4" id="bulmaTags">
+                            <div id="tagCount" style="display: none" class="mr-3">
+                                0/20
                             </div>
                         </div>
-
                     </div>
                     <div id="modal_page4" class="modal_page">
                         <h5 class="title is-5" style="text-align:center">Social Media Links</h5>

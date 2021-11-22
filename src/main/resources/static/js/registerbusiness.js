@@ -43,7 +43,7 @@ function progress(){
         let nextStageId = "modal_page"+ (modalStage+1).toString()
 
         let newHeight = (document.getElementById(nextStageId).offsetHeight)+40
-        document.getElementById("modal_container").style.height = newHeight.toString()+"px"
+        document.getElementById("modal_container").style.minHeight = newHeight.toString()+"px"
 
         document.getElementById(currentStageId.toString()).style.transform = "translateX(-150%)"
         document.getElementById(nextStageId.toString()).style.transform = "translateX(0%)"
@@ -76,18 +76,24 @@ function handleInfo(data){
     }
 }
 
+var tags = []
 function addTag(e){
-    if(e.data==","){
+    if(e.data=="," && tags.length != 20){
         let inputField = document.forms["businessForm"]["businessTagsInput"]
         let text = inputField.value.slice(0,-1);
         document.getElementById("bulmaTags").innerHTML += `
-        <div class="control mr-3">
-            <div class="tags has-addons">
-                <span class="tag gradient" style="color:white">${text}</span>
-                <a class="tag is-delete"></a>
+        <div>
+            <div class="control mr-3 mb-2">
+                <div class="tags has-addons">
+                    <span class="tag gradient" style="color:white">${text}</span>
+                    <a class="tag is-delete"></a>
+                </div>
             </div>
         </div>
         `
+        let newHeight = (document.getElementById("modal_page3").offsetHeight)+40
+        document.getElementById("modal_container").style.minHeight = newHeight.toString()+"px"
+
         let bTag = document.getElementById("businessTags")
         if(bTag.value == ""){
             bTag.value += (text)
@@ -95,6 +101,9 @@ function addTag(e){
             bTag.value += "," + text
         }
 
+        tags.push(bTag.value);
+        document.getElementById("tagCount").innerText = tags.length.toString() + "/20"
+        document.getElementById("tagCount").style.display = "block";
         document.getElementById("businessTags").value += text + ","
         inputField.value = ""
     }
