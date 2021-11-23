@@ -13,7 +13,7 @@ public class BusinessRegisterDTO {
     String business_register_name;
     String business_register_desc;
     //String businessCategory;
-    //ArrayList<String> businessTags;
+    ArrayList<String> businessTags;
     //String instagram;
     //String facebook;
     //String twitter;
@@ -26,7 +26,7 @@ public class BusinessRegisterDTO {
                 brf.getBusiness_register_name(),
                 brf.getBusiness_register_desc(),
                 //brf.getBusinessCategory(),
-                //brf.getBusinessTags(),
+                brf.getBusinessTags(),
                 //brf.getInstagram(),
                 //brf.getFacebook(),
                 //brf.getTwitter(),

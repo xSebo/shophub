@@ -242,3 +242,21 @@ INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (2,'Business Adm
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (3,'Super Admin');
 
 INSERT INTO Tags (Tag_Name) VALUES ('Football');
+INSERT INTO Tags (Tag_Name) VALUES ('Fashion');
+INSERT INTO Tags (Tag_Name) VALUES ('Electronics');
+INSERT INTO Tags (Tag_Name) VALUES ('Coffee');
+INSERT INTO Tags (Tag_Name) VALUES ('Art');
+INSERT INTO Tags (Tag_Name) VALUES ('Pets');
+INSERT INTO Tags (Tag_Name) VALUES ('Clothes');
+INSERT INTO Tags (Tag_Name) VALUES ('Designer');
+INSERT INTO Tags (Tag_Name) VALUES ('Groceries');
+INSERT INTO Tags (Tag_Name) VALUES ('Cars');
+INSERT INTO Tags (Tag_Name) VALUES ('Hiking');
+INSERT INTO Tags (Tag_Name) VALUES ('Cooking');
+INSERT INTO Tags (Tag_Name) VALUES ('Furniture');
+INSERT INTO Tags (Tag_Name) VALUES ('Gaming');
+INSERT INTO Tags (Tag_Name) VALUES ('Travelling');
+INSERT INTO Tags (Tag_Name) VALUES ('Beauty');
+INSERT INTO Tags (Tag_Name) VALUES ('Eco-friendly');
+INSERT INTO Tags (Tag_Name) VALUES ('Decorations');
+INSERT INTO Tags (Tag_Name) VALUES ('Photography');

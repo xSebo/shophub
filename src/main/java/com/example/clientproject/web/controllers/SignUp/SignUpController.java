@@ -1,22 +1,18 @@
 package com.example.clientproject.web.controllers.SignUp;
 
-import com.example.clientproject.data.twoFactorMethods.TwoFactorMethodsRepo;
-import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
 import com.example.clientproject.data.users.Users;
-import com.example.clientproject.data.users.UsersRepo;
 import com.example.clientproject.domain.AccountRegister;
 import com.example.clientproject.services.findUserByEmailService;
 import com.example.clientproject.services.newAccountDTO;
 import com.example.clientproject.services.registerUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -25,6 +21,8 @@ public class SignUpController {
 
 
     private registerUserService regUserService;
+
+    List<String> EmailTakenContainer = new ArrayList<>();
 
 
     @Autowired
@@ -39,12 +37,16 @@ public class SignUpController {
     public String signUp(Model model, AccountRegister accountRegister) {
         newAccountDTO newAccountDTO1 = new newAccountDTO(accountRegister.getName(), accountRegister.getSurname(), accountRegister.getEmail(), accountRegister.getPassword());
 
-        //get all emails
 
+
+        EmailTakenContainer.clear();
+
+        //get all emails
         Optional<Users> User =  findUserByEmail.findByUserEmail(accountRegister.getEmail());
 
         if (User.isPresent()) { //if email is already taken it will not save user to DB and will return error msg
-            model.addAttribute("Email is already taken");
+            EmailTakenContainer.add("yes");
+            model.addAttribute("EmailTaken", EmailTakenContainer);
             System.out.println("Email exists in database");
             return "signup";
         }

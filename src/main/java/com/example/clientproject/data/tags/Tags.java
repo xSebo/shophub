@@ -23,6 +23,13 @@ public class Tags {
     private long tagId;
     private String tagName;
 
+    /**
+     *
+     */
+    public Tags(String tagName){
+        this.tagName = tagName;
+    }
+
     @ManyToMany(mappedBy="shopTags")
     private List<Shops> relatedShops;
 

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -21,20 +23,17 @@ public class selectCategoriesControllers {
     }
 
     @PostMapping("/selectCategories")
-    public String selectCategories(){
-
-        return("selectCategories");
+    public String selectCategories(@RequestParam String listOfTagIDs){
+        System.out.println(listOfTagIDs);
+        List<String> TagID_List = Arrays.asList(listOfTagIDs.split(","));
+        return("index");
     }
 
 
     @GetMapping("/selectCategories")
     public String selectCategories(Model model){
         List<Tags> allTags = tagsRepo.findAll();
-        model.addAttribute("allTags", allTags);
-        for (Tags allTag : allTags) {
-            System.out.println(allTag);
-        }
-        System.out.println("Test");
+        model.addAttribute("allTagsAttributeName", allTags);
         System.out.println(allTags);
         return("selectCategories");
     }

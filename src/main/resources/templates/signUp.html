@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<html xmlns:th="http://www.thymeleaf.org">
 	<link rel="stylesheet" type="text/css" href="css/bulma.min.css">
   <link rel="stylesheet" type="text/css" href="css/signUp.css">
 	<script src="/js/registerUser.js"></script>
@@ -37,6 +38,7 @@
 		<p class="valIssueTxt" id="NameTxt">"Name" field is empty</p><br>
 		<br><p class="valIssueTxt" id="SurnameTxt">"Surname" field is empty</p>
 		<br><p class="valIssueTxt" id="PasswordTxt">"Password" field is empty</p>
+		<br><p class="valIssueTxt" style="display: initial;" th:each="EmailTakenContainer : ${EmailTaken}" id="EmailTxt">Email is already taken</p>
 	</div>
 </body>
 </html>
