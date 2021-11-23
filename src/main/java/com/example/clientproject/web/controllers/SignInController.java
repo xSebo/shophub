@@ -6,9 +6,12 @@ import com.example.clientproject.web.forms.BusinessRegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,10 +26,15 @@ public class SignInController {
     }
 
     @PostMapping("/businessRegister")
-    public String submitBusinessInfo(BusinessRegisterForm brf){
+    public String submitBusinessInfo(@Valid BusinessRegisterForm brf, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            System.out.println("Error");
+            return "registerbusiness.html";
+        }
+
         saveBusiness.save(new BusinessRegisterDTO(brf));
         //System.out.println(brf.getBusinessTags());
-        return "registerbusiness.html";
+        return "redirect:registerbusiness.html";
     }
 
     @GetMapping("/businessRegister")

@@ -35,8 +35,6 @@ public class BusinessRegisterForm {
     String twitter;
     String tiktok;
 
-    @NotEmpty(message="Earning Cannot be Empty")
-    @Pattern(regexp = "[0-9]*", message = "Earnings must be an integer")
     int earnings;
 
     public void setBusinessTags(String tempTags){
