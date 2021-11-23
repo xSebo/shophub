@@ -1,6 +1,7 @@
 package com.example.clientproject.data.users;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,7 @@ public interface UsersRepo extends JpaRepository<Users, Long> {
      * @param email - the email to search by
      * @return - an optional containing the user if one is found
      */
+    @Query("select u from Users u where u.userEmail = ?1")
     Optional<Users> findByUserEmail(String email);
 
     /**
