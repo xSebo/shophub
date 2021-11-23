@@ -17,6 +17,11 @@ function setLoadingBar(){
 }
 
 function progress(){
+
+    function refresh(){
+        let newHeight = (document.getElementById("modal_page" + (modalStage+1).toString()).offsetHeight)+40
+        document.getElementById("modal_container").style.minHeight = newHeight.toString()+"px"
+    }
     urlInput = document.getElementById("business_register_url");
     urlPrefixInput = document.getElementById("business_register_url_prefix");
     nameInput = document.getElementById("business_register_name");
@@ -36,12 +41,38 @@ function progress(){
             if(val == "" ||
                 !new RegExp("http(s)?:\\/\\/(www[.])?([a-zA-Z0-9$_.+!*'(),]|[-])*[.].+").test(val)){
                 urlInput.classList.add("is-danger")
+                document.getElementById("business_register_url_help").innerText = "Url is not valid"
+                refresh()
                 return
             }else{
                 urlInput.classList.remove("is-danger")
+                document.getElementById("business_register_url_help").innerText = ""
+                refresh()
             }
             break;
         case 1:
+            let valid = true;
+            if(nameInput.value == ""){
+                nameInput.classList.add("is-danger")
+                document.getElementById("business_register_name_help").innerText = "Name cannot be empty"
+                refresh()
+                valid = false;
+            }else{
+                nameInput.classList.remove("is-danger")
+                document.getElementById("business_register_name_help").innerText = ""
+                refresh()
+            }
+            if(descInput.value == ""){
+                descInput.classList.add("is-danger")
+                document.getElementById("business_register_desc_help").innerText = "Description cannot be empty"
+                refresh()
+                valid = false;
+            }else{
+                descInput.classList.remove("is-danger")
+                document.getElementById("business_register_desc_help").innerText = ""
+                refresh()
+            }
+            if(!valid){return;}
             break;
     }
 

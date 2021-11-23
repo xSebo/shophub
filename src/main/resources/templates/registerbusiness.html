@@ -32,19 +32,22 @@
             <section class="modal-card-body url-centering" id="modal_container">
                     <div id="modal_page1" class="modal_page">
                         <h5 class="title is-5" style="text-align:center">Enter your shop URL</h5>
-                        <div class="field has-addons" style="display: flex;justify-content: center">
-                            <p class="control">
-                                <span class="select">
-                                  <select id="business_register_url_prefix">
-                                    <option>https://</option>
-                                    <option>http://</option>
-                                  </select>
-                                </span>
-                            </p>
-                            <p class="control">
-                                <input class="input" type="text" name="business_register_url" placeholder="Business URL" style="width:100%; align-content:center"
-                                       id="business_register_url">
-                            </p>
+                        <div>
+                            <div class="field has-addons" style="display: flex;justify-content: center">
+                                <p class="control">
+                                    <span class="select">
+                                      <select id="business_register_url_prefix">
+                                        <option>https://</option>
+                                        <option>http://</option>
+                                      </select>
+                                    </span>
+                                </p>
+                                <p class="control">
+                                    <input class="input" type="text" name="business_register_url" placeholder="Business URL" style="width:100%; align-content:center"
+                                           id="business_register_url">
+                                </p>
+                            </div>
+                            <p class="help is-danger" id="business_register_url_help" style="text-align: center"></p>
                         </div>
                     </div>
                     <div id="modal_page2" class="modal_page">
@@ -54,11 +57,13 @@
                             <span class="icon is-small is-left">
                                 <i class="fas fa-store"></i>
                             </span>
+                            <p class="is-danger help" style="text-align: center" id="business_register_name_help"></p>
                         </p>
                         <h5 class="title is-5" style="text-align:center; margin-bottom:5%; margin-top:5%">Description</h5>
                         <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
                             <textarea class="textarea" name="business_register_desc" id="business_register_desc"></textarea>
                         </p>
+                        <p class="is-danger help" style="text-align: center" id="business_register_desc_help"></p>
                     </div>
                     <div id="modal_page3" class="modal_page">
                         <h5 class="title is-5" style="text-align:center; margin-bottom: 2%">Choose a category</h5>
