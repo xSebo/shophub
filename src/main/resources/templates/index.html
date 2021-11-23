@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html>
 <head>
 	<title>ShopHub | Dashboard</title>
@@ -7,6 +7,7 @@
 	<link th:replace="fragments/nav.html :: nav-css"/>
 	<link rel="stylesheet" href="/css/index.css">
 	<link rel="stylesheet" href="/css/reward_card.css">
+	<link rel="stylesheet" href="/css/business_container.css">
 </head>
 <body>
 	<div th:replace="fragments/nav.html :: nav"></div>
@@ -14,7 +15,7 @@
 		<div class="container">
 			<div class="rewards_container_top level">
 				<div class="level-left">
-					<h1 class="title is-1">My rewards</h1>
+					<h1 class="title is-2">My rewards</h1>
 				</div>
 				<div class="level-right">
 					<div class="control has-icons-left">
@@ -26,12 +27,50 @@
 				</div>
 			</div>
 			<div class="horiz_scroll is-full-width mb-1">
-				<div class="reward_card">
-
-				</div>
+				<!--Reward Card Here-->
+				<div th:replace="fragments/reward_card.html :: reward_card(
+					title='Coca Cola',
+					stamps=6,
+					next_reward=8,
+					reward_amount_obtained=2,
+					total_reward_amount=5,
+					img_path='imgs/coke.jpg'
+				)"></div>
+				<div th:replace="fragments/reward_card.html :: reward_card(
+					title='Cafe Nero',
+					stamps=2,
+					next_reward=4,
+					reward_amount_obtained=0,
+					total_reward_amount=4,
+					img_path='imgs/coffee.jpg'
+				)"></div>
 			</div>
+
 			<a href="/">See All ></a>
 		</div>
+	</div>
+	<div class="search_bar section">
+		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-direction-column mb-4">
+			<h1 class="title is-3">Where else can I earn rewards?</h1>
+			<div class="control has-icons-left mb-2" style="width: 60%;">
+				<input class="input" type="text" placeholder="Enter Brands or keywords e.g. Vegan, Clothing etc..">
+				<span class="icon is-small is-left">
+					<i class="fas fa-search"></i>
+				</span>
+			</div>
+			<!--Tags-->
+			<div class="field is-grouped is-grouped-multiline" style="width: 60%;">
+				<div th:each="tag: ${tags}" th:include="fragments/tag.html :: tag"
+					 th:with="text=${tag}"></div>
+			</div>
+		</div>
+
+		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-wrap-wrap">
+			<div th:each="shop,i: ${shops}" th:include="fragments/business_card.html :: business_card"
+				 th:with="title=${shop.shopName}, reward_text='Free coffee at 6 stamps', reward_amount=4,
+				img_path=${shop.shopImage}"></div>
+		</div>
+
 	</div>
 </body>
 </html>

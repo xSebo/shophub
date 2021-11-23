@@ -19,11 +19,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name="shops")
 public class Shops {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String shopId;
     private String shopName;
+    private String shopDescription;
     private String shopWebsite;
     private int shopEarnings;
     private String shopImage;
@@ -41,9 +43,10 @@ public class Shops {
      * @param countries - shop countries
      * @param active - shop active status
      */
-    public Shops(String name, String website, int earnings,
+    public Shops(String name, String website, String description, int earnings,
                  String image, String countries, boolean active) {
         this.shopName = name;
+        this.shopDescription = description;
         this.shopWebsite = website;
         this.shopEarnings = earnings;
         this.shopImage = image;

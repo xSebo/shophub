@@ -1,9 +1,10 @@
 package com.example.clientproject.data.users;
 
 import com.example.clientproject.data.shops.Shops;
+import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
-import com.example.clientproject.data.userStampBoards.UserStampBoards;
+import com.example.clientproject.services.TwoFactorAuthOBJ;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,6 @@ public class Users {
     private String userLastName;
     private String userEmail;
     private String userPassword;
-    // TODO - implement a random salt generator and extra field here
     private String userProfilePicture;
     private String userResetCode;
     private String userResetCodeExpiry;
@@ -71,7 +71,7 @@ public class Users {
 
     @OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="User_Id", nullable = false)
-    private Set<UserStampBoards> userStampBoards;
+    private Set<StampBoards> stampBoards;
 
     @ManyToMany
     @JoinTable(

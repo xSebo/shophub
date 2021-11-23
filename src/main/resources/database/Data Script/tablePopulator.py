@@ -72,7 +72,7 @@ def namePopulator(amount, userType):
         # print(current_user_id)
         # print(current_user_id+amount)
         stringInsert = str(current_user_id) + ',' + '1' + ',' + str(userType)
-        insertArray.append(createInsert(stringInsert, "UserPermissions", "User_ID, Shop_ID, Admin_Type_Id"))
+        insertArray.append(createInsert(stringInsert, "User_Permissions", "User_ID, Shop_ID, Admin_Type_Id"))
         current_user_id = current_user_id + 1
 
     return insertArray
@@ -113,8 +113,8 @@ def companyPopulator(amount):
 
         countryi = random.randint(0, len(countries)-1)
 
-        stringInsert = '"' + companyNames[i] + '","' + websiteArray[i] + '","' + str(earnings) + '","' + countries[countryi] + '",' + str(random.randint(1, 2))
-        insertArray.append(createInsert(stringInsert, "Shops", "Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active"))
+        stringInsert = '"' + companyNames[i] + '","' + "" + '","' + websiteArray[i] + '","' + str(earnings) + '","' + countries[countryi] + '",' + str(random.randint(1, 2))
+        insertArray.append(createInsert(stringInsert, "Shops", "Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active"))
 
     return insertArray
 
