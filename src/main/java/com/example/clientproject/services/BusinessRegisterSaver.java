@@ -45,17 +45,18 @@ public class BusinessRegisterSaver {
             Tags tag = new Tags(t);
             tagsRepo.save(tag);
 
+
             String query = "INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES ("+ shop.getShopId() +
                     ","+tag.getTagId() + ")";
 
             jdbc.execute(query);
 
         }
-        System.out.println(shop.getShopId());
+        //System.out.println(shop.getShopId());
 
-        System.out.println(tagsRepo.findAll());
+        //System.out.println(tagsRepo.findAll());
 
-        System.out.println(shopsRepo.findByShopName(business.getBusiness_register_name()));
+        //System.out.println(shopsRepo.findByShopName(business.getBusiness_register_name()));
     }
 
 }

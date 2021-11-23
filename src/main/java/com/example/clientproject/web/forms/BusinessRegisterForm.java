@@ -22,7 +22,7 @@ public class BusinessRegisterForm {
     String tiktok;
     int earnings;
 
-    public void setTags(String tempTags){
+    public void setBusinessTags(String tempTags){
         System.out.println(tempTags);
         this.businessTags = new ArrayList(Arrays.asList(tempTags.split(",")));
     }

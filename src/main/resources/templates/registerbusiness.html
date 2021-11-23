@@ -72,7 +72,7 @@
                         <h5 class="title is-5 mt-2" style="text-align:center; margin-bottom: 2%">Add tags that describe your business</h5>
                         <div class="is-flex is-justify-content-center" style="width:100%;">
                             <!-- Need to fix this, shouldn't be full width of modal -->
-                            <input name="businessTagsInput" maxlength="50" style="width:75%;" class="input" oninput="addTag(event)"></input>
+                            <input id="businessTagsInput" maxlength="50" style="width:75%;" class="input" oninput="addTag(event)"></input>
                             <input hidden name="businessTags" id="businessTags"/>
                         </div>
                         <div class = "field is-grouped is-grouped-multiline p-4" id="bulmaTags">
@@ -83,62 +83,63 @@
                     </div>
                     <div id="modal_page4" class="modal_page">
                         <h5 class="title is-5" style="text-align:center">Social Media Links</h5>
-
-                        <div class="socialContainer">
-                            <span class="icon is-large is-left">
-                                <i class="fab fa-instagram"></i>
-                            </span>
-                            <div class="field has-addons" style="display: flex;justify-content: center">
-                                <p class="control">
-                                    <input value="instagram.com/" class="input" disabled>
-                                </p>
-                                <p class="control">
-                                    <input class="input" name="instagram" type="url" style="width:100%; align-content:center">
-                                </p>
+                        <div id="wholeSocialContainer">
+                            <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-instagram"></i>
+                                </span>
+                                <div class="field has-addons" style="display: flex;justify-content: center">
+                                    <p class="control">
+                                        <input value="instagram.com/" class="input" disabled>
+                                    </p>
+                                    <p class="control">
+                                        <input class="input" name="instagram" type="url" style="width:100%; align-content:center">
+                                    </p>
+                                </div>
+        <!--                        <input class="input socialInput">-->
                             </div>
-    <!--                        <input class="input socialInput">-->
-                        </div>
-                        <div class="socialContainer">
-                            <span class="icon is-large is-left">
-                                <i class="fab fa-facebook-f"></i>
-                            </span>
-                            <div class="field has-addons" style="display: flex;justify-content: center">
-                                <p class="control">
-                                    <input value="facebook.com/" class="input" disabled>
-                                </p>
-                                <p class="control">
-                                    <input class="input" name="facebook" type="url" style="width:100%; align-content:center">
-                                </p>
+                            <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-facebook-f"></i>
+                                </span>
+                                <div class="field has-addons" style="display: flex;justify-content: center">
+                                    <p class="control">
+                                        <input value="facebook.com/" class="input" disabled>
+                                    </p>
+                                    <p class="control">
+                                        <input class="input" name="facebook" type="url" style="width:100%; align-content:center">
+                                    </p>
+                                </div>
+        <!--                        <input class="input socialInput">-->
                             </div>
-    <!--                        <input class="input socialInput">-->
-                        </div>
-                        <div class="socialContainer">
-                            <span class="icon is-large is-left">
-                                <i class="fab fa-twitter"></i>
-                            </span>
-                            <div class="field has-addons" style="display: flex;justify-content: center">
-                                <p class="control">
-                                    <input value="twitter.com/" class="input" disabled>
-                                </p>
-                                <p class="control">
-                                    <input class="input" name="twitter" type="url" style="width:100%; align-content:center">
-                                </p>
+                            <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-twitter"></i>
+                                </span>
+                                <div class="field has-addons" style="display: flex;justify-content: center">
+                                    <p class="control">
+                                        <input value="twitter.com/" class="input" disabled>
+                                    </p>
+                                    <p class="control">
+                                        <input class="input" name="twitter" type="url" style="width:100%; align-content:center">
+                                    </p>
+                                </div>
+        <!--                        <input class="input socialInput">-->
                             </div>
-    <!--                        <input class="input socialInput">-->
-                        </div>
-                        <div class="socialContainer">
-                            <span class="icon is-large is-left">
-                                <i class="fab fa-tiktok"></i>
-                            </span>
-                            <div class="field has-addons" style="display: flex;justify-content: center">
-                                <p class="control">
-                                    <input value="tiktok.com/@" class="input" disabled>
-                                </p>
-                                <p class="control">
-                                    <input class="input" name="tiktok" type="url" style="width:100%; align-content:center">
-                                </p>
+                            <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-tiktok"></i>
+                                </span>
+                                <div class="field has-addons" style="display: flex;justify-content: center">
+                                    <p class="control">
+                                        <input value="tiktok.com/@" class="input" disabled>
+                                    </p>
+                                    <p class="control">
+                                        <input class="input" name="tiktok" type="url" style="width:100%; align-content:center">
+                                    </p>
+                                </div>
+        <!--                        <input class="input socialInput">-->
                             </div>
-    <!--                        <input class="input socialInput">-->
                         </div>
                     </div>
                     <div id="modal_page5" class="modal_page">
