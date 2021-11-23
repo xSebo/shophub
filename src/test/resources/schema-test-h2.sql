@@ -5,7 +5,7 @@ SET IGNORECASE=TRUE;
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb`;
+DROP SCHEMA IF EXISTS `mydb` CASCADE;
 CREATE SCHEMA IF NOT EXISTS `mydb`;
 USE `mydb`;
 
