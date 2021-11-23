@@ -16,6 +16,26 @@ function setLoadingBar(){
     }
 }
 
+function revert(){
+    if(modalStage>0){
+        let currentStage = "modal_page" + (modalStage+1).toString()
+        let prevStage = "modal_page" + (modalStage).toString()
+
+        let newHeight = (document.getElementById(prevStage).offsetHeight)+40
+        document.getElementById("modal_container").style.minHeight = newHeight.toString()+"px"
+
+        document.getElementById(currentStage.toString()).style.transform = "translateX(150%)"
+        document.getElementById(prevStage.toString()).style.transform = "translateX(0%)"
+
+        modalStage-=1
+        if(document.getElementById("forwardButton").innerHTML == "Done"){
+            document.getElementById("forwardButton").innerHTML = "Next"
+        }
+
+    }
+    setLoadingBar()
+}
+
 function progress(){
 
     function refresh(){
