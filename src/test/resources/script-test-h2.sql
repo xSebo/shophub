@@ -320,13 +320,13 @@ INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (158,1,3);
 
 
 
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Leffler Group','LefflerGroup.com','36951','WF Wallis And Futuna',1);
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Ondricka, Hermann and Zulauf','OndrickaHermannandZulauf.com','21303','LK Sri Lanka',1);
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Hand, Parker and Haley','HandParkerandHaley.com','17361','PH Philippines',1);
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Hills Group','HillsGroup.com','23720','LB Lebanon',2);
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Reinger, Stanton and Block','ReingerStantonandBlock.com','32575','CR Costa Rica',2);
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Reilly - Dicki','ReillyDicki.com','9218','VE Venezuela',2);
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Collins Group','CollinsGroup.com','36562','MC Monaco',2);
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Fadel, Morar and Harris','FadelMorarandHarris.com','38127','ZM Zambia',2);
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Hayes - Lehner','HayesLehner.com','2919','SG Singapore',1);
-INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('Walsh, Maggio and Maggio','WalshMaggioandMaggio.com','3875','MT Malta',2);
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('Leffler Group','LefflerGroup.com','36951','WF Wallis And Futuna',1,1);
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('Ondricka, Hermann and Zulauf','OndrickaHermannandZulauf.com','21303','LK Sri Lanka',1,1);
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('Hand, Parker and Haley','HandParkerandHaley.com','17361','PH Philippines',1,1);
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('Hills Group','HillsGroup.com','23720','LB Lebanon',2,1);
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('Reinger, Stanton and Block','ReingerStantonandBlock.com','32575','CR Costa Rica',2,1);
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('Reilly - Dicki','ReillyDicki.com','9218','VE Venezuela',2,1);
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('Collins Group','CollinsGroup.com','36562','MC Monaco',2,1);
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('Fadel, Morar and Harris','FadelMorarandHarris.com','38127','ZM Zambia',2,1);
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('Hayes - Lehner','HayesLehner.com','2919','SG Singapore',1,1);
+INSERT INTO Shops (Shop_Name, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('Walsh, Maggio and Maggio','WalshMaggioandMaggio.com','3875','MT Malta',2,1);
