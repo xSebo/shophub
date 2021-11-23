@@ -1,6 +1,8 @@
 package com.example.clientproject.data.tags;
 
+import com.example.clientproject.data.shops.Shops;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -21,4 +23,7 @@ public interface TagsRepo extends JpaRepository<Tags, Long> {
      * @return - the object
      */
     Tags save(Tags tags);
+
+    @Query("select t.tagId from Tags t where t.tagId = (select max(t.tagId) from Tags t)")
+    int findMostRecent();
 }
