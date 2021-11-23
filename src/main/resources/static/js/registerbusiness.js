@@ -50,6 +50,21 @@ function progress(){
         document.getElementById("forwardButton").innerHTML = "Done"
     }
 
+    switch (modalStage){
+        case 0:
+            let val = urlPrefixInput.value + urlInput.value
+            if(val == "" ||
+                !new RegExp("http(s)?:\\/\\/(www[.])?([a-zA-Z0-9$_.+!*'(),]|[-])*[.].+").test(val)){
+                urlInput.classList.add("is-danger")
+                return
+            }else{
+                urlInput.classList.remove("is-danger")
+            }
+            break;
+        case 1:
+            break;
+    }
+
 
     if(modalStage<5){
         modalStage += 1
