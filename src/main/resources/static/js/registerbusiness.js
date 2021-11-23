@@ -1,5 +1,5 @@
 var modalStage = 0
-var urlInput, urlPrefixInput, nameInput, descInput = null;
+var urlInput, urlPrefixInput, nameInput, descInput, tagsInput, amountInput = null;
 
 function htmlDecode(input) {
     var doc = new DOMParser().parseFromString(input, "text/html");
@@ -46,6 +46,8 @@ function progress(){
     urlPrefixInput = document.getElementById("business_register_url_prefix");
     nameInput = document.getElementById("business_register_name");
     descInput = document.getElementById("business_register_desc");
+    tagsInput = document.getElementById("businessTagsInput");
+    amountInput = document.getElementById("earnings");
 
     if(document.getElementById("forwardButton").innerHTML == "Done"){
         document.getElementById("businessForm").submit();
@@ -93,6 +95,30 @@ function progress(){
                 refresh()
             }
             if(!valid){return;}
+            break;
+        case 2:
+            if(tags.length < 3){
+                tagsInput.classList.add("is-danger")
+                document.getElementById("business_register_tags_help").innerText = "You must include at least 3 tags"
+                refresh()
+                return;
+            }else{
+                tagsInput.classList.remove("is-danger")
+                document.getElementById("business_register_tags_help").innerText = ""
+                refresh()
+            }
+            break;
+        case 4:
+            if(amountInput.value == ""){
+                amountInput.classList.add("is-danger")
+                document.getElementById("business_register_amount_help").innerText = "Cannot be empty"
+                refresh()
+                return;
+            }else{
+                amountInput.classList.remove("is-danger")
+                document.getElementById("business_register_amount_help").innerText = ""
+                refresh()
+            }
             break;
     }
 

@@ -68,6 +68,7 @@
                     <div id="modal_page3" class="modal_page">
                         <h5 class="title is-5" style="text-align:center; margin-bottom: 2%">Choose a category</h5>
                         <div id="categoryContainer">
+                            <p th:text="${categories}"></p>
                             <div class="select" name="businessCategory">
                                 <select>
                                     <option th:each="category: ${categories}" th:text="${category}"></option>
@@ -85,6 +86,7 @@
                                 0/20
                             </div>
                         </div>
+                        <p class="is-danger help" style="text-align: center" id="business_register_tags_help"></p>
                     </div>
                     <div id="modal_page4" class="modal_page">
                         <h5 class="title is-5" style="text-align:center">Social Media Links</h5>
@@ -154,12 +156,13 @@
                                 <span class="icon is-large is-left">
                                     <i class="fas fa-pound-sign"></i>
                                 </span>
-                                <input class="input socialInput" name="earnings" style="margin-bottom:5%">
+                                <input class="input socialInput" id="earnings" name="earnings" style="margin-bottom:5%">
                             </p>
                         </div>
                         <p class="subtitle is-5" style="text-align: center; font-size:10px">
                             We need to know this, so we can accurately start you on the correct pricing tier
                         </p>
+                        <p class="is-danger help" style="text-align: center" id="business_register_amount_help"></p>
                     </div>
             </section>
             <footer class="modal-card-foot modal-footer" style="display: flex; justify-content: space-between">
