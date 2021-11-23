@@ -95,16 +95,16 @@ function addTag(e){
         document.getElementById("modal_container").style.minHeight = newHeight.toString()+"px"
 
         let bTag = document.getElementById("businessTags")
-        if(bTag.value == ""){
+        if(bTag.value == "") {
             bTag.value += (text)
         }else{
-            bTag.value += "," + text
+             bTag.value += ("," + text);
         }
 
         tags.push(bTag.value);
         document.getElementById("tagCount").innerText = tags.length.toString() + "/20"
         document.getElementById("tagCount").style.display = "block";
-        document.getElementById("businessTags").value += text + ","
+        // document.getElementById("businessTags").value += text + ","
         inputField.value = ""
     }
 }

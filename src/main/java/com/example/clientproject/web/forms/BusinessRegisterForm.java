@@ -39,7 +39,7 @@ public class BusinessRegisterForm {
     @Pattern(regexp = "[0-9]*", message = "Earnings must be an integer")
     int earnings;
 
-    public void setTags(String tempTags){
+    public void setBusinessTags(String tempTags){
         System.out.println(tempTags);
         this.businessTags = new ArrayList(Arrays.asList(tempTags.split(",")));
     }

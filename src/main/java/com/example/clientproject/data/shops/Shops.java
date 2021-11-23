@@ -23,7 +23,7 @@ import java.util.List;
 public class Shops {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private String shopId;
+    private int shopId;
     private String shopName;
     private String shopDescription;
     private String shopWebsite;
