@@ -1,11 +1,10 @@
 package com.example.clientproject.web.controllers;
 
+import com.example.clientproject.exceptions.ForbiddenErrorException;
 import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.web.forms.LoginForm;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.security.SecureRandom;
 import java.util.*;
 
 @Controller
@@ -48,20 +46,22 @@ public class SignInController {
         return "account-login.html";
     }
 
-    @PostMapping("/login")
+    /**
+     * Takes in a loginForm, and checks the data against a password in the database in order to validate a login
+     * @param loginForm - the login form
+     * @param bindingResult - any errors present in the login form
+     * @param model - empty model object to be populated with values
+     * @return - different pages depending on status of user matching
+     */
+    @PostMapping("login")
     public String signInChecks(@Valid LoginForm loginForm,
             BindingResult bindingResult,
             Model model) {
-
-        System.out.println("Hello World");
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("loggedIn", loggedIn);
             return "account-login.html";
         }
-
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.out.println(passwordEncoder.encode("password123"));
 
         Optional<UsersDTO> usersDTOOptional = usersSearch.findByEmail(loginForm.getLoginEmail());
         // If the optional is present - the search found a user with that email
@@ -77,20 +77,15 @@ public class SignInController {
             // If they match, set the loggedIn flag to true
             if (passwordMatch) {
                 loggedIn = true;
-            // Otherwise, redirect back to the login page with an appropriate error
+            // Otherwise, throw an exception with the correct error message
             } else {
-                model.addAttribute("incorrectPassword", true);
-                model.addAttribute("loggedIn", loggedIn);
-                return "account-login.html";
+                throw new ForbiddenErrorException("Password Incorrect");
             }
         // Else - assumes that the email is incorrect
         } else {
-            model.addAttribute("incorrectEmail", true);
-            model.addAttribute("loggedIn", loggedIn);
-            return "account-login.html";
+            throw new ForbiddenErrorException("Email Incorrect");
         }
 
-        model.addAttribute("loggedIn", loggedIn);
-        return "index.html";
+        return "redirect:/dashboard";
     }
 }
