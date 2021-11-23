@@ -63,18 +63,6 @@ function progress(){
     tagsInput = document.getElementById("businessTagsInput");
     amountInput = document.getElementById("earnings");
 
-    if(document.getElementById("forwardButton").innerHTML == "Done"){
-        url = document.getElementById("business_register_url")
-        url.value = document.getElementById("business_register_url_prefix").value + url.value;
-
-        document.getElementById("businessTags").value = tags;
-        document.getElementById("businessForm").submit();
-    }
-
-    if(modalStage==3) {
-        document.getElementById("forwardButton").innerHTML = "Done"
-    }
-
     switch (modalStage){
         case 0:
             let val = urlPrefixInput.value + urlInput.value
@@ -140,6 +128,17 @@ function progress(){
             break;
     }
 
+    if(document.getElementById("forwardButton").innerHTML == "Done"){
+        url = document.getElementById("business_register_url")
+        url.value = document.getElementById("business_register_url_prefix").value + url.value;
+
+        document.getElementById("businessTags").value = tags;
+        document.getElementById("businessForm").submit();
+    }
+
+    if(modalStage==3) {
+        document.getElementById("forwardButton").innerHTML = "Done"
+    }
 
     if(modalStage<5){
         modalStage += 1
