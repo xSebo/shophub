@@ -14,7 +14,9 @@ public class HomeController {
             model.addAttribute("loggedIn", loggedIn);
             return "redirect:/login";
         }
-
+        //System.out.println(shopsRepo.findAll());
+        model.addAttribute("shops", shopsRepo.findAll());
+        model.addAttribute("tags", new String[]{"Coffee", "Vegan", "Sustainable"});
         return "index";
     }
 }

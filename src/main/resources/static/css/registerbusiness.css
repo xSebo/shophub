@@ -93,3 +93,11 @@ url-centering{
     flex-direction: row;
     justify-content: flex-start;
 }
+
+#wholeSocialContainer{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}

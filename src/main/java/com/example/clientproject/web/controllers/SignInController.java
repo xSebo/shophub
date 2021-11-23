@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Controller
 public class SignInController {
@@ -24,7 +26,19 @@ public class SignInController {
         usersSearch = aUsersSearch;
     }
 
-    @GetMapping("/register")
+    @PostMapping("/businessRegister")
+    public String submitBusinessInfo(@Valid BusinessRegisterForm brf, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            System.out.println("Error");
+            return "registerbusiness.html";
+        }
+
+        saveBusiness.save(new BusinessRegisterDTO(brf));
+        //System.out.println(brf.getBusinessTags());
+        return "redirect:businessRegister";
+    }
+
+    @GetMapping("/businessRegister")
     public String registerBusiness(Model model){
         ArrayList<String> categories = new ArrayList<>(Arrays.asList("Food and drink","Animals","Alcohol"));
         model.addAttribute("categories", categories);
