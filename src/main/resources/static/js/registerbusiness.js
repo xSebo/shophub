@@ -16,6 +16,12 @@ function setLoadingBar(){
     }
 }
 
+function closeModal(){
+    document.getElementById('modal').classList.remove('is-active')
+    for(let i=0; i<5; i++){
+        revert();
+    }
+}
 function revert(){
     if(modalStage>0){
         let currentStage = "modal_page" + (modalStage+1).toString()
@@ -29,6 +35,14 @@ function revert(){
 
         modalStage-=1
         if(document.getElementById("forwardButton").innerHTML == "Done"){
+            for(let i=0; i<tags.length; i++){
+                if(i<(tags.length-1)){
+                    document.getElementById("businessTags").value += (tags[i] + ",");
+                }else{
+                    document.getElementById("businessTags").value += tags[i];
+                }
+
+            }
             document.getElementById("forwardButton").innerHTML = "Next"
         }
 
@@ -50,6 +64,7 @@ function progress(){
     amountInput = document.getElementById("earnings");
 
     if(document.getElementById("forwardButton").innerHTML == "Done"){
+        document.getElementById("businessTags").value = tags;
         document.getElementById("businessForm").submit();
     }
 
@@ -178,7 +193,7 @@ function addTag(e){
             <div class="control mr-3 mb-2">
                 <div class="tags has-addons">
                     <span class="tag gradient" style="color:white">${text}</span>
-                    <a class="tag is-delete"></a>
+                    <a class="tag is-delete" onclick="removeTag(this);"></a>
                 </div>
             </div>
         </div>
@@ -187,16 +202,25 @@ function addTag(e){
         document.getElementById("modal_container").style.minHeight = newHeight.toString()+"px"
 
         let bTag = document.getElementById("businessTags")
+        /*
         if(bTag.value == "") {
             bTag.value += (text)
         }else{
              bTag.value += ("," + text);
         }
 
-        tags.push(bTag.value);
+         */
+
+        tags.push(text);
         document.getElementById("tagCount").innerText = tags.length.toString() + "/20"
         document.getElementById("tagCount").style.display = "block";
         // document.getElementById("businessTags").value += text + ","
         inputField.value = ""
     }
+}
+function removeTag(e){
+    let text = e.parentElement.children[0].innerHTML
+    tags = tags.filter(tag =>{return tag!=text});
+
+    e.parentElement.parentElement.parentElement.remove();
 }

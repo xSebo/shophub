@@ -34,7 +34,7 @@ public class SignInController {
 
         saveBusiness.save(new BusinessRegisterDTO(brf));
         //System.out.println(brf.getBusinessTags());
-        return "redirect:registerbusiness.html";
+        return "redirect:businessRegister";
     }
 
     @GetMapping("/businessRegister")
