@@ -3,6 +3,9 @@ package com.example.clientproject.web.controllers;
 import com.example.clientproject.exceptions.ForbiddenErrorException;
 import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
+import com.example.clientproject.services.BusinessRegisterDTO;
+import com.example.clientproject.services.BusinessRegisterSaver;
+import com.example.clientproject.web.forms.BusinessRegisterForm;
 import com.example.clientproject.web.forms.LoginForm;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
@@ -12,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 @Controller
 public class SignInController {
@@ -22,8 +27,11 @@ public class SignInController {
 
     private UsersSearch usersSearch;
 
-    public SignInController(UsersSearch aUsersSearch) {
+    private BusinessRegisterSaver saveBusiness;
+
+    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness) {
         usersSearch = aUsersSearch;
+        saveBusiness = sBusiness;
     }
 
     @PostMapping("/businessRegister")
@@ -32,10 +40,12 @@ public class SignInController {
             System.out.println("Error");
             return "registerbusiness.html";
         }
+        return "redirect:/businessRegister";
+    }
 
-        saveBusiness.save(new BusinessRegisterDTO(brf));
-        //System.out.println(brf.getBusinessTags());
-        return "redirect:businessRegister";
+    @GetMapping("/businessRedirect")
+    public String redirectBusiness(){
+        return "redirect:/businessRegister";
     }
 
     @GetMapping("/businessRegister")

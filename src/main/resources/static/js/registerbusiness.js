@@ -64,6 +64,9 @@ function progress(){
     amountInput = document.getElementById("earnings");
 
     if(document.getElementById("forwardButton").innerHTML == "Done"){
+        url = document.getElementById("business_register_url")
+        url.value = document.getElementById("business_register_url_prefix").value + url.value;
+
         document.getElementById("businessTags").value = tags;
         document.getElementById("businessForm").submit();
     }
@@ -159,7 +162,7 @@ function progress(){
 }
 
 function getBusinessInfo(url){
-    fetch("http://localhost:8080/infoExtract?url=" + url)
+    fetch("http://localhost:5000/infoExtract?url=" + url)
         .then(response => response.json())
         .then(data => handleInfo(data));
 }
