@@ -6,7 +6,7 @@
 </head>
 <body th:fragment="reward_card">
 <div class="reward_card" style="position:relative;">
-    <div class="favouriteStar starContainer" onclick="this.classList.toggle('active')">
+    <div class="favouriteStar starContainer" th:classappend="${isFavourite ? 'active' : ''}" th:onclick="'favouriteBusiness(this,' + ${shopId} + ');'">
         <span class="icon favouriteStar">
             <i class="far fa-star"></i>
         </span>
@@ -15,7 +15,7 @@
         </span>
     </div>
     <div class="reward_card_content">
-        <h1 class="title is-4 mb-1" th:text="${title}"></h1>
+        <h1 class="title is-4 mb-1" th:text="${title}" style="white-space: break-spaces;"></h1>
         <p class="mb-1" th:text="'You have ' + ${stamps} +  ' stamps!'"></p>
         <progress class="progress mb-1" th:value="${stamps}" th:max="${next_reward}"></progress>
         <p class="mb-2" th:text="${next_reward}-${stamps} + ' to next reward'"></p>

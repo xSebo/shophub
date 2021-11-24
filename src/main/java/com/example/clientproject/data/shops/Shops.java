@@ -45,7 +45,7 @@ public class Shops {
      * @param active - shop active status
      */
     public Shops(String name, String website, String description, int earnings,
-                 String image, String countries, boolean active) {
+                 String image, String countries, boolean active, StampBoards stampBoard) {
         this.shopName = name;
         this.shopDescription = description;
         this.shopWebsite = website;
@@ -53,6 +53,7 @@ public class Shops {
         this.shopImage = image;
         this.shopCountries = countries;
         this.shopActive = active;
+        this.stampBoard = stampBoard;
     }
 
     @ManyToMany(mappedBy="favouriteShops")
