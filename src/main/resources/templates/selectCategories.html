@@ -11,9 +11,9 @@
   <div class="MainText">Pick 3 categories or more
     <img style="position: absolute; top: 20px; left: 20px;" src="imgs/Logo.png" width="112" height="28" class="logo">
   </div>
-  <button class="button submit" th:onclick="submitCategories([[${allTagsAttributeName.size}]])">Submit</button>
+  <button class="button submit" th:onclick="'submitCategories([[' +${allTagsAttributeName.size}+']])'">Submit</button>
   <div class="categoyContainer">
-    <button th:each="allTags,iter : ${allTagsAttributeName}" th:onclick="toggle_onclick([[${iter.index} + 1]])" th:id="${iter.index} + 1" value="0" class="button is-rounded category-Button" th:text="${allTags.tagName}"></button>
+    <button th:each="allTags,iter : ${allTagsAttributeName}" th:onclick="'toggle_onclick([['+${iter.index}+' + 1]])'" th:id="${iter.index} + 1" value="0" class="button is-rounded category-Button" th:text="${allTags.tagName}"></button>
     <!--   toggle_onclick("have server automatically pass ID here"), and also for id="" -->
 
 </body>

@@ -19,7 +19,6 @@ import java.util.Optional;
 @Controller
 public class SignUpController {
 
-
     private registerUserService regUserService;
 
     //creates an object/list to pass into Model for Thymeleaf templating
@@ -60,7 +59,7 @@ public class SignUpController {
 
 
         regUserService.save(newAccountDTO1);
-        return "selectCategories";
+        return "redirect:/selectCategories";
     }
 
         @RequestMapping("/signup")
