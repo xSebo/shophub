@@ -29,6 +29,7 @@ function submitCategories(listSize){
     if (count < 3){ //checks the user has selected the correct number of categories/tags
         alert("Please select 3 or more categories")
     } else {
+        listOfCategories = listOfCategories.substring(1, listOfCategories.length);
         params = 'listOfTagIDs='+listOfCategories;
         //Sends list to server
         var xhttp = new XMLHttpRequest();

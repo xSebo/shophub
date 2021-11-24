@@ -19,7 +19,6 @@ import java.util.Optional;
 @Controller
 public class SignUpController {
 
-
     private registerUserService regUserService;
 
     //creates an object/list to pass into Model for Thymeleaf templating
@@ -47,7 +46,7 @@ public class SignUpController {
         EmailTakenContainer.clear();
 
         //get all emails
-        Optional<Users> User =  findUserByEmail.findByUserEmail(accountRegister.getEmail());
+        Optional<Users> User = findUserByEmail.findByUserEmail(accountRegister.getEmail());
 
         if (User.isPresent()) { //if email is already taken it will not save user to DB and will return error msg
             EmailTakenContainer.add("yes");
@@ -60,9 +59,11 @@ public class SignUpController {
 
 
         regUserService.save(newAccountDTO1);
-        return "selectCategories";
+        return "redirect:/selectCategories";
     }
 
-        @RequestMapping("/signup")
-        public String signupGet(Model model){return "signup";}
+    @RequestMapping("/signup")
+    public String signupGet(Model model) {
+        return "signup";
     }
+}
