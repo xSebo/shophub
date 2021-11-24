@@ -22,6 +22,7 @@ public class HomeController {
 
     @GetMapping({"/", "dashboard"})
     public String index(Model model){
+        loggedIn=true;
         if (!loggedIn) {
             model.addAttribute("loggedIn", loggedIn);
             return "redirect:/login";

@@ -231,6 +231,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User_Stamp_Boards` (
                                                                   ON DELETE NO ACTION
                                                                   ON UPDATE NO ACTION)
     ENGINE = InnoDB;
+    
 
 INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, 'None');
 INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (2, 'GAuth');

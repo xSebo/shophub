@@ -5,7 +5,15 @@
     <title>Title</title>
 </head>
 <body th:fragment="reward_card">
-<div class="reward_card">
+<div class="reward_card" style="position:relative;">
+    <div class="favouriteStar starContainer" onclick="this.classList.toggle('active')">
+        <span class="icon favouriteStar">
+            <i class="far fa-star"></i>
+        </span>
+        <span class="icon favouriteStar">
+            <i class="fas fa-star"></i>
+        </span>
+    </div>
     <div class="reward_card_content">
         <h1 class="title is-4 mb-1" th:text="${title}"></h1>
         <p class="mb-1" th:text="'You have ' + ${stamps} +  ' stamps!'"></p>

@@ -26,3 +26,28 @@
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover;
 }
+
+.starContainer .fas.fa-star{
+    transform: scale(0);
+}
+
+.starContainer.active .fas.fa-star{
+    transform: scale(1);
+}
+
+.starContainer{
+    cursor:pointer;
+}
+
+.favouriteStar{
+    color:gold;
+    top:2px;
+    right:2px;
+    position:absolute;
+    transition: transform 200ms;
+}
+
+.favouriteStar i{
+    color:gold;
+    transition: transform 200ms;
+}
