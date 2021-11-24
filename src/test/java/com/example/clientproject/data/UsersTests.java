@@ -1,7 +1,9 @@
-package com.example.clientproject.data.users;
+package com.example.clientproject.data;
 
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethodsRepo;
+import com.example.clientproject.data.users.Users;
+import com.example.clientproject.data.users.UsersRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

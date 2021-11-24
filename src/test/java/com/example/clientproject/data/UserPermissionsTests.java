@@ -1,4 +1,4 @@
-package com.example.clientproject.data.userPermissions;
+package com.example.clientproject.data;
 
 import com.example.clientproject.data.adminTypes.AdminTypes;
 import com.example.clientproject.data.adminTypes.AdminTypesRepo;
@@ -6,6 +6,8 @@ import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethodsRepo;
+import com.example.clientproject.data.userPermissions.UserPermissions;
+import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.data.users.UsersRepo;
 import org.junit.jupiter.api.Test;
