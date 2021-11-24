@@ -23,8 +23,4 @@ public class Rewards {
     private long rewardId;
     private String rewardName;
     private int rewardStampLocation;
-
-    @ManyToOne
-    @JoinColumn(name="Stamp_Board_Id", nullable=false)
-    private StampBoards stampBoard;
 }
