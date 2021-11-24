@@ -10,12 +10,6 @@ import java.util.List;
  */
 public interface UserStampBoardsRepo extends JpaRepository<UserStampBoards, Long> {
     /**
-     * FindAll method
-     * @return list of UserStampBoards found
-     */
-    List<UserStampBoards> findAll();
-
-    /**
      * Save method
      * @param userStampBoards - the object to save
      * @return - the object

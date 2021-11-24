@@ -12,12 +12,6 @@ import java.util.Optional;
  */
 public interface ShopsRepo extends JpaRepository<Shops, Long> {
     /**
-     * FindAll method
-     * @return list of Shops found
-     */
-//    List<Shops> findAll();
-
-    /**
      * Save method
      * @param shops - the object to save
      * @return - the object
@@ -67,6 +61,11 @@ public interface ShopsRepo extends JpaRepository<Shops, Long> {
     @Query("select s from Shops s where s.shopActive = false")
     List<Shops> findInactiveShops();
 
+    /**
+     * Search by stampBoardId
+     * @param stampId - the id of the StampBoard to search by
+     * @return - an optional containing the shop found
+     */
     @Query("select s from Shops s where s.stampBoard.stampBoardId = ?1")
     Optional<Shops> findByStampId(long stampId);
 }

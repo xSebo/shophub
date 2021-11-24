@@ -12,12 +12,6 @@ import java.util.List;
  */
 public interface TagsRepo extends JpaRepository<Tags, Long> {
     /**
-     * FindAll method
-     * @return list of Tags found
-     */
-    List<Tags> findAll();
-
-    /**
      * Save method
      * @param tags - the object to save
      * @return - the object
