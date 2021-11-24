@@ -22,14 +22,22 @@ public class selectCategoriesControllers {
         this.tagsRepo = tagsRepo;
     }
 
+    /**
+     * @param listOfTagIDs is a string that contains all the tags the user has selected
+     * @return should redirect the user to their dashboard
+     */
     @PostMapping("/selectCategories")
     public String selectCategories(@RequestParam String listOfTagIDs){
         System.out.println(listOfTagIDs);
-        List<String> TagID_List = Arrays.asList(listOfTagIDs.split(","));
+        //listOfIDs will be a string of each ID separated by "," for example: ",2,6,7,9,14"
+        List<String> TagID_List = Arrays.asList(listOfTagIDs.split(",")); //splits it into string list for easier handling
         return("index");
     }
 
 
+    /**
+     * @return will return a list of all the tags for thymeleaf templating
+     */
     @GetMapping("/selectCategories")
     public String selectCategories(Model model){
         List<Tags> allTags = tagsRepo.findAll();

@@ -22,6 +22,7 @@ public class SignUpController {
 
     private registerUserService regUserService;
 
+    //creates an object/list to pass into Model for Thymeleaf templating
     List<String> EmailTakenContainer = new ArrayList<>();
 
 
@@ -33,12 +34,16 @@ public class SignUpController {
     @Autowired
     private findUserByEmailService findUserByEmail;
 
+
+    /**
+     * @param accountRegister this is an object containing all of the data from the register form
+     * @return should redirect the user to the select categories. OR if the user enters an email that already exists in database sends back an error msg
+     */
     @PostMapping("/signup")
     public String signUp(Model model, AccountRegister accountRegister) {
+        //populates the DTO with the data from the form
         newAccountDTO newAccountDTO1 = new newAccountDTO(accountRegister.getName(), accountRegister.getSurname(), accountRegister.getEmail(), accountRegister.getPassword());
-
-
-
+        //Resets the object
         EmailTakenContainer.clear();
 
         //get all emails
@@ -55,7 +60,7 @@ public class SignUpController {
 
 
         regUserService.save(newAccountDTO1);
-        return "signup";
+        return "selectCategories";
     }
 
         @RequestMapping("/signup")
