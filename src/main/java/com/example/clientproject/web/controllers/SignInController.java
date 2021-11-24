@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,11 +26,10 @@ import java.util.Optional;
 public class SignInController {
     public static boolean loggedIn = false;
 
-    private BusinessRegisterSaver saveBusiness;
-
     private UsersSearch usersSearch;
 
-    @Autowired
+    private BusinessRegisterSaver saveBusiness;
+
     public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness) {
         usersSearch = aUsersSearch;
         saveBusiness = sBusiness;
@@ -38,13 +38,16 @@ public class SignInController {
     @PostMapping("/businessRegister")
     public String submitBusinessInfo(@Valid BusinessRegisterForm brf, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            System.out.println("Error");
+            System.out.println(bindingResult.getAllErrors());
             return "registerbusiness.html";
         }
-
         saveBusiness.save(new BusinessRegisterDTO(brf));
-        //System.out.println(brf.getBusinessTags());
-        return "redirect:businessRegister";
+        return "redirect:/businessRegister";
+    }
+
+    @GetMapping("/businessRedirect")
+    public String redirectBusiness(){
+        return "redirect:/businessRegister";
     }
 
     @GetMapping("/businessRegister")
