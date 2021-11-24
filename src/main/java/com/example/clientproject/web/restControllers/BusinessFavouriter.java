@@ -19,6 +19,12 @@ public class BusinessFavouriter {
         deleteFavourite = ufd;
     }
 
+
+    /**
+     *
+     * @param Submitted form, contains a UserID and ShopID
+     * @return ERROR or OK depending on whether it any errors are thrown.
+     */
     @PostMapping("/favouriteBusiness")
     public String favouriteBusiness(UserFavouriteForm uff){
         UserFavouriteDTO ufDTO = new UserFavouriteDTO(uff);

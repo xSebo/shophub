@@ -1,5 +1,5 @@
 function favouriteBusiness(e,shopId){
-    
+
     if(e.classList.contains("active")){
         e.classList.remove("active")
     }else{

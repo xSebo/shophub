@@ -14,6 +14,12 @@ public class UserFavouriteToggle {
     @Autowired
     JdbcTemplate jdbc;
 
+    /**
+     * Checks whether the user has already favourited a shop
+     * @param urfDTO, Userfavourite DTO
+     * @return Boolean, true if it's already favourited false if not.
+     * @throws Exception
+     */
     public boolean alreadyInDb(UserFavouriteDTO urfDTO) throws Exception{
 
         String query = "SELECT s.User_Shop_Link_Id FROM User_Shop_Links s WHERE (Shop_Id = " +

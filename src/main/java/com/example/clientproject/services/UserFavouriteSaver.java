@@ -10,6 +10,10 @@ public class UserFavouriteSaver {
     @Autowired
     JdbcTemplate jdbc;
 
+    /**
+     * Takes a user dto and saves it to the DB with jdbc
+     * @param urfDTO UserfavouriteDTO
+     */
     public void save(UserFavouriteDTO urfDTO){
 
         String query = "INSERT INTO User_Shop_Links (Shop_Id, User_Id) VALUES ("+ urfDTO.getShopId() +

@@ -10,6 +10,10 @@ public class UserFavouriteDeleter {
     @Autowired
     JdbcTemplate jdbc;
 
+    /**
+     * Takes a userfavourite DTO and removes it from the database.
+     * @param usfDTO
+     */
     public void delete(UserFavouriteDTO usfDTO){
 
         String query = "DELETE FROM User_Shop_Links WHERE (Shop_Id = " +
