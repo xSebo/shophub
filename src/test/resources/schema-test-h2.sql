@@ -241,6 +241,12 @@ INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`
 INSERT INTO stamp_boards (Stamp_Board_Id, Stamp_Board_Size) VALUES (1, 0);
 
 INSERT INTO Categories (Category_Id, Category_Name) VALUES (1, '');
+INSERT INTO Categories (Category_Name) VALUES ('Hospitality');
+INSERT INTO Categories (Category_Name) VALUES ('Retail');
+INSERT INTO Categories (Category_Name) VALUES ('Supplier');
+INSERT INTO Categories (Category_Name) VALUES ('Food And Drink');
+INSERT INTO Categories (Category_Name) VALUES ('Animals');
+INSERT INTO Categories (Category_Name) VALUES ('Alcohol');
 
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('','','',0,'',0,1,1);
 
