@@ -1,12 +1,12 @@
 package com.example.clientproject.data.stampBoards;
 
+import com.example.clientproject.data.rewards.Rewards;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * StampBoards Entity
@@ -21,4 +21,8 @@ public class StampBoards {
     @GeneratedValue
     private long stampBoardId;
     private int stampBoardSize;
+
+    @OneToMany
+    @JoinColumn(name="Stamp_Board_Id")
+    private Set<Rewards> rewards;
 }
