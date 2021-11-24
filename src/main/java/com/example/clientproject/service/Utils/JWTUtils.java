@@ -11,7 +11,10 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpSession;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class JWTUtils {
@@ -79,6 +82,29 @@ public class JWTUtils {
                 jwtTimeToLive // used to calculate expiration (claim = exp)
         );
 
+        session.setAttribute("loginCredJWT", jwt);
         return jwt.toString();
+    }
+
+    public static Optional<Integer> getLoggedInUserId(HttpSession session){
+        String loginJWT = (String) session.getAttribute("loginCredJWT");
+        if (loginJWT == null) {
+            System.out.println("Jwt is null");
+            return Optional.empty();
+        }
+
+        try{
+            Claims claims = JWTUtils.decodeJWT(loginJWT);
+            return Optional.of(Integer.parseInt(claims.getSubject()));
+        }catch (io.jsonwebtoken.MalformedJwtException e){
+            System.out.println("malformed jwt");
+            return Optional.empty();
+        }catch (io.jsonwebtoken.SignatureException e){
+            System.out.println("JWT was edited outside this scope");
+            return Optional.empty();
+        }catch (Exception e){
+            System.out.println(e);
+            return Optional.empty();
+        }
     }
 }
