@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <link th:replace="fragments/libs.html :: bulma"/>
+      <link th:replace="fragments/libs.html :: fa"/>
+      <link th:replace="fragments/nav.html :: nav-css"/>
+      <title>403 Error Page</title>
+  </head>
+
+  <body>
+  <div th:replace="fragments/nav.html :: nav"></div>
+  <h1 th:text="${message}">You are not permitted to access this resource!</h1>
+
+    <a href="/login">Click here to login</a>
+  </body>
+</html>

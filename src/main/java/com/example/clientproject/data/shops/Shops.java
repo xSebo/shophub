@@ -2,6 +2,7 @@ package com.example.clientproject.data.shops;
 
 import com.example.clientproject.data.converters.TinyIntToBoolean;
 import com.example.clientproject.data.rewards.Rewards;
+import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.users.Users;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ import java.util.List;
 public class Shops {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private String shopId;
+    private int shopId;
     private String shopName;
     private String shopDescription;
     private String shopWebsite;
@@ -65,11 +66,7 @@ public class Shops {
     )
     private List<Tags> shopTags;
 
-    @ManyToMany
-    @JoinTable(
-            name="Reward_Shop_Links",
-            joinColumns=@JoinColumn(name="Shop_Id"),
-            inverseJoinColumns = @JoinColumn(name="Reward_Id")
-    )
-    private List<Rewards> rewardsList;
+    @OneToOne
+    @JoinColumn(name="Stamp_Board_Id")
+    private StampBoards stampBoard;
 }
