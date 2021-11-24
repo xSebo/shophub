@@ -64,12 +64,4 @@ public class Shops {
             inverseJoinColumns = @JoinColumn(name="Tag_Id")
     )
     private List<Tags> shopTags;
-
-    @ManyToMany
-    @JoinTable(
-            name="Reward_Shop_Links",
-            joinColumns=@JoinColumn(name="Shop_Id"),
-            inverseJoinColumns = @JoinColumn(name="Reward_Id")
-    )
-    private List<Rewards> rewardsList;
 }

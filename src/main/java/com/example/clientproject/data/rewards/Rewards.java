@@ -27,7 +27,4 @@ public class Rewards {
     @ManyToOne
     @JoinColumn(name="Stamp_Board_Id", nullable=false)
     private StampBoards stampBoard;
-
-    @ManyToMany(mappedBy = "rewardsList")
-    private List<Shops> shopsList;
 }
