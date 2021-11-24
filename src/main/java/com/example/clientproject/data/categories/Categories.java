@@ -21,4 +21,8 @@ public class Categories {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long categoryId;
     private String categoryName;
+
+    public Categories(String aCategoryName) {
+        this.categoryName = aCategoryName;
+    }
 }
