@@ -37,9 +37,10 @@ public class SignInController {
     @PostMapping("/businessRegister")
     public String submitBusinessInfo(@Valid BusinessRegisterForm brf, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            System.out.println("Error");
+            System.out.println(bindingResult.getAllErrors());
             return "registerbusiness.html";
         }
+        saveBusiness.save(new BusinessRegisterDTO(brf));
         return "redirect:/businessRegister";
     }
 
