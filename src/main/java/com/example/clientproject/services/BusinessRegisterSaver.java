@@ -56,7 +56,7 @@ public class BusinessRegisterSaver {
 
         //System.out.println(tagsRepo.findAll());
 
-        //System.out.println(shopsRepo.findByShopName(business.getBusiness_register_name()));
+        System.out.println(shopsRepo.findByShopName(business.getBusiness_register_name()).get().getShopName());
     }
 
 }

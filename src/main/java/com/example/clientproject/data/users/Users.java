@@ -1,7 +1,7 @@
 package com.example.clientproject.data.users;
 
 import com.example.clientproject.data.shops.Shops;
-import com.example.clientproject.data.stampBoards.StampBoards;
+import com.example.clientproject.data.userStampBoards.UserStampBoards;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
 import com.example.clientproject.services.TwoFactorAuthOBJ;
@@ -71,7 +71,7 @@ public class Users {
 
     @OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="User_Id", nullable = false)
-    private Set<StampBoards> stampBoards;
+    private Set<UserStampBoards> userStampBoards;
 
     @ManyToMany
     @JoinTable(
