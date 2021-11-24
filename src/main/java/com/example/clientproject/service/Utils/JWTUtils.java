@@ -107,4 +107,8 @@ public class JWTUtils {
             return Optional.empty();
         }
     }
+
+    public static void logOutUser(HttpSession session){
+        session.removeAttribute("loginCredJWT");
+    }
 }
