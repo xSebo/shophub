@@ -1,5 +1,6 @@
 package com.example.clientproject.data.shops;
 
+import com.example.clientproject.data.categories.Categories;
 import com.example.clientproject.data.converters.TinyIntToBoolean;
 import com.example.clientproject.data.rewards.Rewards;
 import com.example.clientproject.data.stampBoards.StampBoards;
@@ -69,4 +70,8 @@ public class Shops {
     @OneToOne
     @JoinColumn(name="Stamp_Board_Id")
     private StampBoards stampBoard;
+
+    @ManyToOne
+    @JoinColumn(name="Category_Id")
+    private Categories category;
 }
