@@ -1,5 +1,6 @@
 package com.example.clientproject.web.controllers;
 
+import com.example.clientproject.service.Utils.JWTUtils;
 import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import java.util.List;
 public class SessionTestController {
     @GetMapping("/session")
     public String getSessionPage(Model model, HttpSession session){
+        JWTUtils.getKey();
+
         List<String> messages = (List<String>) session.getAttribute("MY_SESSION_MESSAGES");
         model.addAttribute("sessionData",messages);
         return "session-test";
