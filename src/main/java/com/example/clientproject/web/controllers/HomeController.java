@@ -1,5 +1,9 @@
 package com.example.clientproject.web.controllers;
 
+import com.example.clientproject.data.shops.ShopsRepo;
+import com.example.clientproject.service.searches.UsersSearch;
+import com.example.clientproject.services.BusinessRegisterSaver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +12,14 @@ import static com.example.clientproject.web.controllers.SignInController.loggedI
 
 @Controller
 public class HomeController {
+
+    private ShopsRepo shopsRepo;
+
+    @Autowired
+    public HomeController(ShopsRepo ashopsRepo) {
+        shopsRepo = ashopsRepo;
+    }
+
     @GetMapping({"/", "dashboard"})
     public String index(Model model){
         if (!loggedIn) {

@@ -3,7 +3,11 @@ package com.example.clientproject.web.controllers;
 import com.example.clientproject.exceptions.ForbiddenErrorException;
 import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
+import com.example.clientproject.services.BusinessRegisterDTO;
+import com.example.clientproject.services.BusinessRegisterSaver;
+import com.example.clientproject.web.forms.BusinessRegisterForm;
 import com.example.clientproject.web.forms.LoginForm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +19,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 @Controller
 public class SignInController {
     public static boolean loggedIn = false;
 
+    private BusinessRegisterSaver saveBusiness;
+
     private UsersSearch usersSearch;
 
-    public SignInController(UsersSearch aUsersSearch) {
+    @Autowired
+    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness) {
         usersSearch = aUsersSearch;
+        saveBusiness = sBusiness;
     }
 
     @PostMapping("/businessRegister")
