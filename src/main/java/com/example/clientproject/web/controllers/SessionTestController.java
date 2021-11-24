@@ -1,5 +1,6 @@
 package com.example.clientproject.web.controllers;
 
+import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,14 @@ public class SessionTestController {
         messages.add("test");
         session.setAttribute("MY_SESSION_MESSAGES", messages);
 
+        model.addAttribute("sessionData",messages);
+        return "session-test";
+    }
+
+    @GetMapping("/sessionDelete")
+    public String deleteSessionData(Model model, HttpSession session){
+        List<String> messages = new ArrayList<>();
+        session.setAttribute("MY_SESSION_MESSAGES", messages);
         model.addAttribute("sessionData",messages);
         return "session-test";
     }
