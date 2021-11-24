@@ -1,12 +1,9 @@
 package com.example.clientproject.web.controllers;
 
 import com.example.clientproject.data.shops.ShopsRepo;
-<<<<<<< HEAD
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.services.BusinessRegisterSaver;
 import org.springframework.beans.factory.annotation.Autowired;
-=======
->>>>>>> addba0046efd53928cee35c1f46b131ba97550c3
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
