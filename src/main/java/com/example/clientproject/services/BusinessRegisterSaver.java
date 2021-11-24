@@ -2,8 +2,12 @@ package com.example.clientproject.services;
 
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
+import com.example.clientproject.data.stampBoards.StampBoards;
+import com.example.clientproject.data.stampBoards.StampBoardsRepo;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.tags.TagsRepo;
+import com.example.clientproject.data.userStampBoards.UserStampBoards;
+import com.example.clientproject.data.userStampBoards.UserStampBoardsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -18,6 +22,9 @@ public class BusinessRegisterSaver {
     ShopsRepo shopsRepo;
 
     @Autowired
+    StampBoardsRepo stampBoards;
+
+    @Autowired
     TagsRepo tagsRepo;
 
     @Autowired
@@ -25,13 +32,16 @@ public class BusinessRegisterSaver {
 
     public void save(BusinessRegisterDTO business){
 
+        StampBoards stampBoard = stampBoards.findById(1L).get();
+
         Shops shop = new Shops(business.getBusiness_register_name(),
                 business.getBusiness_register_url(),
                 business.getBusiness_register_desc(),
                 business.getEarnings(),
                 "shopPic.png",
                 "UK United Kingdom",
-                false);
+                false,
+                stampBoard);
 
         shopsRepo.save(shop);
         List<Tags> tagsList = tagsRepo.findAll();

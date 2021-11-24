@@ -1,7 +1,6 @@
-package com.example.clientproject.data;
+package com.example.clientproject.data.shops;
 
-import com.example.clientproject.data.shops.Shops;
-import com.example.clientproject.data.shops.ShopsRepo;
+import com.example.clientproject.data.stampBoards.StampBoardsRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,6 +20,9 @@ public class ShopsTests {
     @Autowired
     ShopsRepo shopsRepo;
 
+    @Autowired
+    StampBoardsRepo stampRepo;
+
     @Test
     public void shouldGet11Shops() throws Exception {
         List<Shops> shopsList = shopsRepo.findAll();
@@ -29,7 +31,7 @@ public class ShopsTests {
 
     @Test
     public void shouldGet12ShopsAfterInsert() throws Exception {
-        Shops newShop = new Shops("", "", "", 0, "", "", true);
+        Shops newShop = new Shops("", "", "", 0, "", "", true, stampRepo.getById(1L));
         Shops shop = shopsRepo.save(newShop);
 
         List<Shops> shopsList = shopsRepo.findAll();

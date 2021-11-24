@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script th:fragment="card_js" src="/js/favouriteBusiness.js"></script>
 </head>
 <body th:fragment="business_card">
-<div class="business_container box">
+<div class="business_container box" style="position:relative;">
     <div class="image" th:style="'background-image:url(' + ${img_path} + ');'"></div>
+    <div class="favouriteStar starContainer" th:onclick="'favouriteBusiness(this,' + ${shopId} + ');'">
+        <span class="icon favouriteStar">
+            <i class="far fa-star"></i>
+        </span>
+        <span class="icon favouriteStar">
+            <i class="fas fa-star"></i>
+        </span>
+    </div>
     <div class="content">
         <h1 class="title is-4 mb-1" th:text="${title}"></h1>
         <p class="mb-1" th:text="${reward_text}"></p>

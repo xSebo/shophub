@@ -4,6 +4,7 @@ import com.example.clientproject.data.adminTypes.AdminTypes;
 import com.example.clientproject.data.adminTypes.AdminTypesRepo;
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
+import com.example.clientproject.data.stampBoards.StampBoardsRepo;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethodsRepo;
 import com.example.clientproject.data.userPermissions.UserPermissions;
@@ -38,6 +39,8 @@ public class UserPermissionsTests {
     TwoFactorMethodsRepo twoFactorMethodsRepo;
     @Autowired
     AdminTypesRepo adminTypesRepo;
+    @Autowired
+    StampBoardsRepo stampRepo;
 
     @Test
     public void shouldGet157Permissions() {
@@ -47,7 +50,7 @@ public class UserPermissionsTests {
 
     @Test
     public void shouldGet158PermissionsAfterInsert() throws Exception {
-        Shops newShop = new Shops("", "", "", 0, "", "", true);
+        Shops newShop = new Shops("", "", "", 0, "", "", true, stampRepo.getById(1L));
         shopsRepo.save(newShop);
         TwoFactorMethods twoFactorMethods = twoFactorMethodsRepo.findByTwoFactorMethodId(1).get();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
