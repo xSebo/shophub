@@ -2,6 +2,7 @@ package com.example.clientproject.data.shops;
 
 import com.example.clientproject.data.converters.TinyIntToBoolean;
 import com.example.clientproject.data.rewards.Rewards;
+import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.users.Users;
 import lombok.AllArgsConstructor;
@@ -64,4 +65,8 @@ public class Shops {
             inverseJoinColumns = @JoinColumn(name="Tag_Id")
     )
     private List<Tags> shopTags;
+
+    @OneToOne
+    @JoinColumn(name="Stamp_Board_Id")
+    private StampBoards stampBoard;
 }
