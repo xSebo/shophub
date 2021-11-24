@@ -31,6 +31,7 @@ public class selectCategoriesControllers {
         System.out.println(listOfTagIDs);
         //listOfIDs will be a string of each ID separated by "," for example: ",2,6,7,9,14"
         List<String> TagID_List = Arrays.asList(listOfTagIDs.split(",")); //splits it into string list for easier handling
+
         return("index");
     }
 
