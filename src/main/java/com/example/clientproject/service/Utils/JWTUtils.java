@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpSession;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
@@ -26,6 +27,7 @@ public class JWTUtils {
         System.out.println(SECRET_KEY);
     }
 
+    //    https://github.com/oktadev/okta-java-jwt-example/blob/master/src/main/java/com/okta/createverifytokens/JWTDemo.java
     public static String createJWT(String id, String issuer, String subject, long ttlMillis) {
 
         //The JWT signature algorithm we will be using to sign the token
@@ -63,5 +65,20 @@ public class JWTUtils {
                 .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
                 .parseClaimsJws(jwt).getBody();
         return claims;
+    }
+
+    public static String makeUserJWT(Integer userId, HttpSession session) {
+        String jwtId = "loginCred";
+        String jwtIssuer = "ShopHub";
+        int jwtTimeToLive = 800000;
+
+        String jwt = JWTUtils.createJWT(
+                jwtId, // claim = jti
+                jwtIssuer, // claim = iss
+                userId.toString(), // claim = sub
+                jwtTimeToLive // used to calculate expiration (claim = exp)
+        );
+
+        return jwt.toString();
     }
 }
