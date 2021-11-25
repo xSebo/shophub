@@ -21,12 +21,12 @@ public class FavouriteBusiness {
     private MockMvc mockMvc;
 
     @Test
-    public void testNoArgs() throws Exception{
+    public void testNoArgsNoSession() throws Exception{
         this.mockMvc.perform(post("/favouriteBusiness")).
                 andDo(print())
                 .andReturn().
                 getResponse().
-                getHeaderNames();
+                getContentAsString().contains("BAD SESSION");
     }
 
 

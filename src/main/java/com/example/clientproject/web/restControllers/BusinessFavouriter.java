@@ -25,12 +25,17 @@ public class BusinessFavouriter {
 
     /**
      *
-     * @param Submitted form, contains a UserID and ShopID
+     * @param submitted form, contains a UserID and ShopID
      * @return ERROR or OK depending on whether it any errors are thrown.
      */
     @PostMapping("/favouriteBusiness")
     public String favouriteBusiness(UserFavouriteForm uff, HttpSession session){
-        UserFavouriteDTO ufDTO = new UserFavouriteDTO(uff, JWTUtils.getLoggedInUserId(session).get());
+        UserFavouriteDTO ufDTO;
+        try{
+            ufDTO = new UserFavouriteDTO(uff, JWTUtils.getLoggedInUserId(session).get());
+        }catch(Exception e){
+            return "BAD SESSION";
+        }
         try{
             if(toggleFavourite.alreadyInDb(ufDTO)){
                 deleteFavourite.delete(ufDTO);
