@@ -13,12 +13,6 @@ import java.util.Optional;
  */
 public interface AdminTypesRepo extends JpaRepository<AdminTypes, Long> {
     /**
-     * FindAll method
-     * @return list of AdminTypes found
-     */
-    List<AdminTypes> findAll();
-
-    /**
      * Find an AdminType by the Id
      * @param adminTypeId - id of the AdminType to find
      * @return - Optional object containing the AdminType found, if it's present

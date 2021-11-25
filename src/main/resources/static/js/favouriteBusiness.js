@@ -7,7 +7,7 @@ function favouriteBusiness(e,shopId){
     }
 
     var xhttp = new XMLHttpRequest();
-    let params= 'userId=' + "2" + "&shopId=" + shopId
+    let params= "shopId=" + shopId
     xhttp.open("POST", '/favouriteBusiness', true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onload = function() {
@@ -23,4 +23,8 @@ function favouriteBusiness(e,shopId){
     xhttp.send(params);
 
 
+}
+
+function redirect(shopId){
+    location.href = "businessDetails?shopId="+shopId;
 }

@@ -30,12 +30,19 @@ public class AccountRegister {
     }
 
     public void setPassword(String password) {
+        final Random RANDOM = new SecureRandom();
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        //Salt has been removed
+
+        byte[] salt = new byte[16];// credits to user "Assylias" https://stackoverflow.com/questions/18142745/how-do-i-generate-a-salt-in-java-for-salted-hash
+        RANDOM.nextBytes(salt);
+        String generatedSalt = Base64.getEncoder().encodeToString(salt);
 
 
-        this.password = passwordEncoder.encode(password);
+        //System.out.println(generatedSalt);
+
+
+        this.password = passwordEncoder.encode(password + generatedSalt);
 
         //System.out.println(this.password);
     }
