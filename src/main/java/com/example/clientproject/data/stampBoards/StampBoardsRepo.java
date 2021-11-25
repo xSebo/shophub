@@ -12,12 +12,6 @@ import java.util.Optional;
  */
 public interface StampBoardsRepo extends JpaRepository<StampBoards, Long> {
     /**
-     * FindAll method
-     * @return list of StampBoards found
-     */
-    List<StampBoards> findAll();
-
-    /**
      * Save Method
      * @param stampBoards - the StampBoard to save
      * @return - the object

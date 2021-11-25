@@ -12,12 +12,6 @@ import java.util.Optional;
  */
 public interface TwoFactorMethodsRepo extends JpaRepository<TwoFactorMethods, Long> {
     /**
-     * FindAll method
-     * @return list of TwoFactorMethods found
-     */
-    List<TwoFactorMethods> findAll();
-
-    /**
      * Search by the id of the two factor method
      * @param twoFactorMethodId - the id to search by
      * @return - an option containing the object if one is found

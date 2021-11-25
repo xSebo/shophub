@@ -1,7 +1,9 @@
-package com.example.clientproject.data.users;
+package com.example.clientproject.data;
 
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethodsRepo;
+import com.example.clientproject.data.users.Users;
+import com.example.clientproject.data.users.UsersRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -26,13 +28,13 @@ public class UsersTests {
     TwoFactorMethodsRepo twoFactorMethodsRepo;
 
     @Test
-    public void shouldGet160Users() throws Exception {
+    public void shouldGet21Users() throws Exception {
         List<Users> usersList = usersRepo.findAll();
-        assertEquals(160, usersList.size());
+        assertEquals(21, usersList.size());
     }
 
     @Test
-    public void shouldGet161UsersAfterInsert() throws Exception {
+    public void shouldGet22UsersAfterInsert() throws Exception {
         TwoFactorMethods twoFactorMethods = twoFactorMethodsRepo.findByTwoFactorMethodId(1).get();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         Users newUser = new Users("", "", "", "",
@@ -41,7 +43,7 @@ public class UsersTests {
         Users users = usersRepo.save(newUser);
 
         List<Users> usersList = usersRepo.findAll();
-        assertEquals(161, usersList.size());
+        assertEquals(22, usersList.size());
     }
 }
 

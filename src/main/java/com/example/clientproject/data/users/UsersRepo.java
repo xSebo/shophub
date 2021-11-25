@@ -12,12 +12,6 @@ import java.util.Optional;
  */
 public interface UsersRepo extends JpaRepository<Users, Long> {
     /**
-     * FindAll method
-     * @return list of Users found
-     */
-    List<Users> findAll();
-
-    /**
      * Method for finding a user by the email
      * @param email - the email to search by
      * @return - an optional containing the user if one is found
