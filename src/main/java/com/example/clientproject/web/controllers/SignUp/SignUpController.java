@@ -21,15 +21,13 @@ import java.util.Optional;
 public class SignUpController {
 
     private registerUserService regUserService;
-    private GetUserIdFromEmail GetIDFromEmailService;
 
     //creates an object/list to pass into Model for Thymeleaf templating
     List<String> EmailTakenContainer = new ArrayList<>();
 
 
     @Autowired
-    public SignUpController(registerUserService rService, GetUserIdFromEmail aService) {
-        GetIDFromEmailService = aService;
+    public SignUpController(registerUserService rService) {
         regUserService = rService;
     }
 

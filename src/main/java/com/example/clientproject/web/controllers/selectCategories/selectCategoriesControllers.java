@@ -51,7 +51,7 @@ public class selectCategoriesControllers {
         List<String> TagID_List = Arrays.asList(listOfTagIDs.split(",")); //splits it into string list for easier handling
 
 
-        Integer UserID = JWTUtils.getLoggedInUserId(session).get();
+        int UserID = JWTUtils.getLoggedInUserId(session).get();
 
 
         for (String TagID : TagID_List){
@@ -73,6 +73,8 @@ public class selectCategoriesControllers {
         Optional<Integer> user = JWTUtils.getLoggedInUserId(session);
         if(user.isPresent()){System.out.println(user.get());
         }else{ return "redirect:/login";}
+
+        System.out.println("valid user session, fetching all tags");
 
         List<Tags> allTags = tagsRepo.findAll();
         model.addAttribute("allTagsAttributeName", allTags);
