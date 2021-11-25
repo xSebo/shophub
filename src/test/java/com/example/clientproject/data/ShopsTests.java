@@ -1,5 +1,7 @@
-package com.example.clientproject.data.shops;
+package com.example.clientproject.data;
 
+import com.example.clientproject.data.shops.Shops;
+import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.stampBoards.StampBoardsRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
