@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserFavouriteForm {
-    long userId;
     long shopId;
 
 
