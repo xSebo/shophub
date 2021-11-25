@@ -2,6 +2,7 @@ package com.example.clientproject.web.controllers;
 
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
+import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.services.BusinessRegisterSaver;
 import com.example.clientproject.services.UserFavouriteDTO;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +32,7 @@ public class HomeController {
     }
 
     @GetMapping({"/", "dashboard"})
-    public String index(Model model) throws Exception{
-        //loggedIn=true;
+    public String index(Model model, HttpSession session) throws Exception{
         if (!loggedIn) {
             model.addAttribute("loggedIn", loggedIn);
             return "redirect:/login";
@@ -43,8 +44,8 @@ public class HomeController {
         List<Shops> normalShops = new ArrayList();
 
         for(Shops s : allShops){
-            UserFavouriteForm uff = new UserFavouriteForm(2,s.getShopId());
-            if(toggleFavourite.alreadyInDb(new UserFavouriteDTO(uff))){
+            UserFavouriteForm uff = new UserFavouriteForm(s.getShopId());
+            if(toggleFavourite.alreadyInDb(new UserFavouriteDTO(uff, JWTUtils.getLoggedInUserId(session).get()))){
                 favouriteShops.add(s);
             }else{
                 normalShops.add(s);
