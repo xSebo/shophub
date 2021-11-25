@@ -1,16 +1,17 @@
 package com.example.clientproject.web.controllers.SignUp;
 
+import com.example.clientproject.data.tags.TagsRepo;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.domain.AccountRegister;
-import com.example.clientproject.services.findUserByEmailService;
-import com.example.clientproject.services.newAccountDTO;
-import com.example.clientproject.services.registerUserService;
+import com.example.clientproject.service.Utils.JWTUtils;
+import com.example.clientproject.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,15 +21,18 @@ import java.util.Optional;
 public class SignUpController {
 
     private registerUserService regUserService;
+    private GetUserIdFromEmail GetIDFromEmailService;
 
     //creates an object/list to pass into Model for Thymeleaf templating
     List<String> EmailTakenContainer = new ArrayList<>();
 
 
     @Autowired
-    public SignUpController(registerUserService rService) {
+    public SignUpController(registerUserService rService, GetUserIdFromEmail aService) {
+        GetIDFromEmailService = aService;
         regUserService = rService;
     }
+
 
     @Autowired
     private findUserByEmailService findUserByEmail;
@@ -39,7 +43,7 @@ public class SignUpController {
      * @return should redirect the user to the select categories. OR if the user enters an email that already exists in database sends back an error msg
      */
     @PostMapping("/signup")
-    public String signUp(Model model, AccountRegister accountRegister) {
+    public String signUp(Model model, AccountRegister accountRegister, HttpSession session) {
         //populates the DTO with the data from the form
         newAccountDTO newAccountDTO1 = new newAccountDTO(accountRegister.getName(), accountRegister.getSurname(), accountRegister.getEmail(), accountRegister.getPassword());
         //Resets the object
@@ -59,6 +63,16 @@ public class SignUpController {
 
 
         regUserService.save(newAccountDTO1);
+
+        User = findUserByEmail.findByUserEmail(accountRegister.getEmail());
+        String UserID = User.toString();
+        String[] UserDetailsArray = UserID.split(",");
+        UserID = UserDetailsArray[0].substring(22);
+
+        JWTUtils.makeUserJWT(Integer.parseInt(UserID), session);
+
+        //String UserID = GetIDFromEmailService.getUserIdFromEmailFunct(accountRegister.getEmail());
+
         return "redirect:/selectCategories";
     }
 

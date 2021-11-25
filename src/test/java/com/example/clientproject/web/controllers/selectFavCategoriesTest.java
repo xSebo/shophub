@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DirtiesContext
 @SpringBootTest
 @AutoConfigureMockMvc
-public class selectFavCategoriesTests {
+class selectFavCategoriesTests {
     @Autowired
     MockMvc mockMvc;
 
