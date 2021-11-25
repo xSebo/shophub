@@ -11,27 +11,10 @@
   <div class="MainText">Pick 3 categories or more
     <img style="position: absolute; top: 20px; left: 20px;" src="imgs/Logo.png" width="112" height="28" class="logo">
   </div>
-  <button class="button submit">Submit</button>
-  <div class="categoyContainer" th:with="mycounter = 0">
-    <button th:each="allTags : ${shopTags}" th:with="mycounter=${mycounter + 1}" onclick="toggle_onclick(${mycounter})" type="submit" id="${mycounter}" value="0" class="button is-rounded category-Button" th:text="${shopTags}"></button>
+  <button class="button submit" th:onclick="submitCategories([[${allTagsAttributeName.size}]])">Submit</button>
+  <div class="categoyContainer">
+    <button th:each="allTags,iter : ${allTagsAttributeName}" th:onclick="toggle_onclick([[${iter.index} + 1]])" th:id="${iter.index} + 1" value="0" class="button is-rounded category-Button" th:text="${allTags.tagName}"></button>
     <!--   toggle_onclick("have server automatically pass ID here"), and also for id="" -->
-    <button type="submit" class="button is-rounded category-Button">Furniture</button>
-    <button type="submit" class="button is-rounded category-Button">Coffee</button>
-    <button type="submit" class="button is-rounded category-Button">Cooking</button>
-    <button type="submit" class="button is-rounded category-Button">Electronics</button>
-    <button type="submit" class="button is-rounded category-Button">Cars</button>
-    <button type="submit" class="button is-rounded category-Button">Clothing</button>
-
-
-    <tr th:each="charity : ${matches}">
-                        <th scope="row">
-                            <a th:id="@{charityLink{id} (id=${charity.id})}"
-                               th:href="@{/charity/{id} (id=${charity.id})}">
-                                <span th:text="${charity.name}"></span>
-                            </a>
-                        </th>
-                        <td th:text="${charity.registrationNumber}"></td>
-                    </tr>
 
 </body>
 </html>
