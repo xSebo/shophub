@@ -2,6 +2,7 @@ package com.example.clientproject.data.shops;
 
 import com.example.clientproject.data.converters.TinyIntToBoolean;
 import com.example.clientproject.data.rewards.Rewards;
+import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.users.Users;
 import lombok.AllArgsConstructor;
@@ -44,7 +45,7 @@ public class Shops {
      * @param active - shop active status
      */
     public Shops(String name, String website, String description, int earnings,
-                 String image, String countries, boolean active) {
+                 String image, String countries, boolean active, StampBoards stampBoard) {
         this.shopName = name;
         this.shopDescription = description;
         this.shopWebsite = website;
@@ -52,6 +53,7 @@ public class Shops {
         this.shopImage = image;
         this.shopCountries = countries;
         this.shopActive = active;
+        this.stampBoard = stampBoard;
     }
 
     @ManyToMany(mappedBy="favouriteShops")
@@ -65,11 +67,7 @@ public class Shops {
     )
     private List<Tags> shopTags;
 
-    @ManyToMany
-    @JoinTable(
-            name="Reward_Shop_Links",
-            joinColumns=@JoinColumn(name="Shop_Id"),
-            inverseJoinColumns = @JoinColumn(name="Reward_Id")
-    )
-    private List<Rewards> rewardsList;
+    @OneToOne
+    @JoinColumn(name="Stamp_Board_Id")
+    private StampBoards stampBoard;
 }

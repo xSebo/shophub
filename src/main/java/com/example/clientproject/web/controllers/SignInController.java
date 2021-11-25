@@ -7,6 +7,7 @@ import com.example.clientproject.services.BusinessRegisterDTO;
 import com.example.clientproject.services.BusinessRegisterSaver;
 import com.example.clientproject.web.forms.BusinessRegisterForm;
 import com.example.clientproject.web.forms.LoginForm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

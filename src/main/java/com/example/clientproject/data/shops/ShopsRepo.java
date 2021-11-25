@@ -66,4 +66,7 @@ public interface ShopsRepo extends JpaRepository<Shops, Long> {
      */
     @Query("select s from Shops s where s.shopActive = false")
     List<Shops> findInactiveShops();
+
+    @Query("select s from Shops s where s.stampBoard.stampBoardId = ?1")
+    Optional<Shops> findByStampId(long stampId);
 }
