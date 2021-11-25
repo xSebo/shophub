@@ -10,9 +10,9 @@ public class UserFavouriteDTO {
     long userId;
     long shopId;
 
-    public UserFavouriteDTO(UserFavouriteForm urf){
+    public UserFavouriteDTO(UserFavouriteForm urf, long userId){
         this(
-                urf.getUserId(),
+                userId,
                 urf.getShopId()
         );
     }
