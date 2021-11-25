@@ -30,6 +30,9 @@ public class BusinessRegisterSaver {
     @Autowired
     JdbcTemplate jdbc;
 
+    @Autowired
+    LinkUserShop linkShop;
+
     public void save(BusinessRegisterDTO business){
 
         StampBoards stampBoard = stampBoards.findById(1L).get();
@@ -62,6 +65,10 @@ public class BusinessRegisterSaver {
             jdbc.execute(query);
 
         }
+
+        linkShop.linkUserShop(shop.getShopId(), 2); //NEED TO FETCH USER ID FROM SESSION
+
+
         //System.out.println(shop.getShopId());
 
         //System.out.println(tagsRepo.findAll());
