@@ -84,7 +84,8 @@ public class SignInController {
     @PostMapping("login")
     public String signInChecks(@Valid LoginForm loginForm,
             BindingResult bindingResult,
-            Model model) {
+            Model model,
+            HttpSession session) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("loggedIn", loggedIn);
@@ -104,6 +105,7 @@ public class SignInController {
 
             // If they match, set the loggedIn flag to true
             if (passwordMatch) {
+                JWTUtils.makeUserJWT((int)usersDTOOptional.get().getUserId(), session);
                 loggedIn = true;
             // Otherwise, throw an exception with the correct error message
             } else {
