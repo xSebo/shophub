@@ -9,5 +9,14 @@
 <body>
     <div th:replace="fragments/nav.html :: nav"></div>
 
+    <div>
+        <h1 th:text="${shop.shopName}"></h1>
+        <p th:text="${shop.shopDescription}"></p>
+        <p th:text="${shop.shopWebsite}"></p>
+        <p th:text="${shop.shopEarnings}"></p>
+        <p th:text="${shop.shopCountries}"></p>
+        <img th:src="${shop.shopImage}" alt="">
+    </div>
+
 </body>
 </html>

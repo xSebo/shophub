@@ -30,10 +30,6 @@ public class selectCategoriesControllers {
     public String selectCategories(Model model){
         List<Tags> allTags = getTagService.findAll();
         model.addAttribute("allTags", allTags);
-        for (Tags allTag : allTags) {
-            System.out.println(allTag);
-        }
-        System.out.println("Test");
         return("selectCategories");
     }
 }
