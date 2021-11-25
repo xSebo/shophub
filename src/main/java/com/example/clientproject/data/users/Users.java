@@ -58,7 +58,6 @@ public class Users {
         this.twoFactorMethod = aTwoFactorMethod;
     }
 
-
     @ManyToOne
     @JoinColumn(name="Two_Factor_Method_Id", nullable=false)
     private TwoFactorMethods twoFactorMethod;

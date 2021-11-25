@@ -7,9 +7,8 @@
   display: flex;
   height: inherit;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 3;
+  justify-content:center;
+  align-items:center;
 }
 
 .name-box-container {
@@ -27,14 +26,6 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    flex-grow: 2;
-}
-
-form {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
 }
 
 h1 {
@@ -73,12 +64,6 @@ input {
   width: 140px;
 }
 
-.signUp-Button:hover {
-  transition: background-color 0.5s ease;
-  background-color: blue;
-  color: white;
-}
-
 h2 {
   font-size: 40px;
   font-family: sans-serif;
@@ -99,19 +84,12 @@ h2 {
 
 .loginUp-Button {
   margin: 10px;
-  background-color: white;
+  background-color: transparent;
   border-color: white;
-  color: rgb(1,126,255) !important;
+  color: white !important;
   width: 140px;
   border-width: 2px;
   font-weight: bold;
-}
-
-.loginUp-Button:hover {
-  background-color: transparent;
-  transition: background-color 0.5s ease;
-  border-color: white;
-  color: white !important;
 }
 
 .logo {
@@ -122,15 +100,4 @@ h2 {
 img {
   position: absolute !important;
   top: 40px !important;
-}
-
-.valIssueContainer {
-  position: absolute;
-  top: 45%;
-  left: 40%;
-}
-
-.valIssueTxt {
-  color: red;
-  display: none;
 }
