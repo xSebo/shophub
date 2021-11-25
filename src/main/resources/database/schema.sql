@@ -17,22 +17,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Two_Factor_Methods` (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Shops`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Shops` (
-                                              `Shop_Id` INT NOT NULL AUTO_INCREMENT,
-                                              `Shop_Name` VARCHAR(45) NOT NULL,
-                                              `Shop_Description` VARCHAR(250) NOT NULL,
-                                              `Shop_Website` VARCHAR(45) NOT NULL,
-                                              `Shop_Earnings` INT NOT NULL,
-                                              `Shop_Countries` VARCHAR(150) NOT NULL,
-                                              `Shop_Image` VARCHAR(150),
-                                              `Shop_Active` TINYINT NOT NULL,
-                                              PRIMARY KEY (`Shop_Id`))
-    ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `mydb`.`Admin_Types`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Admin_Types` (
@@ -61,33 +45,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
                                                       REFERENCES `mydb`.`Two_Factor_Methods` (`Two_Factor_Method_Id`)
                                                       ON DELETE NO ACTION
                                                       ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`User_Permissions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`User_Permissions` (
-                                                         `User_Permission_Id` INT NOT NULL AUTO_INCREMENT,
-                                                         `User_Id` INT NOT NULL,
-                                                         `Shop_Id` INT,
-                                                         `Admin_Type_Id` INT NOT NULL,
-                                                         PRIMARY KEY (`User_Permission_Id`, `User_Id`, `Shop_Id`, `Admin_Type_Id`),
-                                                         CONSTRAINT `fk_User_Permissions_Users1`
-                                                             FOREIGN KEY (`User_Id`)
-                                                                 REFERENCES `mydb`.`Users` (`User_Id`)
-                                                                 ON DELETE NO ACTION
-                                                                 ON UPDATE NO ACTION,
-                                                         CONSTRAINT `fk_User_Permissions_Shops1`
-                                                             FOREIGN KEY (`Shop_Id`)
-                                                                 REFERENCES `mydb`.`Shops` (`Shop_Id`)
-                                                                 ON DELETE NO ACTION
-                                                                 ON UPDATE NO ACTION,
-                                                         CONSTRAINT `fk_User_Permissions_Admin_Types1`
-                                                             FOREIGN KEY (`Admin_Type_Id`)
-                                                                 REFERENCES `mydb`.`Admin_Types` (`Admin_Type_Id`)
-                                                                 ON DELETE NO ACTION
-                                                                 ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
 
@@ -121,26 +78,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User_Favourite_Tags` (
 )
 ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `mydb`.`Shop_Tag_Links`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Shop_Tag_Links` (
-                                                       `Shop_Tag_Link_Id` INT NOT NULL AUTO_INCREMENT,
-                                                       `Shop_Id` INT NOT NULL,
-                                                       `Tag_Id` INT NOT NULL,
-                                                       PRIMARY KEY (`Shop_Tag_Link_Id`, `Shop_Id`, `Tag_Id`),
-                                                       CONSTRAINT `fk_Shop_Tag_Links_Shops1`
-                                                           FOREIGN KEY (`Shop_Id`)
-                                                               REFERENCES `mydb`.`Shops` (`Shop_Id`)
-                                                               ON DELETE NO ACTION
-                                                               ON UPDATE NO ACTION,
-                                                       CONSTRAINT `fk_Shop_Tag_Links_Tags1`
-                                                           FOREIGN KEY (`Tag_Id`)
-                                                               REFERENCES `mydb`.`Tags` (`Tag_Id`)
-                                                               ON DELETE NO ACTION
-                                                               ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Stamp_Boards`
@@ -168,25 +105,73 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Rewards` (
                                                         ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `mydb`.`Shops`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Shops` (
+                                              `Shop_Id` INT NOT NULL AUTO_INCREMENT,
+                                              `Shop_Name` VARCHAR(45) NOT NULL,
+                                              `Shop_Description` VARCHAR(250) NOT NULL,
+                                              `Shop_Website` VARCHAR(45) NOT NULL,
+                                              `Shop_Earnings` INT NOT NULL,
+                                              `Shop_Countries` VARCHAR(150) NOT NULL,
+                                              `Shop_Image` VARCHAR(150),
+                                              `Shop_Active` TINYINT NOT NULL,
+                                              `Stamp_Board_Id` INT NOT NULL,
+                                              PRIMARY KEY (`Shop_Id`, `Stamp_Board_Id`),
+                                                  CONSTRAINT `fk_Shops_Stamp_Boards1`
+                                                  FOREIGN KEY (`Stamp_Board_Id`)
+                                                  REFERENCES `mydb`.`Stamp_Boards` (`Stamp_Board_Id`)
+                                                  ON DELETE NO ACTION
+                                                  ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
--- Table `mydb`.`Reward_Shop_Links`
+-- Table `mydb`.`Shop_Tag_Links`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Reward_Shop_Links` (
-                                                          `Reward_Shop_Link_ID` INT NOT NULL AUTO_INCREMENT,
-                                                          `Shop_Id` INT NOT NULL,
-                                                          `Reward_Id` INT NOT NULL,
-                                                          PRIMARY KEY (`Reward_Shop_Link_ID`, `Shop_Id`, `Reward_Id`),
-                                                          CONSTRAINT `fk_Reward_Shop_Links_Shops1`
-                                                              FOREIGN KEY (`Shop_Id`)
-                                                                  REFERENCES `mydb`.`Shops` (`Shop_Id`)
-                                                                  ON DELETE NO ACTION
-                                                                  ON UPDATE NO ACTION,
-                                                          CONSTRAINT `fk_Reward_Shop_Links_Rewards1`
-                                                              FOREIGN KEY (`Reward_Id`)
-                                                                  REFERENCES `mydb`.`Rewards` (`Reward_Id`)
-                                                                  ON DELETE NO ACTION
-                                                                  ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `mydb`.`Shop_Tag_Links` (
+                                                       `Shop_Tag_Link_Id` INT NOT NULL AUTO_INCREMENT,
+                                                       `Shop_Id` INT NOT NULL,
+                                                       `Tag_Id` INT NOT NULL,
+                                                       PRIMARY KEY (`Shop_Tag_Link_Id`, `Shop_Id`, `Tag_Id`),
+                                                       CONSTRAINT `fk_Shop_Tag_Links_Shops1`
+                                                           FOREIGN KEY (`Shop_Id`)
+                                                               REFERENCES `mydb`.`Shops` (`Shop_Id`)
+                                                               ON DELETE NO ACTION
+                                                               ON UPDATE NO ACTION,
+                                                       CONSTRAINT `fk_Shop_Tag_Links_Tags1`
+                                                           FOREIGN KEY (`Tag_Id`)
+                                                               REFERENCES `mydb`.`Tags` (`Tag_Id`)
+                                                               ON DELETE NO ACTION
+                                                               ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`User_Permissions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`User_Permissions` (
+                                                         `User_Permission_Id` INT NOT NULL AUTO_INCREMENT,
+                                                         `User_Id` INT NOT NULL,
+                                                         `Shop_Id` INT,
+                                                         `Admin_Type_Id` INT NOT NULL,
+                                                         PRIMARY KEY (`User_Permission_Id`, `User_Id`, `Shop_Id`, `Admin_Type_Id`),
+                                                         CONSTRAINT `fk_User_Permissions_Users1`
+                                                             FOREIGN KEY (`User_Id`)
+                                                                 REFERENCES `mydb`.`Users` (`User_Id`)
+                                                                 ON DELETE NO ACTION
+                                                                 ON UPDATE NO ACTION,
+                                                         CONSTRAINT `fk_User_Permissions_Shops1`
+                                                             FOREIGN KEY (`Shop_Id`)
+                                                                 REFERENCES `mydb`.`Shops` (`Shop_Id`)
+                                                                 ON DELETE NO ACTION
+                                                                 ON UPDATE NO ACTION,
+                                                         CONSTRAINT `fk_User_Permissions_Admin_Types1`
+                                                             FOREIGN KEY (`Admin_Type_Id`)
+                                                                 REFERENCES `mydb`.`Admin_Types` (`Admin_Type_Id`)
+                                                                 ON DELETE NO ACTION
+                                                                 ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
 
@@ -231,11 +216,14 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User_Stamp_Boards` (
                                                                   ON DELETE NO ACTION
                                                                   ON UPDATE NO ACTION)
     ENGINE = InnoDB;
+    
 
 INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, 'None');
 INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (2, 'GAuth');
 
-INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active) VALUES ('','','',0,'',0);
+INSERT INTO stamp_boards (Stamp_Board_Id, Stamp_Board_Size) VALUES (1, 0);
+
+INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('','','',0,'',0,1);
 
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (1,'User');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (2,'Business Admin');
