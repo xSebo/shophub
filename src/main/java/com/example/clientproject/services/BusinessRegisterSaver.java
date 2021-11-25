@@ -33,7 +33,7 @@ public class BusinessRegisterSaver {
     @Autowired
     LinkUserShop linkShop;
 
-    public void save(BusinessRegisterDTO business){
+    public void save(BusinessRegisterDTO business, long userId){
 
         StampBoards stampBoard = stampBoards.findById(1L).get();
 
@@ -66,8 +66,7 @@ public class BusinessRegisterSaver {
 
         }
 
-        linkShop.linkUserShop(shop.getShopId(), 2); //NEED TO FETCH USER ID FROM SESSION
-
+        linkShop.linkUserShop(shop.getShopId(), userId);
 
         //System.out.println(shop.getShopId());
 

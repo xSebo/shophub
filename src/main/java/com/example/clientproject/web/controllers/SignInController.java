@@ -38,12 +38,12 @@ public class SignInController {
     }
 
     @PostMapping("/businessRegister")
-    public String submitBusinessInfo(@Valid BusinessRegisterForm brf, BindingResult bindingResult){
+    public String submitBusinessInfo(@Valid BusinessRegisterForm brf, BindingResult bindingResult, HttpSession session){
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
             return "registerbusiness.html";
         }
-        saveBusiness.save(new BusinessRegisterDTO(brf));
+        saveBusiness.save(new BusinessRegisterDTO(brf), JWTUtils.getLoggedInUserId(session).get());
         return "redirect:/redirect?url=businessRegister";
     }
 
@@ -84,7 +84,8 @@ public class SignInController {
     @PostMapping("login")
     public String signInChecks(@Valid LoginForm loginForm,
             BindingResult bindingResult,
-            Model model) {
+            Model model,
+            HttpSession session) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("loggedIn", loggedIn);
@@ -104,6 +105,9 @@ public class SignInController {
 
             // If they match, set the loggedIn flag to true
             if (passwordMatch) {
+                JWTUtils.makeUserJWT(
+                        (int) usersDTOOptional.get().getUserId(),
+                        session);
                 loggedIn = true;
             // Otherwise, throw an exception with the correct error message
             } else {
