@@ -10,11 +10,16 @@ import java.util.List;
 @Service
 public class getAllTagsServiceStatic implements getAllTagsService{
 
-    @Autowired
-    TagsRepo tagsRepo;
+    private TagsRepo tagsRepo;
 
-    @Override
+    @Autowired
+    public getAllTagsServiceStatic(TagsRepo aRepo) {
+        tagsRepo = aRepo;
+    }
+
+
     public List<Tags> findAll() {
+        System.out.println("Service test");
         return tagsRepo.findAll();
     }
 }

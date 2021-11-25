@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<html xmlns:th="http://www.thymeleaf.org">
 	<link rel="stylesheet" type="text/css" href="css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="css/signUp.css">
+  <link rel="stylesheet" type="text/css" href="css/signUp.css">
+	<script src="/js/registerUser.js"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,25 +12,33 @@
 
 <body>
   <div class="flex-container">
-    <div class="vert-flex-container" style="flex-grow: 3;">
+    <div class="vert-flex-container">
       <h1 class="has-text-weight-bold">Start collecting rewards <br>today!</h1>
-      <form action="/signup" th:method="post">
+      <form action="/signup" th:method="post" name="signIn" id="signIn" onsubmit="return validate()">
         <div class="flex-container name-box-container">
           <input class="input small-name-box" type="text" placeholder="Name" id="name" name="name"/>
           <input class="input small-name-box" type="text" placeholder="Surname" id="surname" name="surname"/>
         </div>
         <input class="input large-input-box" type="email" placeholder="Email" id="email" name="email"/>
         <input class="input large-input-box" type="password" placeholder="Password" id="password" name="password"/>
-        <button type="submit" class="button is-rounded signUp-Button">Sign Up</button>
-      </form>
+				<button class="button is-rounded signUp-Button">Sign Up</button>
+			</form>
+
     </div>
-    <div class="loginPart" style="flex-grow: 4;">
+    <div class="loginPart">
       <img style="position: absolute; top: 45px" src="imgs/Logo.png" width="112" height="28" class="logo">
       <h2>Welcome!</h2>
       <h3 class="special-text">Already a member of <br>ShopHub?<h3>
-      <button class="button is-rounded loginUp-Button">Sign in</button>
+			<form method="get" action="/login">
+      	<button class="button is-rounded loginUp-Button" href="http://localhost:8080/login">Sign in</button>
+			</form>
     </div>
-
   </div>
+	<div class="valIssueContainer">
+		<p class="valIssueTxt" id="NameTxt">"Name" field is empty</p><br>
+		<br><p class="valIssueTxt" id="SurnameTxt">"Surname" field is empty</p>
+		<br><p class="valIssueTxt" id="PasswordTxt">"Password" field is empty</p>
+		<br><p class="valIssueTxt" style="display: initial;" th:each="EmailTakenContainer : ${EmailTaken}" id="EmailTxt">Email is already taken</p>
+	</div>
 </body>
 </html>

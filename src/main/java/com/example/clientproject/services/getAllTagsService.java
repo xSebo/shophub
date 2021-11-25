@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface getAllTagsService {
-    List<Tags> findAll();
+    public List<Tags> findAll();
 }
