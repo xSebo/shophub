@@ -68,4 +68,12 @@ public interface ShopsRepo extends JpaRepository<Shops, Long> {
      */
     @Query("select s from Shops s where s.stampBoard.stampBoardId = ?1")
     Optional<Shops> findByStampId(long stampId);
+
+    /**
+     * Search by categoryId
+     * @param categoryId - the id to search by
+     * @return - list of all shops with that category
+     */
+    @Query("select s from Shops s where s.category.categoryId = ?1")
+    List<Shops> findByCategoryId(long categoryId);
 }
