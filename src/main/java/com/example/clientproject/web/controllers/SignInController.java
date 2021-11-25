@@ -1,6 +1,7 @@
 package com.example.clientproject.web.controllers;
 
 import com.example.clientproject.exceptions.ForbiddenErrorException;
+import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.services.BusinessRegisterDTO;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -113,5 +115,17 @@ public class SignInController {
         }
 
         return "redirect:/dashboard";
+    }
+
+    /**
+     *
+     * @param model
+     * @param session the http session of the browser accessing the site
+     * @return returns a redirect to the login page after clearing the session jwt
+     */
+    @GetMapping("/log_out")
+    public String jwtLogout(Model model, HttpSession session){
+        JWTUtils.logOutUser(session);
+        return "redirect:/login";
     }
 }
