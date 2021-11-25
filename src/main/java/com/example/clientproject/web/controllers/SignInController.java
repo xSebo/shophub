@@ -44,7 +44,7 @@ public class SignInController {
             return "registerbusiness.html";
         }
         saveBusiness.save(new BusinessRegisterDTO(brf));
-        return "redirect:/businessRegister";
+        return "redirect:/redirect?url=businessRegister";
     }
 
     @GetMapping("/businessRedirect")
