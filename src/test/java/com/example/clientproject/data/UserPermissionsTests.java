@@ -2,6 +2,7 @@ package com.example.clientproject.data;
 
 import com.example.clientproject.data.adminTypes.AdminTypes;
 import com.example.clientproject.data.adminTypes.AdminTypesRepo;
+import com.example.clientproject.data.categories.CategoriesRepo;
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.stampBoards.StampBoardsRepo;
@@ -41,16 +42,18 @@ public class UserPermissionsTests {
     AdminTypesRepo adminTypesRepo;
     @Autowired
     StampBoardsRepo stampRepo;
+    @Autowired
+    CategoriesRepo categoriesRepo;
 
     @Test
-    public void shouldGet157Permissions() {
+    public void shouldGet18Permissions() {
         List<UserPermissions> userPermissionsList = userPermissionsRepo.findAll();
-        assertEquals(157, userPermissionsList.size());
+        assertEquals(18, userPermissionsList.size());
     }
 
     @Test
-    public void shouldGet158PermissionsAfterInsert() throws Exception {
-        Shops newShop = new Shops("", "", "", 0, "", "", true, stampRepo.getById(1L));
+    public void shouldGet19PermissionsAfterInsert() throws Exception {
+        Shops newShop = new Shops("", "", "", 0, "", "", true, stampRepo.getById(1L), categoriesRepo.getById(1L));
         shopsRepo.save(newShop);
         TwoFactorMethods twoFactorMethods = twoFactorMethodsRepo.findByTwoFactorMethodId(1).get();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -64,6 +67,6 @@ public class UserPermissionsTests {
         userPermissionsRepo.save(newUserPermission);
 
         List<UserPermissions> userPermissionsList = userPermissionsRepo.findAll();
-        assertEquals(158, userPermissionsList.size());
+        assertEquals(19, userPermissionsList.size());
     }
 }

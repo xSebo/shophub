@@ -1,3 +1,6 @@
+SET MODE MYSQL;
+SET IGNORECASE=TRUE;
+
 -- -----------------------------------------------------
 -- -----------------------------------------------------
 -- Schema mydb
@@ -48,32 +51,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Users` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `mydb`.`User_Permissions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`User_Permissions` (
-    `User_Permission_Id` INT NOT NULL AUTO_INCREMENT,
-    `User_Id` INT NOT NULL,
-    `Shop_Id` INT,
-    `Admin_Type_Id` INT NOT NULL,
-    PRIMARY KEY (`User_Permission_Id`, `User_Id`, `Shop_Id`, `Admin_Type_Id`),
-    CONSTRAINT `fk_User_Permissions_Users1`
-        FOREIGN KEY (`User_Id`)
-            REFERENCES `mydb`.`Users` (`User_Id`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT `fk_User_Permissions_Shops1`
-        FOREIGN KEY (`Shop_Id`)
-            REFERENCES `mydb`.`Shops` (`Shop_Id`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT `fk_User_Permissions_Admin_Types1`
-        FOREIGN KEY (`Admin_Type_Id`)
-            REFERENCES `mydb`.`Admin_Types` (`Admin_Type_Id`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Tags`
@@ -100,27 +77,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User_Favourite_Tags` (
     CONSTRAINT `fk_User_Favourite_Tags_Users1`
         FOREIGN KEY (`User_Id`)
             REFERENCES `mydb`.`Users` (`User_Id`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Shop_Tag_Links`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Shop_Tag_Links` (
-    `Shop_Tag_Link_Id` INT NOT NULL AUTO_INCREMENT,
-    `Shop_Id` INT NOT NULL,
-    `Tag_Id` INT NOT NULL,
-    PRIMARY KEY (`Shop_Tag_Link_Id`, `Shop_Id`, `Tag_Id`),
-    CONSTRAINT `fk_Shop_Tag_Links_Shops1`
-        FOREIGN KEY (`Shop_Id`)
-            REFERENCES `mydb`.`Shops` (`Shop_Id`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT `fk_Shop_Tag_Links_Tags1`
-        FOREIGN KEY (`Tag_Id`)
-            REFERENCES `mydb`.`Tags` (`Tag_Id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -190,6 +146,54 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Shops` (
             ON DELETE NO ACTION
             ON UPDATE NO ACTION )
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`User_Permissions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`User_Permissions` (
+                                                         `User_Permission_Id` INT NOT NULL AUTO_INCREMENT,
+                                                         `User_Id` INT NOT NULL,
+                                                         `Shop_Id` INT,
+                                                         `Admin_Type_Id` INT NOT NULL,
+                                                         PRIMARY KEY (`User_Permission_Id`, `User_Id`, `Shop_Id`, `Admin_Type_Id`),
+                                                         CONSTRAINT `fk_User_Permissions_Users1`
+                                                             FOREIGN KEY (`User_Id`)
+                                                                 REFERENCES `mydb`.`Users` (`User_Id`)
+                                                                 ON DELETE NO ACTION
+                                                                 ON UPDATE NO ACTION,
+                                                         CONSTRAINT `fk_User_Permissions_Shops1`
+                                                             FOREIGN KEY (`Shop_Id`)
+                                                                 REFERENCES `mydb`.`Shops` (`Shop_Id`)
+                                                                 ON DELETE NO ACTION
+                                                                 ON UPDATE NO ACTION,
+                                                         CONSTRAINT `fk_User_Permissions_Admin_Types1`
+                                                             FOREIGN KEY (`Admin_Type_Id`)
+                                                                 REFERENCES `mydb`.`Admin_Types` (`Admin_Type_Id`)
+                                                                 ON DELETE NO ACTION
+                                                                 ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Shop_Tag_Links`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Shop_Tag_Links` (
+                                                       `Shop_Tag_Link_Id` INT NOT NULL AUTO_INCREMENT,
+                                                       `Shop_Id` INT NOT NULL,
+                                                       `Tag_Id` INT NOT NULL,
+                                                       PRIMARY KEY (`Shop_Tag_Link_Id`, `Shop_Id`, `Tag_Id`),
+                                                       CONSTRAINT `fk_Shop_Tag_Links_Shops1`
+                                                           FOREIGN KEY (`Shop_Id`)
+                                                               REFERENCES `mydb`.`Shops` (`Shop_Id`)
+                                                               ON DELETE NO ACTION
+                                                               ON UPDATE NO ACTION,
+                                                       CONSTRAINT `fk_Shop_Tag_Links_Tags1`
+                                                           FOREIGN KEY (`Tag_Id`)
+                                                               REFERENCES `mydb`.`Tags` (`Tag_Id`)
+                                                               ON DELETE NO ACTION
+                                                               ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
