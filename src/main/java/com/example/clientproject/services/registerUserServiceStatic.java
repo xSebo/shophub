@@ -31,7 +31,7 @@ public class registerUserServiceStatic implements registerUserService{
                 LocalDateTime.now().format(formatter), twoFactorMethods);
         usersRepo.save(newUser);
 
-        System.out.println(usersRepo.findById(newUser.getUserId()));
+        //System.out.println(usersRepo.findById(newUser.getUserId()));
 
     }
 }

@@ -24,3 +24,7 @@ function favouriteBusiness(e,shopId){
 
 
 }
+
+function redirect(shopId){
+    location.href = "businessDetails?shopId="+shopId;
+}
