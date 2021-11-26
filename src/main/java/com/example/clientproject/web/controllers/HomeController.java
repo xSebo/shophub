@@ -60,8 +60,11 @@ public class HomeController {
             return "redirect:/login";
         }
 
+<<<<<<< HEAD
 
         //System.out.println(shopsRepo.findAll());
+=======
+>>>>>>> origin/issueFifteen
         List<Shops> allShops = shopsRepo.findAll();
 
         List<Shops> favouriteShops = new ArrayList();
