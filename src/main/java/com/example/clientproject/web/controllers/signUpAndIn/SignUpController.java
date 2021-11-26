@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Optional;
@@ -32,11 +33,9 @@ public class SignUpController {
     }
 
     @GetMapping("/signUp")
-    public String signUpGet(Model model, HttpSession session) {
-        Optional<Integer> user = jwtUtils.getLoggedInUserId(session);
+    public String signUpGet(Model model, HttpSession session, HttpServletResponse httpResponse) throws Exception {
+        Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
         if(user.isPresent()){
-            Integer loggedInUserId = user.get();
-        }else{
             return "redirect:/";
         }
 

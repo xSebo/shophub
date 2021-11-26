@@ -1,5 +1,6 @@
 package com.example.clientproject.web.controllers.signUpAndIn;
 
+import com.example.clientproject.data.users.Users;
 import com.example.clientproject.exceptions.ForbiddenErrorException;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.dtos.UsersDTO;
@@ -67,7 +68,12 @@ public class SignInController {
      * @return - the page to redirect to
      */
     @GetMapping("/login")
-    public String loginPageAccess(Model model) {
+    public String loginPageAccess(Model model, HttpSession session) {
+        Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
+        if(user.isPresent()){
+            return "redirect:/";
+        }
+
         LoginForm loginForm = new LoginForm();
         model.addAttribute("loginForm", loginForm);
         model.addAttribute("loggedIn", loggedIn);

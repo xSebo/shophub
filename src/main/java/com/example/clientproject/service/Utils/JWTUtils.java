@@ -108,8 +108,12 @@ public class JWTUtils {
         }catch (io.jsonwebtoken.MalformedJwtException e){
             System.out.println("malformed jwt");
             return Optional.empty();
-        }catch (io.jsonwebtoken.SignatureException e){
+        }catch (io.jsonwebtoken.SignatureException e) {
             System.out.println("JWT was edited outside this scope");
+            return Optional.empty();
+        }catch (io.jsonwebtoken.ExpiredJwtException e){
+            System.out.println("JWT Expired");
+            this.logOutUser(session);
             return Optional.empty();
         }catch (Exception e){
             System.out.println(e);
