@@ -12,17 +12,29 @@
     <div class="flex-container">
       <div class="vert-flex-container" style="flex-grow: 4;">
         <h1 class="has-text-weight-bold">Start collecting rewards <br>today!</h1>
-        <form th:action="@{/signUp}" th:method="post" th:object="${signUpForm}">
-          <div class="flex-container name-box-container">
-            <input class="input small-name-box" type="text" placeholder="Name" th:field="*{newUserForename}"/>
-            <input class="input small-name-box" type="text" placeholder="Surname" th:field="*{newUserLastname}"/>
+        <form th:action="@{/signUp}" th:method="post" th:object="${signUpForm}" id="signUpForm">
+          <div class="field is-grouped" style="justify-content: space-between">
+            <p class="control" style="width: 47.5%">
+              <input class="input small-name-box" type="text" placeholder="Name" th:field="*{newUserForename}"/>
+            </p>
+            <p class="control" style="width: 47.5%">
+              <input class="input small-name-box" type="text" placeholder="Surname" th:field="*{newUserLastname}"/>
+            </p>
           </div>
 
-          <div class="flex-container name-box-container">
-            <div th:if="${emailInUse}" th:text="Email Already in use"></div>
-            <input class="input large-input-box" type="text" placeholder="Email" th:field="*{newUserEmail}"/>
-            <input class="input large-input-box" type="text" placeholder="Password" th:field="*{newUserPassword}"/>
+          <div class="field is-full-width">
+            <p class="control">
+              <input class="input large-input-box" type="text" placeholder="Email" th:field="*{newUserEmail}"/>
+            </p>
           </div>
+
+          <div class="field is-full-width">
+            <p class="control">
+              <input class="input large-input-box" type="text" placeholder="Password" th:field="*{newUserPassword}"/>
+            </p>
+          </div>
+
+          <div th:if="${emailInUse}" th:text="Email Already in use"></div>
 
           <button type="submit" class="button is-rounded signUp-Button">Sign Up</button>
         </form>
@@ -32,7 +44,7 @@
         <h2>Welcome!</h2>
         <h3 class="special-text">Already a member of <br>ShopHub?</h3>
         <form method="get" th:action="@{/login}">
-          <button type="submit" class="button is-rounded loginUp-Button">Login</button>
+          <button type="submit" class="button is-rounded login-Button">Login</button>
         </form>
       </div>
 
