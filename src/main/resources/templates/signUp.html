@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/bulma.min.css">
     <link rel="stylesheet" type="text/css" href="css/signUp.css">
+    <script src="js/signup.js"></script>
     <meta charset="UTF-8">
     <title>SignUp</title>
   </head>
@@ -12,29 +13,31 @@
     <div class="flex-container">
       <div class="vert-flex-container" style="flex-grow: 4;">
         <h1 class="has-text-weight-bold">Start collecting rewards <br>today!</h1>
-        <form th:action="@{/signUp}" th:method="post" th:object="${signUpForm}" id="signUpForm">
+        <form th:action="@{/signUp}" th:method="post" th:object="${signUpForm}" id="signUpForm" name="signUpForm" onsubmit="return validateSignup()">
           <div class="field is-grouped" style="justify-content: space-between">
-            <p class="control" style="width: 47.5%">
-              <input class="input small-name-box" type="text" placeholder="Name" th:field="*{newUserForename}"/>
-            </p>
-            <p class="control" style="width: 47.5%">
-              <input class="input small-name-box" type="text" placeholder="Surname" th:field="*{newUserLastname}"/>
-            </p>
+            <span class="control" style="width: 47.5%">
+              <input class="input small-name-box" type="text" placeholder="Name" name="nameField" th:field="*{newUserForename}"/>
+              <p class="help is-danger" id="nameHelpText" style="display: none">required</p>
+            </span>
+            <span class="control" style="width: 47.5%">
+              <input class="input small-name-box" type="text" placeholder="Surname" name="surname" th:field="*{newUserLastname}"/>
+              <p class="help is-danger" id="surnameHelpText" style="display: none">required</p>
+            </span>
           </div>
 
           <div class="field is-full-width">
-            <p class="control">
-              <input class="input large-input-box" type="text" placeholder="Email" th:field="*{newUserEmail}"/>
-            </p>
+            <span class="control">
+              <input class="input large-input-box" type="text" placeholder="Email" name="email" th:field="*{newUserEmail}"/>
+              <p class="help is-danger" id="emailHelpText" style="display: none">required</p>
+            </span>
           </div>
 
           <div class="field is-full-width">
-            <p class="control">
-              <input class="input large-input-box" type="text" placeholder="Password" th:field="*{newUserPassword}"/>
-            </p>
+            <span class="control">
+              <input class="input large-input-box" type="text" placeholder="Password" name="password" th:field="*{newUserPassword}"/>
+              <p class="help is-danger" id="passwordHelpText" style="display: none">required</p>
+            </span>
           </div>
-
-          <div th:if="${emailInUse}" th:text="Email Already in use"></div>
 
           <button type="submit" class="button is-rounded signUp-Button">Sign Up</button>
         </form>
