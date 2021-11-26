@@ -15,11 +15,13 @@ public class BusinessFavouriter {
     private UserFavouriteSaver saveFavourite;
     private UserFavouriteToggle toggleFavourite;
     private UserFavouriteDeleter deleteFavourite;
+    private JWTUtils jwtUtils;
 
-    public BusinessFavouriter(UserFavouriteSaver ufs, UserFavouriteToggle uft, UserFavouriteDeleter ufd) {
+    public BusinessFavouriter(UserFavouriteSaver ufs, UserFavouriteToggle uft, UserFavouriteDeleter ufd, JWTUtils jwt) {
         saveFavourite = ufs;
         toggleFavourite = uft;
         deleteFavourite = ufd;
+        jwtUtils = jwt;
     }
 
 
@@ -30,7 +32,7 @@ public class BusinessFavouriter {
      */
     @PostMapping("/favouriteBusiness")
     public String favouriteBusiness(UserFavouriteForm uff, HttpSession session){
-        UserFavouriteDTO ufDTO = new UserFavouriteDTO(uff, JWTUtils.getLoggedInUserId(session).get());
+        UserFavouriteDTO ufDTO = new UserFavouriteDTO(uff, jwtUtils.getLoggedInUserId(session).get());
         try{
             if(toggleFavourite.alreadyInDb(ufDTO)){
                 deleteFavourite.delete(ufDTO);
