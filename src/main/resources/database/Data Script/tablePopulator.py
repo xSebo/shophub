@@ -57,6 +57,8 @@ def namePopulator(amount, userType):
     salt = "EXAMPLESALT"
     stdPassword = hashlib.sha256(salt.encode() + b'password123').hexdigest()
 
+    stdPassword = "$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK"
+
     profilePic = "testImage.png"
 
     insertArray = []
@@ -113,8 +115,8 @@ def companyPopulator(amount):
 
         countryi = random.randint(0, len(countries)-1)
 
-        stringInsert = '"' + companyNames[i] + '","' + "" + '","' + websiteArray[i] + '","' + str(earnings) + '","' + countries[countryi] + '","' + "shopPic.png" + '",' + str(random.randint(0, 1))
-        insertArray.append(createInsert(stringInsert, "Shops", "Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active"))
+        stringInsert = '"' + companyNames[i] + '","' + "" + '","' + websiteArray[i] + '","' + str(earnings) + '","' + countries[countryi] + '","' + "shopPic.png" + '",' + str(random.randint(0, 1)) + ',' + str(1)
+        insertArray.append(createInsert(stringInsert, "Shops", "Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id"))
 
     return insertArray
 

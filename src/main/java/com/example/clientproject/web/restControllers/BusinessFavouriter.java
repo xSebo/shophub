@@ -1,10 +1,13 @@
 package com.example.clientproject.web.restControllers;
 
+import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.services.*;
 import com.example.clientproject.web.forms.UserFavouriteForm;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class BusinessFavouriter {
@@ -26,8 +29,8 @@ public class BusinessFavouriter {
      * @return ERROR or OK depending on whether it any errors are thrown.
      */
     @PostMapping("/favouriteBusiness")
-    public String favouriteBusiness(UserFavouriteForm uff){
-        UserFavouriteDTO ufDTO = new UserFavouriteDTO(uff);
+    public String favouriteBusiness(UserFavouriteForm uff, HttpSession session){
+        UserFavouriteDTO ufDTO = new UserFavouriteDTO(uff, JWTUtils.getLoggedInUserId(session).get());
         try{
             if(toggleFavourite.alreadyInDb(ufDTO)){
                 deleteFavourite.delete(ufDTO);

@@ -12,8 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.example.clientproject.web.controllers.SignInController.loggedIn;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,9 +35,9 @@ public class LoginTests {
      * @param password - password
      */
     @ParameterizedTest
-    @CsvSource({"WoodrowRAZER@email.com,helloWorld", "WoodrowRAZER@email.com,password123", "Testing123@email.com,helloworld123"})
+    @CsvSource({"ShrayaBELUSKO@email.com,helloWorld", "ShrayaBELUSKO@email.com,password123", "Testing123@email.com,helloworld123"})
     public void correctResponseFromLoginRoute(String email, String password) throws Exception {
-        if (email.equals("WoodrowRAZER@email.com") && password.equals("password123")) {
+        if (email.equals("ShrayaBELUSKO@email.com") && password.equals("password123")) {
             mockMvc.perform(post("/login")
                             .param("loginEmail", email)
                             .param("loginPassword", password)
