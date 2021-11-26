@@ -23,15 +23,17 @@ import java.util.Optional;
 public class SignUpController {
     private UsersSearch usersSearch;
     private UsersRepo usersRepo;
+    private JWTUtils jwtUtils;
 
-    public SignUpController(UsersSearch aUsersSearch, UsersRepo aUsersRepo) {
+    public SignUpController(UsersSearch aUsersSearch, UsersRepo aUsersRepo, JWTUtils jwt) {
         this.usersSearch = aUsersSearch;
         this.usersRepo = aUsersRepo;
+        this.jwtUtils = jwt;
     }
 
     @GetMapping("/signUp")
     public String signUpGet(Model model, HttpSession session) {
-        Optional<Integer> user = JWTUtils.getLoggedInUserId(session);
+        Optional<Integer> user = jwtUtils.getLoggedInUserId(session);
         if(user.isPresent()){
             Integer loggedInUserId = user.get();
         }else{
@@ -83,7 +85,7 @@ public class SignUpController {
             // Get the user
             usersDTOOptional = usersSearch.findByEmail(signUpForm.getNewUserEmail());
             // Create a JWTSession
-            JWTUtils.makeUserJWT(
+            jwtUtils.makeUserJWT(
                     (int) usersDTOOptional.get().getUserId(),
                     httpSession);
             // Redirect to the dashboard

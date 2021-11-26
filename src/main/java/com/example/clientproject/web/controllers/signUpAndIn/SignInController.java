@@ -43,7 +43,7 @@ public class SignInController {
             System.out.println(bindingResult.getAllErrors());
             return "registerbusiness.html";
         }
-        saveBusiness.save(new BusinessRegisterDTO(brf), JWTUtils.getLoggedInUserId(session).get());
+        saveBusiness.save(new BusinessRegisterDTO(brf), jwtUtils.getLoggedInUserId(session).get());
         return "redirect:/redirect?url=businessRegister";
     }
 
@@ -105,7 +105,7 @@ public class SignInController {
 
             // If they match, set the loggedIn flag to true
             if (passwordMatch) {
-                JWTUtils.makeUserJWT(
+                jwtUtils.makeUserJWT(
                         (int) usersDTOOptional.get().getUserId(),
                         session);
                 loggedIn = true;

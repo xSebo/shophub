@@ -22,11 +22,13 @@ public class HomeController {
 
     private ShopsRepo shopsRepo;
     private UserFavouriteToggle toggleFavourite;
+    private JWTUtils jwtUtils;
 
     @Autowired
-    public HomeController(ShopsRepo ashopsRepo, UserFavouriteToggle uft) {
+    public HomeController(ShopsRepo ashopsRepo, UserFavouriteToggle uft, JWTUtils jwt) {
         shopsRepo = ashopsRepo;
         toggleFavourite = uft;
+        jwtUtils = jwt;
     }
 
     @GetMapping({"/", "dashboard"})
@@ -43,7 +45,7 @@ public class HomeController {
 
         for(Shops s : allShops){
             UserFavouriteForm uff = new UserFavouriteForm(s.getShopId());
-            if(toggleFavourite.alreadyInDb(new UserFavouriteDTO(uff, JWTUtils.getLoggedInUserId(session).get()))){
+            if(toggleFavourite.alreadyInDb(new UserFavouriteDTO(uff, jwtUtils.getLoggedInUserId(session).get()))){
                 favouriteShops.add(s);
             }else{
                 normalShops.add(s);
