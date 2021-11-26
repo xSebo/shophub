@@ -24,11 +24,21 @@ public class SignUpController {
     private UsersSearch usersSearch;
     private UsersRepo usersRepo;
 
+    /**
+     * Constructor
+     * @param aUsersSearch - userSearch class
+     * @param aUsersRepo - userRepo class
+     */
     public SignUpController(UsersSearch aUsersSearch, UsersRepo aUsersRepo) {
         this.usersSearch = aUsersSearch;
         this.usersRepo = aUsersRepo;
     }
 
+    /**
+     * Get mapping to get to the Sign Up page
+     * @param model - empty model object
+     * @return - the page to return to
+     */
     @GetMapping("/signUp")
     public String signUpGet(Model model) {
         SignUpForm signUpForm = new SignUpForm();
@@ -36,6 +46,14 @@ public class SignUpController {
         return "signUp.html";
     }
 
+    /**
+     * Post mapping for the Sign Up page
+     * @param signUpForm - the form populated with data
+     * @param bindingResult - object with errors from the form object
+     * @param httpSession - session object
+     * @param model - empty model object
+     * @return - varied pages based on code functionality
+     */
     @PostMapping("/signUp")
     public String signUpPost(@Valid SignUpForm signUpForm,
                              BindingResult bindingResult,
