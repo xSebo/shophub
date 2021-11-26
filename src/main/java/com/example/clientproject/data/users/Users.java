@@ -56,6 +56,17 @@ public class Users {
         this.twoFactorMethod = aTwoFactorMethod;
     }
 
+    public Users(String firstName, String surname, String email,
+                 String password, String profilePicture,
+                 TwoFactorMethods aTwoFactorMethod) {
+        this.userFirstName = firstName;
+        this.userLastName = surname;
+        this.userEmail = email;
+        this.userPassword = password;
+        this.userProfilePicture = profilePicture;
+        this.twoFactorMethod = aTwoFactorMethod;
+    }
+
     @ManyToOne
     @JoinColumn(name="Two_Factor_Method_Id", nullable=false)
     private TwoFactorMethods twoFactorMethod;

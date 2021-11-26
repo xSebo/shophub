@@ -1,34 +1,41 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="css/signUp.css">
 <html lang="en">
-<head>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="css/signUp.css">
     <meta charset="UTF-8">
     <title>SignUp</title>
-</head>
+  </head>
 
-<body>
-  <div class="flex-container">
-    <div class="vert-flex-container" style="flex-grow: 3;">
-      <h1 class="has-text-weight-bold">Start collecting rewards <br>today!</h1>
-      <form action="/signup" th:method="post">
-        <div class="flex-container name-box-container">
-          <input class="input small-name-box" type="text" placeholder="Name" id="name" name="name"/>
-          <input class="input small-name-box" type="text" placeholder="Surname" id="surname" name="surname"/>
-        </div>
-        <input class="input large-input-box" type="email" placeholder="Email" id="email" name="email"/>
-        <input class="input large-input-box" type="password" placeholder="Password" id="password" name="password"/>
-        <button type="submit" class="button is-rounded signUp-Button">Sign Up</button>
-      </form>
-    </div>
-    <div class="loginPart" style="flex-grow: 4;">
-      <img style="position: absolute; top: 45px" src="imgs/Logo.png" width="112" height="28" class="logo">
-      <h2>Welcome!</h2>
-      <h3 class="special-text">Already a member of <br>ShopHub?<h3>
-      <button class="button is-rounded loginUp-Button">Sign in</button>
-    </div>
+  <body>
+    <div class="flex-container">
+      <div class="vert-flex-container" style="flex-grow: 4;">
+        <h1 class="has-text-weight-bold">Start collecting rewards <br>today!</h1>
+        <form th:action="@{/signUp}" th:method="post" th:object="${signUpForm}">
+          <div class="flex-container name-box-container">
+            <input class="input small-name-box" type="text" placeholder="Name" th:field="*{newUserForename}"/>
+            <input class="input small-name-box" type="text" placeholder="Surname" th:field="*{newUserLastname}"/>
+          </div>
 
-  </div>
-</body>
+          <div class="flex-container name-box-container">
+            <div th:if="${emailInUse}" th:text="Email Already in use"></div>
+            <input class="input large-input-box" type="text" placeholder="Email" th:field="*{newUserEmail}"/>
+            <input class="input large-input-box" type="text" placeholder="Password" th:field="*{newUserPassword}"/>
+          </div>
+
+          <button type="submit" class="button is-rounded signUp-Button">Sign Up</button>
+        </form>
+      </div>
+      <div class="loginPart" style="flex-grow: 2;">
+        <img style="position: absolute; top: 45px" src="imgs/Logo.png" width="112" height="28" class="logo">
+        <h2>Welcome!</h2>
+        <h3 class="special-text">Already a member of <br>ShopHub?</h3>
+        <form method="get" th:action="@{/login}">
+          <button type="submit" class="button is-rounded loginUp-Button">Login</button>
+        </form>
+      </div>
+
+    </div>
+  </body>
 </html>
