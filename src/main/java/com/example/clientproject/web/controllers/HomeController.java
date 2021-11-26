@@ -3,8 +3,6 @@ package com.example.clientproject.web.controllers;
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.service.Utils.JWTUtils;
-import com.example.clientproject.service.searches.UsersSearch;
-import com.example.clientproject.services.BusinessRegisterSaver;
 import com.example.clientproject.services.UserFavouriteDTO;
 import com.example.clientproject.services.UserFavouriteToggle;
 import com.example.clientproject.web.forms.UserFavouriteForm;
@@ -17,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.clientproject.web.controllers.SignInController.loggedIn;
+import static com.example.clientproject.web.controllers.signUpAndIn.SignInController.loggedIn;
 
 @Controller
 public class HomeController {
