@@ -1,5 +1,6 @@
 package com.example.clientproject.service.Utils;
 
+import com.example.clientproject.data.users.Users;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;

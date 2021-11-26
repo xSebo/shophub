@@ -30,7 +30,14 @@ public class SignUpController {
     }
 
     @GetMapping("/signUp")
-    public String signUpGet(Model model) {
+    public String signUpGet(Model model, HttpSession session) {
+        Optional<Integer> user = JWTUtils.getLoggedInUserId(session);
+        if(user.isPresent()){
+            Integer loggedInUserId = user.get();
+        }else{
+            return "redirect:/";
+        }
+
         SignUpForm signUpForm = new SignUpForm();
         model.addAttribute("signUpForm", signUpForm);
         return "signUp.html";
