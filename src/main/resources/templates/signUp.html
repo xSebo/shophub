@@ -13,7 +13,7 @@
     <div class="flex-container">
       <div class="vert-flex-container" style="flex-grow: 4;">
         <h1 class="has-text-weight-bold">Start collecting rewards <br>today!</h1>
-        <form th:action="@{/signUp}" th:method="post" th:object="${signUpForm}" id="signUpForm" name="signUpForm" onsubmit="return validateSignup()">
+        <form th:action="@{/signUp}" th:method="post" th:object="${signUpForm}" id="signUpForm" name="signUpForm" onsubmit="validateSignup(); return false;">
           <div class="field is-grouped" style="justify-content: space-between">
             <span class="control" style="width: 47.5%">
               <input class="input small-name-box" type="text" placeholder="Name" name="nameField" th:field="*{newUserForename}"/>
@@ -46,9 +46,9 @@
         <img style="position: absolute; top: 45px" src="imgs/Logo.png" width="112" height="28" class="logo">
         <h2>Welcome!</h2>
         <h3 class="special-text">Already a member of <br>ShopHub?</h3>
-        <form method="get" th:action="@{/login}">
-          <button type="submit" class="button is-rounded login-Button">Login</button>
-        </form>
+        <a href="/login">
+          <button class="button is-rounded login-Button">Login</button>
+        </a>
       </div>
 
     </div>
