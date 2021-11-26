@@ -1,9 +1,14 @@
 package com.example.clientproject.web.controllers;
 
+import com.example.clientproject.data.tags.TagsRepo;
+import com.example.clientproject.data.users.Users;
+import com.example.clientproject.service.dtos.TagsDTO;
+import com.example.clientproject.service.searches.TagSearch;
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
-import com.example.clientproject.data.users.Users;
+import com.example.clientproject.data.tags.TagsRepo;
 import com.example.clientproject.service.Utils.JWTUtils;
+import com.example.clientproject.service.searches.TagSearch;
 import com.example.clientproject.services.UserFavouriteDTO;
 import com.example.clientproject.services.UserFavouriteToggle;
 import com.example.clientproject.web.forms.UserFavouriteForm;
@@ -26,22 +31,35 @@ public class HomeController {
     private ShopsRepo shopsRepo;
     private UserFavouriteToggle toggleFavourite;
     private JWTUtils jwtUtils;
+    private TagSearch tagsSearch;
+    private TagsRepo tagsRepo;
 
     @Autowired
-    public HomeController(ShopsRepo ashopsRepo, UserFavouriteToggle uft, JWTUtils jwt) {
+    public HomeController(ShopsRepo ashopsRepo, UserFavouriteToggle uft, TagSearch aTagsSearch, TagsRepo aTagsRepo, JWTUtils jwt) {
         shopsRepo = ashopsRepo;
         toggleFavourite = uft;
+        this.tagsSearch = aTagsSearch;
+        this.tagsRepo = aTagsRepo;
         jwtUtils = jwt;
     }
 
     @GetMapping({"/", "dashboard"})
-    public String index(Model model, HttpSession session, HttpServletResponse httpResponse) throws Exception{
+    public String index(Model model, HttpSession session) throws Exception{
+        //if (!loggedIn) {
+            //model.addAttribute("loggedIn", loggedIn);
+            //return "redirect:/login";
+        //}
+
         Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
         if(user.isPresent()){
-            Users loggedInUser = user.get();
+//            System.out.println(user.get().getFavouriteTags());
+            if(user.get().getFavouriteTags().size() == 0){
+                model.addAttribute("selectCategories", true);
+            }
         }else{
             return "redirect:/login";
         }
+
 
         //System.out.println(shopsRepo.findAll());
         List<Shops> allShops = shopsRepo.findAll();
@@ -57,6 +75,14 @@ public class HomeController {
                 normalShops.add(s);
             }
         }
+
+
+        List<TagsDTO> Tags = tagsSearch.findAll();
+        System.out.println(Tags);
+
+        model.addAttribute("allTags", Tags);
+
+
 
 
         model.addAttribute("normalShops", normalShops);
