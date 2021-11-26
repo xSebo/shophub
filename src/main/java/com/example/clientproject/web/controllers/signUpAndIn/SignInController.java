@@ -1,4 +1,4 @@
-package com.example.clientproject.web.controllers;
+package com.example.clientproject.web.controllers.signUpAndIn;
 
 import com.example.clientproject.exceptions.ForbiddenErrorException;
 import com.example.clientproject.service.Utils.JWTUtils;
@@ -7,19 +7,14 @@ import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.services.BusinessRegisterDTO;
 import com.example.clientproject.services.BusinessRegisterSaver;
 import com.example.clientproject.web.forms.BusinessRegisterForm;
-import com.example.clientproject.web.forms.LoginForm;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.clientproject.web.forms.signUpAndIn.LoginForm;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
