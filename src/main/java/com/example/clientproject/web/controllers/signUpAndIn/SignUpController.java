@@ -42,6 +42,7 @@ public class SignUpController {
                              HttpSession httpSession,
                              Model model) {
         if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
             return "signUp.html";
         }
 
