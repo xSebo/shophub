@@ -51,10 +51,22 @@ function validateSignup(){
             emailHelpText.style.display = "block"
             valid = false;
         }else{
-            emailField.classList.add("is-success")
-            emailField.classList.remove("is-danger")
-            emailHelpText.innerText = ""
-            emailHelpText.style.display = "none"
+            fetch("/emailInUse?email=" + emailField.value)
+                .then(result=>result.json())
+                .then(data => {
+                    if(data){
+                        emailField.classList.remove("is-success")
+                        emailField.classList.add("is-danger")
+                        emailHelpText.innerText = "Email in use"
+                        emailHelpText.style.display = "block"
+                        valid = false;
+                    }else{
+                        emailField.classList.add("is-success")
+                        emailField.classList.remove("is-danger")
+                        emailHelpText.innerText = ""
+                        emailHelpText.style.display = "none"
+                    }
+                })
         }
     }
 
