@@ -32,9 +32,12 @@ public class SignInController {
 
     private BusinessRegisterSaver saveBusiness;
 
-    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness) {
+    private JWTUtils jwtUtils;
+
+    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness, JWTUtils ajwtUtils) {
         usersSearch = aUsersSearch;
         saveBusiness = sBusiness;
+        jwtUtils = ajwtUtils;
     }
 
     @PostMapping("/businessRegister")
@@ -125,7 +128,7 @@ public class SignInController {
      */
     @GetMapping("/log_out")
     public String jwtLogout(Model model, HttpSession session){
-        JWTUtils.logOutUser(session);
+        jwtUtils.logOutUser(session);
         return "redirect:/login";
     }
 }
