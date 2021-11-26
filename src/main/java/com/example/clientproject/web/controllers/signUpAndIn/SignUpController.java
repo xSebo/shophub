@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Optional;
@@ -23,43 +24,33 @@ import java.util.Optional;
 public class SignUpController {
     private UsersSearch usersSearch;
     private UsersRepo usersRepo;
+    private JWTUtils jwtUtils;
 
-    /**
-     * Constructor
-     * @param aUsersSearch - userSearch class
-     * @param aUsersRepo - userRepo class
-     */
-    public SignUpController(UsersSearch aUsersSearch, UsersRepo aUsersRepo) {
+    public SignUpController(UsersSearch aUsersSearch, UsersRepo aUsersRepo, JWTUtils jwt) {
         this.usersSearch = aUsersSearch;
         this.usersRepo = aUsersRepo;
+        this.jwtUtils = jwt;
     }
 
-    /**
-     * Get mapping to get to the Sign Up page
-     * @param model - empty model object
-     * @return - the page to return to
-     */
     @GetMapping("/signUp")
-    public String signUpGet(Model model) {
+    public String signUpGet(Model model, HttpSession session, HttpServletResponse httpResponse) throws Exception {
+        Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
+        if(user.isPresent()){
+            return "redirect:/";
+        }
+
         SignUpForm signUpForm = new SignUpForm();
         model.addAttribute("signUpForm", signUpForm);
         return "signUp.html";
     }
 
-    /**
-     * Post mapping for the Sign Up page
-     * @param signUpForm - the form populated with data
-     * @param bindingResult - object with errors from the form object
-     * @param httpSession - session object
-     * @param model - empty model object
-     * @return - varied pages based on code functionality
-     */
     @PostMapping("/signUp")
     public String signUpPost(@Valid SignUpForm signUpForm,
                              BindingResult bindingResult,
                              HttpSession httpSession,
                              Model model) {
         if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
             return "signUp.html";
         }
 
@@ -93,7 +84,7 @@ public class SignUpController {
             // Get the user
             usersDTOOptional = usersSearch.findByEmail(signUpForm.getNewUserEmail());
             // Create a JWTSession
-            JWTUtils.makeUserJWT(
+            jwtUtils.makeUserJWT(
                     (int) usersDTOOptional.get().getUserId(),
                     httpSession);
             // Redirect to the dashboard

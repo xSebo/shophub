@@ -1,8 +1,14 @@
 package com.example.clientproject.web.controllers;
 
+import com.example.clientproject.data.tags.TagsRepo;
+import com.example.clientproject.data.users.Users;
+import com.example.clientproject.service.dtos.TagsDTO;
+import com.example.clientproject.service.searches.TagSearch;
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
+import com.example.clientproject.data.tags.TagsRepo;
 import com.example.clientproject.service.Utils.JWTUtils;
+import com.example.clientproject.service.searches.TagSearch;
 import com.example.clientproject.services.UserFavouriteDTO;
 import com.example.clientproject.services.UserFavouriteToggle;
 import com.example.clientproject.web.forms.UserFavouriteForm;
@@ -11,9 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.clientproject.web.controllers.signUpAndIn.SignInController.loggedIn;
 
@@ -22,20 +30,41 @@ public class HomeController {
 
     private ShopsRepo shopsRepo;
     private UserFavouriteToggle toggleFavourite;
+    private JWTUtils jwtUtils;
+    private TagSearch tagsSearch;
+    private TagsRepo tagsRepo;
 
     @Autowired
-    public HomeController(ShopsRepo ashopsRepo, UserFavouriteToggle uft) {
+    public HomeController(ShopsRepo ashopsRepo, UserFavouriteToggle uft, TagSearch aTagsSearch, TagsRepo aTagsRepo, JWTUtils jwt) {
         shopsRepo = ashopsRepo;
         toggleFavourite = uft;
+        this.tagsSearch = aTagsSearch;
+        this.tagsRepo = aTagsRepo;
+        jwtUtils = jwt;
     }
 
     @GetMapping({"/", "dashboard"})
     public String index(Model model, HttpSession session) throws Exception{
-        if (!loggedIn) {
-            model.addAttribute("loggedIn", loggedIn);
+        //if (!loggedIn) {
+            //model.addAttribute("loggedIn", loggedIn);
+            //return "redirect:/login";
+        //}
+
+        Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
+        if(user.isPresent()){
+//            System.out.println(user.get().getFavouriteTags());
+            if(user.get().getFavouriteTags().size() == 0){
+                model.addAttribute("selectCategories", true);
+            }
+        }else{
             return "redirect:/login";
         }
+
+<<<<<<< HEAD
+
         //System.out.println(shopsRepo.findAll());
+=======
+>>>>>>> origin/issueFifteen
         List<Shops> allShops = shopsRepo.findAll();
 
         List<Shops> favouriteShops = new ArrayList();
@@ -43,12 +72,20 @@ public class HomeController {
 
         for(Shops s : allShops){
             UserFavouriteForm uff = new UserFavouriteForm(s.getShopId());
-            if(toggleFavourite.alreadyInDb(new UserFavouriteDTO(uff, JWTUtils.getLoggedInUserId(session).get()))){
+            if(toggleFavourite.alreadyInDb(new UserFavouriteDTO(uff, jwtUtils.getLoggedInUserId(session).get()))){
                 favouriteShops.add(s);
             }else{
                 normalShops.add(s);
             }
         }
+
+
+        List<TagsDTO> Tags = tagsSearch.findAll();
+        System.out.println(Tags);
+
+        model.addAttribute("allTags", Tags);
+
+
 
 
         model.addAttribute("normalShops", normalShops);

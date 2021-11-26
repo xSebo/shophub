@@ -1,5 +1,6 @@
 package com.example.clientproject.web.controllers.signUpAndIn;
 
+import com.example.clientproject.data.users.Users;
 import com.example.clientproject.exceptions.ForbiddenErrorException;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.dtos.UsersDTO;
@@ -29,9 +30,12 @@ public class SignInController {
 
     private BusinessRegisterSaver saveBusiness;
 
-    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness) {
+    private JWTUtils jwtUtils;
+
+    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness, JWTUtils ajwtUtils) {
         usersSearch = aUsersSearch;
         saveBusiness = sBusiness;
+        jwtUtils = ajwtUtils;
     }
 
     @PostMapping("/businessRegister")
@@ -40,7 +44,7 @@ public class SignInController {
             System.out.println(bindingResult.getAllErrors());
             return "registerbusiness.html";
         }
-        saveBusiness.save(new BusinessRegisterDTO(brf), JWTUtils.getLoggedInUserId(session).get());
+        saveBusiness.save(new BusinessRegisterDTO(brf), jwtUtils.getLoggedInUserId(session).get());
         return "redirect:/redirect?url=businessRegister";
     }
 
@@ -64,7 +68,12 @@ public class SignInController {
      * @return - the page to redirect to
      */
     @GetMapping("/login")
-    public String loginPageAccess(Model model) {
+    public String loginPageAccess(Model model, HttpSession session) {
+        Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
+        if(user.isPresent()){
+            return "redirect:/";
+        }
+
         LoginForm loginForm = new LoginForm();
         model.addAttribute("loginForm", loginForm);
         model.addAttribute("loggedIn", loggedIn);
@@ -102,7 +111,7 @@ public class SignInController {
 
             // If they match, set the loggedIn flag to true
             if (passwordMatch) {
-                JWTUtils.makeUserJWT(
+                jwtUtils.makeUserJWT(
                         (int) usersDTOOptional.get().getUserId(),
                         session);
                 loggedIn = true;
@@ -126,7 +135,7 @@ public class SignInController {
      */
     @GetMapping("/log_out")
     public String jwtLogout(Model model, HttpSession session){
-        JWTUtils.logOutUser(session);
+        jwtUtils.logOutUser(session);
         return "redirect:/login";
     }
 }
