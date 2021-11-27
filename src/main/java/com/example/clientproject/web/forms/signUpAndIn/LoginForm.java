@@ -1,4 +1,4 @@
-package com.example.clientproject.web.forms;
+package com.example.clientproject.web.forms.signUpAndIn;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

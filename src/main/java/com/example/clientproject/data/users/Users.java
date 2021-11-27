@@ -4,8 +4,6 @@ import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.userStampBoards.UserStampBoards;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
-import com.example.clientproject.data.userStampBoards.UserStampBoards;
-import com.example.clientproject.services.TwoFactorAuthOBJ;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -55,6 +53,17 @@ public class Users {
         this.userProfilePicture = profilePicture;
         this.userResetCode = resetCode;
         this.userResetCodeExpiry = expiry;
+        this.twoFactorMethod = aTwoFactorMethod;
+    }
+
+    public Users(String firstName, String surname, String email,
+                 String password, String profilePicture,
+                 TwoFactorMethods aTwoFactorMethod) {
+        this.userFirstName = firstName;
+        this.userLastName = surname;
+        this.userEmail = email;
+        this.userPassword = password;
+        this.userProfilePicture = profilePicture;
         this.twoFactorMethod = aTwoFactorMethod;
     }
 

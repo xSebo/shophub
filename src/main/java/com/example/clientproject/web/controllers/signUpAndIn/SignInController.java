@@ -1,22 +1,22 @@
-package com.example.clientproject.web.controllers;
+package com.example.clientproject.web.controllers.signUpAndIn;
 
+import com.example.clientproject.data.users.Users;
 import com.example.clientproject.exceptions.ForbiddenErrorException;
+import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.services.BusinessRegisterDTO;
 import com.example.clientproject.services.BusinessRegisterSaver;
 import com.example.clientproject.web.forms.BusinessRegisterForm;
-import com.example.clientproject.web.forms.LoginForm;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.clientproject.web.forms.signUpAndIn.LoginForm;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,18 +30,21 @@ public class SignInController {
 
     private BusinessRegisterSaver saveBusiness;
 
-    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness) {
+    private JWTUtils jwtUtils;
+
+    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness, JWTUtils ajwtUtils) {
         usersSearch = aUsersSearch;
         saveBusiness = sBusiness;
+        jwtUtils = ajwtUtils;
     }
 
     @PostMapping("/businessRegister")
-    public String submitBusinessInfo(@Valid BusinessRegisterForm brf, BindingResult bindingResult){
+    public String submitBusinessInfo(@Valid BusinessRegisterForm brf, BindingResult bindingResult, HttpSession session){
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
             return "registerbusiness.html";
         }
-        saveBusiness.save(new BusinessRegisterDTO(brf));
+        saveBusiness.save(new BusinessRegisterDTO(brf), jwtUtils.getLoggedInUserId(session).get());
         return "redirect:/redirect?url=businessRegister";
     }
 
@@ -65,7 +68,12 @@ public class SignInController {
      * @return - the page to redirect to
      */
     @GetMapping("/login")
-    public String loginPageAccess(Model model) {
+    public String loginPageAccess(Model model, HttpSession session) {
+        Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
+        if(user.isPresent()){
+            return "redirect:/";
+        }
+
         LoginForm loginForm = new LoginForm();
         model.addAttribute("loginForm", loginForm);
         model.addAttribute("loggedIn", loggedIn);
@@ -82,7 +90,8 @@ public class SignInController {
     @PostMapping("login")
     public String signInChecks(@Valid LoginForm loginForm,
             BindingResult bindingResult,
-            Model model) {
+            Model model,
+            HttpSession session) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("loggedIn", loggedIn);
@@ -102,6 +111,9 @@ public class SignInController {
 
             // If they match, set the loggedIn flag to true
             if (passwordMatch) {
+                jwtUtils.makeUserJWT(
+                        (int) usersDTOOptional.get().getUserId(),
+                        session);
                 loggedIn = true;
             // Otherwise, throw an exception with the correct error message
             } else {
@@ -113,5 +125,17 @@ public class SignInController {
         }
 
         return "redirect:/dashboard";
+    }
+
+    /**
+     *
+     * @param model
+     * @param session the http session of the browser accessing the site
+     * @return returns a redirect to the login page after clearing the session jwt
+     */
+    @GetMapping("/log_out")
+    public String jwtLogout(Model model, HttpSession session){
+        jwtUtils.logOutUser(session);
+        return "redirect:/login";
     }
 }

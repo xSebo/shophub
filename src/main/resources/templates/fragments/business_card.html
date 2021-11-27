@@ -27,7 +27,7 @@
                 <p th:text="${reward_amount}"></p>
             </div>
             <div class="level-right">
-                <button class="button is-rounded gradient">
+                <button class="button is-rounded gradient" th:onclick="'redirect('+ ${shopId} + ')'">
                     View Shop
                     <span class="icon is-small is-left ml-1">
                         <i class="fas fa-arrow-right"></i>
