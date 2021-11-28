@@ -34,7 +34,7 @@ public class BusinessFavouriter {
     public String favouriteBusiness(UserFavouriteForm uff, HttpSession session){
         UserFavouriteDTO ufDTO;
         try{
-            ufDTO = new UserFavouriteDTO(uff, JWTUtils.getLoggedInUserId(session).get());
+            ufDTO = new UserFavouriteDTO(uff, jwtUtils.getLoggedInUserId(session).get());
         }catch(Exception e){
             return "BAD SESSION";
         }
