@@ -22,7 +22,7 @@
             </div>
 
             <div class="vert-flex-container" style="flex-grow: 5;">
-                <h1 class="has-text-weight-bold mb-4">Sign In to ShopHub</h1>
+                <h1 class="has-text-weight-bold mb-5">Sign In to ShopHub</h1>
                 <form th:action="@{/login}" th:method="post" th:object="${loginForm}" id="loginForm" name="loginForm" onsubmit="validateLogin(); return false;">
                     <div class="field is-full-width">
                         <span class="control">
@@ -36,7 +36,7 @@
                         </span>
                     </div>
                     <p class="help is-danger" id="loginHelpText" style="display: none"></p>
-                    <button type="submit" class="button is-rounded signIn-Button">Sign In</button>
+                    <button type="submit" class="button is-rounded signIn-Button mt-4">Sign In</button>
                 </form>
             </div>
         </div>

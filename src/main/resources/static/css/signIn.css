@@ -116,12 +116,12 @@ img {
     top: 40px !important;
 }
 
-#signUpForm{
+#loginForm{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 300px;
+    width: 300px;
 }
 
 .is-full-width{
