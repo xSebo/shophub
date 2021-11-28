@@ -117,11 +117,15 @@ public class SignInController {
                 loggedIn = true;
             // Otherwise, throw an exception with the correct error message
             } else {
-                throw new ForbiddenErrorException("Password Incorrect");
+                //Changed this as it is a security risk exposing which field is incorrect
+                //throw new ForbiddenErrorException("Password Incorrect");
+                throw new ForbiddenErrorException("Details Incorrect");
             }
         // Else - assumes that the email is incorrect
         } else {
-            throw new ForbiddenErrorException("Email Incorrect");
+            //Changed this as it is a security risk exposing which field is incorrect
+            //throw new ForbiddenErrorException("Email Incorrect");
+            throw new ForbiddenErrorException("Details Incorrect");
         }
 
         return "redirect:/dashboard";
