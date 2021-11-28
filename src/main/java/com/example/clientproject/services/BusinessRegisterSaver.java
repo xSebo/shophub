@@ -1,5 +1,7 @@
 package com.example.clientproject.services;
 
+import com.example.clientproject.data.categories.Categories;
+import com.example.clientproject.data.categories.CategoriesRepo;
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.stampBoards.StampBoards;
@@ -25,14 +27,21 @@ public class BusinessRegisterSaver {
     StampBoardsRepo stampBoards;
 
     @Autowired
+    CategoriesRepo categoriesRepo;
+
+    @Autowired
     TagsRepo tagsRepo;
 
     @Autowired
     JdbcTemplate jdbc;
 
-    public void save(BusinessRegisterDTO business){
+    @Autowired
+    LinkUserShop linkShop;
+
+    public void save(BusinessRegisterDTO business, long userId){
 
         StampBoards stampBoard = stampBoards.findById(1L).get();
+        Categories categories = categoriesRepo.findById(1L).get();
 
         Shops shop = new Shops(business.getBusiness_register_name(),
                 business.getBusiness_register_url(),
@@ -41,7 +50,8 @@ public class BusinessRegisterSaver {
                 "shopPic.png",
                 "UK United Kingdom",
                 false,
-                stampBoard);
+                stampBoard,
+                categories);
 
         shopsRepo.save(shop);
         List<Tags> tagsList = tagsRepo.findAll();
@@ -62,11 +72,14 @@ public class BusinessRegisterSaver {
             jdbc.execute(query);
 
         }
+
+        linkShop.linkUserShop(shop.getShopId(), userId);
+
         //System.out.println(shop.getShopId());
 
         //System.out.println(tagsRepo.findAll());
 
-        System.out.println(shopsRepo.findByShopName(business.getBusiness_register_name()).get().getShopName());
+        //System.out.println(shopsRepo.findByShopName(business.getBusiness_register_name()).get().getShopName());
     }
 
 }

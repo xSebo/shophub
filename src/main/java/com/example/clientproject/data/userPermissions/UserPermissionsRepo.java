@@ -11,12 +11,6 @@ import java.util.List;
  */
 public interface UserPermissionsRepo extends JpaRepository<UserPermissions, Long> {
     /**
-     * FindAll method
-     * @return list of UserPermissions found
-     */
-    List<UserPermissions> findAll();
-
-    /**
      * Save method
      * @param userPermissions - the object to save
      * @return - the object

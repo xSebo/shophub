@@ -19,7 +19,7 @@ public class UserStampBoards {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userStampBoardId;
-    private int userStampBoardPosition;
+    private int userStampPosition;
 
     @ManyToOne
     @JoinColumn(name="Stamp_Board_Id", nullable=false)

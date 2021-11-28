@@ -15,11 +15,13 @@ public class BusinessFavouriter {
     private UserFavouriteSaver saveFavourite;
     private UserFavouriteToggle toggleFavourite;
     private UserFavouriteDeleter deleteFavourite;
+    private JWTUtils jwtUtils;
 
-    public BusinessFavouriter(UserFavouriteSaver ufs, UserFavouriteToggle uft, UserFavouriteDeleter ufd) {
+    public BusinessFavouriter(UserFavouriteSaver ufs, UserFavouriteToggle uft, UserFavouriteDeleter ufd, JWTUtils jwt) {
         saveFavourite = ufs;
         toggleFavourite = uft;
         deleteFavourite = ufd;
+        jwtUtils = jwt;
     }
 
 
@@ -47,6 +49,8 @@ public class BusinessFavouriter {
             e.printStackTrace();
             return "ERROR";
         }
+
+
 
     }
 }
