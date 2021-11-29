@@ -1,34 +1,56 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="css/signUp.css">
 <html lang="en">
-<head>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="css/signUp.css">
+    <script src="js/signup.js"></script>
     <meta charset="UTF-8">
     <title>SignUp</title>
-</head>
+  </head>
 
-<body>
-  <div class="flex-container">
-    <div class="vert-flex-container" style="flex-grow: 3;">
-      <h1 class="has-text-weight-bold">Start collecting rewards <br>today!</h1>
-      <form action="/signup" th:method="post">
-        <div class="flex-container name-box-container">
-          <input class="input small-name-box" type="text" placeholder="Name" id="name" name="name"/>
-          <input class="input small-name-box" type="text" placeholder="Surname" id="surname" name="surname"/>
-        </div>
-        <input class="input large-input-box" type="email" placeholder="Email" id="email" name="email"/>
-        <input class="input large-input-box" type="password" placeholder="Password" id="password" name="password"/>
-        <button type="submit" class="button is-rounded signUp-Button">Sign Up</button>
-      </form>
-    </div>
-    <div class="loginPart" style="flex-grow: 4;">
-      <img style="position: absolute; top: 45px" src="imgs/Logo.png" width="112" height="28" class="logo">
-      <h2>Welcome!</h2>
-      <h3 class="special-text">Already a member of <br>ShopHub?<h3>
-      <button class="button is-rounded loginUp-Button">Sign in</button>
-    </div>
+  <body>
+    <div class="flex-container">
+      <div class="vert-flex-container" style="flex-grow: 4;">
+        <h1 class="has-text-weight-bold">Start collecting rewards <br>today!</h1>
+        <form th:action="@{/signUp}" th:method="post" th:object="${signUpForm}" id="signUpForm" name="signUpForm" onsubmit="validateSignup(); return false;">
+          <div class="field is-grouped" style="justify-content: space-between">
+            <span class="control" style="width: 47.5%">
+              <input class="input small-name-box" type="text" placeholder="Name" name="nameField" th:field="*{newUserForename}"/>
+              <p class="help is-danger" id="nameHelpText" style="display: none">required</p>
+            </span>
+            <span class="control" style="width: 47.5%">
+              <input class="input small-name-box" type="text" placeholder="Surname" name="surname" th:field="*{newUserLastname}"/>
+              <p class="help is-danger" id="surnameHelpText" style="display: none">required</p>
+            </span>
+          </div>
 
-  </div>
-</body>
+          <div class="field is-full-width">
+            <span class="control">
+              <input class="input large-input-box" type="text" placeholder="Email" name="email" th:field="*{newUserEmail}"/>
+              <p class="help is-danger" id="emailHelpText" style="display: none">required</p>
+            </span>
+          </div>
+
+          <div class="field is-full-width">
+            <span class="control">
+              <input class="input large-input-box" type="text" placeholder="Password" name="password" th:field="*{newUserPassword}"/>
+              <p class="help is-danger" id="passwordHelpText" style="display: none">required</p>
+            </span>
+          </div>
+
+          <button type="submit" class="button is-rounded signUp-Button">Sign Up</button>
+        </form>
+      </div>
+      <div class="loginPart" style="flex-grow: 2;">
+        <img style="position: absolute; top: 45px" src="imgs/Logo.png" width="112" height="28" class="logo">
+        <h2>Welcome!</h2>
+        <h3 class="special-text">Already a member of <br>ShopHub?</h3>
+        <a href="/login">
+          <button class="button is-rounded login-Button">Login</button>
+        </a>
+      </div>
+
+    </div>
+  </body>
 </html>

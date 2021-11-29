@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="/css/index.css">
 	<link rel="stylesheet" href="/css/reward_card.css">
 	<link rel="stylesheet" href="/css/business_container.css">
+	<script src="/js/selectCategories.js"></script>
 </head>
 <body>
 	<div th:replace="fragments/nav.html :: nav"></div>
@@ -38,8 +39,8 @@
 					 total_reward_amount=5,
 					 img_path=${shop.shopImage},
 					 shopId=${shop.shopId}"></div>
-
 			</div>
+			<h1 class="subtitle is-5" th:unless="${favouriteShops.size != 0}"> Looks like you don't have any stamps yet, favourite a shop or make a purchase to start collecting!</h1>
 
 			<a href="/">See All ></a>
 		</div>
@@ -66,6 +67,22 @@
 				img_path=${shop.shopImage}, shopId=${shop.shopId}"></div>
 		</div>
 
+	</div>
+		<div th:if="${selectCategories}" class="modal is-active">
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Chose 3 or more things that interest you</p>
+					<button class="delete" aria-label="close"></button>
+				</header>
+				<section class="modal-card-body">
+					<button th:each="Tag, iter : ${allTags}" th:onclick="toggle_onclick([[${iter.index} + 1]])" th:id="${iter.index} + 1" value="0" class="button is-rounded category-Button" th:text="${Tag.tagName}"></button>
+				</section>
+				<footer class="modal-card-foot">
+					<button class="button is-success" th:onclick="'submitCategories(' + ${allTags.size} + ')'">Submit</button>
+				</footer>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

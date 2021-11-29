@@ -1,9 +1,12 @@
 package com.example.clientproject.service.Utils;
 
+import com.example.clientproject.data.users.Users;
+import com.example.clientproject.data.users.UsersRepo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,19 +22,25 @@ import java.util.Optional;
 @Component
 public class JWTUtils {
 
-    private static String SECRET_KEY;
+    private UsersRepo usersRepo;
+
+    public JWTUtils(UsersRepo ausersRepo){
+        usersRepo = ausersRepo;
+    }
+
+    private String SECRET_KEY;
 
     @Value("${jwt.secret_key}")
     private void setSECRET_KEY(String aSECRET_KEY){
         SECRET_KEY = aSECRET_KEY;
     }
 
-    public static void getKey(){
+    public void getKey(){
         System.out.println(SECRET_KEY);
     }
 
     //    https://github.com/oktadev/okta-java-jwt-example/blob/master/src/main/java/com/okta/createverifytokens/JWTDemo.java
-    public static String createJWT(String id, String issuer, String subject, long ttlMillis) {
+    public String createJWT(String id, String issuer, String subject, long ttlMillis) {
 
         //The JWT signature algorithm we will be using to sign the token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -61,7 +70,7 @@ public class JWTUtils {
         return builder.compact();
     }
 
-    public static Claims decodeJWT(String jwt) {
+    public Claims decodeJWT(String jwt) {
 
         //This line will throw an exception if it is not a signed JWS (as expected)
         Claims claims = Jwts.parser()
@@ -70,12 +79,12 @@ public class JWTUtils {
         return claims;
     }
 
-    public static String makeUserJWT(Integer userId, HttpSession session) {
+    public String makeUserJWT(Integer userId, HttpSession session) {
         String jwtId = "loginCred";
         String jwtIssuer = "ShopHub";
-        int jwtTimeToLive = 800000;
+        int jwtTimeToLive = 86400000; // 1 Day
 
-        String jwt = JWTUtils.createJWT(
+        String jwt = this.createJWT(
                 jwtId, // claim = jti
                 jwtIssuer, // claim = iss
                 userId.toString(), // claim = sub
@@ -86,7 +95,7 @@ public class JWTUtils {
         return jwt.toString();
     }
 
-    public static Optional<Integer> getLoggedInUserId(HttpSession session){
+    public Optional<Integer> getLoggedInUserId(HttpSession session){
         String loginJWT = (String) session.getAttribute("loginCredJWT");
         if (loginJWT == null) {
             System.out.println("Jwt is null");
@@ -94,13 +103,17 @@ public class JWTUtils {
         }
 
         try{
-            Claims claims = JWTUtils.decodeJWT(loginJWT);
+            Claims claims = this.decodeJWT(loginJWT);
             return Optional.of(Integer.parseInt(claims.getSubject()));
         }catch (io.jsonwebtoken.MalformedJwtException e){
             System.out.println("malformed jwt");
             return Optional.empty();
-        }catch (io.jsonwebtoken.SignatureException e){
+        }catch (io.jsonwebtoken.SignatureException e) {
             System.out.println("JWT was edited outside this scope");
+            return Optional.empty();
+        }catch (io.jsonwebtoken.ExpiredJwtException e){
+            System.out.println("JWT Expired");
+            this.logOutUser(session);
             return Optional.empty();
         }catch (Exception e){
             System.out.println(e);
@@ -108,7 +121,16 @@ public class JWTUtils {
         }
     }
 
-    public static void logOutUser(HttpSession session){
+    public Optional<Users> getLoggedInUserRow(HttpSession session){
+        Optional<Integer> userId = this.getLoggedInUserId(session);
+        if(!userId.isPresent()){
+            return Optional.empty();
+        }
+        Users loggedInUser = usersRepo.getById(Long.valueOf(userId.get()));
+        return Optional.of(loggedInUser);
+    }
+
+    public void logOutUser(HttpSession session){
         session.removeAttribute("loginCredJWT");
     }
 }
