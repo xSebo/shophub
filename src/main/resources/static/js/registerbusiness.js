@@ -172,7 +172,13 @@ function handleInfo(data){
 
     let name = data.site_name;
     let url = data.url;
-    let description = data.description;
+    let tempDescription = data.description;
+    let description = ""
+
+    for(let i=0; i<250; i++){
+        description+=tempDescription[i]
+    }
+
     if(description !== undefined){
         description = htmlDecode(unescape(description));
     }

@@ -32,7 +32,12 @@ public class BusinessFavouriter {
      */
     @PostMapping("/favouriteBusiness")
     public String favouriteBusiness(UserFavouriteForm uff, HttpSession session){
-        UserFavouriteDTO ufDTO = new UserFavouriteDTO(uff, jwtUtils.getLoggedInUserId(session).get());
+        UserFavouriteDTO ufDTO;
+        try{
+            ufDTO = new UserFavouriteDTO(uff, jwtUtils.getLoggedInUserId(session).get());
+        }catch(Exception e){
+            return "BAD SESSION";
+        }
         try{
             if(toggleFavourite.alreadyInDb(ufDTO)){
                 deleteFavourite.delete(ufDTO);
@@ -45,5 +50,8 @@ public class BusinessFavouriter {
             return "ERROR";
         }
 
+
+
     }
+
 }
