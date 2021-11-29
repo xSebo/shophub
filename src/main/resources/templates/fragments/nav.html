@@ -24,8 +24,8 @@
 
         <div class="navbar-end">
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    Hi Alice!
+                <a class="navbar-link" th:inline="text">
+                    [['Hi ' + ${loggedInUser.getUserFirstName()} + '!']]
                     <div class="nav_profile_img" style="background-image: url('imgs/profile.jpg')"></div>
                 </a>
 

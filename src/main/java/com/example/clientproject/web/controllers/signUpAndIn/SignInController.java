@@ -61,12 +61,19 @@ public class SignInController {
 
     @GetMapping("/businessRegister")
     public String registerBusiness(Model model, HttpSession session){
+        Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
+        if(user.isPresent()){
+        }else{
+            return "redirect:/login";
+        }
+
         if(userShopLinked.hasShop(jwtUtils.getLoggedInUserId(session).get())){
             long userId = jwtUtils.getLoggedInUserId(session).get();
             long shopId = userPermissionsRepo.findByUserId(userId).get(0).getShop().getShopId();
             return "redirect:/businessDetails?shopId="+shopId;
         }
         ArrayList<String> categories = new ArrayList<>(Arrays.asList("Food and drink","Animals","Alcohol"));
+        model.addAttribute("loggedInUser", user.get());
         model.addAttribute("categories", categories);
         model.addAttribute("loggedIn", loggedIn);
         return "registerbusiness.html";
