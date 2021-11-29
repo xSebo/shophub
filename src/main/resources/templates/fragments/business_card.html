@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:fragment="card_js" src="/js/favouriteBusiness.js"></script>
+</head>
+<body th:fragment="business_card">
+<div class="business_container box" style="position:relative;">
+    <div class="image" th:style="'background-image:url(' + ${img_path} + ');'"></div>
+    <div class="favouriteStar starContainer" th:onclick="'favouriteBusiness(this,' + ${shopId} + ');'">
+        <span class="icon favouriteStar">
+            <i class="far fa-star"></i>
+        </span>
+        <span class="icon favouriteStar">
+            <i class="fas fa-star"></i>
+        </span>
+    </div>
+    <div class="content">
+        <h1 class="title is-4 mb-1" th:text="${title}"></h1>
+        <p class="mb-1" th:text="${reward_text}"></p>
+        <div class="is-full-width" style="display:flex;justify-content: space-between;align-items: center">
+            <div class="level-left">
+                <span class="icon is-small is-left ml-1 mr-1">
+                    <i class="fas fa-gift"></i>
+                </span>
+                <p th:text="${reward_amount}"></p>
+            </div>
+            <div class="level-right">
+                <button class="button is-rounded gradient" th:onclick="'redirect('+ ${shopId} + ')'">
+                    View Shop
+                    <span class="icon is-small is-left ml-1">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

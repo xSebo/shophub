@@ -1,0 +1,121 @@
+.flex-container {
+    display: flex;
+    height: 100vh;
+}
+
+.vert-flex-container {
+  display: flex;
+  height: inherit;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+}
+
+.name-box-container {
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+  width: 50%
+}
+
+.loginPart {
+    background: rgb(1,126,255);
+    background: linear-gradient(90deg, rgba(1,126,255,1) 0%, rgba(0,76,255,1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+h1 {
+    color: rgb(1,126,255);
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input {
+  color: #f4f8f7;
+}
+
+.top-and-bottom-margin {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.small-name-box {
+  background-color: #f4f8f7;
+}
+
+.large-input-box {
+  background-color: #f4f8f7;
+}
+
+.signUp-Button {
+  margin: 10px;
+  background-color: rgb(1,126,255);
+  color: white;
+  width: 140px;
+}
+
+.signUp-Button:hover{
+    color: white;
+    opacity: 0.9;
+}
+
+h2 {
+  font-size: 40px;
+  font-family: sans-serif;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.special-text {
+  font-size: 35px;
+  font-family: sans-serif;
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 100;
+}
+
+.login-Button {
+  margin: 10px;
+  background-color: transparent;
+  border:2px solid white;
+  color: white !important;
+  width: 140px;
+  font-weight: bold;
+  transition: color 200ms, background-color 200ms;
+}
+
+.login-Button:hover{
+    background-color: white;
+    color: rgb(1,126,255)!important;
+    border-color: white;
+}
+
+.logo {
+  position: absolute !important;
+  top: 40px !important;
+}
+
+img {
+  position: absolute !important;
+  top: 40px !important;
+}
+
+#signUpForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+}
+
+.is-full-width{
+    width: 100%;
+}

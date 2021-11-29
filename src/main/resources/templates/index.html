@@ -1,0 +1,88 @@
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>ShopHub | Dashboard</title>
+	<link th:replace="fragments/libs.html :: bulma"/>
+	<link th:replace="fragments/libs.html :: fa"/>
+	<link th:replace="fragments/nav.html :: nav-css"/>
+	<script th:replace="fragments/business_card.html :: card_js"/>
+	<link rel="stylesheet" href="/css/index.css">
+	<link rel="stylesheet" href="/css/reward_card.css">
+	<link rel="stylesheet" href="/css/business_container.css">
+	<script src="/js/selectCategories.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/nav.html :: nav"></div>
+	<div class="my_rewards_container section">
+		<div class="container">
+			<div class="rewards_container_top level">
+				<div class="level-left">
+					<h1 class="title is-2">My rewards</h1>
+				</div>
+				<div class="level-right">
+					<div class="control has-icons-left">
+						<input class="input" type="text" placeholder="Search">
+						<span class="icon is-small is-left">
+							<i class="fas fa-search"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="horiz_scroll is-full-width mb-1">
+				<!--Reward Card Here-->
+				<div th:each="shop,i: ${favouriteShops}" th:include="fragments/reward_card.html :: reward_card"
+					 th:with="title=${shop.shopName},
+					 stamps=6,
+					 next_reward=8,
+					 reward_amount_obtained=2,
+					 isFavourite=true,
+					 total_reward_amount=5,
+					 img_path=${shop.shopImage},
+					 shopId=${shop.shopId}"></div>
+			</div>
+			<h1 class="subtitle is-5" th:unless="${favouriteShops.size != 0}"> Looks like you don't have any stamps yet, favourite a shop or make a purchase to start collecting!</h1>
+
+			<a href="/">See All ></a>
+		</div>
+	</div>
+	<div class="search_bar section">
+		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-direction-column mb-4">
+			<h1 class="title is-3">Where else can I earn rewards?</h1>
+			<div class="control has-icons-left mb-2" style="width: 60%;">
+				<input class="input" type="text" placeholder="Enter Brands or keywords e.g. Vegan, Clothing etc..">
+				<span class="icon is-small is-left">
+					<i class="fas fa-search"></i>
+				</span>
+			</div>
+			<!--Tags-->
+			<div class="field is-grouped is-grouped-multiline" style="width: 60%;">
+				<div th:each="tag: ${tags}" th:include="fragments/tag.html :: tag"
+					 th:with="text=${tag}"></div>
+			</div>
+		</div>
+
+		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-wrap-wrap">
+			<div th:each="shop,i: ${normalShops}" th:include="fragments/business_card.html :: business_card"
+				 th:with="title=${shop.shopName}, reward_text='Free coffee at 6 stamps', reward_amount=4,
+				img_path=${shop.shopImage}, shopId=${shop.shopId}"></div>
+		</div>
+
+	</div>
+		<div th:if="${selectCategories}" class="modal is-active">
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Chose 3 or more things that interest you</p>
+					<button class="delete" aria-label="close"></button>
+				</header>
+				<section class="modal-card-body">
+					<button th:each="Tag, iter : ${allTags}" th:onclick="toggle_onclick([[${iter.index} + 1]])" th:id="${iter.index} + 1" value="0" class="button is-rounded category-Button" th:text="${Tag.tagName}"></button>
+				</section>
+				<footer class="modal-card-foot">
+					<button class="button is-success" th:onclick="'submitCategories(' + ${allTags.size} + ')'">Submit</button>
+				</footer>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

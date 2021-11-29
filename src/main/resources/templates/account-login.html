@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>ShopHub | Account Login</title>
+        <link th:replace="fragments/libs.html :: bulma"/>
+        <link th:replace="fragments/libs.html :: fa"/>
+        <link th:replace="fragments/nav.html :: nav-css"/>
+        <link rel="stylesheet" type="text/css" href="css/signIn.css">
+        <script src="js/signin.js"></script>
+    </head>
+
+    <body>
+        <div class="flex-container">
+            <div class="signUpPart" style="flex-grow: 2;">
+                <img style="position: absolute; top: 45px" src="imgs/Logo.png" width="112" height="28" class="logo">
+                <h2>Welcome!</h2>
+                <h3 class="special-text">First time here?</h3>
+                <a href="/signUp">
+                    <button class="button is-rounded signUp-Button">Sign Up</button>
+                </a>
+            </div>
+
+            <div class="vert-flex-container" style="flex-grow: 5;">
+                <h1 class="has-text-weight-bold mb-5">Sign In to ShopHub</h1>
+                <form th:action="@{/login}" th:method="post" th:object="${loginForm}" id="loginForm" name="loginForm" onsubmit="validateLogin(); return false;">
+                    <div class="field is-full-width">
+                        <span class="control">
+                          <input class="input large-input-box" type="text" placeholder="Email" name="email" th:field="*{loginEmail}"/>
+                        </span>
+                    </div>
+
+                    <div class="field is-full-width">
+                        <span class="control">
+                          <input class="input large-input-box" type="text" placeholder="Password" name="password" th:field="*{loginPassword}"/>
+                        </span>
+                    </div>
+                    <p class="help is-danger" id="loginHelpText" style="display: none"></p>
+                    <button type="submit" class="button is-rounded signIn-Button mt-4">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

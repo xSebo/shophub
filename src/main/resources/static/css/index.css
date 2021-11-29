@@ -1,0 +1,67 @@
+.is-full-width{
+    width: 100%;
+}
+
+.horiz_scroll{
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.horiz_scroll > *{
+    display: inline-flex;
+}
+
+i.fas{
+    color: gray;
+}
+
+.gradient{
+    background: rgb(1,126,255);
+    background: linear-gradient(90deg, rgba(1,126,255,1) 0%, rgba(0,76,255,1) 100%);
+    color: white!important;
+}
+
+.gradient i{
+    color: white!important;
+}
+
+.hideSelectTagContent{
+  /* display: none; */
+}
+
+.mainContainer{
+  position: absolute;
+  top: 18vh;
+  width: 500px;
+  height: 55vh;
+  align-self: center;
+  background-color: white;
+}
+
+.fullDisplayTint{
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(131,131,131,.5);
+}
+
+.selectTagHeader{
+  width: inherit;
+  height: 9vh;
+  background: rgb(1,126,255);
+  background: linear-gradient(90deg, rgba(0,76,255,1) 0%, rgba(1,126,255,1) 100%);
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.category-Button {
+  background: rgb(1,126,255);
+  color: white !important;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 5px !important;
+}
