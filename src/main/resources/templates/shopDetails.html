@@ -10,12 +10,17 @@
     <div th:replace="fragments/nav.html :: nav"></div>
 
     <div>
+        <h1>SHOP DETAILS <br></h1>
         <h1 th:text="${shop.shopName}"></h1>
         <p th:text="${shop.shopDescription}"></p>
         <p th:text="${shop.shopWebsite}"></p>
         <p th:text="${shop.shopEarnings}"></p>
         <p th:text="${shop.shopCountries}"></p>
         <img th:src="${shop.shopImage}" alt="">
+    </div>
+    <div>
+        <h1>STAMP BOARDS</h1>
+        <h1 th:text="${stampBoard.stampBoardSize}"></h1>
     </div>
 
 </body>

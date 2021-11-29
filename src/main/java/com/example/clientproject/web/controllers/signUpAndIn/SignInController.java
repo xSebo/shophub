@@ -1,5 +1,7 @@
 package com.example.clientproject.web.controllers.signUpAndIn;
 
+import com.example.clientproject.data.shops.ShopsRepo;
+import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.exceptions.ForbiddenErrorException;
 import com.example.clientproject.service.Utils.JWTUtils;
@@ -7,6 +9,7 @@ import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.services.BusinessRegisterDTO;
 import com.example.clientproject.services.BusinessRegisterSaver;
+import com.example.clientproject.services.UserShopLinked;
 import com.example.clientproject.web.forms.BusinessRegisterForm;
 import com.example.clientproject.web.forms.signUpAndIn.LoginForm;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -32,10 +35,18 @@ public class SignInController {
 
     private JWTUtils jwtUtils;
 
-    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness, JWTUtils ajwtUtils) {
+    private UserShopLinked userShopLinked;
+
+    private UserPermissionsRepo userPermissionsRepo;
+
+    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness, JWTUtils ajwtUtils,
+                            UserShopLinked aUserShopLinked,
+                            UserPermissionsRepo aUserPermissionsRepo) {
         usersSearch = aUsersSearch;
         saveBusiness = sBusiness;
         jwtUtils = ajwtUtils;
+        userShopLinked = aUserShopLinked;
+        userPermissionsRepo = aUserPermissionsRepo;
     }
 
     @PostMapping("/businessRegister")
@@ -48,13 +59,13 @@ public class SignInController {
         return "redirect:/redirect?url=businessRegister";
     }
 
-    @GetMapping("/businessRedirect")
-    public String redirectBusiness(){
-        return "redirect:/businessRegister";
-    }
-
     @GetMapping("/businessRegister")
-    public String registerBusiness(Model model){
+    public String registerBusiness(Model model, HttpSession session){
+        if(userShopLinked.hasShop(jwtUtils.getLoggedInUserId(session).get())){
+            long userId = jwtUtils.getLoggedInUserId(session).get();
+            long shopId = userPermissionsRepo.findByUserId(userId).get(0).getShop().getShopId();
+            return "redirect:/businessDetails?shopId="+shopId;
+        }
         ArrayList<String> categories = new ArrayList<>(Arrays.asList("Food and drink","Animals","Alcohol"));
         model.addAttribute("categories", categories);
         model.addAttribute("loggedIn", loggedIn);
