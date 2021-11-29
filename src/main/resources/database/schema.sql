@@ -105,6 +105,18 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Rewards` (
                                                         ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Categories`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Categories` (
+    `Category_Id` INT NOT NULL AUTO_INCREMENT,
+    `Category_Name` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`Category_Id`)
+)
+ENGINE = InnoDB;
+
+
 -- -----------------------------------------------------
 -- Table `mydb`.`Shops`
 -- -----------------------------------------------------
@@ -118,12 +130,18 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Shops` (
                                               `Shop_Image` VARCHAR(150),
                                               `Shop_Active` TINYINT NOT NULL,
                                               `Stamp_Board_Id` INT NOT NULL,
-                                              PRIMARY KEY (`Shop_Id`, `Stamp_Board_Id`),
-                                                  CONSTRAINT `fk_Shops_Stamp_Boards1`
+                                              `Category_Id` INT NOT NULL,
+                                              PRIMARY KEY (`Shop_Id`, `Stamp_Board_Id`, `Category_Id`),
+                                                CONSTRAINT `fk_Shops_Stamp_Boards1`
                                                   FOREIGN KEY (`Stamp_Board_Id`)
-                                                  REFERENCES `mydb`.`Stamp_Boards` (`Stamp_Board_Id`)
-                                                  ON DELETE NO ACTION
-                                                  ON UPDATE NO ACTION)
+                                                    REFERENCES `mydb`.`Stamp_Boards` (`Stamp_Board_Id`)
+                                                    ON DELETE NO ACTION
+                                                    ON UPDATE NO ACTION,
+                                                CONSTRAINT `fk_Shops_Categories1`
+                                                  FOREIGN KEY (`Category_Id`)
+                                                    REFERENCES `mydb`.`Categories` (`Category_Id`)
+                                                    ON DELETE NO ACTION
+                                                    ON UPDATE NO ACTION )
     ENGINE = InnoDB;
 
 
@@ -223,10 +241,36 @@ INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`
 
 INSERT INTO stamp_boards (Stamp_Board_Id, Stamp_Board_Size) VALUES (1, 0);
 
-INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id) VALUES ('','','',0,'',0,1);
+INSERT INTO Categories (Category_Id, Category_Name) VALUES (1, '');
+INSERT INTO Categories (Category_Name) VALUES ('Hospitality');
+INSERT INTO Categories (Category_Name) VALUES ('Retail');
+INSERT INTO Categories (Category_Name) VALUES ('Supplier');
+INSERT INTO Categories (Category_Name) VALUES ('Food And Drink');
+INSERT INTO Categories (Category_Name) VALUES ('Animals');
+INSERT INTO Categories (Category_Name) VALUES ('Alcohol');
+
+INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('','','',0,'',0,1,1);
 
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (1,'User');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (2,'Business Admin');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (3,'Super Admin');
 
 INSERT INTO Tags (Tag_Name) VALUES ('Football');
+INSERT INTO Tags (Tag_Name) VALUES ('Fashion');
+INSERT INTO Tags (Tag_Name) VALUES ('Electronics');
+INSERT INTO Tags (Tag_Name) VALUES ('Coffee');
+INSERT INTO Tags (Tag_Name) VALUES ('Art');
+INSERT INTO Tags (Tag_Name) VALUES ('Pets');
+INSERT INTO Tags (Tag_Name) VALUES ('Clothes');
+INSERT INTO Tags (Tag_Name) VALUES ('Designer');
+INSERT INTO Tags (Tag_Name) VALUES ('Groceries');
+INSERT INTO Tags (Tag_Name) VALUES ('Cars');
+INSERT INTO Tags (Tag_Name) VALUES ('Hiking');
+INSERT INTO Tags (Tag_Name) VALUES ('Cooking');
+INSERT INTO Tags (Tag_Name) VALUES ('Furniture');
+INSERT INTO Tags (Tag_Name) VALUES ('Gaming');
+INSERT INTO Tags (Tag_Name) VALUES ('Travelling');
+INSERT INTO Tags (Tag_Name) VALUES ('Beauty');
+INSERT INTO Tags (Tag_Name) VALUES ('Eco-friendly');
+INSERT INTO Tags (Tag_Name) VALUES ('Decorations');
+INSERT INTO Tags (Tag_Name) VALUES ('Photography');

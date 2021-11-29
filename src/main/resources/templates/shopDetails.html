@@ -4,18 +4,46 @@
     <title>ShopHub | Dashboard</title>
     <link th:replace="fragments/libs.html :: bulma"/>
     <link th:replace="fragments/libs.html :: fa"/>
-    <link th:replace="fragments/nav.html :: nav-css"/>
+    <!-- <link th:replace="fragments/nav.html :: nav-css"/> -->
+    <link rel="stylesheet" type="text/css" href="css/viewShop.css">
 </head>
 <body>
-    <div th:replace="fragments/nav.html :: nav"></div>
+    <!-- <div th:replace="fragments/nav.html :: nav"></div> -->
+    <class class="shopName">Example Shop</class>
 
     <div>
-        <h1 th:text="${shop.shopName}"></h1>
-        <p th:text="${shop.shopDescription}"></p>
-        <p th:text="${shop.shopWebsite}"></p>
-        <p th:text="${shop.shopEarnings}"></p>
-        <p th:text="${shop.shopCountries}"></p>
-        <img th:src="${shop.shopImage}" alt="">
+    </div>
+
+    <div class="card card-styling addLeftMargin">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-150x150">
+                <img src="https://bulma.io/images/placeholders/96x96.png" class="imageSize" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="subtitle field is-grouped is-grouped-multiline socialMediaContainer">
+                
+            </div>
+            <!-- <div style="float: left;"><p class="subtitle is-6">Website link<br>Tik tok<br>Facebook<br>Instagram<br>Twitter</p><div> -->
+            </div>
+          </div>
+        <div class="content" style="margin-left: 1rem">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pellentesque orci sem, at elementum augue fermentum vitae. Phasellus vitae gravida massa, vitae facilisis enim. Morbi varius rutrum turpis, blandit porta felis feugiat a. Praesent lobortis iaculis ante, in placerat risus. Vestibulum dui leo, interdum vel euismod nec, venenatis eu turpis. Cras bibendum nisl quis felis cursus, vel scelerisque eros semper. Nam vitae iaculis erat, sit amet accumsan nulla. Sed ultricies cursus placerat. Sed sit amet nibh eu massa dignissim venenatis at id sapien. Fusce feugiat enim sit amet molestie auctor. Quisque nec orci at dui consectetur accumsan. In ac pellentesque risus. Morbi dolor nisl, cursus sed mattis eget, gravida vitae purus.
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- <h1 th:text="${shop.shopName}"></h1> -->
+      <!-- <p th:text="${shop.shopDescription}"></p> -->
+      <!-- <p th:text="${shop.shopWebsite}"></p> -->
+      <!-- <p th:text="${shop.shopEarnings}"></p> -->
+      <!-- <p th:text="${shop.shopCountries}"></p> -->
+      <!-- <img th:src="${shop.shopImage}" alt=""> -->
+    </div>
+    <div>
+        <h1>STAMP BOARDS</h1>
+        <!-- <h1 th:text="${stampBoard.stampBoardSize}"></h1> -->
     </div>
 
 </body>

@@ -7,6 +7,7 @@
         <link th:replace="fragments/libs.html :: fa"/>
         <link th:replace="fragments/nav.html :: nav-css"/>
         <link rel="stylesheet" type="text/css" href="css/signIn.css">
+        <script src="js/signin.js"></script>
     </head>
 
     <body>
@@ -14,45 +15,28 @@
             <div class="signUpPart" style="flex-grow: 2;">
                 <img style="position: absolute; top: 45px" src="imgs/Logo.png" width="112" height="28" class="logo">
                 <h2>Welcome!</h2>
-                <h3 class="special-text">New Member of <br>ShopHub?</h3>
+                <h3 class="special-text">First time here?</h3>
+                <a href="/signUp">
                     <button class="button is-rounded signUp-Button">Sign Up</button>
+                </a>
             </div>
 
             <div class="vert-flex-container" style="flex-grow: 5;">
-                <h1 class="has-text-weight-bold">Start collecting rewards <br>today!</h1>
-                <form th:action="@{/login}" th:method="post" th:object="${loginForm}">
-                    <div>
-                        <div class="flex-container name-box-container">
-                            <label th:for="loginEmail">Email:</label>
-                            <div class="flex-container name-box-container">
-                                <p class="control has-icons-left">
-                                    <input class="input" type="text" placeholder="Email" th:field="*{loginEmail}"/>
-                                    <span class="icon is-small is-left">
-                                        <i class="fas fa-envelope"></i>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="alert alert-warning" th:if="${incorrectEmail}">Email Incorrect</div>
-                            <div class="alert alert-warning" th:errors="*{loginEmail}" th:if="${#fields.hasErrors('loginEmail')}">Email Error</div>
-                        </div>
-
-                        <br>
-
-                        <div class="flex-container name-box-container">
-                            <label th:for="loginPassword">Password:  </label>
-                            <div class="flex-container name-box-container">
-                                <p class="control has-icons-left">
-                                    <input class="input" type="text" placeholder="Password" th:field="*{loginPassword}"/>
-                                    <span class="icon is-small is-left">
-                                        <i class="fas fa-lock"></i>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="alert alert-warning" th:if="${incorrectPassword}">Password Incorrect</div>
-                            <div class="alert alert-warning" th:errors="*{loginPassword}" th:if="${#fields.hasErrors('loginPassword')}">Password Error</div>
-                        </div>
+                <h1 class="has-text-weight-bold mb-5">Sign In to ShopHub</h1>
+                <form th:action="@{/login}" th:method="post" th:object="${loginForm}" id="loginForm" name="loginForm" onsubmit="validateLogin(); return false;">
+                    <div class="field is-full-width">
+                        <span class="control">
+                          <input class="input large-input-box" type="text" placeholder="Email" name="email" th:field="*{loginEmail}"/>
+                        </span>
                     </div>
-                    <button type="submit" class="button is-rounded signIn-Button">Sign In</button>
+
+                    <div class="field is-full-width">
+                        <span class="control">
+                          <input class="input large-input-box" type="text" placeholder="Password" name="password" th:field="*{loginPassword}"/>
+                        </span>
+                    </div>
+                    <p class="help is-danger" id="loginHelpText" style="display: none"></p>
+                    <button type="submit" class="button is-rounded signIn-Button mt-4">Sign In</button>
                 </form>
             </div>
         </div>

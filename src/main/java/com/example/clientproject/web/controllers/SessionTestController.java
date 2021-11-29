@@ -16,9 +16,15 @@ import java.util.Optional;
 @Controller
 public class SessionTestController {
 
+    private JWTUtils jwtUtils;
+
+    public SessionTestController(JWTUtils ajwtUtils){
+        jwtUtils = ajwtUtils;
+    }
+
     @GetMapping("/sessionJWTTest")
     public String jwtTest(Model model, HttpSession session){
-        Optional<Integer> user = JWTUtils.getLoggedInUserId(session);
+        Optional<Integer> user = jwtUtils.getLoggedInUserId(session);
         if(user.isPresent()){
             System.out.println(user.get());
         }else{
@@ -26,17 +32,19 @@ public class SessionTestController {
         }
 
         System.out.println("Making jwt");
-        String jwt = JWTUtils.makeUserJWT(6, session);
+        String jwt = jwtUtils.makeUserJWT(6, session);
         System.out.println(jwt);
 
-        user = JWTUtils.getLoggedInUserId(session);
+        user = jwtUtils.getLoggedInUserId(session);
         if(user.isPresent()){
             System.out.println(user.get());
         }else{
             System.out.println("No User");
         }
 
-        model.addAttribute("sessionData",user.get());
+        Users loggedInUser = jwtUtils.getLoggedInUserRow(session).get();
+
+        model.addAttribute("sessionData",loggedInUser);
 
         return "session-test";
     }

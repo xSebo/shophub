@@ -1,0 +1,42 @@
+.mainContainer{
+  background-color: #f4f4f4 ;
+  width: 60vh;
+  height: 60vh;
+  top: 4vh;
+}
+
+.shopName{
+  position: absolute;
+  width: 100%;
+  top: 8vh;
+  font-size: 45px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card-styling{
+  width: 550px;
+  margin: 15px;
+  top: 20vh;
+}
+
+.businessImg{
+  height: 413px !important;
+  width: 550px !important;
+}
+
+.addLeftMargin{
+  margin-left: 50px;
+}
+
+.imageSize{
+  height: 150px !important;
+  width: 150px !important;
+}
+
+.socialMediaContainer{
+  float: left;
+  width: 325px;
+  height: 150px;
+  background-color: #e8e8e8;
+}

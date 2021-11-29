@@ -1,5 +1,6 @@
 package com.example.clientproject.data.shops;
 
+import com.example.clientproject.data.categories.Categories;
 import com.example.clientproject.data.converters.TinyIntToBoolean;
 import com.example.clientproject.data.rewards.Rewards;
 import com.example.clientproject.data.stampBoards.StampBoards;
@@ -45,7 +46,8 @@ public class Shops {
      * @param active - shop active status
      */
     public Shops(String name, String website, String description, int earnings,
-                 String image, String countries, boolean active, StampBoards stampBoard) {
+                 String image, String countries, boolean active, StampBoards stampBoard,
+                 Categories categories) {
         this.shopName = name;
         this.shopDescription = description;
         this.shopWebsite = website;
@@ -54,6 +56,7 @@ public class Shops {
         this.shopCountries = countries;
         this.shopActive = active;
         this.stampBoard = stampBoard;
+        this.category = categories;
     }
 
     @ManyToMany(mappedBy="favouriteShops")
@@ -70,4 +73,8 @@ public class Shops {
     @OneToOne
     @JoinColumn(name="Stamp_Board_Id")
     private StampBoards stampBoard;
+
+    @ManyToOne
+    @JoinColumn(name="Category_Id")
+    private Categories category;
 }

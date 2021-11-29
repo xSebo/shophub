@@ -1,23 +1,24 @@
-package com.example.clientproject.web.controllers;
+package com.example.clientproject.web.controllers.signUpAndIn;
 
+import com.example.clientproject.data.shops.ShopsRepo;
+import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
+import com.example.clientproject.data.users.Users;
 import com.example.clientproject.exceptions.ForbiddenErrorException;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.services.BusinessRegisterDTO;
 import com.example.clientproject.services.BusinessRegisterSaver;
+import com.example.clientproject.services.UserShopLinked;
 import com.example.clientproject.web.forms.BusinessRegisterForm;
-import com.example.clientproject.web.forms.LoginForm;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.clientproject.web.forms.signUpAndIn.LoginForm;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -32,9 +33,20 @@ public class SignInController {
 
     private BusinessRegisterSaver saveBusiness;
 
-    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness) {
+    private JWTUtils jwtUtils;
+
+    private UserShopLinked userShopLinked;
+
+    private UserPermissionsRepo userPermissionsRepo;
+
+    public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness, JWTUtils ajwtUtils,
+                            UserShopLinked aUserShopLinked,
+                            UserPermissionsRepo aUserPermissionsRepo) {
         usersSearch = aUsersSearch;
         saveBusiness = sBusiness;
+        jwtUtils = ajwtUtils;
+        userShopLinked = aUserShopLinked;
+        userPermissionsRepo = aUserPermissionsRepo;
     }
 
     @PostMapping("/businessRegister")
@@ -43,18 +55,25 @@ public class SignInController {
             System.out.println(bindingResult.getAllErrors());
             return "registerbusiness.html";
         }
-        saveBusiness.save(new BusinessRegisterDTO(brf), JWTUtils.getLoggedInUserId(session).get());
+        saveBusiness.save(new BusinessRegisterDTO(brf), jwtUtils.getLoggedInUserId(session).get());
         return "redirect:/redirect?url=businessRegister";
     }
 
-    @GetMapping("/businessRedirect")
-    public String redirectBusiness(){
-        return "redirect:/businessRegister";
-    }
-
     @GetMapping("/businessRegister")
-    public String registerBusiness(Model model){
+    public String registerBusiness(Model model, HttpSession session){
+        Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
+        if(user.isPresent()){
+        }else{
+            return "redirect:/login";
+        }
+
+        if(userShopLinked.hasShop(jwtUtils.getLoggedInUserId(session).get())){
+            long userId = jwtUtils.getLoggedInUserId(session).get();
+            long shopId = userPermissionsRepo.findByUserId(userId).get(0).getShop().getShopId();
+            return "redirect:/businessDetails?shopId="+shopId;
+        }
         ArrayList<String> categories = new ArrayList<>(Arrays.asList("Food and drink","Animals","Alcohol"));
+        model.addAttribute("loggedInUser", user.get());
         model.addAttribute("categories", categories);
         model.addAttribute("loggedIn", loggedIn);
         return "registerbusiness.html";
@@ -67,7 +86,12 @@ public class SignInController {
      * @return - the page to redirect to
      */
     @GetMapping("/login")
-    public String loginPageAccess(Model model) {
+    public String loginPageAccess(Model model, HttpSession session) {
+        Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
+        if(user.isPresent()){
+            return "redirect:/";
+        }
+
         LoginForm loginForm = new LoginForm();
         model.addAttribute("loginForm", loginForm);
         model.addAttribute("loggedIn", loggedIn);
@@ -105,17 +129,21 @@ public class SignInController {
 
             // If they match, set the loggedIn flag to true
             if (passwordMatch) {
-                JWTUtils.makeUserJWT(
+                jwtUtils.makeUserJWT(
                         (int) usersDTOOptional.get().getUserId(),
                         session);
                 loggedIn = true;
             // Otherwise, throw an exception with the correct error message
             } else {
-                throw new ForbiddenErrorException("Password Incorrect");
+                //Changed this as it is a security risk exposing which field is incorrect
+                //throw new ForbiddenErrorException("Password Incorrect");
+                throw new ForbiddenErrorException("Details Incorrect");
             }
         // Else - assumes that the email is incorrect
         } else {
-            throw new ForbiddenErrorException("Email Incorrect");
+            //Changed this as it is a security risk exposing which field is incorrect
+            //throw new ForbiddenErrorException("Email Incorrect");
+            throw new ForbiddenErrorException("Details Incorrect");
         }
 
         return "redirect:/dashboard";
@@ -129,7 +157,7 @@ public class SignInController {
      */
     @GetMapping("/log_out")
     public String jwtLogout(Model model, HttpSession session){
-        JWTUtils.logOutUser(session);
+        jwtUtils.logOutUser(session);
         return "redirect:/login";
     }
 }

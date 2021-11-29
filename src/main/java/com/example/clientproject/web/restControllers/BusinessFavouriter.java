@@ -15,22 +15,29 @@ public class BusinessFavouriter {
     private UserFavouriteSaver saveFavourite;
     private UserFavouriteToggle toggleFavourite;
     private UserFavouriteDeleter deleteFavourite;
+    private JWTUtils jwtUtils;
 
-    public BusinessFavouriter(UserFavouriteSaver ufs, UserFavouriteToggle uft, UserFavouriteDeleter ufd) {
+    public BusinessFavouriter(UserFavouriteSaver ufs, UserFavouriteToggle uft, UserFavouriteDeleter ufd, JWTUtils jwt) {
         saveFavourite = ufs;
         toggleFavourite = uft;
         deleteFavourite = ufd;
+        jwtUtils = jwt;
     }
 
 
     /**
      *
-     * @param Submitted form, contains a UserID and ShopID
+     * @param submitted form, contains a UserID and ShopID
      * @return ERROR or OK depending on whether it any errors are thrown.
      */
     @PostMapping("/favouriteBusiness")
     public String favouriteBusiness(UserFavouriteForm uff, HttpSession session){
-        UserFavouriteDTO ufDTO = new UserFavouriteDTO(uff, JWTUtils.getLoggedInUserId(session).get());
+        UserFavouriteDTO ufDTO;
+        try{
+            ufDTO = new UserFavouriteDTO(uff, jwtUtils.getLoggedInUserId(session).get());
+        }catch(Exception e){
+            return "BAD SESSION";
+        }
         try{
             if(toggleFavourite.alreadyInDb(ufDTO)){
                 deleteFavourite.delete(ufDTO);
@@ -42,6 +49,8 @@ public class BusinessFavouriter {
             e.printStackTrace();
             return "ERROR";
         }
+
+
 
     }
 }
