@@ -6,6 +6,7 @@ import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.stampBoards.StampBoardsRepo;
 import com.example.clientproject.data.userStampBoards.UserStampBoards;
 import com.example.clientproject.data.userStampBoards.UserStampBoardsRepo;
+import com.example.clientproject.data.users.Users;
 import com.example.clientproject.data.users.UsersRepo;
 import com.example.clientproject.service.Utils.JWTUtils;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Controller
 public class BusinessDetails {
@@ -40,6 +42,12 @@ public class BusinessDetails {
 
     @GetMapping("/businessDetails")
     public String getBusiness(@RequestParam(value = "shopId") int shopId, Model model, HttpSession session){
+        Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
+        if(user.isPresent()){
+        }else{
+            return "redirect:/login";
+        }
+
         //UserStampBoards userStampBoard;
         StampBoards stampBoard;
         Shops shop;
@@ -52,13 +60,12 @@ public class BusinessDetails {
             }
             long userId = jwtUtils.getLoggedInUserId(session).get();
             //userStampBoard = usersRepo.getById(userId).getUserStampBoards();
-
-
         }catch(Exception e){
             e.printStackTrace();
             return "redirect:/";
         }
         //model.addAttribute("stampBoard", stampBoard);
+        model.addAttribute("loggedInUser", user.get());
         model.addAttribute("shop", shop);
         model.addAttribute("stampBoard", stampBoard);
         return "shopDetails.html";
