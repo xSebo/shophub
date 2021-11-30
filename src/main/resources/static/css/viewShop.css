@@ -36,7 +36,18 @@
 
 .socialMediaContainer{
   float: left;
-  width: 325px;
-  height: 150px;
-  background-color: #e8e8e8;
+  width: 320px;
+  height: 130px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.mousePointerWhenHovered{
+  cursor: pointer;
+}
+
+.websiteLinkText{
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
 }
