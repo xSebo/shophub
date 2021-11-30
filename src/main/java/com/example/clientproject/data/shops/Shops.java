@@ -3,8 +3,10 @@ package com.example.clientproject.data.shops;
 import com.example.clientproject.data.categories.Categories;
 import com.example.clientproject.data.converters.TinyIntToBoolean;
 import com.example.clientproject.data.rewards.Rewards;
+import com.example.clientproject.data.socials.Socials;
 import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.tags.Tags;
+import com.example.clientproject.data.userStampBoards.UserStampBoards;
 import com.example.clientproject.data.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +14,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Shops Entity
@@ -77,4 +80,8 @@ public class Shops {
     @ManyToOne
     @JoinColumn(name="Category_Id")
     private Categories category;
+
+    @OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="Shop_Id", nullable = false)
+    private Set<Socials> userSocials;
 }

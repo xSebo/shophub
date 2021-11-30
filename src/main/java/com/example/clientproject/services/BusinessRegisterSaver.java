@@ -4,6 +4,8 @@ import com.example.clientproject.data.categories.Categories;
 import com.example.clientproject.data.categories.CategoriesRepo;
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
+import com.example.clientproject.data.socials.Socials;
+import com.example.clientproject.data.socials.SocialsRepo;
 import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.stampBoards.StampBoardsRepo;
 import com.example.clientproject.data.tags.Tags;
@@ -30,6 +32,9 @@ public class BusinessRegisterSaver {
     CategoriesRepo categoriesRepo;
 
     @Autowired
+    SocialsRepo socialsRepo;
+
+    @Autowired
     TagsRepo tagsRepo;
 
     @Autowired
@@ -41,7 +46,7 @@ public class BusinessRegisterSaver {
     public void save(BusinessRegisterDTO business, long userId){
 
         StampBoards stampBoard = stampBoards.findById(1L).get();
-        Categories categories = categoriesRepo.findById(1L).get();
+        Categories category = new Categories(business.getBusinessCategory());
 
         Shops shop = new Shops(business.getBusiness_register_name(),
                 business.getBusiness_register_url(),
@@ -51,14 +56,13 @@ public class BusinessRegisterSaver {
                 "UK United Kingdom",
                 false,
                 stampBoard,
-                categories);
+                category);
 
         shopsRepo.save(shop);
         List<Tags> tagsList = tagsRepo.findAll();
 
         for(String t: business.getBusinessTags()){
             if(tagsList.contains(new Tags(t))){
-                // Link shop to tag
                 continue;
             }
             //long id = 0;
@@ -74,6 +78,11 @@ public class BusinessRegisterSaver {
         }
 
         linkShop.linkUserShop(shop.getShopId(), userId);
+
+        socialsRepo.save(new Socials((int)shop.getShopId(), "Facebook", business.getFacebook()));
+        socialsRepo.save(new Socials((int)shop.getShopId(), "Twitter", business.getTwitter()));
+        socialsRepo.save(new Socials((int)shop.getShopId(), "TikTok", business.getTiktok()));
+        socialsRepo.save(new Socials((int)shop.getShopId(), "Instagram", business.getInstagram()));
 
         //System.out.println(shop.getShopId());
 
