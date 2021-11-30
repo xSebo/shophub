@@ -12,7 +12,7 @@
 <body>
 	<div th:replace="fragments/nav.html :: nav"></div>
 	<div id="adminPage">
-		<div class="sidebar" th:if="${userHasShop}">
+		<div class="sidebar" th:if="${highestPerm > 1}">
 			<div class="admin-tab active" onclick="toggle_tab('profile')" id="profile-tab">
 				<div class="baseIcon">
 					<i class="fas fa-user fa-lg"></i>
@@ -32,7 +32,7 @@
 				<p>Shop Rewards</p>
 			</div>
 		</div>
-		<main th:if="${userHasShop}">
+		<main th:if="${highestPerm > 1}">
 			<section id="profile-section" class="admin-section active">
 				<div th:replace="fragments/user_settings.html :: settings_page"/>
 			</section>
@@ -45,7 +45,7 @@
 				<h1 class="title">Shop Rewards</h1>
 			</section>
 		</main>
-		<main th:unless="${userHasShop}">
+		<main th:unless="${highestPerm > 1}">
 			<section class="admin-section active">
 				<div th:replace="fragments/user_settings.html :: settings_page"/>
 			</section>
