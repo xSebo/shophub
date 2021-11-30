@@ -18,9 +18,4 @@ import org.springframework.test.web.servlet.MockMvc;
 public class SelectCategoriesTests {
     @Autowired
     MockMvc mockMvc;
-
-    @ParameterizedTest
-    public void expectCorrectAdditionsToTableAfterFavouriteTagsSelected() {
-
-    }
 }
