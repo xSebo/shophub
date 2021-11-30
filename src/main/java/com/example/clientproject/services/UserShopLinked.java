@@ -39,7 +39,8 @@ public class UserShopLinked {
     }
 
     public List<Integer> getByUserId(Long userId){
-        String query = "SELECT s.Shop_Id FROM User_Permissions s WHERE (User_Id = " +userId.toString() + ")";
+        String query = "SELECT s.Shop_Id FROM User_Permissions s WHERE (User_Id = " +userId.toString() +
+                " AND Shop_Id != 1)";
 
         List<Map<String, Object>> rs = jdbc.queryForList(query);
         List<Integer> shops = new ArrayList<Integer>();

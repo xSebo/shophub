@@ -23,4 +23,9 @@ public class Rewards {
     private long rewardId;
     private String rewardName;
     private int rewardStampLocation;
+
+    public Rewards(String rewardName, int rewardStampLocation){
+        this.rewardName = rewardName;
+        this.rewardStampLocation = rewardStampLocation;
+    }
 }
