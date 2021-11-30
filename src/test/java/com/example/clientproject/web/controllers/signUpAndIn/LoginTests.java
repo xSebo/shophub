@@ -1,4 +1,4 @@
-package com.example.clientproject.web.controllers;
+package com.example.clientproject.web.controllers.signUpAndIn;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
