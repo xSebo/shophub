@@ -84,7 +84,7 @@ public class HomeController {
 
 
 
-
+        model.addAttribute("loggedInUser", user.get());
         model.addAttribute("normalShops", normalShops);
         model.addAttribute("favouriteShops", favouriteShops);
         model.addAttribute("tags", new String[]{"Coffee", "Vegan", "Sustainable"});

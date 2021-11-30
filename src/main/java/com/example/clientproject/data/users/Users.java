@@ -90,4 +90,5 @@ public class Users {
             inverseJoinColumns = @JoinColumn(name="Tag_Id")
     )
     private List<Tags> favouriteTags;
+
 }

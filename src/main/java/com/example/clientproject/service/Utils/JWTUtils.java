@@ -82,7 +82,7 @@ public class JWTUtils {
     public String makeUserJWT(Integer userId, HttpSession session) {
         String jwtId = "loginCred";
         String jwtIssuer = "ShopHub";
-        int jwtTimeToLive = 800000;
+        int jwtTimeToLive = 86400000; // 1 Day
 
         String jwt = this.createJWT(
                 jwtId, // claim = jti

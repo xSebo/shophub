@@ -39,8 +39,8 @@
 					 total_reward_amount=5,
 					 img_path=${shop.shopImage},
 					 shopId=${shop.shopId}"></div>
-
 			</div>
+			<h1 class="subtitle is-5" th:unless="${favouriteShops.size != 0}"> Looks like you don't have any stamps yet, favourite a shop or make a purchase to start collecting!</h1>
 
 			<a href="/">See All ></a>
 		</div>
