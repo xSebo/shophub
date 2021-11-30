@@ -1,5 +1,7 @@
 package com.example.clientproject.web.controllers.signUpAndIn;
 
+import com.example.clientproject.data.categories.Categories;
+import com.example.clientproject.data.categories.CategoriesRepo;
 import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
 import com.example.clientproject.data.users.Users;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -39,14 +42,18 @@ public class SignInController {
 
     private UserPermissionsRepo userPermissionsRepo;
 
+    private CategoriesRepo catRepo;
+
     public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness, JWTUtils ajwtUtils,
                             UserShopLinked aUserShopLinked,
-                            UserPermissionsRepo aUserPermissionsRepo) {
+                            UserPermissionsRepo aUserPermissionsRepo,
+                            CategoriesRepo aCatRepo) {
         usersSearch = aUsersSearch;
         saveBusiness = sBusiness;
         jwtUtils = ajwtUtils;
         userShopLinked = aUserShopLinked;
         userPermissionsRepo = aUserPermissionsRepo;
+        catRepo = aCatRepo;
     }
 
     @PostMapping("/businessRegister")
@@ -67,12 +74,16 @@ public class SignInController {
             return "redirect:/login";
         }
 
+        //System.out.println(userShopLinked.hasShop(jwtUtils.getLoggedInUserId(session).get()));
         if(userShopLinked.hasShop(jwtUtils.getLoggedInUserId(session).get())){
             long userId = jwtUtils.getLoggedInUserId(session).get();
             long shopId = userPermissionsRepo.findByUserId(userId).get(0).getShop().getShopId();
+            if(shopId == 1){
+                shopId = userPermissionsRepo.findByUserId(userId).get(1).getShop().getShopId();
+            }
             return "redirect:/businessDetails?shopId="+shopId;
         }
-        ArrayList<String> categories = new ArrayList<>(Arrays.asList("Food and drink","Animals","Alcohol"));
+        List<Categories> categories = catRepo.findAll();
         model.addAttribute("loggedInUser", user.get());
         model.addAttribute("categories", categories);
         model.addAttribute("loggedIn", loggedIn);

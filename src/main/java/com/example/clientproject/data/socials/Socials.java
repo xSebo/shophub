@@ -1,25 +1,28 @@
 package com.example.clientproject.data.socials;
 
+import com.example.clientproject.data.shops.Shops;
+import com.example.clientproject.data.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Socials {
+public class Socials{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Social_Id", nullable = false)
     private Integer socialId;
 
-    @Id
-    @Column(name = "Shop_Id", nullable = false)
-    private Integer shopId;
+    @ManyToOne
+    @JoinColumn(name="Shop_Id", nullable = false)
+    private Shops shop;
 
     @Column(name = "Social_Platform", length = 45)
     private String socialPlatform;
@@ -27,12 +30,10 @@ public class Socials {
     @Column(name = "Social_Name", length = 45)
     private String socialName;
 
-
-    
-    public Socials(int aShopId, String aSocialPlatform, String aSocialName){
-        this.shopId = aShopId;
-        this.socialPlatform = aSocialPlatform;
-        this.socialName = aSocialName;
+    public Socials(Shops aShop, String aSocialPlatform, String aSocialName){
+        shop = aShop;
+        socialPlatform = aSocialPlatform;
+        socialName = aSocialName;
     }
 
 }

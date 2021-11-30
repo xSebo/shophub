@@ -238,17 +238,17 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User_Stamp_Boards` (
 -- -----------------------------------------------------
 -- Table `mydb`.`Socials`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Shops` (
+CREATE TABLE IF NOT EXISTS `mydb`.`Socials` (
                                               `Social_Id` INT NOT NULL AUTO_INCREMENT,
                                               `Shop_Id` INT NOT NULL,
                                               `Social_Platform` VARCHAR(45),
                                               `Social_Name` VARCHAR(45),
                                               PRIMARY KEY (`Social_Id`, `Shop_Id`),
 											  CONSTRAINT `fk_Socials1`
-													FOREIGN KEY (`User_Id`)
-														REFERENCES `mydb`.`Users` (`User_Id`)
+													FOREIGN KEY (`Shop_Id`)
+														REFERENCES `mydb`.`Shops` (`Shop_Id`)
 																ON DELETE NO ACTION
-																ON UPDATE NO ACTION,
+																ON UPDATE NO ACTION)
                                                 
     ENGINE = InnoDB;
 

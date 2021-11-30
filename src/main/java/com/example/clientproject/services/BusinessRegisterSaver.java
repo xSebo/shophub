@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,7 +47,9 @@ public class BusinessRegisterSaver {
     public void save(BusinessRegisterDTO business, long userId){
 
         StampBoards stampBoard = stampBoards.findById(1L).get();
-        Categories category = new Categories(business.getBusinessCategory());
+        Categories category;
+
+        category = categoriesRepo.findByName(business.getBusinessCategory());
 
         Shops shop = new Shops(business.getBusiness_register_name(),
                 business.getBusiness_register_url(),
@@ -58,8 +61,12 @@ public class BusinessRegisterSaver {
                 stampBoard,
                 category);
 
+        System.out.println(category.getCategoryId());
+
         shopsRepo.save(shop);
         List<Tags> tagsList = tagsRepo.findAll();
+
+        linkShop.linkUserShop(shop.getShopId(), userId);
 
         for(String t: business.getBusinessTags()){
             if(tagsList.contains(new Tags(t))){
@@ -77,12 +84,12 @@ public class BusinessRegisterSaver {
 
         }
 
-        linkShop.linkUserShop(shop.getShopId(), userId);
+        socialsRepo.save(new Socials(shop, "Facebook", business.getFacebook()));
+        socialsRepo.save(new Socials(shop, "Twitter", business.getTwitter()));
+        socialsRepo.save(new Socials(shop, "Instagram", business.getInstagram()));
+        socialsRepo.save(new Socials(shop, "TikTok", business.getTiktok()));
 
-        socialsRepo.save(new Socials((int)shop.getShopId(), "Facebook", business.getFacebook()));
-        socialsRepo.save(new Socials((int)shop.getShopId(), "Twitter", business.getTwitter()));
-        socialsRepo.save(new Socials((int)shop.getShopId(), "TikTok", business.getTiktok()));
-        socialsRepo.save(new Socials((int)shop.getShopId(), "Instagram", business.getInstagram()));
+
 
         //System.out.println(shop.getShopId());
 

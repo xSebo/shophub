@@ -70,7 +70,7 @@
                         <div id="categoryContainer">
                             <div class="select">
                                 <select name="businessCategory">
-                                    <option th:each="category: ${categories}" th:text="${category}"></option>
+                                    <option th:each="category: ${categories}" th:text="${category.categoryName}"></option>
                                 </select>
                             </div>
                         </div>

@@ -81,7 +81,4 @@ public class Shops {
     @JoinColumn(name="Category_Id")
     private Categories category;
 
-    @OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="Shop_Id", nullable = false)
-    private Set<Socials> userSocials;
 }
