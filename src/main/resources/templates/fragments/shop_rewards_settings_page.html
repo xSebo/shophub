@@ -7,6 +7,7 @@
 <body th:fragment="rewards">
 <div>
 <h1 class="title">Shop Rewards</h1>
+<h2 class="title is-4 secondary mb-2">Preview (1 Stamp Collected)</h2>
 <div class="container1 mb-5">
     <div class="multi-page-container" id="stampboardContainer">
         <th:block th:each="i: ${#numbers.sequence(1, stampBoard.stampBoardSize)}">
@@ -33,7 +34,7 @@
 <h2 class="title is-4 secondary pb-4">Background Colour and Icon</h2>
 
 <h3 class="subtitle is-6 mb-3">Background Colour</h3>
-<input type="color" class="mb-5" th:value="${stampBoard.stampBoardColour}"
+<input type="color" class="mb-5" id="colour-input" th:value="${stampBoard.stampBoardColour}"
 oninput="for(let item of document.getElementById('stampboardContainer').children){item.style.backgroundColor=this.value};">
 
 <h3 class="subtitle is-6 mb-3">Stamp Icon</h3>
@@ -54,7 +55,7 @@ oninput="for(let item of document.getElementById('stampboardContainer').children
 </div>
 
 <h2 class="title is-4 secondary">Stamp Positions</h2>
-<div class="mb-5">
+<div id="stamp_position_container">
 <th:block th:each="i: ${#numbers.sequence(1, stampBoard.stampBoardSize)}">
     <div class="is-flex is-flex-direction-row is-align-items-center mb-2">
         <p class="mr-2" th:text="${i} + ' -'" style="width: 30px;"></p>
@@ -69,10 +70,10 @@ oninput="for(let item of document.getElementById('stampboardContainer').children
         </span>
     </div>
 </th:block>
-<div class="buttons">
-    <button class="button is-outlined is-success"><i class="fa fa-plus"></i></button>
-    <button class="button is-outlined is-danger"><i class="fa fa-times"></i></button>
 </div>
+<div class="buttons mb-5">
+    <button class="button is-outlined is-success" onclick="addRow()"><i class="fa fa-plus"></i></button>
+    <button class="button is-outlined is-danger" onclick="removeRow()"><i class="fa fa-times"></i></button>
 </div>
 
 <button class="button is-link">Save Changes</button>

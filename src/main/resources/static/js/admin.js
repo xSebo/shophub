@@ -85,9 +85,10 @@ function updateReward(e,index){
     let input = e.target;
     let group = Math.ceil(index/8);
     let child = index%8;
+
     if(e.data == input.value && input.value.length == 1){
         //Update appropriate number to icon
-        let elem = document.getElementById("stampboardContainer").children[group-1].children[child-1];
+        let elem = document.getElementById("stampboardContainer").children[group-1].children[(child-1==-1) ? 7 : child-1];
         if(elem.nodeName != "IMG"){
             const newItem = document.createElement('i');
             newItem.classList.add("fa")
@@ -97,10 +98,61 @@ function updateReward(e,index){
     }else{
         if(input.value == ""){
             //Remove icon and replace with index
-            let elem = document.getElementById("stampboardContainer").children[group-1].children[child-1];
+            console.log(group)
+            console.log(child)
+            let elem = document.getElementById("stampboardContainer").children[group-1].children[(child-1==-1) ? 7 : child-1];
+            console.log(elem)
             if(elem.nodeName != "IMG"){
                 elem.innerText = index.toString()
             }
         }
     }
 }
+
+function addRow(){
+    let rows = document.getElementById("stamp_position_container");
+    let index = rows.children.length + 1
+    let row = `<div class="is-flex is-flex-direction-row is-align-items-center mb-2">
+        <p class="mr-2" style="width: 30px;">${index} -</p>
+        <span class="control stamp-position-input">
+                <input type="text" class="input" placeholder="No reward" onInput="updateReward(event,${index});">
+        </span>
+    </div>`
+    rows.innerHTML += row;
+
+    let group = Math.ceil(index/8);
+    let child = index%8;
+    if(child == 1){
+        let colour = document.getElementById("colour-input").value
+        let elem = document.getElementById("stampboardContainer")
+        let x = `<div class="stampBoard" id="${group}" style="display: none; background-color:${colour};"></div>`
+        elem.innerHTML += x;
+    }
+    let elem = document.getElementById("stampboardContainer").children[group-1];
+    elem.innerHTML += `<div class="stamp">${index}</div>`;
+}
+
+function removeRow(){
+    let rows = document.getElementById("stamp_position_container");
+    if(rows.children.length != 1){
+        rows.lastElementChild.remove();
+
+        let elem = document.getElementById("stampboardContainer")
+        let lastBoard =elem.lastElementChild;
+        lastBoard.lastElementChild.remove();
+        if(lastBoard.children.length == 0){
+            pageNav(-1)
+            lastBoard.remove();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
