@@ -4,24 +4,126 @@
     <title>ShopHub | Dashboard</title>
     <link th:replace="fragments/libs.html :: bulma"/>
     <link th:replace="fragments/libs.html :: fa"/>
-    <link th:replace="fragments/nav.html :: nav-css"/>
+    <!-- <link th:replace="fragments/nav.html :: nav-css"/> -->
+    <link rel="stylesheet" type="text/css" href="css/viewShop.css">
 </head>
+<script src="/js/viewShop.js"></script>
 <body>
-    <div th:replace="fragments/nav.html :: nav"></div>
+    <!-- <div th:replace="fragments/nav.html :: nav"></div> -->
+    <div class="shopName" th:text="${shop.shopName}"></div>
+    <div class="container1">
+      <div class="multi-page-container">
+        <div id="1" class="stampBoard">
+          <div class="stamp">1</div>
+          <div class="stamp">2</div>
+          <img src="imgs/gear.png" class="stamp"></img>
+          <div class="stamp">4</div>
+          <div class="stamp">5</div>
+          <div class="stamp">6</div>
+          <img src="imgs/landscape.jpg" class="stamp"></img>
+          <div class="stamp">8</div>
+        </div>
+        <!-- <div id="3" style="display: none;" class="stampBoard">  example of a stamp board
+          <img src="imgs/landscape.jpg" class="stamp"></img>
+          <div class="stamp">18</div>
+          <img src="imgs/gear.png" class="stamp"></img>
+          <div class="stamp">19</div>
+          <div class="stamp">20</div>
+          <div class="stamp">21</div>
+          <img src="imgs/gear.png" class="stamp"></img>
+          <div class="stamp">22</div>
+        </div> -->
+      </div>
+      <div class="stampNavBar">
+        <div class="stampNavButton" onclick="pageNav(-1)"><</div>
+        <div class="stampNavButton" onclick="pageNav(1)" >></div>
+      </div>
+      <div class="rewardsContainer box">
+        <div class="reward is-fullwidth">
+          <p class="reward-text">2 free gears
+          <button class="button is-small buttonRewardNotReady">Cannot afford</button></p>
+          <progress class="progress is-small marginBottom7px" value="20" max="100">20%</progress>
+          <div class="stampProgressText">4 away from reward</div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-styling addLeftMargin">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-150x150">
+                <img th:src="${shop.shopImage}" class="imageSize" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="subtitle field is-grouped is-grouped-multiline socialMediaContainer">
+              <div class="control">
+                <div class="tags has-addons">
+                  <span class="tag is-large is-grey">
+                    <span class="icon-text">
+                      <span class="icon">
+                        <i class="fab fa-tiktok"></i>
+                      </span>
+                    </span>
+                  </span>
+                  <span href="#" class="tag is-large is-dark mousePointerWhenHovered">Tik Tok</span>
+                </div>
+              </div>
 
-    <div>
-        <h1>SHOP DETAILS <br></h1>
-        <h1 th:text="${shop.shopName}"></h1>
-        <p th:text="${shop.shopDescription}"></p>
-        <p th:text="${shop.shopWebsite}"></p>
-        <p th:text="${shop.shopEarnings}"></p>
-        <p th:text="${shop.shopCountries}"></p>
-        <img th:src="${shop.shopImage}" alt="">
-    </div>
-    <div>
-        <h1>STAMP BOARDS</h1>
-        <h1 th:text="${stampBoard.stampBoardSize}"></h1>
-    </div>
+              <div class="control">
+                <div class="tags has-addons">
+                  <span class="tag is-large is-grey">
+                    <span class="icon-text">
+                      <span class="icon">
+                        <i class="fab fa-facebook-f"></i>
+                      </span>
+                    </span>
+                  </span>
+                  <span href="#" class="tag is-large is-link mousePointerWhenHovered">Facebook</span>
+                </div>
+              </div>
+
+              <div class="control">
+                <div class="tags has-addons">
+                  <span class="tag is-large is-grey">
+                    <span class="icon-text">
+                      <span class="icon">
+                        <i class="fab fa-twitter"></i>
+                      </span>
+                    </span>
+                  </span>
+                  <span href="#" class="tag is-large is-info mousePointerWhenHovered">Twitter</span>
+                </div>
+              </div>
+
+              <div class="control">
+                <div class="tags has-addons">
+                  <span class="tag is-large is-grey">
+                    <span class="icon-text">
+                      <span class="icon">
+                        <i class="fab fa-instagram"></i>
+                      </span>
+                    </span>
+                  </span>
+                  <span href="#" class="tag is-large is-danger mousePointerWhenHovered">Instagram</span>
+                </div>
+              </div>
+
+            </div>
+            <!-- <div style="float: left;"><p class="subtitle is-6">Website link<br>Tik tok<br>Facebook<br>Instagram<br>Twitter</p><div> -->
+            </div>
+          </div>
+        <div class="content" style="margin-left: 1rem" th:text="${shop.shopDescription}"></div>
+        <footer class="card-footer">
+          <a th:href="${shop.shopWebsite}" class="card-footer-item websiteLinkText">Click for website</a>
+        </footer>
+      </div>
+      <!-- <h1 th:text="${shop.shopName}"></h1> -->
+      <!-- <p th:text="${shop.shopDescription}"></p> -->
+      <!-- <p th:text="${shop.shopWebsite}"></p> -->
+      <!-- <p th:text="${shop.shopEarnings}"></p> -->
+      <!-- <p th:text="${shop.shopCountries}"></p> -->
+      <!-- <img th:src="${shop.shopImage}" alt=""> -->
+      <!-- <h1 th:text="${stampBoard.stampBoardSize}"></h1> -->
 
 </body>
 </html>
