@@ -51,7 +51,16 @@ public class BusinessRegisterSaver {
 
     public void save(BusinessRegisterDTO business, long userId){
 
-        StampBoards stampBoard = stampBoards.findById(1L).get();
+        String query = "INSERT INTO Stamp_Boards (Stamp_Board_Size) VALUES (8)";
+        jdbc.execute(query);
+
+        long currentStampId = stampBoards.findAll().get(stampBoards.findAll().size()-1).getStampBoardId();
+        String rewardsQuery = "INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES (\"10% off\", 4," +
+                currentStampId +  ")";
+        //System.out.println(rewardsQuery);
+        jdbc.execute(rewardsQuery);
+
+        StampBoards stampBoard = stampBoards.findAll().get(stampBoards.findAll().size()-1);
 
         Categories category;
 
@@ -85,7 +94,7 @@ public class BusinessRegisterSaver {
             tagsRepo.save(tag);
 
 
-            String query = "INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES ("+ shop.getShopId() +
+            query = "INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES ("+ shop.getShopId() +
                     ","+tag.getTagId() + ")";
 
             jdbc.execute(query);
@@ -97,14 +106,6 @@ public class BusinessRegisterSaver {
         socialsRepo.save(new Socials(shop, "Instagram", business.getInstagram()));
         socialsRepo.save(new Socials(shop, "TikTok", business.getTiktok()));
 
-        String query = "INSERT INTO Stamp_Boards (Stamp_Board_Size) VALUES (8)";
-        jdbc.execute(query);
-
-        long currentStampId = stampBoards.findAll().get(stampBoards.findAll().size()-1).getStampBoardId();
-        String rewardsQuery = "INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES (\"10% off\", 4," +
-                currentStampId +  ")";
-        System.out.println(rewardsQuery);
-        jdbc.execute(rewardsQuery);
 
         //System.out.println(shop.getShopId());
 
