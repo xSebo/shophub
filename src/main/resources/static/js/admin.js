@@ -1,3 +1,5 @@
+// noinspection DuplicatedCode
+
 function toggle_tab(tab){
     Array.prototype.forEach.call(
         document.getElementsByClassName("admin-tab"),
@@ -64,6 +66,7 @@ function checkTab(){
 
 function loadFile(event){
     var preview = document.getElementById('icon_preview');
+    document.getElementById("file-name").innerText = event.target.files[0].name;
     let tmpURL = URL.createObjectURL(event.target.files[0]);
     preview.src = tmpURL
     for(let item of document.getElementById('stampboardContainer').children){
@@ -75,5 +78,29 @@ function loadFile(event){
     }
     preview.onload = function() {
         URL.revokeObjectURL(preview.src) // free memory
+    }
+}
+
+function updateReward(e,index){
+    let input = e.target;
+    let group = Math.ceil(index/8);
+    let child = index%8;
+    if(e.data == input.value && input.value.length == 1){
+        //Update appropriate number to icon
+        let elem = document.getElementById("stampboardContainer").children[group-1].children[child-1];
+        if(elem.nodeName != "IMG"){
+            const newItem = document.createElement('i');
+            newItem.classList.add("fa")
+            newItem.classList.add("fa-gift")
+            elem.replaceChild(newItem, elem.childNodes[0]);
+        }
+    }else{
+        if(input.value == ""){
+            //Remove icon and replace with index
+            let elem = document.getElementById("stampboardContainer").children[group-1].children[child-1];
+            if(elem.nodeName != "IMG"){
+                elem.innerText = index.toString()
+            }
+        }
     }
 }

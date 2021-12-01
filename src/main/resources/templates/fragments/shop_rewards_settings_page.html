@@ -49,7 +49,7 @@ oninput="for(let item of document.getElementById('stampboardContainer').children
             Choose a file…
         </span>
     </span>
-        <span class="file-name">No File Selected</span>
+        <span class="file-name" id="file-name">No File Selected</span>
     </label>
 </div>
 
@@ -60,14 +60,19 @@ oninput="for(let item of document.getElementById('stampboardContainer').children
         <p class="mr-2" th:text="${i} + ' -'" style="width: 30px;"></p>
         <span class="control stamp-position-input">
             <th:block th:unless="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}">
-                <input type="text" class="input" placeholder="No reward">
+                <input type="text" class="input" placeholder="No reward" th:oninput="'updateReward(event,'+${i}+');'">
             </th:block>
             <th:block th:if="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}">
-                <input type="text" class="input" placeholder="No reward" th:value="${@thymeMath.getRewardTextFromId(stampBoard.rewards,i)}">
+                <input type="text" class="input" placeholder="No reward" th:oninput="'updateReward(event,'+${i}+');'"
+                       th:value="${@thymeMath.getRewardTextFromId(stampBoard.rewards,i)}">
             </th:block>
         </span>
     </div>
 </th:block>
+<div class="buttons">
+    <button class="button is-outlined is-success"><i class="fa fa-plus"></i></button>
+    <button class="button is-outlined is-danger"><i class="fa fa-times"></i></button>
+</div>
 </div>
 
 <button class="button is-link">Save Changes</button>
