@@ -26,27 +26,20 @@ public class UserSocialSave {
     public void updateSocials(UserSocialDTO usDTO){
         int shopId = usDTO.getShopId();
         String query;
-        if(!usDTO.getInstagram().equalsIgnoreCase("")){
-            query = queryGenerator(shopId, "Instagram", usDTO.getInstagram());
-            System.out.println(query);
-            jdbc.execute(query);
-            System.out.println("Instagram updated");
-        }
-        if(!usDTO.getFacebook().equalsIgnoreCase("")){
-            query = queryGenerator(shopId, "Facebook", usDTO.getFacebook());
-            jdbc.execute(query);
-        }
-        if(!usDTO.getTwitter().equalsIgnoreCase("")){
-            query = queryGenerator(shopId, "Twitter", usDTO.getTwitter());
-            jdbc.execute(query);
-        }
-        if(!usDTO.getTiktok().equalsIgnoreCase("")){
-            query = queryGenerator(shopId, "TikTok", usDTO.getTiktok());
-            jdbc.execute(query);
-        }
-        if(!usDTO.getShopUrl().equalsIgnoreCase("")){
-            //DO SOMETHING
-        }
+        query = queryGenerator(shopId, "Instagram", usDTO.getInstagram());
+        jdbc.execute(query);
+        query = queryGenerator(shopId, "Facebook", usDTO.getFacebook());
+        jdbc.execute(query);
+        query = queryGenerator(shopId, "Twitter", usDTO.getTwitter());
+        jdbc.execute(query);
+        query = queryGenerator(shopId, "TikTok", usDTO.getTiktok());
+        jdbc.execute(query);
+        query = "UPDATE Shops SET Shop_Website = '" +
+                usDTO.getShopUrl() +
+                "' WHERE Shop_Id = " + shopId;
+
+        jdbc.execute(query);
+
     }
 
 }

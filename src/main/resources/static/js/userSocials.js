@@ -6,7 +6,8 @@ function send(shopId){
     params += "&facebook=" + document.getElementById("facebook").value
     params += "&twitter=" + document.getElementById("twitter").value
     params += "&tiktok=" + document.getElementById("tiktok").value
-    params += "&shopUrl=" + document.getElementById("shopUrl").value
+    params += "&shopUrl=" +
+        document.getElementById("shopUrlPrefix").value + document.getElementById("shopUrl").value
 
     xhttp.open("POST", '/updateSocials', true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
