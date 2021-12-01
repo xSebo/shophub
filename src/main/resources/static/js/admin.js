@@ -51,3 +51,13 @@ function pageNav(direction){
     }
 }
 
+function checkTab(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const tab = urlParams.get('tab')
+    if (tab != null){
+        if(document.getElementById(tab+"-tab") != undefined){
+            toggle_tab(tab);
+        }
+    }
+}
