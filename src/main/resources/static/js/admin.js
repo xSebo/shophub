@@ -61,3 +61,19 @@ function checkTab(){
         }
     }
 }
+
+function loadFile(event){
+    var preview = document.getElementById('icon_preview');
+    let tmpURL = URL.createObjectURL(event.target.files[0]);
+    preview.src = tmpURL
+    for(let item of document.getElementById('stampboardContainer').children){
+        for(let child of item.children){
+            if(child.nodeName == "IMG"){
+                child.src = tmpURL;
+            }
+        }
+    }
+    preview.onload = function() {
+        URL.revokeObjectURL(preview.src) // free memory
+    }
+}

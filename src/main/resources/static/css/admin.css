@@ -222,6 +222,9 @@ html{
 	background-color: white;
 	font-size: 40px;
 	font-weight: lighter;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 img.stamp{
@@ -267,7 +270,11 @@ img.stamp{
 	color:#8f8f8f;
 }
 
-
+.icon_preview{
+	height: 50px;
+	width: 50px;
+	border-radius: 100px;
+}
 
 .stamp-position-input{
 	width: 300px;
