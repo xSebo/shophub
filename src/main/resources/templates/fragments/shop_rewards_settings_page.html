@@ -29,11 +29,13 @@
     </div>
 </div>
 <h2 class="title is-3 secondary">Stamp Positions</h2>
-    <div class="is-flex is-flex-direction-row is-align-items-center">
-        <p class="mr-2">1 -</p>
-        <span class="control stamp-position-input">
-            <input type="text" class="input" placeholder="No reward">
-        </span>
-    </div>
+    <th:block th:each="i: ${#numbers.sequence(1, stampBoard.stampBoardSize)}">
+        <div class="is-flex is-flex-direction-row is-align-items-center mb-2">
+            <p class="mr-2" th:text="${i} + ' -'" style="width: 30px;"></p>
+            <span class="control stamp-position-input">
+                <input type="text" class="input" placeholder="No reward">
+            </span>
+        </div>
+    </th:block>
 </body>
 </html>
