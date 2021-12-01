@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="css/bulma.min.css">
+<link rel="stylesheet" type="text/css" href="css/userSocials.css">
+<link th:replace="fragments/libs.html :: bulma"/>
+<link th:replace="fragments/libs.html :: fa"/>
+
+<script src="js/userSocials.js"></script>
+
+<body th:fragment="userSocial">
+<div class="wholeSocialContainer" style="width:100%">
+        <h6 class="subtitle is-6">Socials</h6>
+        <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-instagram"></i>
+                                </span>
+        <div class="field has-addons" style="display: flex;justify-content: center">
+            <p class="control">
+                <input value="instagram.com/" class="input" disabled>
+            </p>
+            <p class="control">
+                <input class="input" id="instagram" type="url" style="width:100%; align-content:center">
+            </p>
+        </div>
+        <!--                        <input class="input socialInput">-->
+        </div>
+        <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-facebook-f"></i>
+                                </span>
+        <div class="field has-addons" style="display: flex;justify-content: center">
+            <p class="control">
+                <input value="facebook.com/" class="input" disabled>
+            </p>
+            <p class="control">
+                <input class="input" id="facebook" type="url" style="width:100%; align-content:center">
+            </p>
+        </div>
+        <!--                        <input class="input socialInput">-->
+        </div>
+        <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-twitter"></i>
+                                </span>
+        <div class="field has-addons" style="display: flex;justify-content: center">
+            <p class="control">
+                <input value="twitter.com/" class="input" disabled>
+            </p>
+            <p class="control">
+                <input class="input" id="twitter" type="url" style="width:100%; align-content:center">
+            </p>
+        </div>
+        <!--                        <input class="input socialInput">-->
+        </div>
+        <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-tiktok"></i>
+                                </span>
+        <div class="field has-addons" style="display: flex;justify-content: center">
+            <p class="control">
+                <input value="tiktok.com/@" class="input" disabled>
+            </p>
+            <p class="control">
+                <input class="input" id="tiktok" type="url" style="width:100%; align-content:center">
+            </p>
+        </div>
+    </div>
+    <h6 class="subtitle is-6">Shop URL</h6>
+    <input id="shopUrl" class="input" type="url" value="test" style="width:36%">
+    <button class="button is-link" style="margin-top: 5px" th:onclick="'send('+${shopId}+');'">Save changes</button>
+</div>
+</body>
+
+</html>
