@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="/js/admin.js"></script>
 	<link rel="stylesheet" href="/static/css/admin.css">
 </head>
-<body onload="document.getElementById('1').style.display = 'flex'; checkTab()">
+<body onload="document.getElementById('1').style.display = 'flex';">
 	<div th:replace="fragments/nav.html :: nav"></div>
 	<div id="adminPage">
 		<div class="sidebar" th:if="${highestPerm > 1}">
@@ -51,5 +51,6 @@
 			</section>
 		</main>
 	</div>
+	<script>checkTab();</script>
 </body>
 </html>
