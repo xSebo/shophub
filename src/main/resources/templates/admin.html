@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ShopHub | Dashboard</title>
+	<link th:replace="fragments/libs.html :: bulma"/>
+	<link th:replace="fragments/libs.html :: fa"/>
+	<link th:replace="fragments/nav.html :: nav-css"/>	<link rel="stylesheet" href="/css/admin.css">
+
+	<script type="text/javascript" src="/js/admin.js"></script>
+	<link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+	<div th:replace="fragments/nav.html :: nav"></div>
+	<div id="adminPage">
+		<div class="sidebar" th:if="${highestPerm > 1}">
+			<div class="admin-tab active" onclick="toggle_tab('profile')" id="profile-tab">
+				<div class="baseIcon">
+					<i class="fas fa-user fa-lg"></i>
+				</div>
+				<p>Profile</p>
+			</div>
+			<div class="admin-tab" onclick="toggle_tab('shop-settings')" id="shop-settings-tab">
+				<div class="baseIcon">
+					<i class="fas fa-shopping-basket fa-lg"></i>
+				</div>
+				<p>Shop Settings</p>
+			</div>
+			<div class="admin-tab" onclick="toggle_tab('shop-rewards')" id="shop-rewards-tab">
+				<div class="baseIcon">
+					<i class="fas fa-star fa-lg"></i>
+				</div>
+				<p>Shop Rewards</p>
+			</div>
+		</div>
+		<main th:if="${highestPerm > 1}">
+			<section id="profile-section" class="admin-section active">
+				<div th:replace="fragments/user_settings.html :: settings_page"/>
+			</section>
+
+			<section id="shop-settings-section" class="admin-section">
+				<h1 class="title">Shop Settings</h1>
+				<p th:text="${stampBoard}"></p>
+			</section>
+
+			<section id="shop-rewards-section" class="admin-section">
+				<h1 class="title">Shop Rewards</h1>
+			</section>
+		</main>
+		<main th:unless="${highestPerm > 1}">
+			<section class="admin-section active">
+				<div th:replace="fragments/user_settings.html :: settings_page"/>
+			</section>
+		</main>
+	</div>
+</body>
+</html>
