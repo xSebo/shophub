@@ -4,3 +4,153 @@
   height: 60vh;
   top: 4vh;
 }
+
+.shopName{
+  position: absolute;
+  width: 55%;
+  top: 8vh;
+  font-size: 45px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card-styling{
+  width: 550px;
+  margin: 15px;
+  top: 20vh;
+}
+
+.businessImg{
+  height: 413px !important;
+  width: 550px !important;
+}
+
+.addLeftMargin{
+  margin-left: 50px;
+}
+
+.imageSize{
+  height: 150px !important;
+  width: 150px !important;
+}
+
+.socialMediaContainer{
+  float: left;
+  width: 320px;
+  height: 130px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.mousePointerWhenHovered{
+  cursor: pointer;
+}
+
+.websiteLinkText{
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+}
+
+.stampBoard{
+  width: 400px;
+  height: 195px;
+  background-color: grey;
+  border-radius: 30px 30px 0px 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.stamp{
+  margin: 15px;
+  margin-bottom: 0px;
+  height: 70px;
+  width: 70px;
+  border-radius: 35px;
+  text-align: center;
+  background-color: white;
+  font-size: 40px;
+  font-weight: lighter;
+}
+
+img.stamp{
+    height: 70px;
+    width: 70px;
+    padding: 10px;
+}
+
+.multi-page-container{
+  position: relative;
+}
+
+.container1{
+  top: 10vh;
+  right: 10vh;
+  position: absolute;
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: purple;
+}
+
+.stampNavBar{
+  width: 400px;
+  height: 35px;
+  align-items: stretch;
+  background-color: red;
+  display: flex;
+}
+
+.stampNavBar>div {
+  flex: 1;
+  border-top-width: 2px;
+}
+
+
+.stampNavButton{
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  font-weight: bold;
+  background-color: grey;
+  cursor: pointer;
+}
+
+.stampNavButton:hover{
+  background-color: #c9c9c9;
+}
+
+.rewardsContainer{
+  width: 400px;
+  height: 550px;
+  border-radius: 0px 0px 30px 30px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.reward {
+  border-top-style: solid;
+  border-top-width: 1px;
+  height: 75px;
+}
+
+.buttonRewardNotReady{
+  background-color: rgb(216, 216, 216);
+  float: right;
+}
+
+.stampProgressText{
+  width: 100%;
+  text-align: center;
+}
+
+.reward-text{
+  font-size: 15px;
+  margin: 13px;
+}
+
+.marginBottom7px{
+  margin-bottom: 7px;
+}

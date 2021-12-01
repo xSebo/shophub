@@ -24,6 +24,8 @@ public class StampBoards {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long stampBoardId;
     private int stampBoardSize;
+    private String stampBoardColour;
+    private String stampBoardIcon;
 
     @OneToMany
     @JoinColumn(name="Stamp_Board_Id")
