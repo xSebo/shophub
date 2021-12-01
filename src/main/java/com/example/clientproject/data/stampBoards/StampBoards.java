@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,11 +21,17 @@ import java.util.Set;
 @Entity
 public class StampBoards {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long stampBoardId;
     private int stampBoardSize;
 
     @OneToMany
     @JoinColumn(name="Stamp_Board_Id")
-    private Set<Rewards> rewards;
+    private List<Rewards> rewards = new ArrayList<>();
+
+    public StampBoards(int aStampBoardId, int aBoardSize){
+        this.stampBoardId = aStampBoardId;
+        this.stampBoardSize = aBoardSize;
+    }
+
 }

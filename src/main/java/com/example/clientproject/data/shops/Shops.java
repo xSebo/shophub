@@ -73,7 +73,7 @@ public class Shops {
     )
     private List<Tags> shopTags;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="Stamp_Board_Id")
     private StampBoards stampBoard;
 

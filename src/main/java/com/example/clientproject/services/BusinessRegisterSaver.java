@@ -2,6 +2,8 @@ package com.example.clientproject.services;
 
 import com.example.clientproject.data.categories.Categories;
 import com.example.clientproject.data.categories.CategoriesRepo;
+import com.example.clientproject.data.rewards.Rewards;
+import com.example.clientproject.data.rewards.RewardsRepo;
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.socials.Socials;
@@ -44,9 +46,13 @@ public class BusinessRegisterSaver {
     @Autowired
     LinkUserShop linkShop;
 
+    @Autowired
+    RewardsRepo rewardsRepo;
+
     public void save(BusinessRegisterDTO business, long userId){
 
         StampBoards stampBoard = stampBoards.findById(1L).get();
+
         Categories category;
 
         category = categoriesRepo.findByName(business.getBusinessCategory());
@@ -61,7 +67,9 @@ public class BusinessRegisterSaver {
                 stampBoard,
                 category);
 
-        System.out.println(category.getCategoryId());
+        //System.out.println(category.getCategoryId());
+
+        //System.out.println(shop.getStampBoard());
 
         shopsRepo.save(shop);
         List<Tags> tagsList = tagsRepo.findAll();
@@ -89,7 +97,14 @@ public class BusinessRegisterSaver {
         socialsRepo.save(new Socials(shop, "Instagram", business.getInstagram()));
         socialsRepo.save(new Socials(shop, "TikTok", business.getTiktok()));
 
+        String query = "INSERT INTO Stamp_Boards (Stamp_Board_Size) VALUES (8)";
+        jdbc.execute(query);
 
+        long currentStampId = stampBoards.findAll().get(stampBoards.findAll().size()-1).getStampBoardId();
+        String rewardsQuery = "INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES (\"10% off\", 4," +
+                currentStampId +  ")";
+        System.out.println(rewardsQuery);
+        jdbc.execute(rewardsQuery);
 
         //System.out.println(shop.getShopId());
 
