@@ -280,5 +280,8 @@ img.stamp{
 	width: 300px;
 }
 
-
+#stamp_position_container{
+	max-height: 500px;
+	overflow-y: auto;
+}
 
