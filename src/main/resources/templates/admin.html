@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="/js/admin.js"></script>
 	<link rel="stylesheet" href="/static/css/admin.css">
 </head>
-<body>
+<body onload="document.getElementById('1').style.display = 'flex'; checkTab()">
 	<div th:replace="fragments/nav.html :: nav"></div>
 	<div id="adminPage">
 		<div class="sidebar" th:if="${highestPerm > 1}">
@@ -19,11 +19,11 @@
 				</div>
 				<p>Profile</p>
 			</div>
-			<div class="admin-tab" onclick="toggle_tab('shop-settings')" id="shop-settings-tab">
+			<div class="admin-tab" onclick="toggle_tab('shop-setup')" id="shop-setup-tab">
 				<div class="baseIcon">
 					<i class="fas fa-shopping-basket fa-lg"></i>
 				</div>
-				<p>Shop Settings</p>
+				<p>Shop Setup</p>
 			</div>
 			<div class="admin-tab" onclick="toggle_tab('shop-rewards')" id="shop-rewards-tab">
 				<div class="baseIcon">
@@ -37,13 +37,12 @@
 				<div th:replace="fragments/user_settings.html :: settings_page"/>
 			</section>
 
-			<section id="shop-settings-section" class="admin-section">
-				<h1 class="title">Shop Settings</h1>
-				<p th:text="${stampBoard}"></p>
+			<section id="shop-setup-section" class="admin-section">
+				<h1 class="title">Shop Setup</h1>
 			</section>
 
 			<section id="shop-rewards-section" class="admin-section">
-				<h1 class="title">Shop Rewards</h1>
+				<div th:replace="fragments/shop_rewards_settings_page.html :: rewards"/>
 			</section>
 		</main>
 		<main th:unless="${highestPerm > 1}">
