@@ -8,44 +8,45 @@
     <link rel="stylesheet" type="text/css" href="css/viewShop.css">
 </head>
 <script src="/js/viewShop.js"></script>
-<body>
+<body onload="document.getElementById('1').style.display = 'flex'">
     <!-- <div th:replace="fragments/nav.html :: nav"></div> -->
     <div class="shopName" th:text="${shop.shopName}"></div>
+    <p th:text="${stampBoard}"></p>
     <div class="container1">
-      <div class="multi-page-container">
-        <div id="1" class="stampBoard">
-          <div class="stamp">1</div>
-          <div class="stamp">2</div>
-          <img src="imgs/gear.png" class="stamp"></img>
-          <div class="stamp">4</div>
-          <div class="stamp">5</div>
-          <div class="stamp">6</div>
-          <img src="imgs/landscape.jpg" class="stamp"></img>
-          <div class="stamp">8</div>
-        </div>
-        <!-- <div id="3" style="display: none;" class="stampBoard">  example of a stamp board
-          <img src="imgs/landscape.jpg" class="stamp"></img>
-          <div class="stamp">18</div>
-          <img src="imgs/gear.png" class="stamp"></img>
-          <div class="stamp">19</div>
-          <div class="stamp">20</div>
-          <div class="stamp">21</div>
-          <img src="imgs/gear.png" class="stamp"></img>
-          <div class="stamp">22</div>
-        </div> -->
-      </div>
-      <div class="stampNavBar">
-        <div class="stampNavButton" onclick="pageNav(-1)"><i class="fas fa-angle-left"></i></div>
-        <div class="stampNavButton" onclick="pageNav(1)" ><i class="fas fa-angle-right"></i></div>
-      </div>
+				<div class="multi-page-container">
+					<th:block th:each="i : ${#numbers.sequence(1, stampBoard.stampBoardSize)}" th:with="j=${i}">
+						<th:block th:if="${i%8==1}" th:utext="'&lt;div class=&#34;stampBoard&#34; id=&#34;'+ ${@thymeMath.ceil(i,8)} +'&#34; style=&#34;display:none;background-color:'+${stampBoard.stampBoardColour}+';&#34;&gt;'"/>
+
+            <th:block th:switch="${UserStampPos[0]>=j}">
+              <img src="imgs/icon.png" class="stamp" th:case="true"></img>
+              <th:block th:case="false">
+                <div class="stamp" th:text="${j}" th:unless="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), j)}"></div>
+                <div class="stamp" th:if="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), j)}">
+                  <i class="fa fa-gift"></i>
+                </div>
+              </th:block>
+            </th:block>
+
+					<th:block th:if="${i%8==0 || i==stampBoard.stampBoardSize}" th:utext="'&lt;/div&gt;'"/>
+					</th:block>
+				</div>
+				<div class="stampNavBar">
+					<div class="stampNavButton" onclick="pageNav(-1)"><i class="fas fa-angle-left"></i></div>
+					<div class="stampNavButton" onclick="pageNav(1)" ><i class="fas fa-angle-right"></i></div>
+				</div>
+
       <div class="rewardsContainer box">
-        <div class="reward is-fullwidth">
-          <p class="reward-text">2 free gears
-          <button class="button is-small buttonRewardNotReady">Cannot afford</button></p>
-          <progress class="progress is-small marginBottom7px" value="20" max="100">20%</progress>
-          <div class="stampProgressText">4 away from reward</div>
+        <div th:each="reward : ${stampBoard.rewards}" class="reward is-fullwidth">
+          <p class="reward-text" th:text="${reward.rewardName}"></p>
+          <button th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardNotReady">Cannot afford</button>
+          <button th:if="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardisReady">Click to claim!</button>
+          <progress class="progress is-small marginBottom7px" th:style="background: ${stampBoard.}"th:value="${UserStampPos[0]}" th:max="${reward.rewardStampLocation}"></progress>
+          <!-- TH:STYLE HAS NOT BEEN SET SO EXPECT AN ERROR -->
+          <p class="stampProgressText" th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" th:text="${reward.rewardStampLocation - UserStampPos[0]} + ' away from reward'"/>
+          <p th:if="${UserStampPos[0]>=reward.rewardStampLocation}" text="Reward has been reached!"/>
         </div>
       </div>
+
     </div>
     <div class="card card-styling addLeftMargin">
         <div class="card-content">

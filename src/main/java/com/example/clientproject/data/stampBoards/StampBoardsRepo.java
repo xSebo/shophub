@@ -25,4 +25,5 @@ public interface StampBoardsRepo extends JpaRepository<StampBoards, Long> {
      */
     @Query("SELECT s from StampBoards s where s.stampBoardId = ?1")
     Optional<StampBoards> findById(long id);
+
 }

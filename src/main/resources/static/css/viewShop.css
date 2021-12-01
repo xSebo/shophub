@@ -133,12 +133,19 @@ img.stamp{
 .reward {
   border-top-style: solid;
   border-top-width: 1px;
-  height: 75px;
+  height: 125px;
 }
 
 .buttonRewardNotReady{
   background-color: rgb(216, 216, 216);
   float: right;
+  margin-top: 10px;
+}
+
+.buttonRewardisReady{
+  background-color: green;
+  float: right;
+  margin-top: 10px;
 }
 
 .stampProgressText{
@@ -149,6 +156,8 @@ img.stamp{
 .reward-text{
   font-size: 15px;
   margin: 13px;
+  width: 200;
+  float: left;
 }
 
 .marginBottom7px{
