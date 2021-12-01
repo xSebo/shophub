@@ -54,7 +54,7 @@ public class BusinessDetails {
         try {
             shop = shopsRepo.getById(Long.valueOf(shopId));
             try {
-                stampBoard = stampRepo.findById(Long.valueOf(shopId)).get();
+                stampBoard = shop.getStampBoard();
             }catch(NoSuchElementException e){
                 stampBoard = stampRepo.findById(1L).get();
             }
