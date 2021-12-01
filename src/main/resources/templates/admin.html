@@ -19,11 +19,11 @@
 				</div>
 				<p>Profile</p>
 			</div>
-			<div class="admin-tab" onclick="toggle_tab('shop-settings')" id="shop-settings-tab">
+			<div class="admin-tab" onclick="toggle_tab('shop-setup')" id="shop-setup-tab">
 				<div class="baseIcon">
 					<i class="fas fa-shopping-basket fa-lg"></i>
 				</div>
-				<p>Shop Settings</p>
+				<p>Shop Setup</p>
 			</div>
 			<div class="admin-tab" onclick="toggle_tab('shop-rewards')" id="shop-rewards-tab">
 				<div class="baseIcon">
@@ -37,31 +37,12 @@
 				<div th:replace="fragments/user_settings.html :: settings_page"/>
 			</section>
 
-			<section id="shop-settings-section" class="admin-section">
-				<h1 class="title">Shop Settings</h1>
-				<p th:text="${stampBoard}"></p>
-
-				<div class="container1">
-					<div class="multi-page-container">
-						<th:block th:each="i: ${#numbers.sequence(1, stampBoard.stampBoardSize)}">
-							<th:block th:if="${i%8==1}" th:utext="'&lt;div class=&#34;stampBoard&#34; id=&#34;'+ ${@thymeMath.ceil(i,8)} +
-							'&#34; style=&#34;display:none;background-color:'+${stampBoard.stampBoardColour}+';&#34;&gt;'"/>
-								<div class="stamp" th:text="${i}" th:unless="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}"></div>
-								<div class="stamp" th:if="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}">
-									<i class="fa fa-gift"></i>
-								</div>
-							<th:block th:if="${i%8==0 || i==stampBoard.stampBoardSize}" th:utext="'&lt;/div&gt;'"/>
-						</th:block>
-					</div>
-					<div class="stampNavBar">
-						<div class="stampNavButton" onclick="pageNav(-1)"><i class="fas fa-angle-left"></i></div>
-						<div class="stampNavButton" onclick="pageNav(1)" ><i class="fas fa-angle-right"></i></div>
-					</div>
-				</div>
+			<section id="shop-setup-section" class="admin-section">
+				<h1 class="title">Shop Setup</h1>
 			</section>
 
 			<section id="shop-rewards-section" class="admin-section">
-				<h1 class="title">Shop Rewards</h1>
+				<div th:replace="fragments/shop_rewards_settings_page.html :: rewards"/>
 			</section>
 		</main>
 		<main th:unless="${highestPerm > 1}">
