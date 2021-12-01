@@ -33,7 +33,12 @@
         <div class="is-flex is-flex-direction-row is-align-items-center mb-2">
             <p class="mr-2" th:text="${i} + ' -'" style="width: 30px;"></p>
             <span class="control stamp-position-input">
-                <input type="text" class="input" placeholder="No reward">
+                <th:block th:unless="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}">
+                    <input type="text" class="input" placeholder="No reward">
+                </th:block>
+                <th:block th:if="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}">
+                    <input type="text" class="input" placeholder="No reward" th:value="${@thymeMath.getRewardTextFromId(stampBoard.rewards,i)}">
+                </th:block>
             </span>
         </div>
     </th:block>
