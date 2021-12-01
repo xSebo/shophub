@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="/js/admin.js"></script>
 	<link rel="stylesheet" href="/static/css/admin.css">
 </head>
-<body>
+<body onload="document.getElementById('1').style.display = 'flex'">
 	<div th:replace="fragments/nav.html :: nav"></div>
 	<div id="adminPage">
 		<div class="sidebar" th:if="${highestPerm > 1}">
@@ -40,6 +40,24 @@
 			<section id="shop-settings-section" class="admin-section">
 				<h1 class="title">Shop Settings</h1>
 				<p th:text="${stampBoard}"></p>
+
+				<div class="container1">
+					<div class="multi-page-container">
+						<th:block th:each="i: ${#numbers.sequence(1, stampBoard.stampBoardSize)}">
+							<th:block th:if="${i%8==1}" th:utext="'&lt;div class=&#34;stampBoard&#34; id=&#34;'+ ${@thymeMath.ceil(i,8)} +
+							'&#34; style=&#34;display:none;background-color:'+${stampBoard.stampBoardColour}+';&#34;&gt;'"/>
+								<div class="stamp" th:text="${i}" th:unless="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}"></div>
+								<div class="stamp" th:if="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}">
+									<i class="fa fa-gift"></i>
+								</div>
+							<th:block th:if="${i%8==0 || i==stampBoard.stampBoardSize}" th:utext="'&lt;/div&gt;'"/>
+						</th:block>
+					</div>
+					<div class="stampNavBar">
+						<div class="stampNavButton" onclick="pageNav(-1)"><i class="fas fa-angle-left"></i></div>
+						<div class="stampNavButton" onclick="pageNav(1)" ><i class="fas fa-angle-right"></i></div>
+					</div>
+				</div>
 			</section>
 
 			<section id="shop-rewards-section" class="admin-section">
