@@ -37,5 +37,10 @@ public class UsersSearchImpl implements UsersSearch {
             return Optional.empty();
         }
     }
+
+    @Override
+    public Users save(Users user) {
+        return usersRepo.save(user);
+    }
 }
 
