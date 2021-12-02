@@ -1,5 +1,6 @@
 package com.example.clientproject.service.searches;
 
+import com.example.clientproject.data.users.Users;
 import com.example.clientproject.service.dtos.UsersDTO;
 
 import java.util.List;
@@ -9,4 +10,6 @@ public interface UsersSearch {
     List<UsersDTO> findAll();
 
     Optional<UsersDTO> findByEmail(String email);
+
+    Users save(Users user);
 }
