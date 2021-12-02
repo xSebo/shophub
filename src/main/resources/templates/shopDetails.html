@@ -11,7 +11,6 @@
 <body onload="document.getElementById('1').style.display = 'flex'">
     <!-- <div th:replace="fragments/nav.html :: nav"></div> -->
     <div class="shopName" th:text="${shop.shopName}"></div>
-    <p th:text="${stampBoard}"></p>
     <div class="container1">
 				<div class="multi-page-container">
 					<th:block th:each="i : ${#numbers.sequence(1, stampBoard.stampBoardSize)}" th:with="j=${i}">
@@ -40,10 +39,10 @@
           <p class="reward-text" th:text="${reward.rewardName}"></p>
           <button th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardNotReady">Cannot afford</button>
           <button th:if="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardisReady">Click to claim!</button>
-          <progress class="progress is-small marginBottom7px" th:style="background: ${stampBoard.}"th:value="${UserStampPos[0]}" th:max="${reward.rewardStampLocation}"></progress>
+          <progress class="progress is-small marginBottom7px is-success" th:value="${UserStampPos[0]}" th:max="${reward.rewardStampLocation}"></progress>
           <!-- TH:STYLE HAS NOT BEEN SET SO EXPECT AN ERROR -->
           <p class="stampProgressText" th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" th:text="${reward.rewardStampLocation - UserStampPos[0]} + ' away from reward'"/>
-          <p th:if="${UserStampPos[0]>=reward.rewardStampLocation}" text="Reward has been reached!"/>
+          <p class="stampProgressText" th:if="${UserStampPos[0]>=reward.rewardStampLocation}">Reward has been reached!</p>
         </div>
       </div>
 
