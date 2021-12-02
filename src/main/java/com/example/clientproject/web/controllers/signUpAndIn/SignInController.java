@@ -154,6 +154,10 @@ public class SignInController {
         } else {
             //Changed this as it is a security risk exposing which field is incorrect
             //throw new ForbiddenErrorException("Email Incorrect");
+            System.out.println(loginForm.getLoginEmail());
+            System.out.println(usersSearch.findAll().size());
+            usersSearch.findAll().forEach(x -> System.out.println(x.getUserEmail()));
+            System.out.println("TEST");
             throw new ForbiddenErrorException("Details Incorrect");
         }
 
