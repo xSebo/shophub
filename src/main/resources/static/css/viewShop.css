@@ -91,7 +91,6 @@ img.stamp{
   height: auto;
   display: flex;
   flex-direction: column;
-  background-color: purple;
 }
 
 .stampNavBar{
@@ -140,12 +139,14 @@ img.stamp{
   background-color: rgb(216, 216, 216);
   float: right;
   margin-top: 10px;
+  font-weight: bold;
 }
 
 .buttonRewardisReady{
-  background-color: green;
+  background-color: #48c774;
   float: right;
   margin-top: 10px;
+  font-weight: bold;
 }
 
 .stampProgressText{
@@ -157,6 +158,7 @@ img.stamp{
   font-size: 15px;
   margin: 13px;
   width: 200;
+  font-weight: bold;
   float: left;
 }
 

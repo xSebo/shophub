@@ -52,12 +52,12 @@ INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Sho
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Schoen Group','','SchoenGroup.com','10783','FR France','shopPic.png',0,1,1);
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Homenick and Sons','The best burrito place in New York, our owner Benjamin has moved to New York to bring over his families techniques and recipes that have been blessing tastebuds of customers for years.user_stamp_boards ','HomenickandSons.com','14948','SM San Marino','shopPic.png',0,1,1);
 
-INSERT INTO stamp_boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (14, "#ffc5c5", "blank.png");
+INSERT INTO stamp_boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (14, "#ffc5c5", "imgs/burrito.png");
 INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ("Free medium Burrito", 4, 2);
 INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ("Free delivery", 7, 2);
 INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ("2 for 1 deal", 12, 2);
 
-INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Bens Burritos','','BensBurritos.com','13708','SM San Marino','imgs/benburrito.jpeg',0,2,2);
+INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Bens Burritos','Our owner Benjamin has taked his family recipes and techniques that have been passed down for generations in mexico to come bless the tastebuds of the USA, land of freedom. Come and get tasty burritos delivered to your home!','BensBurritos.com','13708','SM San Marino','imgs/benburrito.png',0,2,2);
 SET FOREIGN_KEY_CHECKS=0;
 INSERT INTO user_stamp_boards (User_Id, Stamp_Board_Id, User_Stamp_Position) VALUES (1, 12, 4);
 SET FOREIGN_KEY_CHECKS=1;
