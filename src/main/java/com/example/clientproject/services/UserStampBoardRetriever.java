@@ -20,6 +20,12 @@ public class UserStampBoardRetriever {
     @Autowired
     UserStampBoardsRepo userRepo;
 
+    /**
+     * Select user stamp position by userId and stampBoardId
+     * @param userID, stampBoardID - the id of the user and stampBoard to search by
+     * @return - an int of user stamp position
+     */
+
     public int getUserStampPos(int userID, int stampBoardID){
         String query = "SELECT User_Stamp_Position FROM user_stamp_boards WHERE User_Id = " + userID + " AND Stamp_Board_Id = " + stampBoardID + ";";
 

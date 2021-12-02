@@ -3,6 +3,8 @@ package com.example.clientproject.web.controllers;
 import com.example.clientproject.data.rewards.Rewards;
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
+import com.example.clientproject.data.socials.Socials;
+import com.example.clientproject.data.socials.SocialsRepo;
 import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.stampBoards.StampBoardsRepo;
 import com.example.clientproject.data.userPermissions.UserPermissions;
@@ -26,13 +28,16 @@ public class AdminController {
     public UserPermissionsRepo userPermissionsRepo;
     public ShopsRepo shopsRepo;
     public StampBoardsRepo stampBoardsRepo;
+    public SocialsRepo socialsRepo;
 
-    public AdminController(JWTUtils jwt, UserShopLinked usl, UserPermissionsRepo upr, ShopsRepo sr, StampBoardsRepo sbr){
+    public AdminController(JWTUtils jwt, UserShopLinked usl, UserPermissionsRepo upr, ShopsRepo sr, StampBoardsRepo sbr,
+                           SocialsRepo socialRepo){
         jwtUtils = jwt;
         userShopLinked = usl;
         userPermissionsRepo = upr;
         shopsRepo = sr;
         stampBoardsRepo = sbr;
+        socialsRepo = socialRepo;
     }
 
     @GetMapping("/settings")
@@ -65,11 +70,15 @@ public class AdminController {
                 }else{
                     //Else choose the first one
                     shop = shopsRepo.getById(Long.valueOf(shops.get(0)));
+
                 }
             }else{
                 //Else choose the first one
                 shop = shopsRepo.getById(Long.valueOf(shops.get(0)));
             }
+            List<Socials> socialList = socialsRepo.findByShopId(shop.getShopId());
+
+            model.addAttribute("socials", socialList);
             model.addAttribute("shop",shop);
 
             //Get the stamp board for the chosen shop

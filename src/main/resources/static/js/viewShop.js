@@ -25,3 +25,7 @@ function pageNav(direction){
 
     }
 }
+
+function toBusinessWebsite(URL){
+    window.location.href = URL;
+}

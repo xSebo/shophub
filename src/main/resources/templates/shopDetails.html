@@ -11,7 +11,7 @@
 <body onload="document.getElementById('1').style.display = 'flex'">
     <!-- <div th:replace="fragments/nav.html :: nav"></div> -->
     <div class="shopName" th:text="${shop.shopName}"></div>
-
+    <p th:text="${@loadSocials.getSocial(socials, 'tiktok')}"/>
     <div class="container1">
 				<div class="multi-page-container">
 					<th:block th:each="i : ${#numbers.sequence(1, stampBoard.stampBoardSize)}" th:with="j=${i}">
@@ -57,7 +57,7 @@
               </figure>
             </div>
             <div class="subtitle field is-grouped is-grouped-multiline socialMediaContainer">
-              <div class="control">
+              <div th:if="${@loadSocials.doesShopHaveSocialPlatform(socials, 'tiktok')}" class="control">
                 <div class="tags has-addons">
                   <span class="tag is-large is-grey">
                     <span class="icon-text">
@@ -66,11 +66,11 @@
                       </span>
                     </span>
                   </span>
-                  <span href="#" class="tag is-large is-dark mousePointerWhenHovered">Tik Tok</span>
+                  <span th:href="'https://www.tiktok.com/@' + ${@loadSocials.getSocial(socials, 'tiktok')}" class="tag is-large is-dark mousePointerWhenHovered">Tik Tok</span>
                 </div>
               </div>
 
-              <div class="control">
+              <div th:if="${@loadSocials.doesShopHaveSocialPlatform(socials, 'facebook')}" class="control">
                 <div class="tags has-addons">
                   <span class="tag is-large is-grey">
                     <span class="icon-text">
@@ -79,11 +79,11 @@
                       </span>
                     </span>
                   </span>
-                  <span href="#" class="tag is-large is-link mousePointerWhenHovered">Facebook</span>
+                  <span th:href="'https://www.facebook.com/' + ${@loadSocials.getSocial(socials, 'facebook')}" class="tag is-large is-link mousePointerWhenHovered">Facebook</span>
                 </div>
               </div>
 
-              <div class="control">
+              <div th:if="${@loadSocials.doesShopHaveSocialPlatform(socials, 'twitter')}" class="control">
                 <div class="tags has-addons">
                   <span class="tag is-large is-grey">
                     <span class="icon-text">
@@ -92,11 +92,11 @@
                       </span>
                     </span>
                   </span>
-                  <span href="#" class="tag is-large is-info mousePointerWhenHovered">Twitter</span>
+                  <span th:href="'https://twitter.com/' + ${@loadSocials.getSocial(socials, 'twitter')}" class="tag is-large is-info mousePointerWhenHovered">Twitter</span>
                 </div>
               </div>
 
-              <div class="control">
+              <div th:if="${@loadSocials.doesShopHaveSocialPlatform(socials, 'instagram')}" class="control">
                 <div class="tags has-addons">
                   <span class="tag is-large is-grey">
                     <span class="icon-text">
@@ -105,7 +105,7 @@
                       </span>
                     </span>
                   </span>
-                  <span href="#" class="tag is-large is-danger mousePointerWhenHovered">Instagram</span>
+                  <span th:href="'https://twitter.com/' + ${@loadSocials.getSocial(socials, 'instagram')}" class="tag is-large is-danger mousePointerWhenHovered">Instagram</span>
                 </div>
               </div>
 
@@ -115,7 +115,7 @@
           </div>
         <div class="content" style="margin-left: 1rem" th:text="${shop.shopDescription}"></div>
         <footer class="card-footer">
-          <a th:href="${shop.shopWebsite}" class="card-footer-item websiteLinkText">Click for website</a>
+          <a th:onclick="toBusinessWebsite([[${shop.shopWebsite}]])" class="card-footer-item websiteLinkText">Click for website</a>
         </footer>
       </div>
       <!-- <h1 th:text="${shop.shopName}"></h1> -->

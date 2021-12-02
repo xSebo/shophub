@@ -58,6 +58,12 @@ INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES 
 INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ("2 for 1 deal", 12, 2);
 
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Bens Burritos','Our owner Benjamin has taked his family recipes and techniques that have been passed down for generations in mexico to come bless the tastebuds of the USA, land of freedom. Come and get tasty burritos delivered to your home!','BensBurritos.com','13708','SM San Marino','imgs/benburrito.png',0,2,2);
+
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (12, "tiktok", "bensburrito");
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (12, "twitter", "bensburrito");
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (12, "instagram", "bensburrito");
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (12, "facebook", "bensburrito");
+
 SET FOREIGN_KEY_CHECKS=0;
 INSERT INTO user_stamp_boards (User_Id, Stamp_Board_Id, User_Stamp_Position) VALUES (1, 12, 4);
 SET FOREIGN_KEY_CHECKS=1;
