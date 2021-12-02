@@ -14,6 +14,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
@@ -25,7 +26,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DataJpaTest
+@SpringBootTest
 @Sql(scripts={"/schema-test-h2.sql","/script-test-h2.sql"})
 @ActiveProfiles("h2")
 @DirtiesContext
@@ -33,9 +34,9 @@ public class SelectCategoriesTests {
     @Autowired
     TwoFactorMethodsRepo twoFactorMethodsRepo;
     @Autowired
-    TagsRepo tagsRepo;
+    UsersRepo usersRepo;
     @Autowired
-    UsersSearch usersSearch;
+    TagsRepo tagsRepo;
     @Autowired
     MiscQueries miscQueries;
 
@@ -57,9 +58,9 @@ public class SelectCategoriesTests {
                 "", "",
                 LocalDateTime.now().format(formatter), twoFactorMethods);
         // Save the user
-        Users users = usersSearch.save(newUser);
+        miscQueries.saveUser(newUser);
         // Get the user as a DTO object
-        Optional<UsersDTO> usersDTOOptional = usersSearch.findByEmail(newUser.getUserEmail());
+        Optional<Users> usersOptional = usersRepo.findByUserEmail(newUser.getUserEmail());
 
         // Split the array of tags by a comma
         String[] tagNames = tags.split(",");
@@ -68,9 +69,11 @@ public class SelectCategoriesTests {
             // Create a new "Tags" object with that name
             Tags newTag = new Tags(tagName);
             // Save a new tag with that name
-            tagsRepo.save(newTag);
+            miscQueries.saveTag(newTag);
+            // Get the newly saved tag
+            Optional<Tags> tagsOptional = tagsRepo.findByTagName(tagName);
             // Add a row to the "User_Favourite_Tags" table
-            miscQueries.saveUserFavouriteTags(usersDTOOptional.get(), newTag);
+            miscQueries.saveUserFavouriteTags(usersOptional.get(), tagsOptional.get());
         }
 
         // Get the size of the table at the beginning
