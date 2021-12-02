@@ -78,7 +78,7 @@ public class HomeController {
 
 
         List<TagsDTO> Tags = tagsSearch.findAll();
-        System.out.println(Tags);
+        //System.out.println(Tags);
 
         model.addAttribute("allTags", Tags);
 

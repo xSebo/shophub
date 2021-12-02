@@ -24,7 +24,7 @@ public class SelectTagsController {
     @GetMapping("/selectTags")
     public String tagsGet(Model model) {
         List<TagsDTO> Tags = tagsSearch.findAll();
-        System.out.println(Tags);
+        //System.out.println(Tags);
         return "selectCategories.html";
     }
 

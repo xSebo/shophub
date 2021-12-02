@@ -9,12 +9,15 @@ import com.example.clientproject.data.userStampBoards.UserStampBoardsRepo;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.data.users.UsersRepo;
 import com.example.clientproject.service.Utils.JWTUtils;
+import com.example.clientproject.services.UserFavouriteTagSaver;
+import com.example.clientproject.services.UserStampBoardRetriever;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -30,14 +33,17 @@ public class BusinessDetails {
 
     private JWTUtils jwtUtils;
 
+    private UserStampBoardRetriever userStampService;
+
 
     public BusinessDetails(ShopsRepo aShopRepo, StampBoardsRepo aStampBoard,
-                           UsersRepo aUsersRepo,
+                           UsersRepo aUsersRepo, UserStampBoardRetriever aUserStampService,
                            JWTUtils ajwtUtils){
         shopsRepo = aShopRepo;
         stampRepo = aStampBoard;
         usersRepo = aUsersRepo;
         jwtUtils = ajwtUtils;
+        userStampService = aUserStampService;
     }
 
     @GetMapping("/businessDetails")
@@ -54,7 +60,7 @@ public class BusinessDetails {
         try {
             shop = shopsRepo.getById(Long.valueOf(shopId));
             try {
-                stampBoard = stampRepo.findById(Long.valueOf(shopId)).get();
+                stampBoard = shop.getStampBoard();
             }catch(NoSuchElementException e){
                 stampBoard = stampRepo.findById(1L).get();
             }
@@ -64,6 +70,14 @@ public class BusinessDetails {
             e.printStackTrace();
             return "redirect:/";
         }
+
+        int UserStampPos = userStampService.getUserStampPos(1, (int) shop.getShopId());
+
+        ArrayList <Integer> UserStampPosOBJ = new ArrayList<>();
+        UserStampPosOBJ.add(UserStampPos);
+        model.addAttribute("UserStampPos", UserStampPosOBJ);
+
+
         //model.addAttribute("stampBoard", stampBoard);
         model.addAttribute("loggedInUser", user.get());
         model.addAttribute("shop", shop);
