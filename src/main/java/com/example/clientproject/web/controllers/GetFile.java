@@ -24,7 +24,7 @@ public class GetFile {
         try {
             image = FileUtils.readFileToByteArray(new File(FILE_PATH_ROOT+filename));
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
     }
