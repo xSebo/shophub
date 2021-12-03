@@ -7,6 +7,8 @@
 	<link th:replace="fragments/nav.html :: nav-css"/>
 	<link th:replace="fragments/userSocials.html :: socialCss">
 	<link th:replace="fragments/userSocials.html :: socialJs">
+	<link rel="stylesheet" type="text/css" href="css/manageStaff.css"/>
+	<script src="js/manageStaff.js"></script>
 
 	<link rel="stylesheet" href="/css/admin.css">
 
@@ -44,7 +46,10 @@
 			<section id="shop-setup-section" class="admin-section">
 				<h1 class="title">Shop Setup</h1>
 				<div th:replace="fragments/userSocials.html :: userSocial"/>
+				<br>
+				<div th:replace="fragments/manageStaff.html :: manageStaffMembers"/>
 			</section>
+
 
 			<section id="shop-rewards-section" class="admin-section">
 				<div th:replace="fragments/shop_rewards_settings_page.html :: rewards"/>

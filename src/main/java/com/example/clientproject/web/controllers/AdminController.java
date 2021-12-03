@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,6 +79,19 @@ public class AdminController {
             }
             List<Socials> socialList = socialsRepo.findByShopId(shop.getShopId());
 
+            List<UserPermissions> linkedList = userPermissionsRepo.findByShopID(shop.getShopId());
+
+            List<Users> linkedUsers = new ArrayList<>();
+
+
+            for(UserPermissions u:linkedList){
+                if(u.getUser().getUserEmail().equalsIgnoreCase(user.get().getUserEmail())){
+                    continue;
+                }
+                linkedUsers.add(u.getUser());
+            }
+
+            model.addAttribute("staffMembers", linkedUsers);
             model.addAttribute("socials", socialList);
             model.addAttribute("shop",shop);
 
