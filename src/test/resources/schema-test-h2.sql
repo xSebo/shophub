@@ -5,11 +5,11 @@ SET IGNORECASE=TRUE;
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
---DROP SCHEMA IF EXISTS `mydb` CASCADE;
---CREATE SCHEMA IF NOT EXISTS `mydb`;
---USE `mydb`;
-
+-- DROP SCHEMA IF EXISTS `mydb` CASCADE;
+-- CREATE SCHEMA IF NOT EXISTS `mydb`;
+-- USE `mydb`;
 DROP ALL OBJECTS;
+
 CREATE TABLE SPRING_SESSION (
                                 PRIMARY_ID CHAR(36) NOT NULL,
                                 SESSION_ID CHAR(36) NOT NULL,
@@ -20,9 +20,11 @@ CREATE TABLE SPRING_SESSION (
                                 PRINCIPAL_NAME VARCHAR(100),
                                 CONSTRAINT SPRING_SESSION_PK PRIMARY KEY (PRIMARY_ID)
 );
+
 CREATE UNIQUE INDEX SPRING_SESSION_IX1 ON SPRING_SESSION (SESSION_ID);
 CREATE INDEX SPRING_SESSION_IX2 ON SPRING_SESSION (EXPIRY_TIME);
 CREATE INDEX SPRING_SESSION_IX3 ON SPRING_SESSION (PRINCIPAL_NAME);
+
 CREATE TABLE SPRING_SESSION_ATTRIBUTES (
                                            SESSION_PRIMARY_ID CHAR(36) NOT NULL,
                                            ATTRIBUTE_NAME VARCHAR(200) NOT NULL,

@@ -58,10 +58,8 @@ public class SignUpController {
         Optional<UsersDTO> usersDTOOptional = usersSearch.findByEmail(signUpForm.getNewUserEmail());
         // If one does
         if (usersDTOOptional.isPresent()) {
-            // Set a boolean flag to true
-            boolean emailInUse = true;
             // Add it to the model to alert the user
-            model.addAttribute("emailInUse", emailInUse);
+            model.addAttribute("emailInUse", true);
             // Return to the SignUp page
             return "signUp.html";
         // Otherwise
