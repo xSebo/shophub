@@ -31,7 +31,7 @@ public class SaveUserFavouriteTagController {
         if(user.isEmpty()){
             return "redirect:/login";
         }
-        System.out.println(listOfTagIDs);
+        //System.out.println(listOfTagIDs);
         //listOfIDs will be a string of each ID separated by "," for example: ",2,6,7,9,14"
         List<String> TagID_List = Arrays.asList(listOfTagIDs.split(",")); //splits it into string list for easier handling
         for (String TagID : TagID_List){
