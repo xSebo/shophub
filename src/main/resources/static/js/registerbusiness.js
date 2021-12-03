@@ -176,6 +176,10 @@ function handleInfo(data){
     let description = ""
 
     for(let i=0; i<250; i++){
+        if(i>tempDescription.length-1){
+            // console.log(i)
+            break
+        }
         description+=tempDescription[i]
     }
 

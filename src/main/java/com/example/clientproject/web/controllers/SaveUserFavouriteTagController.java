@@ -35,8 +35,8 @@ public class SaveUserFavouriteTagController {
         //listOfIDs will be a string of each ID separated by "," for example: ",2,6,7,9,14"
         List<String> TagID_List = Arrays.asList(listOfTagIDs.split(",")); //splits it into string list for easier handling
         for (String TagID : TagID_List){
-            System.out.println(TagID_List.size());
-            System.out.println(TagID);
+            //System.out.println(TagID_List.size());
+            //System.out.println(TagID);
             int UserID = jwtUtils.getLoggedInUserId(session).get();
             FavTagService.saveUserFavTag(UserID,TagID);
         }

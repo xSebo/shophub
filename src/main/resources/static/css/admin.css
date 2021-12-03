@@ -188,3 +188,100 @@ html{
 }
 
 
+
+/* Stampboard styles */
+.container1{
+	width: auto;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	width:400px;
+}
+
+.multi-page-container{
+	position: relative;
+}
+
+.stampBoard{
+	width: 400px;
+	height: 195px;
+	background-color: grey;
+	border-radius: 30px;
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 15px;
+}
+
+.stamp{
+	margin: 15px;
+	margin-bottom: 0px;
+	height: 70px;
+	width: 70px;
+	border-radius: 35px;
+	text-align: center;
+	background-color: white;
+	font-size: 40px;
+	font-weight: lighter;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+img.stamp{
+	height: 70px;
+	width: 70px;
+	padding: 10px;
+}
+
+.stampNavBar{
+	width: 400px;
+	height: 35px;
+	align-items: stretch;
+	display: flex;
+}
+
+.stampNavBar>div {
+	flex: 1;
+	border-top-width: 2px;
+}
+
+
+.stampNavButton{
+	text-align: center;
+	font-size: 25px;
+	color: white;
+	font-weight: bold;
+	background-color: grey;
+	cursor: pointer;
+}
+
+.stampNavButton.hidden{
+	opacity: 0;
+	pointer-events: none;
+	cursor: default;
+}
+
+.stampNavButton:hover{
+	background-color: #c9c9c9;
+}
+
+/* Titles */
+.title.secondary{
+	color:#8f8f8f;
+}
+
+.icon_preview{
+	height: 50px;
+	width: 50px;
+	border-radius: 100px;
+}
+
+.stamp-position-input{
+	width: 300px;
+}
+
+#stamp_position_container{
+	max-height: 500px;
+	overflow-y: auto;
+}
+

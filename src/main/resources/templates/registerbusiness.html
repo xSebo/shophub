@@ -70,7 +70,7 @@
                         <div id="categoryContainer">
                             <div class="select">
                                 <select name="businessCategory">
-                                    <option th:each="category: ${categories}" th:text="${category}"></option>
+                                    <option th:each="category: ${categories}" th:text="${category.categoryName}"></option>
                                 </select>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                                         <input value="instagram.com/" class="input" disabled>
                                     </p>
                                     <p class="control">
-                                        <input class="input" name="instagram" type="url" style="width:100%; align-content:center">
+                                        <input class="input" name="instagram" type="text" style="width:100%; align-content:center">
                                     </p>
                                 </div>
         <!--                        <input class="input socialInput">-->
@@ -113,7 +113,7 @@
                                         <input value="facebook.com/" class="input" disabled>
                                     </p>
                                     <p class="control">
-                                        <input class="input" name="facebook" type="url" style="width:100%; align-content:center">
+                                        <input class="input" name="facebook" type="text" style="width:100%; align-content:center">
                                     </p>
                                 </div>
         <!--                        <input class="input socialInput">-->
@@ -127,7 +127,7 @@
                                         <input value="twitter.com/" class="input" disabled>
                                     </p>
                                     <p class="control">
-                                        <input class="input" name="twitter" type="url" style="width:100%; align-content:center">
+                                        <input class="input" name="twitter" type="text" style="width:100%; align-content:center">
                                     </p>
                                 </div>
         <!--                        <input class="input socialInput">-->
@@ -141,7 +141,7 @@
                                         <input value="tiktok.com/@" class="input" disabled>
                                     </p>
                                     <p class="control">
-                                        <input class="input" name="tiktok" type="url" style="width:100%; align-content:center">
+                                        <input class="input" name="tiktok" type="text" style="width:100%; align-content:center">
                                     </p>
                                 </div>
         <!--                        <input class="input socialInput">-->

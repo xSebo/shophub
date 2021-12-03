@@ -23,4 +23,10 @@ public class Rewards {
     private long rewardId;
     private String rewardName;
     private int rewardStampLocation;
+
+    public Rewards(String aRewardName, int rewardLocation){
+        rewardName = aRewardName;
+        rewardStampLocation = rewardLocation;
+    }
+
 }

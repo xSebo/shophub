@@ -85,6 +85,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`Stamp_Boards` (
                                                      `Stamp_Board_Id` INT NOT NULL AUTO_INCREMENT,
                                                      `Stamp_Board_Size` INT NOT NULL,
+                                                     `Stamp_Board_Colour` VARCHAR(7),
+                                                     `Stamp_Board_Icon` varchar(255),
                                                      PRIMARY KEY (`Stamp_Board_Id`))
     ENGINE = InnoDB;
 
@@ -234,6 +236,24 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User_Stamp_Boards` (
                                                                   ON DELETE NO ACTION
                                                                   ON UPDATE NO ACTION)
     ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Socials`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Socials` (
+                                              `Social_Id` INT NOT NULL AUTO_INCREMENT,
+                                              `Shop_Id` INT NOT NULL,
+                                              `Social_Platform` VARCHAR(45),
+                                              `Social_Name` VARCHAR(45),
+                                              PRIMARY KEY (`Social_Id`, `Shop_Id`),
+											  CONSTRAINT `fk_Socials1`
+													FOREIGN KEY (`Shop_Id`)
+														REFERENCES `mydb`.`Shops` (`Shop_Id`)
+																ON DELETE NO ACTION
+																ON UPDATE NO ACTION)
+                                                
+    ENGINE = InnoDB;
+
     
 
 INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, 'None');

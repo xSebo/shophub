@@ -1,3 +1,4 @@
+INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('Ethan','Allen-Harris','ethanaharris10@gmail.com','$2a$10$nIjlchUua8JPHUcChoSBfu8hdHfCH2QDInC6785FJidGENP22pIly', 'testImage.png', 1);
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('Shraya','BELUSKO','ShrayaBELUSKO@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',1);
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('Saleem','GETTI','SaleemGETTI@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',1);
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('Saajid','EFREHN','SaajidEFREHN@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',2);
@@ -50,4 +51,25 @@ INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Sho
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Weimann - Hauck','','WeimannHauck.com','39160','SZ Swaziland','shopPic.png',1,1,1);
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Douglas, Reichert and Kutch','','DouglasReichertandKutch.com','2093','SC Seychelles','shopPic.png',1,1,1);
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Schoen Group','','SchoenGroup.com','10783','FR France','shopPic.png',0,1,1);
-INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Homenick and Sons','','HomenickandSons.com','14948','SM San Marino','shopPic.png',0,1,1);
+INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Homenick and Sons','The best burrito place in New York, our owner Benjamin has moved to New York to bring over his families techniques and recipes that have been blessing tastebuds of customers for years.user_stamp_boards ','HomenickandSons.com','14948','SM San Marino','shopPic.png',0,1,1);
+
+INSERT INTO stamp_boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (20, "#ffc5c5", "imgs/burrito.png");
+INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ("Free medium Burrito", 4, 2);
+INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ("Free delivery", 7, 2);
+INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ("2 for 1 deal", 12, 2);
+INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ("Free large burrito", 15, 2);
+INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ("£10 off next delivery", 17, 2);
+INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ("50% off next delivery up to £40", 20, 2);
+
+INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Bens Burritos','Our owner Benjamin has taked his family recipes and techniques that have been passed down for generations in mexico to come bless the tastebuds of the USA, land of freedom. Come and get tasty burritos delivered to your home!','BensBurritos.com','13708','SM San Marino','imgs/benburrito.png',0,2,2);
+
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (12, "tiktok", "bensburrito");
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (12, "twitter", "bensburrito");
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (12, "instagram", "bensburrito");
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (12, "facebook", "bensburrito");
+
+SET FOREIGN_KEY_CHECKS=0;
+INSERT INTO user_stamp_boards (User_Id, Stamp_Board_Id, User_Stamp_Position) VALUES (1, 12, 4);
+SET FOREIGN_KEY_CHECKS=1;
+
+

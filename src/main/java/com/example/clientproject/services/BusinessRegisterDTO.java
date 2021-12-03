@@ -12,12 +12,12 @@ public class BusinessRegisterDTO {
     String business_register_url;
     String business_register_name;
     String business_register_desc;
-    //String businessCategory;
+    String businessCategory;
     ArrayList<String> businessTags;
-    //String instagram;
-    //String facebook;
-    //String twitter;
-    //String tiktok;
+    String instagram;
+    String facebook;
+    String twitter;
+    String tiktok;
     int earnings;
 
     public BusinessRegisterDTO(BusinessRegisterForm brf){
@@ -25,12 +25,12 @@ public class BusinessRegisterDTO {
                 brf.getBusiness_register_url(),
                 brf.getBusiness_register_name(),
                 brf.getBusiness_register_desc(),
-                //brf.getBusinessCategory(),
+                brf.getBusinessCategory(),
                 brf.getBusinessTags(),
-                //brf.getInstagram(),
-                //brf.getFacebook(),
-                //brf.getTwitter(),
-                //brf.getTiktok(),
+                brf.getInstagram(),
+                brf.getFacebook(),
+                brf.getTwitter(),
+                brf.getTiktok(),
                 brf.getEarnings()
         );
     }
