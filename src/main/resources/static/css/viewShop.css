@@ -157,11 +157,16 @@ img.stamp{
 .reward-text{
   font-size: 15px;
   margin: 13px;
-  width: 200;
+  max-width: 200px;
   font-weight: bold;
   float: left;
 }
 
 .marginBottom7px{
   margin-bottom: 7px;
+}
+
+.vertScrollbarIfOverflow{
+    max-height: 550px;
+    overflow-y: scroll;
 }

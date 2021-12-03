@@ -2,6 +2,8 @@ package com.example.clientproject.web.controllers;
 
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
+import com.example.clientproject.data.socials.Socials;
+import com.example.clientproject.data.socials.SocialsRepo;
 import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.stampBoards.StampBoardsRepo;
 import com.example.clientproject.data.userStampBoards.UserStampBoards;
@@ -35,15 +37,18 @@ public class BusinessDetails {
 
     private UserStampBoardRetriever userStampService;
 
+    private SocialsRepo socialsRepo;
+
 
     public BusinessDetails(ShopsRepo aShopRepo, StampBoardsRepo aStampBoard,
                            UsersRepo aUsersRepo, UserStampBoardRetriever aUserStampService,
-                           JWTUtils ajwtUtils){
+                           JWTUtils ajwtUtils, SocialsRepo aSocialsRepo){
         shopsRepo = aShopRepo;
         stampRepo = aStampBoard;
         usersRepo = aUsersRepo;
         jwtUtils = ajwtUtils;
         userStampService = aUserStampService;
+        socialsRepo = aSocialsRepo;
     }
 
     @GetMapping("/businessDetails")
@@ -53,6 +58,7 @@ public class BusinessDetails {
         }else{
             return "redirect:/login";
         }
+
 
         //UserStampBoards userStampBoard;
         StampBoards stampBoard;
@@ -70,6 +76,11 @@ public class BusinessDetails {
             e.printStackTrace();
             return "redirect:/";
         }
+
+        List<Socials> socialMedia = socialsRepo.findByShopId(shop.getShopId());
+
+
+        model.addAttribute("socials", socialMedia);
 
         int UserStampPos = userStampService.getUserStampPos(1, (int) shop.getShopId());
 

@@ -23,4 +23,18 @@ public class LoadSocials {
         String host = uri.getHost();
         return host;
     }
+
+    /**
+     * Method for accessing the login page
+     * @param socialList, socialPlatform - Model object which contains all of a shops socials, and socialPatform is used to search/filter
+     * @return - retuns true/false based on whether the shop has a social media for that platform
+     */
+
+    public boolean doesShopHaveSocialPlatform(List<Socials> socialList, String socialPlatform){
+        for(Socials s:socialList){
+            if(s.getSocialPlatform().equalsIgnoreCase(socialPlatform)){
+                return true;
+            }
+        }return false;
+    }
 }
