@@ -22,7 +22,17 @@ public class StampboardUpdater {
     }
 
     public void updateRewards(Integer shopId, Map<String,Object> rewards){
+        String deleteQuery = "delete from rewards where Stamp_Board_Id = (" +
+                "SELECT Stamp_Board_Id from shops where Shop_Id = 12);";
 
+        jdbc.execute(deleteQuery);
+
+        rewards.entrySet().forEach(r -> {
+            String insertQuery = "INSERT into rewards (Reward_Name, Reward_Stamp_Location,Stamp_Board_Id) values (\""+r.getValue()+"\", " +
+                    r.getKey()+",(SELECT Stamp_Board_Id from shops where Shop_Id = "+ shopId.toString() +"));";
+
+            jdbc.execute(insertQuery);
+        });
     }
 
     public void updateStampboardSize(Integer shopId, Integer size){

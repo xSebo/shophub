@@ -44,9 +44,10 @@ public class updateStampboard {
             throw new ForbiddenErrorException("You do not have admin access to this shop");
         }
 
+        Map<String,Object> rewardsMap;
         try{
             ObjectMapper mapper = new ObjectMapper();
-            Map<String,Object> rewardsMap = mapper.readValue(usf.getRewardMapping(), Map.class);
+            rewardsMap = mapper.readValue(usf.getRewardMapping(), Map.class);
         }catch (JsonProcessingException e){
             throw new ForbiddenErrorException("Invalid JSON");
         }
@@ -57,6 +58,7 @@ public class updateStampboard {
 
         stampboardUpdater.updateColour(usf.getShopId(), usf.getColour());
         stampboardUpdater.updateStampboardSize(usf.getShopId(), usf.getStampboardSize());
+        stampboardUpdater.updateRewards(usf.getShopId(), rewardsMap);
 
         return "OK";
     }

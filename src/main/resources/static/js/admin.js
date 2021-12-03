@@ -98,10 +98,7 @@ function updateReward(e,index){
     }else{
         if(input.value == ""){
             //Remove icon and replace with index
-            console.log(group)
-            console.log(child)
             let elem = document.getElementById("stampboardContainer").children[group-1].children[(child-1==-1) ? 7 : child-1];
-            console.log(elem)
             if(elem.nodeName != "IMG"){
                 elem.innerText = index.toString()
             }
