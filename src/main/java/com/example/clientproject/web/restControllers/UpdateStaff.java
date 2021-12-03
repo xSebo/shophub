@@ -62,7 +62,7 @@ public class UpdateStaff {
             userPermRepo.delete(userPerm);
             return "USER REMOVED";
         }else{
-            linkUser.linkUserShop(usf.getShopId(),userId);
+            linkUser.linkUserShop(usf.getShopId(),userId, 1L);
             return "OK";
         }
     }

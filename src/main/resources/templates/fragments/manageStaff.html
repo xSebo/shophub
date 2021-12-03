@@ -18,7 +18,8 @@
         </button>
     </div>
     <p><br>Current Admins</p>
-    <div th:each="user : ${staffMembers}">
+    <div id="staffManagement"></div>
+    <div id="staffManagement" th:each="user : ${staffMembers}">
         <div class="staffManagementContainer">
         <p class="subtitle is-6" th:text="${user.userEmail}" style="width:50%; margin-bottom: 0"></p>
         <button class="button is-danger is-outlined" style="border-bottom: 1px solid #00b89c" th:onclick="'submit('+${shop.shopId}+',this);'">
@@ -27,8 +28,10 @@
             </span>
         </button>
         </div>
-        <p class="subtitle is-6" style="border-bottom: 1px solid #00b89c; margin-bottom:1%; width:50%"> </p>
+        <p id="blackLine" class="subtitle is-6" style="border-bottom: 1px solid #00b89c; margin-bottom:1%; width:50%"> </p>
+
     </div>
+    <input id="shopId" class="input is-hidden" th:value="${shop.shopId}">
 
 </div>
 </body>

@@ -60,8 +60,9 @@ public class AdminController {
             }
         }
 
+
         //Get Shops the user is associated with
-        if(highestPerm > 1){
+        if(highestPerm > 1 || userShopLinked.hasShop(user.get().getUserId())){
             List<Integer> shops = userShopLinked.getByUserId(user.get().getUserId());
             //Check if user has defined a shop to look at in the url
             Shops shop;
@@ -83,6 +84,8 @@ public class AdminController {
 
             List<Users> linkedUsers = new ArrayList<>();
 
+            //userPermissionsRepo.findAll().forEach(x -> System.out.println(x.getUser().getUserId() +":"+ x.getShop().getShopId()));
+
 
             for(UserPermissions u:linkedList){
                 if(u.getUser().getUserEmail().equalsIgnoreCase(user.get().getUserEmail())){
@@ -91,6 +94,18 @@ public class AdminController {
                 linkedUsers.add(u.getUser());
             }
 
+            long highestShopLevel = 1;
+
+            List<UserPermissions> userShops = userPermissionsRepo.findByUserId(user.get().getUserId());
+            for(UserPermissions u:userShops){
+                if(u.getShop().getShopId() == shop.getShopId()){
+                    highestShopLevel = u.getAdminType().getAdminTypeId();
+                }
+            }
+            System.out.println(highestShopLevel);
+            //System.out.println(userShopLinked.hasShop(user.get().getUserId()));
+            model.addAttribute("linkedShop", userShopLinked.hasShop(user.get().getUserId()));
+            model.addAttribute("highestShopLevel", highestShopLevel);
             model.addAttribute("staffMembers", linkedUsers);
             model.addAttribute("socials", socialList);
             model.addAttribute("shop",shop);

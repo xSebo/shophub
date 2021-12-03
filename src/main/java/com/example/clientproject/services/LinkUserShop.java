@@ -28,11 +28,11 @@ public class LinkUserShop {
         userPermissionsRepo = aUserPermissionsRepo;
     }
 
-    public void linkUserShop(long shopId, long userID){
+    public void linkUserShop(long shopId, long userID, long adminTypeId){
         try {
             Users user = userRepo.findById(userID).get();
             Shops shop = shopsRepo.getById(shopId);
-            AdminTypes adminType = adminTypesRepo.getById(2L);
+            AdminTypes adminType = adminTypesRepo.getById(adminTypeId);
 
             UserPermissions link = new UserPermissions(user, shop, adminType);
 
