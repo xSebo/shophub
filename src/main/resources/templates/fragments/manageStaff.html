@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link ref="stylesheet" type="text/css" href="css/manageStaff.css"/>
+    <script src="js/manageStaff.js"></script>
+</head>
+<body th:fragment="manageStaffMembers">
+<div class="wholeStaffContainer" style="width:100%">
+
+    <h6 class="title is-6">Site Admins</h6>
+    <p>Invite an admin</p>
+    <div class="emailInputContainer" style="width:50%">
+        <input id="emailAddress" class="input" placeholder="Email Address">
+        <button class="button" th:onclick="'submit('+${shop.shopId}+', this);'">
+            <span class="icon is-small">
+                <i class="fas fa-plus"></i>
+            </span>
+        </button>
+    </div>
+    <p><br>Current Admins</p>
+    <div id="staffManagement"></div>
+    <div id="staffManagement" th:each="user : ${staffMembers}">
+        <div class="staffManagementContainer">
+        <p class="subtitle is-6" th:text="${user.userEmail}" style="width:50%; margin-bottom: 0"></p>
+        <button class="button is-danger is-outlined" style="border-bottom: 1px solid #00b89c" th:onclick="'submit('+${shop.shopId}+',this);'">
+            <span class="icon is-small">
+                <i class="fas fa-times is-danger"></i>
+            </span>
+        </button>
+        </div>
+        <p id="blackLine" class="subtitle is-6" style="border-bottom: 1px solid #00b89c; margin-bottom:1%; width:50%"> </p>
+
+    </div>
+    <input id="shopId" class="input is-hidden" th:value="${shop.shopId}">
+
+</div>
+</body>

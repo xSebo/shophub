@@ -7,6 +7,8 @@
 	<link th:replace="fragments/nav.html :: nav-css"/>
 	<link th:replace="fragments/userSocials.html :: socialCss">
 	<link th:replace="fragments/userSocials.html :: socialJs">
+	<link rel="stylesheet" type="text/css" href="css/manageStaff.css"/>
+	<script src="js/manageStaff.js"></script>
 
 	<link rel="stylesheet" href="/css/admin.css">
 
@@ -16,7 +18,7 @@
 <body onload="document.getElementById('1').style.display = 'flex';">
 	<div th:replace="fragments/nav.html :: nav"></div>
 	<div id="adminPage">
-		<div class="sidebar" th:if="${highestPerm > 1}">
+		<div class="sidebar" th:if="${linkedShop}">
 			<div class="admin-tab active" onclick="toggle_tab('profile')" id="profile-tab">
 				<div class="baseIcon">
 					<i class="fas fa-user fa-lg"></i>
@@ -36,7 +38,7 @@
 				<p>Shop Rewards</p>
 			</div>
 		</div>
-		<main th:if="${highestPerm > 1}">
+		<main th:if="${highestPerm > 1 || linkedShop}">
 			<section id="profile-section" class="admin-section active">
 				<div th:replace="fragments/user_settings.html :: settings_page"/>
 			</section>
@@ -44,13 +46,18 @@
 			<section id="shop-setup-section" class="admin-section">
 				<h1 class="title">Shop Setup</h1>
 				<div th:replace="fragments/userSocials.html :: userSocial"/>
+				<br>
+				<th:block th:if="${highestShopLevel>=2}">
+					<div th:replace="fragments/manageStaff.html :: manageStaffMembers"/>
+				</th:block>
 			</section>
+
 
 			<section id="shop-rewards-section" class="admin-section">
 				<div th:replace="fragments/shop_rewards_settings_page.html :: rewards"/>
 			</section>
 		</main>
-		<main th:unless="${highestPerm > 1}">
+		<main th:unless="${highestPerm > 1 || linkedShop}">
 			<section class="admin-section active">
 				<div th:replace="fragments/user_settings.html :: settings_page"/>
 			</section>
