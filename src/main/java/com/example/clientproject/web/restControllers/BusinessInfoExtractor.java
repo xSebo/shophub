@@ -24,6 +24,7 @@ public class BusinessInfoExtractor {
      */
     @GetMapping("/infoExtract")
     public HashMap<String, String> testIndex(@RequestParam(value = "url") String url) throws Exception{
+        System.out.println(url);
         return getHTMLMeta(url);
     }
 

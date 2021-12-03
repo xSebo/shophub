@@ -36,7 +36,7 @@ public class UserShopLinked {
                 return false;
             }
         }catch(IndexOutOfBoundsException e){
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     }

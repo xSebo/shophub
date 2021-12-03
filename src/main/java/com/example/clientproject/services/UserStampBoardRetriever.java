@@ -28,13 +28,15 @@ public class UserStampBoardRetriever {
 
     public int getUserStampPos(int userID, int stampBoardID){
         String query = "SELECT User_Stamp_Position FROM user_stamp_boards WHERE User_Id = " + userID + " AND Stamp_Board_Id = " + stampBoardID + ";";
+        try{
+            System.out.println(query);
+            List<Map<String, Object>> rs = jdbc.queryForList(query);
 
-        System.out.println(query);
-        List<Map<String, Object>> rs = jdbc.queryForList(query);
-
-        System.out.println((int) rs.get(0).get("User_Stamp_Position"));
-        return (int) rs.get(0).get("User_Stamp_Position");
-
+            System.out.println((int) rs.get(0).get("User_Stamp_Position"));
+            return (int) rs.get(0).get("User_Stamp_Position");
+        }catch (Exception e){
+            return 0;
+        }
 
     }
 }
