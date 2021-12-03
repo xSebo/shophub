@@ -13,13 +13,18 @@ function send(shopId){
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onload = function() {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
+            document.getElementById("submitButton").classList.remove("is-loading")
             var response = xhttp.responseText
-            if (response == "success"){
+            if (response == "OK"){
+                document.getElementById("responseText").innerHTML = "Success!"
             }else{
+                document.getElementById("responseText").innerHTML = "Something went wrong!"
             }
+
         } else {
             console.error(xhttp.statusText);
         }
     };
+    document.getElementById("submitButton").classList.add("is-loading")
     xhttp.send(params);
 }

@@ -79,7 +79,8 @@
         </p>
     </div>
     </div>
-    <button class="button is-link" style="margin-top: 5px" th:onclick="'send('+${shop.shopId}+');'">Save changes</button>
+    <button id="submitButton" class="button is-link" style="margin-top: 5px" th:onclick="'send('+${shop.shopId}+');'">Save changes</button>
+    <p class="is-help" id="responseText"></p>
 </div>
 </body>
 
