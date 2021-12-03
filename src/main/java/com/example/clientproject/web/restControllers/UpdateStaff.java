@@ -40,7 +40,8 @@ public class UpdateStaff {
 
     @PostMapping("/updateStaff")
     public String addStaff(UpdateStaffForm usf, HttpSession session){
-        if(!userLinked.isLinked(jwtUtils.getLoggedInUserId(session).get(), usf.getShopId())){
+        if((!userLinked.isLinked(jwtUtils.getLoggedInUserId(session).get(), usf.getShopId())) &&
+                (!userLinked.isAdmin(jwtUtils.getLoggedInUserId(session).get(), usf.getShopId()))){
             return "USER NOT AUTHENTICATED";
         }
         int userId;

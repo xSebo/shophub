@@ -20,4 +20,14 @@ public class UserLinked {
             }
         } return false;
     }
+    public boolean isAdmin(int userId, int shopId){
+        List<UserPermissions> allLinks = userPermRepo.findByUserId(userId);
+        for(UserPermissions u:allLinks){
+            if(u.getShop().getShopId() == shopId){
+                if (u.getAdminType().getAdminTypeId() == 2) {
+                    return true;
+                }
+            }
+        } return false;
+    }
 }
