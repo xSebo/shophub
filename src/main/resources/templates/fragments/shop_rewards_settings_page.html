@@ -41,7 +41,7 @@ oninput="for(let item of document.getElementById('stampboardContainer').children
 <img class="icon_preview mb-3" id="icon_preview" th:src="'imgs/' + ${stampBoard.stampBoardIcon}">
 <div class="file has-name mb-5">
     <label class="file-label">
-        <input class="file-input" type="file" name="icon" accept="image/*" onchange="loadFile(event)">
+        <input class="file-input" type="file" name="icon" accept="image/*" id="icon-input" onchange="loadFile(event)">
         <span class="file-cta">
         <span class="file-icon">
             <i class="fas fa-upload"></i>
@@ -53,7 +53,6 @@ oninput="for(let item of document.getElementById('stampboardContainer').children
         <span class="file-name" id="file-name">No File Selected</span>
     </label>
 </div>
-
 <h2 class="title is-4 secondary">Stamp Positions</h2>
 <div id="stamp_position_container">
 <th:block th:each="i: ${#numbers.sequence(1, stampBoard.stampBoardSize)}">
@@ -76,7 +75,7 @@ oninput="for(let item of document.getElementById('stampboardContainer').children
     <button class="button is-outlined is-danger" onclick="removeRow()"><i class="fa fa-times"></i></button>
 </div>
 
-<button class="button is-link">Save Changes</button>
+<button class="button is-link" th:onclick="'saveStampboardChanges(' + ${shop.shopId} + ')'">Save Changes</button>
 </div>
 </body>
 </html>

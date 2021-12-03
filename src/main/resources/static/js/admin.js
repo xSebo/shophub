@@ -148,6 +148,43 @@ function removeRow(){
 }
 
 
+function saveStampboardChanges(shopId){
+    let colour = document.getElementById("colour-input").value;
+
+    let icon = document.getElementById("icon-input").files;
+    console.log(icon);
+
+    let stampBoardContainer = document.getElementById("stamp_position_container");
+    let iter = 1;
+    let rewards = new Map();
+    for (let group of stampBoardContainer.children){
+        let val =group.children[1].children[0].value;
+        if(val != ""){
+            rewards.set(iter ,val);
+        }
+        iter++;
+    }
+    rewards = JSON.stringify(Object.fromEntries(rewards));
+
+    var xhttp = new XMLHttpRequest();
+    let params= "colour=" + colour.toString() +
+        "&rewardMapping=" + encodeURI(rewards) +
+        "&stampboardSize=" + (iter+1).toString() +
+        "&shopId=" + shopId.toString();
+    xhttp.open("POST", '/stampboard/update', true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.onload = function() {
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+            var response = xhttp.responseText
+            if (response == "success"){
+            }else{
+            }
+        } else {
+            console.error(xhttp.statusText);
+        }
+    };
+    xhttp.send(params);
+}
 
 
 
