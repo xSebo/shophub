@@ -9,6 +9,7 @@ INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, U
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('Noel','MCKASSON','NoelMCKASSON@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',2);
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('Henrich','MANIA','HenrichMANIA@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',2);
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('Mckenna','CHWEGMANN','MckennaCHWEGMANN@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',1);
+INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (1,1,1);
 INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (2,1,1);
 INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (3,1,1);
 INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (4,1,1);
@@ -50,7 +51,7 @@ INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Sho
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Weimann - Hauck','','WeimannHauck.com','39160','SZ Swaziland','shopPic.png',1,1,1);
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Douglas, Reichert and Kutch','','DouglasReichertandKutch.com','2093','SC Seychelles','shopPic.png',1,1,1);
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Schoen Group','','SchoenGroup.com','10783','FR France','shopPic.png',0,1,1);
-INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Homenick and Sons','The best burrito place in New York, our owner Benjamin has moved to New York to bring over his families techniques and recipes that have been blessing tastebuds of customers for years.user_stamp_boards ','HomenickandSons.com','14948','SM San Marino','shopPic.png',0,1,1);
+INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Homenick and Sons','','HomenickandSons.com','14948','SM San Marino','shopPic.png',0,1,1);
 
 INSERT INTO stamp_boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (20, "#ffc5c5", "imgs/burrito.png");
 INSERT INTO rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ("Free medium Burrito", 4, 2);
@@ -68,7 +69,8 @@ INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (12, "instagr
 INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (12, "facebook", "bensburrito");
 
 SET FOREIGN_KEY_CHECKS=0;
-INSERT INTO user_stamp_boards (User_Id, Stamp_Board_Id, User_Stamp_Position) VALUES (1, 12, 4);
+INSERT INTO user_stamp_boards (User_Id, Stamp_Board_Id, User_Stamp_Position) VALUES (1, 2, 4);
+INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (1,12,3);
 SET FOREIGN_KEY_CHECKS=1;
 
 

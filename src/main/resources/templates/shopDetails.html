@@ -11,7 +11,6 @@
 <body onload="document.getElementById('1').style.display = 'flex'">
     <!-- <div th:replace="fragments/nav.html :: nav"></div> -->
     <div class="shopName" th:text="${shop.shopName}"></div>
-    <p th:text="${@loadSocials.getSocial(socials, 'tiktok')}"/>
     <div class="container1">
 				<div class="multi-page-container">
 					<th:block th:each="i : ${#numbers.sequence(1, stampBoard.stampBoardSize)}" th:with="j=${i}">
