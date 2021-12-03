@@ -20,7 +20,7 @@
                 </div>
             </th:block>
             <th:block th:if="${i==1}">
-                <img class="stamp" th:src="'imgs/' + ${stampBoard.stampBoardIcon}">
+                <img class="stamp" th:src="${stampBoard.stampBoardIcon}">
             </th:block>
             <th:block th:if="${i%8==0 || i==stampBoard.stampBoardSize}" th:utext="'&lt;/div&gt;'"/>
         </th:block>
@@ -38,7 +38,7 @@
 oninput="for(let item of document.getElementById('stampboardContainer').children){item.style.backgroundColor=this.value};">
 
 <h3 class="subtitle is-6 mb-3">Stamp Icon</h3>
-<img class="icon_preview mb-3" id="icon_preview" th:src="'imgs/' + ${stampBoard.stampBoardIcon}">
+<img class="icon_preview mb-3" id="icon_preview" th:src="${stampBoard.stampBoardIcon}">
 <div class="file has-name mb-5">
     <label class="file-label">
         <input class="file-input" type="file" name="icon" accept="image/*" id="icon-input" onchange="loadFile(event)">
@@ -75,7 +75,8 @@ oninput="for(let item of document.getElementById('stampboardContainer').children
     <button class="button is-outlined is-danger" onclick="removeRow()"><i class="fa fa-times"></i></button>
 </div>
 
-<button class="button is-link" th:onclick="'saveStampboardChanges(' + ${shop.shopId} + ')'">Save Changes</button>
+<button class="button is-link" th:onclick="'saveStampboardChanges(' + ${shop.shopId} + ')'" id="save-stamp-btn">Save Changes</button>
+
 </div>
 </body>
 </html>

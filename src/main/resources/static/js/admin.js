@@ -146,10 +146,11 @@ function removeRow(){
 
 
 function saveStampboardChanges(shopId){
+    document.getElementById("save-stamp-btn").classList.add("is-loading")
+
     let colour = document.getElementById("colour-input").value;
 
     let icon = document.getElementById("icon-input").files;
-    console.log(icon);
 
     let stampBoardContainer = document.getElementById("stamp_position_container");
     let iter = 1;
@@ -162,25 +163,62 @@ function saveStampboardChanges(shopId){
         iter++;
     }
     rewards = JSON.stringify(Object.fromEntries(rewards));
-
-    var xhttp = new XMLHttpRequest();
-    let params= "colour=" + colour.toString() +
-        "&rewardMapping=" + encodeURI(rewards) +
-        "&stampboardSize=" + (iter+1).toString() +
-        "&shopId=" + shopId.toString();
-    xhttp.open("POST", '/stampboard/update', true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.onload = function() {
-        if (xhttp.readyState === 4 && xhttp.status === 200) {
-            var response = xhttp.responseText
-            if (response == "success"){
-            }else{
+    let filename = "";
+    if(icon.length != 0) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/upload', true);
+        var formData = new FormData();
+        formData.append("file", icon[0]);
+        xhr.onload = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                filename = xhr.responseText;
+                var xhttp = new XMLHttpRequest();
+                let params= "colour=" + colour.toString() +
+                    "&rewardMapping=" + encodeURI(rewards) +
+                    "&stampboardSize=" + (iter-1).toString() +
+                    "&shopId=" + shopId.toString()+
+                    "&iconFilePath=" + filename.toString();
+                xhttp.open("POST", '/stampboard/update', true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.onload = function() {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        document.getElementById("save-stamp-btn").classList.remove("is-loading")
+                        var response = xhttp.responseText
+                        if (response == "success"){
+                        }else{
+                        }
+                    } else {
+                        console.error(xhttp.statusText);
+                    }
+                };
+                xhttp.send(params);
+            } else {
             }
-        } else {
-            console.error(xhttp.statusText);
-        }
-    };
-    xhttp.send(params);
+        };
+        xhr.send(formData);
+    }else{
+        document.getElementById("save-stamp-btn").classList.add("is-loading")
+        var xhttp = new XMLHttpRequest();
+        let params= "colour=" + colour.toString() +
+            "&rewardMapping=" + encodeURI(rewards) +
+            "&stampboardSize=" + (iter-1).toString() +
+            "&shopId=" + shopId.toString()+
+            "&iconFilePath=";
+        xhttp.open("POST", '/stampboard/update', true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.onload = function() {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+                document.getElementById("save-stamp-btn").classList.remove("is-loading")
+                var response = xhttp.responseText
+                if (response == "success"){
+                }else{
+                }
+            } else {
+                console.error(xhttp.statusText);
+            }
+        };
+        xhttp.send(params);
+    }
 }
 
 

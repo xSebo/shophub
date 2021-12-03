@@ -17,5 +17,5 @@ public class UpdateStampboardForm {
 
     public Integer shopId;
 
-//    public String iconFilePath;
+    public String iconFilePath;
 }

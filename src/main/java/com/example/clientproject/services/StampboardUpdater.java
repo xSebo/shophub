@@ -42,4 +42,12 @@ public class StampboardUpdater {
 
         jdbc.execute(query);
     }
+
+    public void updateIconURL(Integer shopId, String url){
+        String query = "UPDATE stamp_boards SET Stamp_Board_Icon = '"+ url +"' WHERE Stamp_Board_Id = (" +
+                "SELECT stamp_boards.Stamp_Board_Id FROM mydb.stamp_boards INNER JOIN " +
+                "shops on shops.Stamp_Board_Id = stamp_boards.Stamp_Board_Id where shops.Shop_Id = "+ shopId +" limit 1);";
+
+        jdbc.execute(query);
+    }
 }

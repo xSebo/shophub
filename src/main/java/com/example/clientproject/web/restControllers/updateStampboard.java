@@ -59,7 +59,9 @@ public class updateStampboard {
         stampboardUpdater.updateColour(usf.getShopId(), usf.getColour());
         stampboardUpdater.updateStampboardSize(usf.getShopId(), usf.getStampboardSize());
         stampboardUpdater.updateRewards(usf.getShopId(), rewardsMap);
-
+        if(usf.getIconFilePath().length() > 0){
+            stampboardUpdater.updateIconURL(usf.getShopId(), usf.getIconFilePath());
+        }
         return "OK";
     }
 }
