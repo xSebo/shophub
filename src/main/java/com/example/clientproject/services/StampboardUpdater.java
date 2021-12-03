@@ -23,7 +23,7 @@ public class StampboardUpdater {
 
     public void updateRewards(Integer shopId, Map<String,Object> rewards){
         String deleteQuery = "delete from rewards where Stamp_Board_Id = (" +
-                "SELECT Stamp_Board_Id from shops where Shop_Id = 12);";
+                "SELECT Stamp_Board_Id from shops where Shop_Id = "+shopId+");";
 
         jdbc.execute(deleteQuery);
 
