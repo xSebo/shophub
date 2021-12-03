@@ -8,8 +8,7 @@ import java.util.Optional;
 
 public interface UsersSearch {
     List<UsersDTO> findAll();
-
     Optional<UsersDTO> findByEmail(String email);
-
+    Optional<UsersDTO> findById(long id);
     Users save(Users user);
 }

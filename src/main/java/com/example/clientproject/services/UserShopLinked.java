@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserShopLinked {
 
-    @Autowired
-    UserPermissionsRepo userPermissionsRepo;
+    private UserPermissionsRepo userPermissionsRepo;
 
     public UserShopLinked(UserPermissionsRepo aUserPermissionsRepo){
         userPermissionsRepo = aUserPermissionsRepo;

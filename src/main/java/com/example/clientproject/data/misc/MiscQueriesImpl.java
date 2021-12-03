@@ -75,6 +75,12 @@ public class MiscQueriesImpl implements MiscQueries{
         Number id = simpleJdbcInsert.execute(parameters);
     }
 
+    public void updateUser(UsersDTO usersDTO, String field, Object value) {
+        String sql ="UPDATE Users SET " + field + " = '" + value + "' WHERE User_Id = " + usersDTO.getUserId();
+        System.out.println(sql);
+        jdbcTemplate.execute(sql);
+    }
+
     /**
      * Insert into the "Tags" table
      * @param tag - the tag to insert
