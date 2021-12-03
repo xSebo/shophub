@@ -147,6 +147,7 @@ function removeRow(){
 
 function saveStampboardChanges(shopId){
     document.getElementById("save-stamp-btn").classList.add("is-loading")
+    document.getElementById("stampboard_change_text").style.display = "none";
 
     let colour = document.getElementById("colour-input").value;
 
@@ -183,6 +184,7 @@ function saveStampboardChanges(shopId){
                 xhttp.onload = function() {
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
                         document.getElementById("save-stamp-btn").classList.remove("is-loading")
+                        document.getElementById("stampboard_change_text").style.display = "block";
                         var response = xhttp.responseText
                         if (response == "success"){
                         }else{
@@ -198,6 +200,7 @@ function saveStampboardChanges(shopId){
         xhr.send(formData);
     }else{
         document.getElementById("save-stamp-btn").classList.add("is-loading")
+        document.getElementById("stampboard_change_text").style.display = "none";
         var xhttp = new XMLHttpRequest();
         let params= "colour=" + colour.toString() +
             "&rewardMapping=" + encodeURI(rewards) +
@@ -209,6 +212,7 @@ function saveStampboardChanges(shopId){
         xhttp.onload = function() {
             if (xhttp.readyState === 4 && xhttp.status === 200) {
                 document.getElementById("save-stamp-btn").classList.remove("is-loading")
+                document.getElementById("stampboard_change_text").style.display = "block";
                 var response = xhttp.responseText
                 if (response == "success"){
                 }else{
