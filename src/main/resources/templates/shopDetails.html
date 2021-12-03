@@ -35,7 +35,7 @@
 					<div class="stampNavButton" onclick="pageNav(1)" ><i class="fas fa-angle-right"></i></div>
 				</div>
 
-      <div class="rewardsContainer box">
+      <div class="rewardsContainer box vertScrollbarIfOverflow">
         <div th:each="reward : ${stampBoard.rewards}" class="reward is-fullwidth">
           <p class="reward-text" th:text="${reward.rewardName}"></p>
           <button th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardNotReady">Cannot afford</button>
