@@ -22,7 +22,7 @@ public class ThymeMath {
     }
     public String getRewardTextFromId(List<Rewards> rewardsList, int position){
         for (Rewards r : rewardsList){
-            if(r.getRewardId() == position){
+            if(r.getRewardStampLocation() == position){
                 return r.getRewardName();
             }
         }
