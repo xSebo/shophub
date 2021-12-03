@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,8 +60,9 @@ public class AdminController {
             }
         }
 
+
         //Get Shops the user is associated with
-        if(highestPerm > 1){
+        if(highestPerm > 1 || userShopLinked.hasShop(user.get().getUserId())){
             List<Integer> shops = userShopLinked.getByUserId(user.get().getUserId());
             //Check if user has defined a shop to look at in the url
             Shops shop;
@@ -78,6 +80,33 @@ public class AdminController {
             }
             List<Socials> socialList = socialsRepo.findByShopId(shop.getShopId());
 
+            List<UserPermissions> linkedList = userPermissionsRepo.findByShopID(shop.getShopId());
+
+            List<Users> linkedUsers = new ArrayList<>();
+
+            //userPermissionsRepo.findAll().forEach(x -> System.out.println(x.getUser().getUserId() +":"+ x.getShop().getShopId()));
+
+
+            for(UserPermissions u:linkedList){
+                if(u.getUser().getUserEmail().equalsIgnoreCase(user.get().getUserEmail())){
+                    continue;
+                }
+                linkedUsers.add(u.getUser());
+            }
+
+            long highestShopLevel = 1;
+
+            List<UserPermissions> userShops = userPermissionsRepo.findByUserId(user.get().getUserId());
+            for(UserPermissions u:userShops){
+                if(u.getShop().getShopId() == shop.getShopId()){
+                    highestShopLevel = u.getAdminType().getAdminTypeId();
+                }
+            }
+            System.out.println(highestShopLevel);
+            //System.out.println(userShopLinked.hasShop(user.get().getUserId()));
+            model.addAttribute("linkedShop", userShopLinked.hasShop(user.get().getUserId()));
+            model.addAttribute("highestShopLevel", highestShopLevel);
+            model.addAttribute("staffMembers", linkedUsers);
             model.addAttribute("socials", socialList);
             model.addAttribute("shop",shop);
 

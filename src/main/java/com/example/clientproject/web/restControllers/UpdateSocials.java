@@ -39,6 +39,7 @@ public class UpdateSocials {
         for(UserPermissions u:allLinks){
             if(u.getShop().getShopId() == usf.getShopId()){
                 isLinked = true;
+                break;
             }
         }
 

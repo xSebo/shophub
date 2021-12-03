@@ -83,7 +83,7 @@ public class BusinessRegisterSaver {
         shopsRepo.save(shop);
         List<Tags> tagsList = tagsRepo.findAll();
 
-        linkShop.linkUserShop(shop.getShopId(), userId);
+        linkShop.linkUserShop(shop.getShopId(), userId, 2L);
 
         for(String t: business.getBusinessTags()){
             if(tagsList.contains(new Tags(t))){
