@@ -60,6 +60,8 @@ public class HomeController {
             return "redirect:/login";
         }
 
+
+        //System.out.println(shopsRepo.findAll());
         List<Shops> allShops = shopsRepo.findAll();
 
         List<Shops> favouriteShops = new ArrayList();
@@ -76,7 +78,7 @@ public class HomeController {
 
 
         List<TagsDTO> Tags = tagsSearch.findAll();
-        System.out.println(Tags);
+        //System.out.println(Tags);
 
         model.addAttribute("allTags", Tags);
 

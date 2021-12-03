@@ -20,14 +20,22 @@ public class ThymeMath {
         }
         return rewardLocs;
     }
-
     public String getRewardTextFromId(List<Rewards> rewardsList, int position){
         for (Rewards r : rewardsList){
             if(r.getRewardStampLocation() == position){
                 return r.getRewardName();
             }
         }
-
         return "";
     }
+
+    public String getRewardTextFromObject(Rewards reward){
+        return reward.getRewardName();
+    }
+
+    public int getRewardValueFromObject(Rewards reward){
+        return reward.getRewardStampLocation();
+    }
+
 }
+

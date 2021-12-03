@@ -27,13 +27,16 @@ public class UserShopLinked {
 
     public boolean hasShop(long userId){
         try{
-            if(userPermissionsRepo.findByUserId(userId).get(0).getShop().getShopId() != 1){
+            //System.out.println(userId);
+            //System.out.println(userPermissionsRepo.findByUserId(userId).get(1).getShop().getShopId());
+            if((userPermissionsRepo.findByUserId(userId).get(0).getShop().getShopId() != 1) ||
+                    (userPermissionsRepo.findByUserId(userId).get(1).getShop().getShopId() != 1)){
                 return true;
             }else{
                 return false;
             }
-        }catch(Exception e){
-            e.printStackTrace();
+        }catch(IndexOutOfBoundsException e){
+            //e.printStackTrace();
             return false;
         }
     }
