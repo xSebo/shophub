@@ -38,7 +38,7 @@
 				<p>Shop Rewards</p>
 			</div>
 		</div>
-		<main th:if="${highestPerm > 1 || linkedShop}">
+		<main th:if="${(highestPerm > 1) || linkedShop}">
 			<section id="profile-section" class="admin-section active">
 				<div th:replace="fragments/user_settings.html :: settings_page"/>
 			</section>

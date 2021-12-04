@@ -17,6 +17,47 @@
             <div th:if="${detailsChangeSuccess}">
                 <h3>Details Changed Successfully</h3>
             </div>
+
+            <div>
+                <form th:action="@{/nameEmailProfilePictureChange}" th:method="post" th:object="${nameEmailProfileChangeForm}">
+                    <div class="field is-full-width">
+                        <span class="control">
+                            <label style="font-size:15px" for="newFirstName">First Name</label>
+                            <input class="input is-medium is-rounded" type="text" id="newFirstName" th:field="${newFirstName}">
+
+                            <label style="font-size:15px" for="newLastName">Last Name</label>
+                            <input class="input is-medium is-rounded" type="text" id="newLastName" th:field="${newLastName}">
+                        </span>
+                    </div>
+
+                    <div class="field is-full-width">
+                        <span class="control">
+                            <label style="font-size:15px" for="newEmail">Email</label>
+                            <input class="input is-medium is-rounded" type="text" id="newEmail" th:field="${newEmail}">
+                        </span>
+                    </div>
+
+                    <div class="field is-full-width">
+                        <span class="control">
+                            <label for="newProfilePic">Profile Picture</label>
+                            <img th:src="${loggedInUser.getProfilePicture()}" alt="User Profile Pic">
+                            <input class="file-input" type="file" id="newProfilePic">
+
+                            <span class="file-cta">
+                              <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                              </span>
+
+                              <span class="file-label">
+                                Choose a file…
+                              </span>
+                            </span>
+                        </span>
+                    </div>
+
+                    <button type="submit" class="button is-rounded signIn-Button mt-4">Submit</button>
+                </form>
+            </div>
         </div>
 
         <hr style="color:black; height:3px; opacity:100%">
@@ -29,36 +70,38 @@
                 <h2 class="is-success">Password Changed Successfully</h2>
             </div>
 
-            <form th:action="@{/passwordChange}" th:method="post" th:object="${passwordChangeForm}">
-                <div class="field is-full-width">
-                    <span class="control">
-                        <label style="font-size:15px" for="oldPassword">Old Password</label>
-                        <input class="input is-medium is-rounded" type="text" id="oldPassword" name="oldPassword" th:field="*{oldPassword}"/>
-                    </span>
-                    <div class="is-danger" th:if="${oldPasswordDoesNotMatch}" th:text="Old Password Does Not Match"></div>
-                </div>
+            <div>
+                <form th:action="@{/passwordChange}" th:method="post" th:object="${passwordChangeForm}">
+                    <div class="field is-full-width">
+                        <span class="control">
+                            <label style="font-size:15px" for="oldPassword">Old Password</label>
+                            <input class="input is-medium is-rounded" type="text" id="oldPassword" name="oldPassword" th:field="*{oldPassword}"/>
+                        </span>
+                        <div class="is-danger" th:if="${oldPasswordDoesNotMatch}" th:text="Old Password Does Not Match"></div>
+                    </div>
 
-                <p></p>
+                    <p></p>
 
-                <div class="field is-full-width">
-                    <span class="control">
-                        <label style="font-size:15px" for="newPassword">New Password</label>
-                        <input class="input is-medium is-rounded" type="text" id="newPassword" name="newPassword" th:field="*{newPassword}"/>
-                    </span>
-                </div>
+                    <div class="field is-full-width">
+                        <span class="control">
+                            <label style="font-size:15px" for="newPassword">New Password</label>
+                            <input class="input is-medium is-rounded" type="text" id="newPassword" name="newPassword" th:field="*{newPassword}"/>
+                        </span>
+                    </div>
 
-                <p></p>
+                    <p></p>
 
-                <div class="field is-full-width">
-                    <span class="control">
-                        <label style="font-size:15px" for="newPasswordConfirm">Confirm New Password</label>
-                        <input class="input is-medium is-rounded" type="text" id="newPasswordConfirm" name="newPasswordConfirm" th:field="*{newPasswordConfirm}"/>
-                    </span>
-                    <div class="is-danger" th:if="${passwordsDoNotMatch}" th:text="New Passwords Do Not Match"></div>
-                </div>
+                    <div class="field is-full-width">
+                        <span class="control">
+                            <label style="font-size:15px" for="newPasswordConfirm">Confirm New Password</label>
+                            <input class="input is-medium is-rounded" type="text" id="newPasswordConfirm" name="newPasswordConfirm" th:field="*{newPasswordConfirm}"/>
+                        </span>
+                        <div class="is-danger" th:if="${passwordsDoNotMatch}" th:text="New Passwords Do Not Match"></div>
+                    </div>
 
-                <button type="submit" class="button is-rounded signIn-Button mt-4">Submit</button>
-            </form>
+                    <button type="submit" class="button is-rounded signIn-Button mt-4">Submit</button>
+                </form>
+            </div>
         </div>
     </body>
 </html>

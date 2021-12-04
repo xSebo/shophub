@@ -44,7 +44,11 @@ public class AdminController {
     }
 
     @GetMapping("/settings")
-    public String getAdminPage(Model model, HttpSession session, @RequestParam(name="shopId", required = false) Optional<Integer> shopId){
+    public String getAdminPage(
+            Model model,
+            HttpSession session,
+            @RequestParam(name="shopId", required = false) Optional<Integer> shopId
+    ) {
         Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
         if(!user.isPresent()) {
             return "redirect:/login";
@@ -119,6 +123,9 @@ public class AdminController {
 
         model.addAttribute("highestPerm", highestPerm);
         model.addAttribute("loggedInUser", user.get());
+
+        model.addAttribute("nameEmailProfileChangeForm", new NameEmailProfileChangeForm());
+        model.addAttribute("passwordChangeForm", new PasswordChangeForm());
 
         return "admin";
     }
