@@ -120,6 +120,9 @@ public class AdminController {
         model.addAttribute("highestPerm", highestPerm);
         model.addAttribute("loggedInUser", user.get());
 
+        model.addAttribute("nameEmailProfileChangeForm", new NameEmailProfileChangeForm());
+        model.addAttribute("passwordChangeForm", new PasswordChangeForm());
+
         return "admin";
     }
 }
