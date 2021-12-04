@@ -65,6 +65,7 @@ public class AdminController {
             }
         }
 
+        model.addAttribute("linkedShop", false);
 
         //Get Shops the user is associated with
         if(highestPerm > 1 || userShopLinked.hasShop(user.get().getUserId())){
