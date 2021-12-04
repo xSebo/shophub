@@ -8,7 +8,7 @@
 .shopName{
   position: absolute;
   width: 55%;
-  top: 8vh;
+  top: 13vh;
   font-size: 45px;
   font-weight: bold;
   text-align: center;
@@ -17,7 +17,7 @@
 .card-styling{
   width: 550px;
   margin: 15px;
-  top: 20vh;
+  top: 12vh;
 }
 
 .businessImg{
@@ -84,7 +84,7 @@ img.stamp{
 }
 
 .container1{
-  top: 10vh;
+  top: 13vh;
   right: 10vh;
   position: absolute;
   width: auto;

@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>ShopHub | Dashboard</title>
+    <title th:text="'ShopHub | ' + ${shop.shopName}">ShopHub | Dashboard</title>
     <link th:replace="fragments/libs.html :: bulma"/>
     <link th:replace="fragments/libs.html :: fa"/>
+    <link th:replace="fragments/nav.html :: nav-css"/>
     <!-- <link th:replace="fragments/nav.html :: nav-css"/> -->
     <link rel="stylesheet" type="text/css" href="css/viewShop.css">
 </head>
 <script src="/js/viewShop.js"></script>
 <body onload="document.getElementById('1').style.display = 'flex'">
+  <div th:replace="fragments/nav.html :: nav"></div>
     <!-- <div th:replace="fragments/nav.html :: nav"></div> -->
     <div class="shopName" th:text="${shop.shopName}"></div>
     <div class="container1">
