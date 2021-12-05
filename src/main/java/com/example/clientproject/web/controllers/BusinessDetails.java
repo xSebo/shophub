@@ -82,7 +82,7 @@ public class BusinessDetails {
 
         model.addAttribute("socials", socialMedia);
 
-        int UserStampPos = userStampService.getUserStampPos(1, (int) shop.getShopId());
+        int UserStampPos = userStampService.getUserStampPos(1, (int) shop.getStampBoard().getStampBoardId());
 
         ArrayList <Integer> UserStampPosOBJ = new ArrayList<>();
         UserStampPosOBJ.add(UserStampPos);
