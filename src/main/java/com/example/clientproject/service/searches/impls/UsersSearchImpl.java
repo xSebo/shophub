@@ -29,13 +29,12 @@ public class UsersSearchImpl implements UsersSearch {
 
     @Override
     public Optional<UsersDTO> findByEmail(String email) {
-        Optional<Users> usersOptional = usersRepo.findByUserEmail(email);
-        if (usersOptional.isPresent()) {
-            UsersDTO usersDTO = new UsersDTO(usersOptional.get());
-            return Optional.of(usersDTO);
-        } else {
-            return Optional.empty();
-        }
+        return usersRepo.findByUserEmail(email).map(UsersDTO::new);
+    }
+
+    @Override
+    public Optional<UsersDTO> findById(long id) {
+        return usersRepo.findById(id).map(UsersDTO::new);
     }
 
     @Override

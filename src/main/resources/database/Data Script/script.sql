@@ -9,6 +9,7 @@ INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, U
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('Noel','MCKASSON','NoelMCKASSON@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',2);
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('Henrich','MANIA','HenrichMANIA@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',2);
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('Mckenna','CHWEGMANN','MckennaCHWEGMANN@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',1);
+INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (1,1,1);
 INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (2,1,1);
 INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (3,1,1);
 INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (4,1,1);

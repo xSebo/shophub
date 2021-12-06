@@ -15,8 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserShopLinked {
 
-    @Autowired
-    UserPermissionsRepo userPermissionsRepo;
+    private UserPermissionsRepo userPermissionsRepo;
 
     @Autowired
     JdbcTemplate jdbc;

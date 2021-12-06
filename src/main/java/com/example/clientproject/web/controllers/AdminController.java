@@ -12,6 +12,8 @@ import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.services.UserShopLinked;
+import com.example.clientproject.web.forms.userSettingsPage.NameEmailProfileChangeForm;
+import com.example.clientproject.web.forms.userSettingsPage.PasswordChangeForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,8 +46,7 @@ public class AdminController {
     @GetMapping("/settings")
     public String getAdminPage(Model model, HttpSession session, @RequestParam(name="shopId", required = false) Optional<Integer> shopId){
         Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
-        if(user.isPresent()){
-        }else{
+        if(!user.isPresent()) {
             return "redirect:/login";
         }
 
@@ -60,6 +61,7 @@ public class AdminController {
             }
         }
 
+        model.addAttribute("linkedShop", false);
 
         //Get Shops the user is associated with
         if(highestPerm > 1 || userShopLinked.hasShop(user.get().getUserId())){
@@ -118,6 +120,9 @@ public class AdminController {
 
         model.addAttribute("highestPerm", highestPerm);
         model.addAttribute("loggedInUser", user.get());
+
+        model.addAttribute("nameEmailProfileChangeForm", new NameEmailProfileChangeForm());
+        model.addAttribute("passwordChangeForm", new PasswordChangeForm());
 
         return "admin";
     }

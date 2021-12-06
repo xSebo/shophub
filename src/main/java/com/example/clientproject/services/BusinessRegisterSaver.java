@@ -51,7 +51,7 @@ public class BusinessRegisterSaver {
 
     public void save(BusinessRegisterDTO business, long userId){
 
-        String query = "INSERT INTO Stamp_Boards (Stamp_Board_Size) VALUES (8)";
+        String query = "INSERT INTO Stamp_Boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (8, '#ff0000', 'stamp.jpg')";
         jdbc.execute(query);
 
         long currentStampId = stampBoards.findAll().get(stampBoards.findAll().size()-1).getStampBoardId();
