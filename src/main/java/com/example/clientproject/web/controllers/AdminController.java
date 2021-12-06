@@ -65,6 +65,7 @@ public class AdminController {
             }
         }
 
+        model.addAttribute("linkedShop", false);
 
         //Get Shops the user is associated with
         if(highestPerm > 1 || userShopLinked.hasShop(user.get().getUserId())){
@@ -123,6 +124,9 @@ public class AdminController {
 
         model.addAttribute("highestPerm", highestPerm);
         model.addAttribute("loggedInUser", user.get());
+        model.addAttribute("nameEmailProfileChangeForm", new NameEmailProfileChangeForm());
+        model.addAttribute("passwordChangeForm", new PasswordChangeForm());
+
         model.addAttribute("nameEmailProfileChangeForm", new NameEmailProfileChangeForm());
         model.addAttribute("passwordChangeForm", new PasswordChangeForm());
 
