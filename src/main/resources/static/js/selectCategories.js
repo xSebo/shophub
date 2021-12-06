@@ -48,3 +48,28 @@ function submitCategories(listSize){
     }
 
 }
+
+function filterRewards(input){
+    let added = 0;
+    let rewards = document.getElementsByClassName("reward_card");
+    for(let reward of rewards){
+        let title = reward.getElementsByClassName("title")[0].innerText
+        if(title.toLowerCase().replace(" ","").includes(input.value.toString().toLowerCase().replace(" ", ""))){
+            reward.classList.remove("hidden")
+        }else{
+            reward.classList.add("hidden")
+            added++;
+        }
+    }
+
+    if (added == rewards.length){
+        document.getElementById("filterText").style.display = "block";
+    }else{
+        document.getElementById("filterText").style.display = "none";
+    }
+}
+
+
+
+
+
