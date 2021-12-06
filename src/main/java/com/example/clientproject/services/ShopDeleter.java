@@ -9,6 +9,9 @@ public class ShopDeleter {
     @Autowired
     JdbcTemplate jdbc;
 
+    /**
+     * @param shopId - the shopID of the shop that the stored procedure is going to delete
+     */
     public void deleteShop(Integer shopId){
         String query = "CALL `mydb`.`deleteShop`('" + shopId + "');";
         jdbc.execute(query);

@@ -133,6 +133,11 @@ public class AdminController {
         return "admin";
     }
 
+    /**
+     * @param shopId - the shopID of the shop that the user is going to delete
+     * @param session - HttpsSession/JWTsession
+     * @return - return doesn't really matter, Javascript will redirect to "/businessRegister"
+     */
     @PostMapping("/deleteShop")
     public String deleteShop(@RequestParam(name="shopId", required = true) Integer shopId, HttpSession session) {
         long shopPermissionLevel = 0;
