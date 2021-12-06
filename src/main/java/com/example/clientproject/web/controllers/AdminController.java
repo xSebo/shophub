@@ -135,12 +135,21 @@ public class AdminController {
 
     @PostMapping("/deleteShop")
     public String deleteShop(@RequestParam(name="shopId", required = true) Integer shopId, HttpSession session) {
-        Shops shop;
+        long shopPermissionLevel = 0;
         //checks a valid shopId has been passed through
-        if(shopId > 0){//afterwards need to validate that the user logged currently logged in has perms
-            shopDeleter.deleteShop(shopId);
+        if (shopId > 0) {
+            List<UserPermissions> userShops = userPermissionsRepo.findByUserId(jwtUtils.getLoggedInUserId(session).get());
+            for (UserPermissions u : userShops) { //loops through userPermissions and saves their permission level
+                if (u.getShop().getShopId() == shopId) {
+                    shopPermissionLevel = u.getAdminType().getAdminTypeId();
+                }
+            }
+            if (shopPermissionLevel == 2 || shopPermissionLevel == 3) {
+                System.out.println("shop is being deleted");
+                shopDeleter.deleteShop(shopId);
+            }
+            return "redirect:/settings";
         }
         return "redirect:/settings";
     }
-
 }
