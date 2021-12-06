@@ -9,6 +9,7 @@ function deleteShop(shopId){
         xhttp.onload = function () {
             if (xhttp.readyState === 4 && xhttp.status === 200) {
                 console.log(xhttp.responseText);
+                window.location.href="/businessRegister";
             } else if (xhttp.readyState === 401) {
                 alert("Check the credentials and try again.");
             } else {
@@ -19,7 +20,7 @@ function deleteShop(shopId){
             alert("There was an error. Please try again later.");
         }
         xhttp.send(params);
-        alert("shop has been deleted");
+
         return false;
     }
 
