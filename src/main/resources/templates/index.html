@@ -31,7 +31,8 @@
 			<div class="horiz_scroll is-full-width mb-1">
 				<!--Reward Card Here-->
 				<div th:each="shopMap: ${activeShops}" th:include="fragments/reward_card.html :: reward_card"
-					 th:with="title=${shopMap.get('Shop').shopName},
+					 th:with="margin=false,
+					 title=${shopMap.get('Shop').shopName},
 					 stamps=${shopMap.get('UserStampBoard').userStampPosition},
 					 next_reward=${@claimableRewards.nextReward(shopMap.get('UserStampBoard'))},
 					 reward_amount_obtained=${@claimableRewards.totalClaimableRewards(shopMap.get('UserStampBoard'))},
@@ -42,7 +43,8 @@
 
 				<!--Reward Card Here-->
 				<div th:each="shop: ${favouriteShops}" th:include="fragments/reward_card.html :: reward_card"
-					 th:with="title=${shop.shopName},
+					 th:with="margin=false,
+					 title=${shop.shopName},
 					 stamps=0,
 					 next_reward=${shop.getStampBoard.getRewards.get(0).rewardStampLocation},
 					 reward_amount_obtained=0,

@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body th:fragment="reward_card">
-<div class="reward_card" style="position:relative;">
+<div class="reward_card" th:style="${margin?'margin:20px!important':''}+ ';position:relative'">
     <div class="favouriteStar starContainer" th:classappend="${isFavourite ? 'active' : ''}" th:onclick="'favouriteBusiness(this,' + ${shopId} + ');'">
         <span class="icon favouriteStar">
             <i class="far fa-star"></i>
