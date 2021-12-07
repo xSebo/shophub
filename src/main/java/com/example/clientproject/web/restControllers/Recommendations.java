@@ -1,5 +1,6 @@
 package com.example.clientproject.web.restControllers;
 
+import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.exceptions.ForbiddenErrorException;
@@ -28,11 +29,11 @@ public class Recommendations {
     public String getRecommendationsForUser(HttpSession session){
 
         try {
-            return recommendationGenerator.getRecommendations(session);
+            List<Shops> recommendations = recommendationGenerator.getRecommendations(session);
+            return recommendations.toString();
         }catch (Exception e){
             e.printStackTrace();
             return "User Not Logged In";
         }
-
     }
 }
