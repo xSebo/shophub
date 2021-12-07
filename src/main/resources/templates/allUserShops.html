@@ -14,7 +14,7 @@
 <body>
 <div th:replace="fragments/nav.html :: nav"></div>
 
-<div class="is-full-width is-flex is-justify-content-space-between is-align-content-center" style="margin-top:13px; margin-left: 13px; margin-bottom: 13px">
+<div class="is-full-width is-flex is-justify-content-space-between is-align-content-center" style="margin: 20px;">
     <a href="/"> < Back to dashboard</a>
     <div class="control has-icons-left">
         <input class="input" type="text" placeholder="Search">
@@ -24,21 +24,18 @@
     </div>
 </div>
 
-<div class="container is-full-width is-flex is-justify-flex-start is-align-items-flex-start is-flex-wrap-wrap">
-    <div class="horiz_scroll is-full-width mb-1">
+<div class="is-flex is-flex-direction-row is-justify-content-space-around is-flex-wrap-wrap">
         <!--Reward Card Here-->
-        <div th:each="shopMap: ${activeShops}" th:include="fragments/reward_card.html :: reward_card"
+        <div th:each="shopMap: ${activeShops}" style="margin:20px!important" th:include="fragments/reward_card.html :: reward_card"
              th:with="title=${shopMap.get('Shop').shopName},
 					 stamps=${shopMap.get('UserStampBoard').userStampPosition},
 					 next_reward=${@claimableRewards.nextReward(shopMap.get('UserStampBoard'))},
 					 reward_amount_obtained=${@claimableRewards.totalClaimableRewards(shopMap.get('UserStampBoard'))},
-					 isFavourite=false,
+					 isFavourite=${@checkFavourite.isFavourite(shopMap.get('Shop').shopId,loggedInUser.userId)},
 					 total_reward_amount=${shopMap.get('Shop').getStampBoard.getRewards.size},
 					 img_path=${shopMap.get('Shop').shopImage},
 					 shopId=${shopMap.get('Shop').shopId}"></div>
-    </div>
 
-    <div class="horiz_scroll is-full-width mb-1">
         <!--Reward Card Here-->
         <div th:each="shop: ${favouriteShops}" th:include="fragments/reward_card.html :: reward_card"
              th:with="title=${shop.shopName},
@@ -49,7 +46,6 @@
 					 total_reward_amount=${shop.getStampBoard.getRewards.size},
 					 img_path=${shop.shopImage},
 					 shopId=${shop.shopId}"></div>
-    </div>
 </div>
 
 
