@@ -11,10 +11,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PasswordChangeForm {
-    @Size(min=7, max=15, message="Password must be between 7 and 15 characters")
     private String oldPassword;
-    @Size(min=7, max=15, message="Password must be between 7 and 15 characters")
     private String newPassword;
-    @Size(min=7, max=15, message="Password must be between 7 and 15 characters")
     private String newPasswordConfirm;
 }
