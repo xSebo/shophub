@@ -18,5 +18,4 @@ public interface UserStampBoardsRepo extends JpaRepository<UserStampBoards, Long
      * @return - the object
      */
     UserStampBoards save(UserStampBoards userStampBoards);
-
 }

@@ -6,9 +6,6 @@
 }
 
 .shopName{
-  position: absolute;
-  width: 55%;
-  top: 8vh;
   font-size: 45px;
   font-weight: bold;
   text-align: center;
@@ -17,16 +14,11 @@
 .card-styling{
   width: 550px;
   margin: 15px;
-  top: 20vh;
 }
 
 .businessImg{
   height: 413px !important;
   width: 550px !important;
-}
-
-.addLeftMargin{
-  margin-left: 50px;
 }
 
 .imageSize{
@@ -84,20 +76,17 @@ img.stamp{
 }
 
 .container1{
-  top: 10vh;
-  right: 10vh;
-  position: absolute;
   width: auto;
   height: auto;
   display: flex;
   flex-direction: column;
+  margin: 15px;
 }
 
 .stampNavBar{
   width: 400px;
   height: 35px;
   align-items: stretch;
-  background-color: red;
   display: flex;
 }
 
@@ -114,10 +103,12 @@ img.stamp{
   font-weight: bold;
   background-color: grey;
   cursor: pointer;
+  transition: all .2s ease-in-out;
 }
 
 .stampNavButton:hover{
-  background-color: #c9c9c9;
+  color:black;
+  transform: scale(1.1);
 }
 
 .rewardsContainer{
@@ -152,6 +143,7 @@ img.stamp{
 .stampProgressText{
   width: 100%;
   text-align: center;
+  margin-bottom: 7px;
 }
 
 .reward-text{
@@ -168,5 +160,26 @@ img.stamp{
 
 .vertScrollbarIfOverflow{
     max-height: 550px;
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+.fullscreen-flex-container {
+    display: flex;
+    justify-content: space-around;
+    height: 100vh;
+    flex-direction: row-reverse;
+}
+
+.left{
+  display: flex;
+  height: inherit;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.right{
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }

@@ -9,6 +9,7 @@ import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.tags.TagsRepo;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.searches.TagSearch;
+import com.example.clientproject.services.DashboardStampLoader;
 import com.example.clientproject.services.UserFavouriteDTO;
 import com.example.clientproject.services.UserFavouriteToggle;
 import com.example.clientproject.web.forms.UserFavouriteForm;
@@ -33,14 +34,19 @@ public class HomeController {
     private JWTUtils jwtUtils;
     private TagSearch tagsSearch;
     private TagsRepo tagsRepo;
+    private DashboardStampLoader stampLoader;
 
     @Autowired
-    public HomeController(ShopsRepo ashopsRepo, UserFavouriteToggle uft, TagSearch aTagsSearch, TagsRepo aTagsRepo, JWTUtils jwt) {
+    public HomeController(ShopsRepo ashopsRepo,
+                          UserFavouriteToggle uft, TagSearch aTagsSearch,
+                          TagsRepo aTagsRepo, JWTUtils jwt,
+                          DashboardStampLoader aStampLoader) {
         shopsRepo = ashopsRepo;
         toggleFavourite = uft;
         this.tagsSearch = aTagsSearch;
         this.tagsRepo = aTagsRepo;
         jwtUtils = jwt;
+        stampLoader = aStampLoader;
     }
 
     @GetMapping({"/", "dashboard"})
@@ -60,6 +66,7 @@ public class HomeController {
             return "redirect:/login";
         }
 
+        int userId = jwtUtils.getLoggedInUserId(session).get();
 
         //System.out.println(shopsRepo.findAll());
         List<Shops> allShops = shopsRepo.findAll();
@@ -84,9 +91,11 @@ public class HomeController {
 
 
 
+
+        model.addAttribute("favouriteShops", stampLoader.getData(userId).get("favourited"));
+        model.addAttribute("activeShops",stampLoader.getData(userId).get("purchased"));
         model.addAttribute("loggedInUser", user.get());
         model.addAttribute("normalShops", normalShops);
-        model.addAttribute("favouriteShops", favouriteShops);
         model.addAttribute("tags", new String[]{"Coffee", "Vegan", "Sustainable"});
         return "index";
     }

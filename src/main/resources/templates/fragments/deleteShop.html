@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link th:fragment="delShopCSS" rel="stylesheet" type="text/css" href="css/deleteShop.css">
+    <script th:fragment="delShopJS" src="js/deleteShop.js"></script>
+</head>
+<body th:fragment="deleteShop">
+  <p class="horizontal-line"><br></p>
+  <div class="content-container">
+    <p class="title-red">Delete Shop</p>
+    <p class="info-text">This will permanently delete your shop as well as all files and data associated with it. <br> this is FINAL.</p>
+    <button class="button is-danger is-small" style="margin-top: 10px;" th:onclick="deleteShop([[${shop.shopId}]])">DELETE</button>
+  </div>
+  <p class="horizontal-line"><br></p>
+
+</body>
+
+</html>

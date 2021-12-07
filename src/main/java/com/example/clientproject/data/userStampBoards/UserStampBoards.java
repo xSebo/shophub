@@ -1,6 +1,7 @@
 package com.example.clientproject.data.userStampBoards;
 
 import com.example.clientproject.data.stampBoards.StampBoards;
+import com.example.clientproject.data.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,11 @@ public class UserStampBoards {
     @ManyToOne
     @JoinColumn(name="Stamp_Board_Id", nullable=false)
     private StampBoards stampBoard;
+
+    /*
+    @ManyToOne
+    @JoinColumn(name="User_Id", nullable=false)
+    private Users user;
+
+     */
 }

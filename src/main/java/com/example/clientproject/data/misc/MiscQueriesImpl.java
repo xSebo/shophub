@@ -75,10 +75,59 @@ public class MiscQueriesImpl implements MiscQueries{
         Number id = simpleJdbcInsert.execute(parameters);
     }
 
-    public void updateUser(UsersDTO usersDTO, String field, Object value) {
-        String sql ="UPDATE Users SET " + field + " = '" + value + "' WHERE User_Id = " + usersDTO.getUserId();
-        System.out.println(sql);
-        jdbcTemplate.execute(sql);
+    public void updateUser(int userId, String field, Object value) {
+        switch (field) {
+            case "User_First_Name": {
+                String sql = "UPDATE Users SET User_First_Name = ? WHERE User_Id = ?";
+                jdbcTemplate.update(
+                        // Script
+                        sql,
+                        // Arguments
+                        value, userId
+                );
+                break;
+            }
+            case "User_Last_Name": {
+                String sql = "UPDATE Users SET User_Last_Name = ? WHERE User_Id = ?";
+                jdbcTemplate.update(
+                        // Script
+                        sql,
+                        // Arguments
+                        value, userId
+                );
+                break;
+            }
+            case "User_Email": {
+                String sql = "UPDATE Users SET User_Email = ? WHERE User_Id = ?";
+                jdbcTemplate.update(
+                        // Script
+                        sql,
+                        // Arguments
+                        value, userId
+                );
+                break;
+            }
+            case "User_Profile_Picture": {
+                String sql = "UPDATE Users SET User_Profile_Picture = ? WHERE User_Id = ?";
+                jdbcTemplate.update(
+                        // Script
+                        sql,
+                        // Arguments
+                        value, userId
+                );
+                break;
+            }
+            case "User_Password": {
+                String sql = "UPDATE Users SET User_Password = ? WHERE User_Id = ?";
+                jdbcTemplate.update(
+                        // Script
+                        sql,
+                        // Arguments
+                        value, userId
+                );
+                break;
+            }
+        }
     }
 
     /**

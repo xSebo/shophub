@@ -33,6 +33,7 @@ function submitCategories(listSize){
         xhttp.onload = function () {
             if (xhttp.readyState === 4 && xhttp.status === 200) {
                 console.log(xhttp.responseText);
+                window.location.reload(true);
             } else if (xhttp.readyState === 401) {
                 status.innerHTML = "Check the credentials and try again.";
             } else {
@@ -43,7 +44,6 @@ function submitCategories(listSize){
             status.innerHTML = "There was an error. Please try again later.";
         }
         xhttp.send(params);
-        window.location.reload(true);
         return false;
     }
 
