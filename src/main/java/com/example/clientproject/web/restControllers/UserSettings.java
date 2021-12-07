@@ -1,7 +1,7 @@
-package com.example.clientproject.web.controllers.userSettingsPage;
+package com.example.clientproject.web.restControllers;
 
 import com.example.clientproject.data.misc.MiscQueries;
-import com.example.clientproject.data.users.Users;
+import com.example.clientproject.exceptions.ForbiddenErrorException;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.web.forms.userSettingsPage.NameEmailProfileChangeForm;
@@ -9,21 +9,21 @@ import com.example.clientproject.web.forms.userSettingsPage.PasswordChangeForm;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-@Controller
-public class UserSettingsController {
+@RestController
+public class UserSettings {
     private MiscQueries miscQueries;
     private UsersSearch usersSearch;
     private JWTUtils jwtUtils;
 
-    public UserSettingsController(MiscQueries aMiscQueries, UsersSearch aUsersSearch, JWTUtils aJWTUtils) {
+    public UserSettings(MiscQueries aMiscQueries, UsersSearch aUsersSearch, JWTUtils aJWTUtils) {
         this.miscQueries = aMiscQueries;
         this.usersSearch = aUsersSearch;
         this.jwtUtils = aJWTUtils;
@@ -32,34 +32,18 @@ public class UserSettingsController {
     /**
      * Function for when the "Change Password" button is pressed on the "User Settings" page
      * @param nameEmailProfileChangeForm - the form filled by the users
-     * @param bindingResult - any errors from the form
      * @param httpSession - the page's session
-     * @param model - the model, to be filled with attributes
      * @return - the admin page, with the required model attributes
      */
-    @PostMapping("/nameEmailProfilePictureChange")
-    public String nameEmailProfilePictureChangePost(@Valid NameEmailProfileChangeForm nameEmailProfileChangeForm,
-                                                    BindingResult bindingResult,
-                                                    HttpSession httpSession,
-                                                    Model model) {
+    @PostMapping("/nameEmailProfilePicture/update")
+    public String nameEmailProfilePictureChangePost(NameEmailProfileChangeForm nameEmailProfileChangeForm,
+                                                    HttpSession httpSession) {
         // Get the userId for the currently logged-in user
         int userId = jwtUtils.getLoggedInUserId(httpSession).get();
-        // Add the user to the model
-        model.addAttribute(
-                "loggedInUser",
-                usersSearch
-                        .findById(userId)
-                        .get()
-        );
-
-        // If the binding result has errors or if the new password fields do not match
-        if (bindingResult.hasErrors()) {
-            // Return to the admin page
-            return "admin";
-        }
 
         // If the user is changing their First Name
-        if (!nameEmailProfileChangeForm.getNewFirstName().isEmpty()) {
+        if (!(nameEmailProfileChangeForm.getNewFirstName() == null)) {
+            System.out.println("Changing First Name");
             // Set the user's first name to the one entered
             miscQueries.updateUser(
                     userId,
@@ -69,7 +53,8 @@ public class UserSettingsController {
         }
 
         // If the user is changing their Last Name
-        if (!nameEmailProfileChangeForm.getNewLastName().isEmpty()) {
+        if (!(nameEmailProfileChangeForm.getNewLastName() == null)) {
+            System.out.println("Changing Last Name");
             // Set the user's last name to the one entered
             miscQueries.updateUser(
                     userId,
@@ -79,7 +64,8 @@ public class UserSettingsController {
         }
 
         // If the user is changing their Email
-        if (!nameEmailProfileChangeForm.getNewEmail().isEmpty()) {
+        if (!(nameEmailProfileChangeForm.getNewEmail() == null)) {
+            System.out.println("Changing Email");
             // Set the user's email to the one entered
             miscQueries.updateUser(
                     userId,
@@ -89,7 +75,8 @@ public class UserSettingsController {
         }
 
         // If the user is changing their Profile Picture
-        if (!nameEmailProfileChangeForm.getNewProfilePic().isEmpty()) {
+        if (!(nameEmailProfileChangeForm.getNewProfilePic() == null)) {
+            System.out.println("Changing Profile Pic");
             // Set the user's profile picture to the one entered
             miscQueries.updateUser(
                     userId,
@@ -98,48 +85,26 @@ public class UserSettingsController {
             );
         }
 
-        return "admin";
+        return "success";
     }
 
     /**
      * Function for when the "Change Password" button is pressed on the "User Settings" page
      * @param passwordChangeForm - the form that was completed
-     * @param bindingResult - any errors from the passwordChangeForm
      * @param httpSession - the page's session
-     * @param model - the model which will have required attributes added to it
-     * @return - the admin page, with required model attributes
+     * @return - appropriate error message
      */
-    @PostMapping("/passwordChange")
-    public String passwordChangePost(@Valid PasswordChangeForm passwordChangeForm,
-                                     BindingResult bindingResult,
-                                     HttpSession httpSession,
-                                     Model model) {
+    @PostMapping("/password/update")
+    public String passwordChangePostAPI(PasswordChangeForm passwordChangeForm,
+                                     HttpSession httpSession) throws ForbiddenErrorException{
         // Get the userId for the currently logged-in user
         int userId = jwtUtils.getLoggedInUserId(httpSession).get();
-        // Add the user to the model
-        model.addAttribute(
-                "loggedInUser",
-                usersSearch
-                        .findById(userId)
-                        .get()
-        );
 
-        // If the binding result has errors or if the new password fields do not match
-        if (bindingResult.hasErrors() || (
-                !passwordChangeForm.getNewPassword().equals(
-                        passwordChangeForm.getNewPasswordConfirm()
-                )
-        )
-        ) {
-            // If the problem is that the passwords do not match
-            if (passwordChangeForm.getNewPassword().equals(
-                    passwordChangeForm.getNewPasswordConfirm()
-            )) {
-                // Add an attribute to the model
-                model.addAttribute("passwordsDoNotMatch", true);
-            }
-            // Return to the settings page
-            return "admin";
+        // If the new password fields do not match
+        if (!passwordChangeForm.getNewPassword().equals(
+                passwordChangeForm.getNewPasswordConfirm()
+        )) {
+            throw new ForbiddenErrorException("Passwords entered do not match");
         }
 
         // Check that the oldPassword field (after encryption) matches the encrypted
@@ -152,8 +117,8 @@ public class UserSettingsController {
                         .getUserPassword()
         );
         if (!oldPasswordMatches) {
-            model.addAttribute("oldPasswordDoesNotMatch", true);
-            return "admin";
+            // Return an error
+            throw new ForbiddenErrorException("Old password doesn't match");
         }
 
         // Setup a password encoder
@@ -167,9 +132,8 @@ public class UserSettingsController {
                         passwordChangeForm.getNewPassword()
                 )
         );
-        // Add an attribute to the model
-        model.addAttribute("passwordChangeSuccess", true);
-        // Return to the settings page
-        return "admin";
+
+        // Return a success message to the settings page
+        return "success";
     }
 }

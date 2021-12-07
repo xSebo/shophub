@@ -7,6 +7,9 @@
 	<link th:replace="fragments/nav.html :: nav-css"/>
 	<link th:replace="fragments/userSocials.html :: socialCss">
 	<link th:replace="fragments/userSocials.html :: socialJs">
+	<link th:replace="fragments/deleteShop.html :: delShopCSS">
+	<link th:replace="fragments/deleteShop.html :: delShopJS">
+	<link th:replace="fragments/toggleShop.html :: toggleShopJS">
 	<link rel="stylesheet" type="text/css" href="css/manageStaff.css"/>
 	<script src="js/manageStaff.js"></script>
 
@@ -14,6 +17,9 @@
 
 	<script type="text/javascript" src="/js/admin.js"></script>
 	<link rel="stylesheet" href="/static/css/admin.css">
+
+
+    <script type="text/javascript" src="js/userSettings.js"></script>
 </head>
 <body onload="document.getElementById('1').style.display = 'flex';">
 	<div th:replace="fragments/nav.html :: nav"></div>
@@ -49,6 +55,8 @@
 				<br>
 				<th:block th:if="${highestShopLevel>=2}">
 					<div th:replace="fragments/manageStaff.html :: manageStaffMembers"/>
+					<div th:replace="fragments/deleteShop.html :: deleteShop"/>
+					<div th:replace="fragments/toggleShop.html :: toggleShop"/>
 				</th:block>
 			</section>
 

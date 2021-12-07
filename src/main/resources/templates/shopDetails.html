@@ -1,122 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>ShopHub | Dashboard</title>
+    <title th:text="'ShopHub | ' + ${shop.shopName}">ShopHub | Dashboard</title>
     <link th:replace="fragments/libs.html :: bulma"/>
     <link th:replace="fragments/libs.html :: fa"/>
+    <link th:replace="fragments/nav.html :: nav-css"/>
     <!-- <link th:replace="fragments/nav.html :: nav-css"/> -->
     <link rel="stylesheet" type="text/css" href="css/viewShop.css">
 </head>
 <script src="/js/viewShop.js"></script>
 <body onload="document.getElementById('1').style.display = 'flex'">
+  <div th:replace="fragments/nav.html :: nav"></div>
+  <div class="fullscreen-flex-container">
     <!-- <div th:replace="fragments/nav.html :: nav"></div> -->
-    <div class="shopName" th:text="${shop.shopName}"></div>
-    <p th:text="${@loadSocials.getSocial(socials, 'tiktok')}"/>
-    <div class="container1">
-				<div class="multi-page-container">
-					<th:block th:each="i : ${#numbers.sequence(1, stampBoard.stampBoardSize)}" th:with="j=${i}">
-						<th:block th:if="${i%8==1}" th:utext="'&lt;div class=&#34;stampBoard&#34; id=&#34;'+ ${@thymeMath.ceil(i,8)} +'&#34; style=&#34;display:none;background-color:'+${stampBoard.stampBoardColour}+';&#34;&gt;'"/>
+    <div class="right">
+      <div class="container1">
+  				<div class="multi-page-container">
+  					<th:block th:each="i : ${#numbers.sequence(1, stampBoard.stampBoardSize)}" th:with="j=${i}">
+  						<th:block th:if="${i%8==1}" th:utext="'&lt;div class=&#34;stampBoard&#34; id=&#34;'+ ${@thymeMath.ceil(i,8)} +'&#34; style=&#34;display:none;background-color:'+${stampBoard.stampBoardColour}+';&#34;&gt;'"/>
 
-            <th:block th:switch="${UserStampPos[0]>=j}">
-              <img th:src="${stampBoard.stampBoardIcon}" class="stamp" th:case="true"></img>
-              <th:block th:case="false">
-                <div class="stamp" th:text="${j}" th:unless="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), j)}"></div>
-                <div class="stamp" th:if="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), j)}">
-                  <i class="fa fa-gift"></i>
-                </div>
+              <th:block th:switch="${UserStampPos[0]>=j}">
+                <img th:src="${stampBoard.stampBoardIcon}" class="stamp" th:case="true"></img>
+                <th:block th:case="false">
+                  <div class="stamp" th:text="${j}" th:unless="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), j)}"></div>
+                  <div class="stamp" th:if="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), j)}">
+                    <i class="fa fa-gift"></i>
+                  </div>
+                </th:block>
               </th:block>
-            </th:block>
 
-					<th:block th:if="${i%8==0 || i==stampBoard.stampBoardSize}" th:utext="'&lt;/div&gt;'"/>
-					</th:block>
-				</div>
-				<div class="stampNavBar">
-					<div class="stampNavButton" onclick="pageNav(-1)"><i class="fas fa-angle-left"></i></div>
-					<div class="stampNavButton" onclick="pageNav(1)" ><i class="fas fa-angle-right"></i></div>
-				</div>
+  					<th:block th:if="${i%8==0 || i==stampBoard.stampBoardSize}" th:utext="'&lt;/div&gt;'"/>
+  					</th:block>
+  				</div>
+  				<div class="stampNavBar" th:style="'background-color:' + ${stampBoard.stampBoardColour} + ';'">
+  					<div class="stampNavButton" th:style="'background-color:' + ${stampBoard.stampBoardColour} + ';'" onclick="pageNav(-1)"><i class="fas fa-chevron-circle-left"></i></div>
+  					<div class="stampNavButton" th:style="'background-color:' + ${stampBoard.stampBoardColour} + ';'" onclick="pageNav(1)" ><i class="fas fa-chevron-circle-right"></i></div>
+  				</div>
 
-      <div class="rewardsContainer box vertScrollbarIfOverflow">
-        <div th:each="reward : ${stampBoard.rewards}" class="reward is-fullwidth">
-          <p class="reward-text" th:text="${reward.rewardName}"></p>
-          <button th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardNotReady">Cannot afford</button>
-          <button th:if="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardisReady">Click to claim!</button>
-          <progress class="progress is-small marginBottom7px is-success" th:value="${UserStampPos[0]}" th:max="${reward.rewardStampLocation}"></progress>
-          <!-- TH:STYLE HAS NOT BEEN SET SO EXPECT AN ERROR -->
-          <p class="stampProgressText" th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" th:text="${reward.rewardStampLocation - UserStampPos[0]} + ' away from reward'"/>
-          <p class="stampProgressText" th:if="${UserStampPos[0]>=reward.rewardStampLocation}">Reward has been reached!</p>
-        </div>
-      </div>
-
-    </div>
-    <div class="card card-styling addLeftMargin">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-              <figure class="image is-150x150">
-                <img th:src="${shop.shopImage}" class="imageSize" alt="Placeholder image">
-              </figure>
-            </div>
-            <div class="subtitle field is-grouped is-grouped-multiline socialMediaContainer">
-              <div th:if="${@loadSocials.doesShopHaveSocialPlatform(socials, 'tiktok')}" class="control">
-                <div class="tags has-addons">
-                  <span class="tag is-large is-grey">
-                    <span class="icon-text">
-                      <span class="icon">
-                        <i class="fab fa-tiktok"></i>
-                      </span>
-                    </span>
-                  </span>
-                  <span th:href="'https://www.tiktok.com/@' + ${@loadSocials.getSocial(socials, 'tiktok')}" class="tag is-large is-dark mousePointerWhenHovered">Tik Tok</span>
-                </div>
-              </div>
-
-              <div th:if="${@loadSocials.doesShopHaveSocialPlatform(socials, 'facebook')}" class="control">
-                <div class="tags has-addons">
-                  <span class="tag is-large is-grey">
-                    <span class="icon-text">
-                      <span class="icon">
-                        <i class="fab fa-facebook-f"></i>
-                      </span>
-                    </span>
-                  </span>
-                  <span th:href="'https://www.facebook.com/' + ${@loadSocials.getSocial(socials, 'facebook')}" class="tag is-large is-link mousePointerWhenHovered">Facebook</span>
-                </div>
-              </div>
-
-              <div th:if="${@loadSocials.doesShopHaveSocialPlatform(socials, 'twitter')}" class="control">
-                <div class="tags has-addons">
-                  <span class="tag is-large is-grey">
-                    <span class="icon-text">
-                      <span class="icon">
-                        <i class="fab fa-twitter"></i>
-                      </span>
-                    </span>
-                  </span>
-                  <span th:href="'https://twitter.com/' + ${@loadSocials.getSocial(socials, 'twitter')}" class="tag is-large is-info mousePointerWhenHovered">Twitter</span>
-                </div>
-              </div>
-
-              <div th:if="${@loadSocials.doesShopHaveSocialPlatform(socials, 'instagram')}" class="control">
-                <div class="tags has-addons">
-                  <span class="tag is-large is-grey">
-                    <span class="icon-text">
-                      <span class="icon">
-                        <i class="fab fa-instagram"></i>
-                      </span>
-                    </span>
-                  </span>
-                  <span th:href="'https://twitter.com/' + ${@loadSocials.getSocial(socials, 'instagram')}" class="tag is-large is-danger mousePointerWhenHovered">Instagram</span>
-                </div>
-              </div>
-
-            </div>
-            <!-- <div style="float: left;"><p class="subtitle is-6">Website link<br>Tik tok<br>Facebook<br>Instagram<br>Twitter</p><div> -->
-            </div>
+        <div class="rewardsContainer box vertScrollbarIfOverflow">
+          <div th:each="reward : ${stampBoard.rewards}" class="reward is-fullwidth">
+            <p class="reward-text" th:text="${reward.rewardName}"></p>
+            <button th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardNotReady">Cannot afford</button>
+            <button th:if="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardisReady">Click to claim!</button>
+            <progress class="progress is-small marginBottom7px is-success" th:value="${UserStampPos[0]}" th:max="${reward.rewardStampLocation}"></progress>
+            <!-- TH:STYLE HAS NOT BEEN SET SO EXPECT AN ERROR -->
+            <p class="stampProgressText" th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" th:text="${reward.rewardStampLocation - UserStampPos[0]} + ' away from reward'"/>
+            <p class="stampProgressText" th:if="${UserStampPos[0]>=reward.rewardStampLocation}">Reward has been reached!</p>
           </div>
-        <div class="content" style="margin-left: 1rem" th:text="${shop.shopDescription}"></div>
-        <footer class="card-footer">
-          <a th:onclick="toBusinessWebsite([[${shop.shopWebsite}]])" class="card-footer-item websiteLinkText">Click for website</a>
-        </footer>
+        </div>
+
+      </div>
+  </div>
+    <div class="left">
+      <div class="shopName" th:text="${shop.shopName}"></div>
+      <div class="card card-styling">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image is-150x150">
+                  <img th:src="${shop.shopImage}" class="imageSize" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="subtitle field is-grouped is-grouped-multiline socialMediaContainer">
+                <div th:if="${@loadSocials.getSocial(socials, 'tiktok') != ''}" class="control">
+                  <div class="tags has-addons">
+                    <span class="tag is-large is-grey">
+                      <span class="icon-text">
+                        <span class="icon">
+                          <i class="fab fa-tiktok"></i>
+                        </span>
+                      </span>
+                    </span>
+                    <a th:href="'https://www.tiktok.com/@' + ${@loadSocials.getSocial(socials, 'tiktok')}"><span class="tag is-large is-dark mousePointerWhenHovered">Tik Tok</span></a>
+                  </div>
+                </div>
+
+                <div th:if="${@loadSocials.getSocial(socials, 'facebook' != '')}" class="control">
+                  <div class="tags has-addons">
+                    <span class="tag is-large is-grey">
+                      <span class="icon-text">
+                        <span class="icon">
+                          <i class="fab fa-facebook-f"></i>
+                        </span>
+                      </span>
+                    </span>
+                    <a th:href="'https://www.facebook.com/' + ${@loadSocials.getSocial(socials, 'facebook')}"><span class="tag is-large is-link mousePointerWhenHovered">Facebook</span></a>
+                  </div>
+                </div>
+
+                <div th:if="${@loadSocials.getSocial(socials, 'twitter') != ''}" class="control">
+                  <div class="tags has-addons">
+                    <span class="tag is-large is-grey">
+                      <span class="icon-text">
+                        <span class="icon">
+                          <i class="fab fa-twitter"></i>
+                        </span>
+                      </span>
+                    </span>
+                    <a th:href="'https://twitter.com/' + ${@loadSocials.getSocial(socials, 'twitter')}"><span class="tag is-large is-info mousePointerWhenHovered">Twitter</span></a>
+                  </div>
+                </div>
+
+                <div th:if="${@loadSocials.getSocial(socials, 'instagram') != ''}" class="control">
+                  <div class="tags has-addons">
+                    <span class="tag is-large is-grey">
+                      <span class="icon-text">
+                        <span class="icon">
+                          <i class="fab fa-instagram"></i>
+                        </span>
+                      </span>
+                    </span>
+                    <a th:href="'https://twitter.com/' + ${@loadSocials.getSocial(socials, 'instagram')}"><span class="tag is-large is-danger mousePointerWhenHovered">Instagram</span></a>
+                  </div>
+                </div>
+
+              </div>
+              <!-- <div style="float: left;"><p class="subtitle is-6">Website link<br>Tik tok<br>Facebook<br>Instagram<br>Twitter</p><div> -->
+              </div>
+            </div>
+          <div class="content" style="margin-left: 1rem" th:text="${shop.shopDescription}"></div>
+          <footer class="card-footer">
+            <a th:href="${shop.shopWebsite}"><p class="card-footer-item websiteLinkText">Click for website<a></a>
+          </footer>
+        </div>
       </div>
       <!-- <h1 th:text="${shop.shopName}"></h1> -->
       <!-- <p th:text="${shop.shopDescription}"></p> -->
@@ -125,6 +131,6 @@
       <!-- <p th:text="${shop.shopCountries}"></p> -->
       <!-- <img th:src="${shop.shopImage}" alt=""> -->
       <!-- <h1 th:text="${stampBoard.stampBoardSize}"></h1> -->
-
+    </div>
 </body>
 </html>
