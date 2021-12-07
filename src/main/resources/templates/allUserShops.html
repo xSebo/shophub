@@ -5,6 +5,7 @@
     <link th:replace="fragments/libs.html :: fa"/>
     <link th:replace="fragments/nav.html :: nav-css"/>
     <script th:replace="fragments/business_card.html :: card_js"/>
+    <script src="/js/selectCategories.js"></script>
     <link rel="stylesheet" href="/css/reward_card.css">
     <link rel="stylesheet" href="/css/business_container.css">
     <meta charset="UTF-8">
@@ -17,7 +18,7 @@
 <div class="is-full-width is-flex is-justify-content-space-between is-align-content-center" style="margin: 20px;">
     <a href="/"> < Back to dashboard</a>
     <div class="control has-icons-left">
-        <input class="input" type="text" placeholder="Search">
+        <input class="input" type="text" placeholder="Search" oninput="filterRewards(this)">
         <span class="icon is-small is-left">
 							<i class="fas fa-search"></i>
 						</span>
@@ -26,8 +27,9 @@
 
 <div class="is-flex is-flex-direction-row is-justify-content-space-around is-flex-wrap-wrap">
         <!--Reward Card Here-->
-        <div th:each="shopMap: ${activeShops}" style="margin:20px!important" th:include="fragments/reward_card.html :: reward_card"
-             th:with="title=${shopMap.get('Shop').shopName},
+        <div th:each="shopMap: ${activeShops}" th:include="fragments/reward_card.html :: reward_card"
+             th:with="margin=true,
+                     title=${shopMap.get('Shop').shopName},
 					 stamps=${shopMap.get('UserStampBoard').userStampPosition},
 					 next_reward=${@claimableRewards.nextReward(shopMap.get('UserStampBoard'))},
 					 reward_amount_obtained=${@claimableRewards.totalClaimableRewards(shopMap.get('UserStampBoard'))},
@@ -38,7 +40,8 @@
 
         <!--Reward Card Here-->
         <div th:each="shop: ${favouriteShops}" th:include="fragments/reward_card.html :: reward_card"
-             th:with="title=${shop.shopName},
+             th:with="margin=true,
+                     title=${shop.shopName},
 					 stamps=0,
 					 next_reward=${shop.getStampBoard.getRewards.get(0).rewardStampLocation},
 					 reward_amount_obtained=0,

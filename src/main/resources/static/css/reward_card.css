@@ -7,6 +7,10 @@
     margin-right: 20px;
 }
 
+.hidden{
+    display:none;
+}
+
 .reward_card.hidden{
     display: none;
 }
