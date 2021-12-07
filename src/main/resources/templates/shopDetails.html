@@ -71,7 +71,7 @@
                         </span>
                       </span>
                     </span>
-                    <span th:href="'https://www.tiktok.com/@' + ${@loadSocials.getSocial(socials, 'tiktok')}" class="tag is-large is-dark mousePointerWhenHovered">Tik Tok</span>
+                    <a th:href="'https://www.tiktok.com/@' + ${@loadSocials.getSocial(socials, 'tiktok')}"><span class="tag is-large is-dark mousePointerWhenHovered">Tik Tok</span></a>
                   </div>
                 </div>
 
@@ -84,7 +84,7 @@
                         </span>
                       </span>
                     </span>
-                    <span th:href="'https://www.facebook.com/' + ${@loadSocials.getSocial(socials, 'facebook')}" class="tag is-large is-link mousePointerWhenHovered">Facebook</span>
+                    <a th:href="'https://www.facebook.com/' + ${@loadSocials.getSocial(socials, 'facebook')}"><span class="tag is-large is-link mousePointerWhenHovered">Facebook</span></a>
                   </div>
                 </div>
 
@@ -97,7 +97,7 @@
                         </span>
                       </span>
                     </span>
-                    <span th:href="'https://twitter.com/' + ${@loadSocials.getSocial(socials, 'twitter')}" class="tag is-large is-info mousePointerWhenHovered">Twitter</span>
+                    <a th:href="'https://twitter.com/' + ${@loadSocials.getSocial(socials, 'twitter')}"><span class="tag is-large is-info mousePointerWhenHovered">Twitter</span></a>
                   </div>
                 </div>
 
@@ -110,7 +110,7 @@
                         </span>
                       </span>
                     </span>
-                    <span th:href="'https://twitter.com/' + ${@loadSocials.getSocial(socials, 'instagram')}" class="tag is-large is-danger mousePointerWhenHovered">Instagram</span>
+                    <a th:href="'https://twitter.com/' + ${@loadSocials.getSocial(socials, 'instagram')}"><span class="tag is-large is-danger mousePointerWhenHovered">Instagram</span></a>
                   </div>
                 </div>
 
@@ -120,7 +120,7 @@
             </div>
           <div class="content" style="margin-left: 1rem" th:text="${shop.shopDescription}"></div>
           <footer class="card-footer">
-            <a th:onclick="toBusinessWebsite([[${shop.shopWebsite}]])" class="card-footer-item websiteLinkText">Click for website</a>
+            <a th:href="${shop.shopWebsite}"><p class="card-footer-item websiteLinkText">Click for website<a></a>
           </footer>
         </div>
       </div>
