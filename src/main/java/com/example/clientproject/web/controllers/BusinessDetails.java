@@ -69,6 +69,8 @@ public class BusinessDetails {
                 stampBoard = shop.getStampBoard();
             }catch(NoSuchElementException e) {
                 stampBoard = stampRepo.findById(1L).get();
+            }catch(javax.persistence.EntityNotFoundException e){
+                stampBoard = stampRepo.findById(1L).get();
             }
             //userStampBoard = usersRepo.getById(userId).getUserStampBoards();
         }catch(Exception e){
