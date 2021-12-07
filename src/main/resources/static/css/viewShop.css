@@ -165,6 +165,7 @@ img.stamp{
 
 .fullscreen-flex-container {
     display: flex;
+    justify-content: space-around;
     height: 100vh;
     flex-direction: row-reverse;
 }
@@ -181,8 +182,4 @@ img.stamp{
   justify-content: center;
   align-items: center;
   position: relative;
-}
-
-.shop-details-container{
-
 }
