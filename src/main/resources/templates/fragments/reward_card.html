@@ -17,6 +17,7 @@
     <div class="reward_card_content">
         <h1 class="title is-4 mb-1" th:text="${title}" style="white-space: break-spaces;"></h1>
         <p class="mb-1" th:text="'You have ' + ${stamps} +  ' stamps!'"></p>
+        <th:block th:if="${next_reward != 0}">
         <progress class="progress mb-1" th:value="${stamps}" th:max="${next_reward}"></progress>
         <p class="mb-2" th:text="${next_reward}-${stamps} + ' to next reward'"></p>
         <div class="is-full-width" style="display:flex;justify-content: space-between;align-items: center">
@@ -35,6 +36,27 @@
                 </button>
             </div>
         </div>
+        </th:block>
+        <th:block th:if="${next_reward == 0}">
+            <progress class="progress mb-1" th:value="${stamps}" th:max="${stamps}"></progress>
+            <p class="mb-2"></p>
+            <div class="is-full-width" style="display:flex;justify-content: space-between;align-items: center">
+                <div class="level-left">
+                <span class="icon is-small is-left ml-1 mr-1">
+                    <i class="fas fa-gift"></i>
+                </span>
+                    <p style="margin-right:3px">No rewards!</p>
+                </div>
+                <div class="level-right">
+                    <button class="button is-rounded">
+                        Explore
+                        <span class="icon is-small is-left ml-1">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                    </button>
+                </div>
+            </div>
+        </th:block>
     </div>
     <div class="reward_card_img" th:style="'background-image:url(' + ${img_path} + ');'"></div>
 </div>

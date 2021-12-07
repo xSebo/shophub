@@ -21,11 +21,13 @@ public class ClaimableRewards {
 
     public int nextReward(UserStampBoards u){
         List<Rewards> r = u.getStampBoard().getRewards();
-        for(int i = 1; i<u.getStampBoard().getRewards().size()-1; i++){
-            if((r.get(i).getRewardStampLocation() >= u.getUserStampPosition()) &&
-                    (r.get(i-1).getRewardStampLocation() <= u.getUserStampPosition())){
+        if (r.size() != 0) {
+            for (int i = 1; i < u.getStampBoard().getRewards().size() - 1; i++) {
+                if ((r.get(i).getRewardStampLocation() >= u.getUserStampPosition()) &&
+                        (r.get(i - 1).getRewardStampLocation() <= u.getUserStampPosition())) {
 
-                return r.get(i).getRewardStampLocation();
+                    return r.get(i).getRewardStampLocation();
+                }
             }
         }
         return 0;
