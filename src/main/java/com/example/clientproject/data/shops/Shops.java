@@ -81,4 +81,8 @@ public class Shops {
     @JoinColumn(name="Category_Id")
     private Categories category;
 
+    public String toString(){
+        return this.getShopName();
+    }
+
 }
