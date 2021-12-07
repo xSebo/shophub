@@ -67,10 +67,9 @@ public class BusinessDetails {
             shop = shopsRepo.getById(Long.valueOf(shopId));
             try {
                 stampBoard = shop.getStampBoard();
-            }catch(NoSuchElementException e){
+            }catch(NoSuchElementException e) {
                 stampBoard = stampRepo.findById(1L).get();
             }
-            long userId = jwtUtils.getLoggedInUserId(session).get();
             //userStampBoard = usersRepo.getById(userId).getUserStampBoards();
         }catch(Exception e){
             e.printStackTrace();
@@ -82,7 +81,8 @@ public class BusinessDetails {
 
         model.addAttribute("socials", socialMedia);
 
-        int UserStampPos = userStampService.getUserStampPos(1, (int) shop.getShopId());
+        int userId = jwtUtils.getLoggedInUserId(session).get();
+        int UserStampPos = userStampService.getUserStampPos(userId, (int) shop.getStampBoard().getStampBoardId());
 
         ArrayList <Integer> UserStampPosOBJ = new ArrayList<>();
         UserStampPosOBJ.add(UserStampPos);
