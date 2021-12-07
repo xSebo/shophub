@@ -13,6 +13,11 @@ public class ShopActiveService {
     @Autowired
     JdbcTemplate jdbc;
 
+
+    /**
+     * @param shopId - uses shopId to select which shop will have its active field checked
+     * @return - an int of Shop activity 1 = active || 0 = not active
+     */
     public int isShopActive(Integer shopId){
         String query = "SELECT Shop_Active FROM shops WHERE Shop_Id = " + shopId + ";";
         try{
@@ -24,6 +29,11 @@ public class ShopActiveService {
             return 404;
         }
     }
+
+    /**
+     * @param shopId - uses shopId to select which shop will have its active field changed/updated
+     * @param active - will either be 1 or 0 and will update shops "Shop_Active" field accordingly
+     */
 
     public void updateShopActive(Integer shopId, Integer active){
         if(active == 0 || active == 1){ //only allows active values of 0 or 1

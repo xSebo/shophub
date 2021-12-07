@@ -112,6 +112,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Stamp_Boards` (
     `Stamp_Board_Id` INT NOT NULL AUTO_INCREMENT,
     `Stamp_Board_Size` INT NOT NULL,
+    `Stamp_Board_Colour` VARCHAR(7),
+    `Stamp_Board_Icon` varchar(255),
     PRIMARY KEY (`Stamp_Board_Id`))
 ENGINE = InnoDB;
 
