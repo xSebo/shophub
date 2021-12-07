@@ -1,5 +1,6 @@
 package com.example.clientproject.data.userStampBoards;
 
+import com.example.clientproject.data.users.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -17,7 +18,4 @@ public interface UserStampBoardsRepo extends JpaRepository<UserStampBoards, Long
      * @return - the object
      */
     UserStampBoards save(UserStampBoards userStampBoards);
-
-
-
 }

@@ -7,6 +7,10 @@
     margin-right: 20px;
 }
 
+.reward_card.hidden{
+    display: none;
+}
+
 .reward_card_content{
     height: 100%;
     width: 70%;

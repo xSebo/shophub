@@ -6,9 +6,6 @@
 }
 
 .shopName{
-  position: absolute;
-  width: 55%;
-  top: 13vh;
   font-size: 45px;
   font-weight: bold;
   text-align: center;
@@ -17,16 +14,11 @@
 .card-styling{
   width: 550px;
   margin: 15px;
-  top: 12vh;
 }
 
 .businessImg{
   height: 413px !important;
   width: 550px !important;
-}
-
-.addLeftMargin{
-  margin-left: 50px;
 }
 
 .imageSize{
@@ -84,13 +76,11 @@ img.stamp{
 }
 
 .container1{
-  top: 13vh;
-  right: 10vh;
-  position: absolute;
   width: auto;
   height: auto;
   display: flex;
   flex-direction: column;
+  margin: 15px;
 }
 
 .stampNavBar{
@@ -171,4 +161,25 @@ img.stamp{
 .vertScrollbarIfOverflow{
     max-height: 550px;
     overflow-y: auto;
+}
+
+.fullscreen-flex-container {
+    display: flex;
+    justify-content: space-around;
+    height: 100vh;
+    flex-direction: row-reverse;
+}
+
+.left{
+  display: flex;
+  height: inherit;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.right{
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }

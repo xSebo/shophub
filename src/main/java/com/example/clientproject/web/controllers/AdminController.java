@@ -12,6 +12,7 @@ import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.services.ShopDeleter;
+import com.example.clientproject.services.ShopActiveService;
 import com.example.clientproject.services.UserShopLinked;
 import com.example.clientproject.web.forms.userSettingsPage.NameEmailProfileChangeForm;
 import com.example.clientproject.web.forms.userSettingsPage.PasswordChangeForm;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,9 +37,9 @@ public class AdminController {
     public StampBoardsRepo stampBoardsRepo;
     public SocialsRepo socialsRepo;
     public ShopDeleter shopDeleter;
+    public ShopActiveService shopActiveService;
 
-    public AdminController(JWTUtils jwt, UserShopLinked usl, UserPermissionsRepo upr, ShopsRepo sr, StampBoardsRepo sbr,
-                           SocialsRepo socialRepo, ShopDeleter sd){
+    public AdminController(JWTUtils jwt, UserShopLinked usl, UserPermissionsRepo upr, ShopsRepo sr,          StampBoardsRepo sbr, SocialsRepo socialRepo, ShopActiveService sas){
         jwtUtils = jwt;
         userShopLinked = usl;
         userPermissionsRepo = upr;
@@ -45,10 +47,15 @@ public class AdminController {
         stampBoardsRepo = sbr;
         socialsRepo = socialRepo;
         shopDeleter = sd;
+        shopActiveService = sas;
     }
 
     @GetMapping("/settings")
-    public String getAdminPage(Model model, HttpSession session, @RequestParam(name="shopId", required = false) Optional<Integer> shopId){
+    public String getAdminPage(
+            Model model,
+            HttpSession session,
+            @RequestParam(name="shopId", required = false) Optional<Integer> shopId
+    ) {
         Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
         if(!user.isPresent()) {
             return "redirect:/login";
@@ -115,6 +122,13 @@ public class AdminController {
             model.addAttribute("staffMembers", linkedUsers);
             model.addAttribute("socials", socialList);
             model.addAttribute("shop",shop);
+
+            //Gets shop activity and passes it into model/thymeleaf
+            int intShopId = (int) shop.getShopId();
+            List<Integer> shopActive = Collections.singletonList(shopActiveService.isShopActive(intShopId));
+            model.addAttribute("shopActive", shopActive);
+
+
 
             //Get the stamp board for the chosen shop
             StampBoards stampBoard = stampBoardsRepo.findById(shop.getStampBoard().getStampBoardId()).get();
