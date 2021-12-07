@@ -1,0 +1,26 @@
+.content-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.title-red{
+  margin-bottom:5px;
+  color: red;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.info-text{
+  margin-bottom:5px;
+  color: #4b4b4b;
+  font-size: 13px;
+}
+
+.horizontal-line{
+  border-bottom: 1px solid;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
