@@ -20,4 +20,5 @@ public interface UserStampBoardsRepo extends JpaRepository<UserStampBoards, Long
 
 
 
+
 }
