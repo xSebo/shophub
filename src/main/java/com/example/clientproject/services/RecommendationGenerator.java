@@ -118,8 +118,31 @@ public class RecommendationGenerator {
 
         //Calculate weights for each shop, later do this based off a list of passed in shops
         //Ignore shops that have been starred or where the user has a stamp
+        List<HashMap<Shops, Double>> weightedShops = new ArrayList<>();
+        for(Shops shop : shopsRepo.findAll()){
+            //If the shop isn't starred or purchased from
+            if(!purchasedFromShops.contains(shop.getShopId()) && !favoriteShops.contains(shop.getShopId())){
+                double weight = 0;
+                //Loop of each tag of the shop and add relevancy accordingly
+                for(Tags tag : shop.getShopTags()){
+                    //If the tag has a weight
+                    if(tagWeights.containsKey(tag.getTagName())){
+                        weight += tagWeights.get(tag.getTagName());
+                    }
+                }
+                HashMap<Shops, Double> shopPair = new HashMap<>();
+                shopPair.put(shop, weight);
+                weightedShops.add(shopPair);
+            }
+        }
 
-        return tagWeights.toString();
+        Collections.sort(weightedShops, new Comparator<HashMap<Shops, Double>>(){
+            public int compare(HashMap<Shops, Double> one, HashMap<Shops, Double> two) {
+                return one.entrySet().iterator().next().getValue().compareTo(two.entrySet().iterator().next().getValue());
+            }
+        });
+
+        return weightedShops.toString();
 
     }
 }
