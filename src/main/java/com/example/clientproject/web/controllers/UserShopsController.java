@@ -60,19 +60,28 @@ public class UserShopsController {
         Set<UserStampBoards> userStamps = userRepo.findById((long) userId).get().getUserStampBoards();
 
         for(UserStampBoards u:userStamps){
-            Map<String,Object> temp = new HashMap<>();
-            temp.put("UserStampBoard", u);
-            temp.put("Shop", shopsRepo.
-                    findByStampboardId((int) u.getStampBoard().getStampBoardId()));
-            combinedInfo.add(temp);
-            temp.clear();
+            combinedInfo.add(
+                    new HashMap<>() {{
+                        put("UserStampBoard", u);
+                        put("Shop", shopsRepo.
+                                findByStampboardId(u.getStampBoard().getStampBoardId()));
+                    }}
+            );
         }
+
         List<Shops> favouriteShops = new ArrayList<>();
 
         for(Shops s:shopsRepo.findAll()){
             UserFavouriteDTO ufDTO = new UserFavouriteDTO(new UserFavouriteForm(s.getShopId()), userId);
             if(toggleFavourite.alreadyInDb(ufDTO)){
+                for(Map<String, Object> m:combinedInfo){
+                    Shops shop = (Shops) m.get("Shop");
+                    if(shop.getShopId() == s.getShopId()){
+                        continue;
+                    }
+                }
                 favouriteShops.add(s);
+
             }
         }
 

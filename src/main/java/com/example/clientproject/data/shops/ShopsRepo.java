@@ -79,5 +79,5 @@ public interface ShopsRepo extends JpaRepository<Shops, Long> {
     List<Shops> findByCategoryId(long categoryId);
 
     @Query("SELECT s FROM Shops s where s.stampBoard.stampBoardId = ?1")
-    StampBoards findByStampboardId(int stampBoardId);
+    Shops findByStampboardId(long stampBoardId);
 }
