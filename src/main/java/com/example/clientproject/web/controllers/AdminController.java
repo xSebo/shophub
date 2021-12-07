@@ -11,6 +11,7 @@ import com.example.clientproject.data.userPermissions.UserPermissions;
 import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.service.Utils.JWTUtils;
+import com.example.clientproject.services.ShopActiveService;
 import com.example.clientproject.services.UserShopLinked;
 import com.example.clientproject.web.forms.userSettingsPage.NameEmailProfileChangeForm;
 import com.example.clientproject.web.forms.userSettingsPage.PasswordChangeForm;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,15 +34,17 @@ public class AdminController {
     public ShopsRepo shopsRepo;
     public StampBoardsRepo stampBoardsRepo;
     public SocialsRepo socialsRepo;
+    public ShopActiveService shopActiveService;
 
     public AdminController(JWTUtils jwt, UserShopLinked usl, UserPermissionsRepo upr, ShopsRepo sr, StampBoardsRepo sbr,
-                           SocialsRepo socialRepo){
+                           SocialsRepo socialRepo, ShopActiveService sas){
         jwtUtils = jwt;
         userShopLinked = usl;
         userPermissionsRepo = upr;
         shopsRepo = sr;
         stampBoardsRepo = sbr;
         socialsRepo = socialRepo;
+        shopActiveService = sas;
     }
 
     @GetMapping("/settings")
@@ -115,6 +119,13 @@ public class AdminController {
             model.addAttribute("staffMembers", linkedUsers);
             model.addAttribute("socials", socialList);
             model.addAttribute("shop",shop);
+
+            //Gets shop activity and passes it into model/thymeleaf
+            int intShopId = (int) shop.getShopId();
+            List<Integer> shopActive = Collections.singletonList(shopActiveService.isShopActive(intShopId));
+            model.addAttribute("shopActive", shopActive);
+
+
 
             //Get the stamp board for the chosen shop
             StampBoards stampBoard = stampBoardsRepo.findById(shop.getStampBoard().getStampBoardId()).get();
