@@ -39,7 +39,9 @@ public class AdminController {
     public ShopDeleter shopDeleter;
     public ShopActiveService shopActiveService;
 
-    public AdminController(JWTUtils jwt, UserShopLinked usl, UserPermissionsRepo upr, ShopsRepo sr,          StampBoardsRepo sbr, SocialsRepo socialRepo, ShopActiveService sas){
+    public AdminController(JWTUtils jwt, UserShopLinked usl, UserPermissionsRepo upr,
+                           ShopsRepo sr, StampBoardsRepo sbr, SocialsRepo socialRepo,
+                           ShopActiveService sas, ShopDeleter sd){
         jwtUtils = jwt;
         userShopLinked = usl;
         userPermissionsRepo = upr;
