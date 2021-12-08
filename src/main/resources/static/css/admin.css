@@ -20,8 +20,9 @@ html{
 	align-items: flex-start;
 	flex-direction: column;
 	z-index: 3;
-	transition: width 200ms, opacity 200ms;
+	transition: width 200ms, opacity 100ms;
 	pointer-events: all;
+	overflow-x: hidden;
 }
 
 #open-sidebar-tab {
@@ -148,6 +149,41 @@ html{
 
 .sidebar .admin-tab:hover{
 	color: #628ed6;
+}
+
+.sidebar .shop-tab{
+	height: 49px;
+	width: 200px;
+	display: flex;
+	padding: 0 10px;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	color: #3273dc;
+}
+
+.sidebar .shop-tab:hover{
+	color: #628ed6;
+}
+
+.sidebar .shop-tab.shop-name{
+	color: red;
+	height: 50px;
+}
+
+.shop-tab-container{
+	border-bottom: 1px solid lightgray;
+	max-height: 50px;
+	overflow-y: hidden;
+	transition: max-height 300ms;
+}
+
+.shop-tab-container.open{
+	max-height: 500px;
+}
+
+.shop-tab-container.open .shop-tab .baseIcon .fa-caret-down{
+	transform: rotate(180deg);
 }
 
 .sidebar .active{

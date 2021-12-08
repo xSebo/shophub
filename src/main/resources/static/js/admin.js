@@ -182,6 +182,7 @@ function saveStampboardChanges(shopId){
         var formData = new FormData();
         formData.append("file", icon[0]);
         xhr.onload = function() {
+            console.log(xhr.responseText)
             if (xhr.readyState === 4 && xhr.status === 200) {
                 filename = xhr.responseText;
                 var xhttp = new XMLHttpRequest();

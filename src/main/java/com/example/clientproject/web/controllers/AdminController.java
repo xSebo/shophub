@@ -152,6 +152,9 @@ public class AdminController {
                 }
             }
 
+            System.out.println(filteredCategorySortedShops);
+
+
             model.addAttribute("adminOfByCategory",filteredCategorySortedShops);
             model.addAttribute("linkedShop", userShopLinked.hasShop(user.get().getUserId()));
             model.addAttribute("highestShopLevel", highestShopLevel);

@@ -45,7 +45,19 @@
 			</div>
 		</div>
 		<div class="sidebar closed" id="side_shop_select">
-			test
+			<th:block th:each="category: ${adminOfByCategory.entrySet()}">
+				<div class="shop-tab-container" onclick="this.classList.toggle('open')">
+					<div class="shop-tab shop-category">
+						<p th:text="${category.getKey()}"></p>
+						<div class="baseIcon">
+							<i class="fas fa-caret-down fa-lg"></i>
+						</div>
+					</div>
+					<div class="shop-tab shop-name" th:each="shop: ${category.getValue()}">
+						<p th:text="${shop.entrySet.iterator.next().getKey()}"></p>
+					</div>
+				</div>
+			</th:block>
 		</div>
 		<main th:if="${highestPerm > 1 || linkedShop}">
 			<section id="profile-section" class="admin-section active">
