@@ -130,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Shops` (
                                               `Shop_Earnings` INT NOT NULL,
                                               `Shop_Countries` VARCHAR(150) NOT NULL,
                                               `Shop_Image` VARCHAR(150),
+                                              `Shop_Banner` VARCHAR(150),
                                               `Shop_Active` TINYINT NOT NULL,
                                               `Stamp_Board_Id` INT NOT NULL,
                                               `Category_Id` INT NOT NULL,
@@ -294,24 +295,3 @@ INSERT INTO Tags (Tag_Name) VALUES ('Beauty');
 INSERT INTO Tags (Tag_Name) VALUES ('Eco-friendly');
 INSERT INTO Tags (Tag_Name) VALUES ('Decorations');
 INSERT INTO Tags (Tag_Name) VALUES ('Photography');
-
-
-
-DROP PROCEDURE IF EXISTS `deleteShop`;
-DELIMITER $$
-CREATE PROCEDURE `deleteShop`(in Shop_Id_In varchar(6))
-BEGIN
-DELETE FROM user_shop_links WHERE Shop_Id = Shop_Id_In;
-DELETE FROM socials WHERE Shop_Id = Shop_Id_In;
-DELETE FROM shop_tag_links WHERE Shop_Id = Shop_Id_In;
-DELETE FROM user_permissions WHERE Shop_Id = Shop_Id_In;
-SELECT @StampBoardID_var := Stamp_Board_Id FROM shops WHERE Shop_Id = Shop_Id_In;
-SET FOREIGN_KEY_CHECKS=0;
-DELETE FROM rewards WHERE Stamp_Board_Id = @StampBoardID_var;
-DELETE FROM stamp_boards WHERE Stamp_Board_Id = @StampBoardID_var;
-DELETE FROM user_stamp_boards WHERE Stamp_Board_Id = (SELECT Stamp_Board_Id FROM shops WHERE Shop_Id = Shop_Id_In); -- some reason this table wouldn't delete so I used this
-DELETE FROM shops WHERE Shop_Id = Shop_Id_In;
-SET FOREIGN_KEY_CHECKS=1;
-END $$
-
-DELIMITER ;
