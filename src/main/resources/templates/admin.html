@@ -45,7 +45,7 @@
 				<p>Shop Rewards</p>
 			</div>
 		</div>
-		<div class="sidebar closed" id="side_shop_select">
+		<div class="sidebar closed" id="side_shop_select" th:if="${highestPerm > 1 || linkedShop}">
 			<th:block th:each="category: ${adminOfByCategory.entrySet()}">
 				<div class="shop-tab-container">
 					<div class="shop-tab shop-category"  onclick="this.parentElement.classList.toggle('open')">
