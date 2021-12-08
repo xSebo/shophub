@@ -24,4 +24,7 @@ public interface TagsRepo extends JpaRepository<Tags, Long> {
 
     @Query("select t from Tags t where t.tagName = ?1")
     Optional<Tags> findByTagName(String tagName);
+
+    @Query("select t from Tags t where t.tagName = ?1")
+    Optional<Tags> findByTagNameIgnoreCase(String tagName);
 }

@@ -34,6 +34,7 @@ public class Shops {
     private String shopWebsite;
     private int shopEarnings;
     private String shopImage;
+    private String shopBanner;
     private String shopCountries;
 
     @Convert(converter = TinyIntToBoolean.class)
@@ -49,13 +50,14 @@ public class Shops {
      * @param active - shop active status
      */
     public Shops(String name, String website, String description, int earnings,
-                 String image, String countries, boolean active, StampBoards stampBoard,
+                 String image, String banner, String countries, boolean active, StampBoards stampBoard,
                  Categories categories) {
         this.shopName = name;
         this.shopDescription = description;
         this.shopWebsite = website;
         this.shopEarnings = earnings;
         this.shopImage = image;
+        this.shopBanner = banner;
         this.shopCountries = countries;
         this.shopActive = active;
         this.stampBoard = stampBoard;
