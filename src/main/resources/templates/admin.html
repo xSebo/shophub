@@ -25,7 +25,7 @@
 	<div th:replace="fragments/nav.html :: nav"></div>
 	<div id="adminPage">
 		<div class="sidebar" th:if="${linkedShop}">
-			<div class="admin-tab active" onclick="toggle_tab('profile')" id="profile-tab">
+			<div class="admin-tab active" onclick="toggle_tab('profile');" id="profile-tab">
 				<div class="baseIcon">
 					<i class="fas fa-user fa-lg"></i>
 				</div>
@@ -43,6 +43,9 @@
 				</div>
 				<p>Shop Rewards</p>
 			</div>
+		</div>
+		<div class="sidebar closed" id="side_shop_select">
+			test
 		</div>
 		<main th:if="${highestPerm > 1 || linkedShop}">
 			<section id="profile-section" class="admin-section active">

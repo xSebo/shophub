@@ -23,10 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class AdminController {
@@ -117,8 +115,44 @@ public class AdminController {
                     highestShopLevel = u.getAdminType().getAdminTypeId();
                 }
             }
-            System.out.println(highestShopLevel);
-            //System.out.println(userShopLinked.hasShop(user.get().getUserId()));
+
+            //Get the shops paired with admin, sorted by category
+            Map<String,ArrayList<Map<Shops,Users>>> categorySortedShops = new HashMap<>();
+            //For each shop
+            for (Shops sh : shopsRepo.findAll()){
+                Map<Shops, Users> shopsUsersMap = new HashMap<>();
+                //Get the perms for that shop
+                List<UserPermissions> permList = userPermissionsRepo.findByShopID(sh.getShopId());
+                //For each perm
+                for(UserPermissions p : permList){
+                    //If it is the shop creator then pair them with the shop
+                    if(p.getAdminType().getAdminTypeId() == 2){
+                        shopsUsersMap.put(sh, p.getUser());
+                    }
+                }
+
+                //Set an empty list for the category if it doesn't exist
+                if(!categorySortedShops.containsKey(sh.getCategory())){
+                    categorySortedShops.put(sh.getCategory().getCategoryName(),new ArrayList<>());
+                }
+
+                //Add the pair to the correct category list
+                ArrayList<Map<Shops,Users>> cat = categorySortedShops.get(sh.getCategory().getCategoryName());
+                if(shopsUsersMap.size() != 0){
+                    cat.add(shopsUsersMap);
+                    categorySortedShops.put(sh.getCategory().getCategoryName(), cat);
+                }
+            }
+
+            Map<String,ArrayList<Map<Shops,Users>>> filteredCategorySortedShops = new HashMap<>();
+            for(Map.Entry e : categorySortedShops.entrySet()){
+                ArrayList<Map<Shops,Users>> val = (ArrayList<Map<Shops, Users>>) e.getValue();
+                if(val.size() != 0){
+                    filteredCategorySortedShops.put(e.getKey().toString(), val);
+                }
+            }
+
+            model.addAttribute("adminOfByCategory",filteredCategorySortedShops);
             model.addAttribute("linkedShop", userShopLinked.hasShop(user.get().getUserId()));
             model.addAttribute("highestShopLevel", highestShopLevel);
             model.addAttribute("staffMembers", linkedUsers);
@@ -129,8 +163,6 @@ public class AdminController {
             int intShopId = (int) shop.getShopId();
             List<Integer> shopActive = Collections.singletonList(shopActiveService.isShopActive(intShopId));
             model.addAttribute("shopActive", shopActive);
-
-
 
             //Get the stamp board for the chosen shop
             StampBoards stampBoard = stampBoardsRepo.findById(shop.getStampBoard().getStampBoardId()).get();
