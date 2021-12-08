@@ -40,7 +40,7 @@ public class RecommendationGenerator {
         userStampBoardsRepo = usbr;
     }
 
-    public List<Shops> getRecommendations(HttpSession session) throws Exception {
+    public List<Shops> getRecommendations(HttpSession session, List<Shops> shopsToRecommend) throws Exception {
 
         Long userId = 1L;
         List<Tags> tags = new ArrayList<Tags>();
@@ -118,7 +118,7 @@ public class RecommendationGenerator {
         //Calculate weights for each shop, later do this based off a list of passed in shops
         //Ignore shops that have been starred or where the user has a stamp
         List<HashMap<Shops, Double>> weightedShops = new ArrayList<>();
-        for(Shops shop : shopsRepo.findAll()){
+        for(Shops shop : shopsToRecommend){
             //If the shop isn't starred or purchased from
             if(!purchasedFromShops.contains(shop.getShopId()) && !favoriteShops.contains(shop.getShopId())){
                 double weight = 0;

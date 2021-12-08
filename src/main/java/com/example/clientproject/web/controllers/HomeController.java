@@ -10,6 +10,7 @@ import com.example.clientproject.data.tags.TagsRepo;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.searches.TagSearch;
 import com.example.clientproject.services.DashboardStampLoader;
+import com.example.clientproject.services.RecommendationGenerator;
 import com.example.clientproject.services.UserFavouriteDTO;
 import com.example.clientproject.services.UserFavouriteToggle;
 import com.example.clientproject.web.forms.UserFavouriteForm;
@@ -35,18 +36,21 @@ public class HomeController {
     private TagSearch tagsSearch;
     private TagsRepo tagsRepo;
     private DashboardStampLoader stampLoader;
+    private RecommendationGenerator recommendationGenerator;
 
     @Autowired
     public HomeController(ShopsRepo ashopsRepo,
                           UserFavouriteToggle uft, TagSearch aTagsSearch,
                           TagsRepo aTagsRepo, JWTUtils jwt,
-                          DashboardStampLoader aStampLoader) {
+                          DashboardStampLoader aStampLoader,
+                          RecommendationGenerator rg) {
         shopsRepo = ashopsRepo;
         toggleFavourite = uft;
         this.tagsSearch = aTagsSearch;
         this.tagsRepo = aTagsRepo;
         jwtUtils = jwt;
         stampLoader = aStampLoader;
+        recommendationGenerator = rg;
     }
 
     @GetMapping({"/", "dashboard"})
@@ -90,12 +94,10 @@ public class HomeController {
         model.addAttribute("allTags", Tags);
 
 
-
-
         model.addAttribute("favouriteShops", stampLoader.getData(userId).get("favourited"));
         model.addAttribute("activeShops",stampLoader.getData(userId).get("purchased"));
         model.addAttribute("loggedInUser", user.get());
-        model.addAttribute("normalShops", normalShops);
+        model.addAttribute("normalShops", recommendationGenerator.getRecommendations(session, normalShops));
         model.addAttribute("tags", new String[]{"Coffee", "Vegan", "Sustainable"});
         return "index";
     }
