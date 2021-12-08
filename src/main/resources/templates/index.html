@@ -36,7 +36,7 @@
 					 stamps=${shopMap.get('UserStampBoard').userStampPosition},
 					 next_reward=${@claimableRewards.nextReward(shopMap.get('UserStampBoard'))},
 					 reward_amount_obtained=${@claimableRewards.totalClaimableRewards(shopMap.get('UserStampBoard'))},
-					 isFavourite=false,
+					 isFavourite=${@checkFavourite.isFavourite(shopMap.get('Shop').shopId,loggedInUser.userId)},
 					 total_reward_amount=${shopMap.get('Shop').getStampBoard.getRewards.size},
 					 img_path=${shopMap.get('Shop').shopImage},
 					 shopId=${shopMap.get('Shop').shopId}"></div>

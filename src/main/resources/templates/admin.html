@@ -25,7 +25,7 @@
 	<div th:replace="fragments/nav.html :: nav"></div>
 	<div id="adminPage">
 		<div class="sidebar" th:if="${linkedShop}">
-			<div class="admin-tab active" onclick="toggle_tab('profile')" id="profile-tab">
+			<div class="admin-tab active" onclick="toggle_tab('profile');" id="profile-tab">
 				<div class="baseIcon">
 					<i class="fas fa-user fa-lg"></i>
 				</div>
@@ -43,6 +43,24 @@
 				</div>
 				<p>Shop Rewards</p>
 			</div>
+		</div>
+		<div class="sidebar closed" id="side_shop_select">
+			<th:block th:each="category: ${adminOfByCategory.entrySet()}">
+				<div class="shop-tab-container">
+					<div class="shop-tab shop-category"  onclick="this.parentElement.classList.toggle('open')">
+						<p th:text="${category.getKey()}"></p>
+						<div class="baseIcon">
+							<i class="fas fa-caret-down fa-lg"></i>
+						</div>
+					</div>
+					<th:block th:each="sh: ${category.getValue()}">
+						<div th:class="'shop-tab shop-name' + ${shop.getShopId() == sh.getShopId()?' active':''}"
+						th:onclick="'window.location.href=\'/settings?shopId='+${sh.getShopId()} + '&tab=shop-setup\''">
+							<p th:text="'- ' + ${sh.getShopName()}"></p>
+						</div>
+					</th:block>
+				</div>
+			</th:block>
 		</div>
 		<main th:if="${highestPerm > 1 || linkedShop}">
 			<section id="profile-section" class="admin-section active">
