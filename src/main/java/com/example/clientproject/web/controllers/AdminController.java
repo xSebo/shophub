@@ -125,7 +125,7 @@ public class AdminController {
                 //For each perm
                 for(UserPermissions p : permList){
                     //If it is the shop creator then pair them with the shop
-                    if(p.getAdminType().getAdminTypeId() == 2 && user.get().getUserId() == p.getUser().getUserId()){
+                    if((p.getAdminType().getAdminTypeId() == 2 || p.getAdminType().getAdminTypeId() == 1) && user.get().getUserId() == p.getUser().getUserId()){
                         //Set an empty list for the category if it doesn't exist
                         if(!categorySortedShops.containsKey(sh.getCategory().getCategoryName())){
                             categorySortedShops.put(sh.getCategory().getCategoryName(),new ArrayList<>());
