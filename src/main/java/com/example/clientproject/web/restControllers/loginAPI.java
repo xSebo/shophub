@@ -35,7 +35,7 @@ public class loginAPI {
             throw new ForbiddenErrorException("Details Incorrect");
         }
 
-        Optional<UsersDTO> usersDTOOptional = usersSearch.findByEmail(loginForm.getLoginEmail());
+        Optional<UsersDTO> usersDTOOptional = usersSearch.findByEmail(loginForm.getLoginEmail().toLowerCase());
         // If the optional is present - the search found a user with that email
         if (usersDTOOptional.isPresent()) {
             // Check the password given (after encoding) and the user's DB password match

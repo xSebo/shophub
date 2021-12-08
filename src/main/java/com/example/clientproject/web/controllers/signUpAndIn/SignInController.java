@@ -23,10 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class SignInController {
@@ -127,7 +124,7 @@ public class SignInController {
             return "account-login.html";
         }
 
-        Optional<UsersDTO> usersDTOOptional = usersSearch.findByEmail(loginForm.getLoginEmail());
+        Optional<UsersDTO> usersDTOOptional = usersSearch.findByEmail(loginForm.getLoginEmail().toLowerCase());
         // If the optional is present - the search found a user with that email
         if (usersDTOOptional.isPresent()) {
             // Check the password given (after encoding) and the user's DB password match
