@@ -2,6 +2,8 @@ package com.example.clientproject.web.restControllers;
 
 import com.example.clientproject.data.rewards.Rewards;
 import com.example.clientproject.data.rewards.RewardsRepo;
+import com.example.clientproject.data.shops.Shops;
+import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.userPermissions.UserPermissions;
 import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
@@ -29,16 +31,19 @@ public class UpdateUserStampPosition {
     RewardsRepo rewardsRepo;
     UsersRepo usersRepo;
     GetStampBoardIdFromRewardId getStampBoardIdFromRewardId;
+    ShopsRepo shopsRepo;
 
     public UpdateUserStampPosition(JWTUtils jwt, UserStampBoardService usbs,
                                    UserPermissionsRepo upr, RewardsRepo rr,
-                                   UsersRepo ur, GetStampBoardIdFromRewardId gsbifri){ //need to add service for changing stamp pos
+                                   UsersRepo ur, GetStampBoardIdFromRewardId gsbifri,
+                                   ShopsRepo sr){ //need to add service for changing stamp pos
         jwtUtils = jwt;
         userStampBoardService = usbs;
         userPermissionsRepo = upr;
         rewardsRepo = rr;
         usersRepo = ur;
         getStampBoardIdFromRewardId = gsbifri;
+        shopsRepo = sr;
     }
 
     @PostMapping("/changeUserPos")
@@ -50,7 +55,7 @@ public class UpdateUserStampPosition {
         int currentUserStampPos = 0;
         long shopStampBoardId = 0;
         int shopStampBoardSize = 0;
-        int shopIdConverted = Integer.valueOf(shopId);
+        int shopIdConverted = Integer.parseInt(shopId);
         List<UserPermissions> userShops = userPermissionsRepo.findByUserId(jwtUtils.getLoggedInUserId(session).get());
         for (UserPermissions u : userShops) { //loops through userPermissions and saves it to variable to be checked
             if (u.getShop().getShopId() == shopIdConverted) {
@@ -61,13 +66,20 @@ public class UpdateUserStampPosition {
         }
         if(shopPermissionLevel > 1){//user has the correct level to add/subtract their own stampBoard place
             currentUserStampPos = userStampBoardService.getUserStampPos(jwtUtils.getLoggedInUserId(session).get(), (int) shopStampBoardId );
+            Shops shop = shopsRepo.getById(Long.valueOf(shopId));
+            StampBoards stampBoard = shop.getStampBoard();
             if(Objects.equals(direction, "subtract")){
                 if(currentUserStampPos != 0){
-                    userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), -1, currentUserStampPos);
+                    userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), -1, currentUserStampPos, (int) stampBoard.getStampBoardId());
                 }
             } else if(Objects.equals(direction, "add")){
                 if(currentUserStampPos != shopStampBoardSize){
-                    userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), 1, currentUserStampPos);
+                    userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), 1, currentUserStampPos, (int) stampBoard.getStampBoardId());
+                    currentUserStampPos = userStampBoardService.getUserStampPos(jwtUtils.getLoggedInUserId(session).get(), (int) shopStampBoardId );
+                }
+                if(currentUserStampPos == 0){
+                    System.out.println("Attempting to create record for user");
+                    userStampBoardService.createStampRecord(jwtUtils.getLoggedInUserId(session).get(), 1, (int) shopStampBoardId);
                 }
             }
         }
@@ -90,7 +102,7 @@ public class UpdateUserStampPosition {
         }
         if(userIsLinkedToStampBoard){
             if(userStampPos >= reward.get().getRewardStampLocation()){
-                userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), -reward.get().getRewardStampLocation(), userStampPos);
+                userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), -reward.get().getRewardStampLocation(), userStampPos, stampBoardId);
                 //credit to www.programiz.com for code generator
                 String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//creates a string of all characters
                 StringBuilder sb = new StringBuilder();

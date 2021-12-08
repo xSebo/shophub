@@ -40,9 +40,14 @@ public class UserStampBoardService {
 
     }
 
-    public void changeUserStampPosition(int userID, int incrementValue, int currentUserStampPos){
+    public void changeUserStampPosition(int userID, int incrementValue, int currentUserStampPos, int stampBoardId){
         int newStampPos = currentUserStampPos + incrementValue;
-        String query = "UPDATE user_stamp_boards SET User_Stamp_Position = " + newStampPos + " WHERE User_Id = " + userID + ";";
+        String query = "UPDATE user_stamp_boards SET User_Stamp_Position = " + newStampPos + " WHERE User_Id = " + userID + " AND Stamp_Board_Id = " + stampBoardId + ";";
+        jdbc.execute(query);
+    }
+
+    public void createStampRecord(int userID, int stampPosition, int stampBoardId){
+        String query = "INSERT INTO user_stamp_boards (User_Id, Stamp_Board_Id, User_Stamp_Position) VALUES ("+userID+", "+stampBoardId+", "+ stampPosition +");";
         jdbc.execute(query);
     }
 }
