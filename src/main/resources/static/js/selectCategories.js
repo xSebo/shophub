@@ -40,9 +40,9 @@ function submitCategories(listSize){
                 status.innerHTML = "There was an error try again later.";
             }
         };
-        xhttp.onerror = function () {
-            status.innerHTML = "There was an error. Please try again later.";
-        }
+            xhttp.onerror = function () {
+                status.innerHTML = "There was an error. Please try again later.";
+            }
         xhttp.send(params);
         return false;
     }
