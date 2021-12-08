@@ -40,7 +40,6 @@
 					 total_reward_amount=${shopMap.get('Shop').getStampBoard.getRewards.size},
 					 img_path=${shopMap.get('Shop').shopImage},
 					 shopId=${shopMap.get('Shop').shopId}"></div>
-
 				<!--Reward Card Here-->
 				<div th:each="shop: ${favouriteShops}" th:include="fragments/reward_card.html :: reward_card"
 					 th:with="margin=false,

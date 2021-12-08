@@ -37,7 +37,7 @@ public class ShopsTests {
 
     @Test
     public void shouldGet12ShopsAfterInsert() throws Exception {
-        Shops newShop = new Shops("", "", "", 0, "", "", true, stampRepo.getById(1L), categoriesRepo.getById(1L));
+        Shops newShop = new Shops("", "", "", 0, "","", "", true, stampRepo.getById(1L), categoriesRepo.getById(1L));
         Shops shop = shopsRepo.save(newShop);
 
         List<Shops> shopsList = shopsRepo.findAll();

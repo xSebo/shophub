@@ -71,6 +71,7 @@ public class BusinessRegisterSaver {
                 business.getBusiness_register_desc(),
                 business.getEarnings(),
                 "shopPic.png",
+                "shopBanner.png",
                 "UK United Kingdom",
                 false,
                 stampBoard,
