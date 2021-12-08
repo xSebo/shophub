@@ -117,42 +117,35 @@ public class AdminController {
             }
 
             //Get the shops paired with admin, sorted by category
-            Map<String,ArrayList<Map<Shops,Users>>> categorySortedShops = new HashMap<>();
+            Map<String,ArrayList<Shops>> categorySortedShops = new HashMap<>();
             //For each shop
             for (Shops sh : shopsRepo.findAll()){
-                Map<Shops, Users> shopsUsersMap = new HashMap<>();
                 //Get the perms for that shop
                 List<UserPermissions> permList = userPermissionsRepo.findByShopID(sh.getShopId());
                 //For each perm
                 for(UserPermissions p : permList){
                     //If it is the shop creator then pair them with the shop
-                    if(p.getAdminType().getAdminTypeId() == 2){
-                        shopsUsersMap.put(sh, p.getUser());
+                    if(p.getAdminType().getAdminTypeId() == 2 && user.get().getUserId() == p.getUser().getUserId()){
+                        //Set an empty list for the category if it doesn't exist
+                        if(!categorySortedShops.containsKey(sh.getCategory().getCategoryName())){
+                            categorySortedShops.put(sh.getCategory().getCategoryName(),new ArrayList<>());
+                        }
+
+                        //Add the pair to the correct category list
+                        ArrayList<Shops> cat = categorySortedShops.get(sh.getCategory().getCategoryName());
+                        cat.add(sh);
+                        categorySortedShops.put(sh.getCategory().getCategoryName(), cat);
                     }
-                }
-
-                //Set an empty list for the category if it doesn't exist
-                if(!categorySortedShops.containsKey(sh.getCategory())){
-                    categorySortedShops.put(sh.getCategory().getCategoryName(),new ArrayList<>());
-                }
-
-                //Add the pair to the correct category list
-                ArrayList<Map<Shops,Users>> cat = categorySortedShops.get(sh.getCategory().getCategoryName());
-                if(shopsUsersMap.size() != 0){
-                    cat.add(shopsUsersMap);
-                    categorySortedShops.put(sh.getCategory().getCategoryName(), cat);
                 }
             }
 
-            Map<String,ArrayList<Map<Shops,Users>>> filteredCategorySortedShops = new HashMap<>();
+            Map<String,ArrayList<Shops>> filteredCategorySortedShops = new HashMap<>();
             for(Map.Entry e : categorySortedShops.entrySet()){
-                ArrayList<Map<Shops,Users>> val = (ArrayList<Map<Shops, Users>>) e.getValue();
+                ArrayList<Shops> val = (ArrayList<Shops>) e.getValue();
                 if(val.size() != 0){
                     filteredCategorySortedShops.put(e.getKey().toString(), val);
                 }
             }
-
-            System.out.println(filteredCategorySortedShops);
 
 
             model.addAttribute("adminOfByCategory",filteredCategorySortedShops);

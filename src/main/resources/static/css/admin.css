@@ -167,8 +167,12 @@ html{
 }
 
 .sidebar .shop-tab.shop-name{
-	color: red;
 	height: 50px;
+	color: #4a4a4a;
+}
+
+.sidebar .shop-tab.shop-name:hover{
+	opacity: 0.8;
 }
 
 .shop-tab-container{

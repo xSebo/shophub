@@ -46,16 +46,19 @@
 		</div>
 		<div class="sidebar closed" id="side_shop_select">
 			<th:block th:each="category: ${adminOfByCategory.entrySet()}">
-				<div class="shop-tab-container" onclick="this.classList.toggle('open')">
-					<div class="shop-tab shop-category">
+				<div class="shop-tab-container">
+					<div class="shop-tab shop-category"  onclick="this.parentElement.classList.toggle('open')">
 						<p th:text="${category.getKey()}"></p>
 						<div class="baseIcon">
 							<i class="fas fa-caret-down fa-lg"></i>
 						</div>
 					</div>
-					<div class="shop-tab shop-name" th:each="shop: ${category.getValue()}">
-						<p th:text="${shop.entrySet.iterator.next().getKey()}"></p>
-					</div>
+					<th:block th:each="sh: ${category.getValue()}">
+						<div th:class="'shop-tab shop-name' + ${shop.getShopId() == sh.getShopId()?' active':''}"
+						th:onclick="'window.location.href=\'/settings?shopId='+${sh.getShopId()} + '&tab=shop-setup\''">
+							<p th:text="'- ' + ${sh.getShopName()}"></p>
+						</div>
+					</th:block>
 				</div>
 			</th:block>
 		</div>
