@@ -12,7 +12,7 @@ import com.example.clientproject.data.users.Users;
 import com.example.clientproject.data.users.UsersRepo;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.services.UserFavouriteTagSaver;
-import com.example.clientproject.services.UserStampBoardRetriever;
+import com.example.clientproject.services.UserStampBoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,13 +35,13 @@ public class BusinessDetails {
 
     private JWTUtils jwtUtils;
 
-    private UserStampBoardRetriever userStampService;
+    private UserStampBoardService userStampService;
 
     private SocialsRepo socialsRepo;
 
 
     public BusinessDetails(ShopsRepo aShopRepo, StampBoardsRepo aStampBoard,
-                           UsersRepo aUsersRepo, UserStampBoardRetriever aUserStampService,
+                           UsersRepo aUsersRepo, UserStampBoardService aUserStampService,
                            JWTUtils ajwtUtils, SocialsRepo aSocialsRepo){
         shopsRepo = aShopRepo;
         stampRepo = aStampBoard;

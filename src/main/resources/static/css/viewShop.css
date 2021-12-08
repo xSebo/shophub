@@ -183,3 +183,12 @@ img.stamp{
   align-items: center;
   position: relative;
 }
+
+.change-stamp-progress-container{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 70%;
+  right: 3%;
+  width: 10px;
+}

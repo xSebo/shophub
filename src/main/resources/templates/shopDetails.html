@@ -41,7 +41,7 @@
           <div th:each="reward : ${stampBoard.rewards}" class="reward is-fullwidth">
             <p class="reward-text" th:text="${reward.rewardName}"></p>
             <button th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardNotReady">Cannot afford</button>
-            <button th:if="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardisReady">Click to claim!</button>
+            <button th:if="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardisReady" th:onclick="claimReward([[${reward.rewardId}]])">Click to claim!</button>
             <progress class="progress is-small marginBottom7px is-success" th:value="${UserStampPos[0]}" th:max="${reward.rewardStampLocation}"></progress>
             <!-- TH:STYLE HAS NOT BEEN SET SO EXPECT AN ERROR -->
             <p class="stampProgressText" th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" th:text="${reward.rewardStampLocation - UserStampPos[0]} + ' away from reward'"/>
@@ -132,5 +132,10 @@
       <!-- <img th:src="${shop.shopImage}" alt=""> -->
       <!-- <h1 th:text="${stampBoard.stampBoardSize}"></h1> -->
     </div>
+    <div class="change-stamp-progress-container">
+        <button class="button is-rounded is-info" th:onclick="changeUserStampPos('add', [[${shop.getShopId}]])">+</button>
+        <button class="button is-rounded is-info" th:onclick="changeUserStampPos('subtract', [[${shop.getShopId}]])">-</button>
+    </div>
+    <span th:value="${shop.getShopId}" id="shopId"/>
 </body>
 </html>
