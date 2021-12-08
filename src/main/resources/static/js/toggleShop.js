@@ -1,5 +1,5 @@
-let shopId;
 function toggleShop(shopId){
+    const textResponse = document.getElementById("status-text");
     params = 'shopId=' + shopId;
     //Sends list to server
     var xhttp = new XMLHttpRequest();
@@ -8,8 +8,13 @@ function toggleShop(shopId){
     xhttp.onload = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             console.log(xhttp.responseText);
-            alert("shop activity has been successfully changed");
-            location.reload();
+            if(textResponse.innerText === "Your site is currently LIVE, changing this will hide your site from all customers."){
+                textResponse.innerText = "Your site is currently not LIVE, changing this will show your site to anyone on ShopHub.";
+            } else if (textResponse.innerText === "Your site is currently not LIVE, changing this will show your site to anyone on ShopHub."){
+                textResponse.innerText = "Your site is currently LIVE, changing this will hide your site from all customers.";
+            } else{
+                window.location.href = "/settings?tab=shop-setup";
+            }
         } else if (xhttp.readyState === 401) {
             alert("Check the credentials and try again.");
         } else {

@@ -1,6 +1,17 @@
 // noinspection DuplicatedCode
+var isShopSelectOpen = {
+    "profile":false,
+    "shop-setup":true,
+    "shop-rewards":true
+}
 
 function toggle_tab(tab){
+    if(isShopSelectOpen[tab]){
+        document.getElementById("side_shop_select").classList.remove("closed");
+    }else{
+        document.getElementById("side_shop_select").classList.add("closed");
+    }
+
     Array.prototype.forEach.call(
         document.getElementsByClassName("admin-tab"),
         function (el) {
@@ -171,6 +182,7 @@ function saveStampboardChanges(shopId){
         var formData = new FormData();
         formData.append("file", icon[0]);
         xhr.onload = function() {
+            console.log(xhr.responseText)
             if (xhr.readyState === 4 && xhr.status === 200) {
                 filename = xhr.responseText;
                 var xhttp = new XMLHttpRequest();

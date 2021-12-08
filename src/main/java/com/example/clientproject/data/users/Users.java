@@ -91,4 +91,9 @@ public class Users {
     )
     private List<Tags> favouriteTags;
 
+    public String toString(){
+        return "User:" + this.getUserFirstName();
+    }
+
+
 }

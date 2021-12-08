@@ -71,7 +71,7 @@ public class SignUpController {
             Users newUser = new Users(
                     signUpForm.getNewUserForename(),
                     signUpForm.getNewUserLastname(),
-                    signUpForm.getNewUserEmail(),
+                    signUpForm.getNewUserEmail().toLowerCase(),
                     passwordEncoder.encode(signUpForm.getNewUserPassword()),
                     signUpForm.getUserProfilePicture(),
                     new TwoFactorMethods(1, "None")
@@ -80,7 +80,7 @@ public class SignUpController {
             // Save the new user
             usersRepo.save(newUser);
             // Get the user
-            usersDTOOptional = usersSearch.findByEmail(signUpForm.getNewUserEmail());
+            usersDTOOptional = usersSearch.findByEmail(signUpForm.getNewUserEmail().toLowerCase());
             // Create a JWTSession
             jwtUtils.makeUserJWT(
                     (int) usersDTOOptional.get().getUserId(),

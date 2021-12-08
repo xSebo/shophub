@@ -27,13 +27,15 @@ public class DashboardStampLoader {
         Set<UserStampBoards> userStamps = userRepo.findById((long) userId).get().getUserStampBoards();
 
         for(UserStampBoards u:userStamps){
-            combinedInfo.add(
-                    new HashMap<>() {{
-                        put("UserStampBoard", u);
-                        put("Shop", shopsRepo.
-                                findByStampboardId(u.getStampBoard().getStampBoardId()));
-                    }}
-            );
+            if(shopsRepo.findByStampboardId(u.getStampBoard().getStampBoardId()).isShopActive()) {
+                combinedInfo.add(
+                        new HashMap<>() {{
+                            put("UserStampBoard", u);
+                            put("Shop", shopsRepo.
+                                    findByStampboardId(u.getStampBoard().getStampBoardId()));
+                        }}
+                );
+            }
         }
 
         List<Shops> favouriteShops = new ArrayList<>();
@@ -41,19 +43,22 @@ public class DashboardStampLoader {
         boolean alreadyInPuchased = false;
 
         for(Shops s:shopsRepo.findAll()){
-            UserFavouriteDTO ufDTO = new UserFavouriteDTO(new UserFavouriteForm(s.getShopId()), userId);
-            if(toggleFavourite.alreadyInDb(ufDTO)){
-                for(Map<String, Object> m:combinedInfo){
-                    Shops shop = (Shops) m.get("Shop");
-                    if(shop.getShopId() == s.getShopId()){
-                        alreadyInPuchased = true;
+            if(s.isShopActive()) {
+                UserFavouriteDTO ufDTO = new UserFavouriteDTO(new UserFavouriteForm(s.getShopId()), userId);
+                if (toggleFavourite.alreadyInDb(ufDTO)) {
+                    for (Map<String, Object> m : combinedInfo) {
+                        Shops shop = (Shops) m.get("Shop");
+                        if (shop.getShopId() == s.getShopId()) {
+                            alreadyInPuchased = true;
+                        }
                     }
-                }
-                if(!alreadyInPuchased) {
-                    favouriteShops.add(s);
-                }
-                alreadyInPuchased = false;
+                    if (!alreadyInPuchased) {
+                        favouriteShops.add(s);
+                        System.out.println(s.isShopActive());
+                    }
+                    alreadyInPuchased = false;
 
+                }
             }
         }
 

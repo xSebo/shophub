@@ -84,7 +84,7 @@ public class UserSettingsController {
             miscQueries.updateUser(
                     userId,
                     "User_Email",
-                    nameEmailProfileChangeForm.getNewEmail()
+                    nameEmailProfileChangeForm.getNewEmail().toLowerCase()
             );
         }
 

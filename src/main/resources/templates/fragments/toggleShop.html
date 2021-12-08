@@ -8,8 +8,8 @@
 <body th:fragment="toggleShop">
   <div class="content-container">
     <p class="title-red">Toggle Live</p>
-    <p th:if="${shopActive[0] == 1}" class="info-text">Your site is currently LIVE, changing this will hide your site from all customers.</p>
-    <p th:if="${shopActive[0] == 0}" class="info-text">Your site is currently not LIVE, changing this will show your site to anyone on ShopHub.</p>
+    <p th:if="${shopActive[0] == 1}" class="info-text" id="status-text">Your site is currently LIVE, changing this will hide your site from all customers.</p>
+    <p th:if="${shopActive[0] == 0}" class="info-text" id="status-text">Your site is currently not LIVE, changing this will show your site to anyone on ShopHub.</p>
     <button class="button is-danger is-small is-outlined" style="margin-top: 10px;" th:onclick="toggleShop([[${shop.shopId}]])">Toggle</button>
   </div>
   <p class="horizontal-line"><br></p>

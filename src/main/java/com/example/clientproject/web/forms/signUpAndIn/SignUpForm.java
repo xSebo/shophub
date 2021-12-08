@@ -21,5 +21,5 @@ public class SignUpForm {
     private String newUserEmail;
     @Size(min=7,max=15,message="Password must be between 7 and 15 characters")
     private String newUserPassword;
-    private String userProfilePicture = "";
+    private String userProfilePicture = "imgs/defaultProfilePicture.jpg";
 }

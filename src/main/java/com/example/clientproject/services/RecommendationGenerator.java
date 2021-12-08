@@ -40,7 +40,7 @@ public class RecommendationGenerator {
         userStampBoardsRepo = usbr;
     }
 
-    public String getRecommendations(HttpSession session) throws Exception {
+    public List<Shops> getRecommendations(HttpSession session, List<Shops> shopsToRecommend) throws Exception {
 
         Long userId = 1L;
         List<Tags> tags = new ArrayList<Tags>();
@@ -50,7 +50,7 @@ public class RecommendationGenerator {
             tags = user.get().getFavouriteTags();
             userId = user.get().getUserId();
         }else{
-            return "User not logged in";
+            throw new ForbiddenErrorException("User Not Logged In");
         }
 
         //Make the user weights list
@@ -104,7 +104,6 @@ public class RecommendationGenerator {
                 List<Tags> shopTags = s.getShopTags();
                 //For each tag
                 for(Tags tag : shopTags){
-                    System.out.println(tag.getTagName());
                     //Add 2*factor to tag relevancy or add the tag at 1 if not exists
                     String tagName = tag.getTagName().toLowerCase().strip();
                     if(tagWeights.containsKey(tagName)){
@@ -119,7 +118,7 @@ public class RecommendationGenerator {
         //Calculate weights for each shop, later do this based off a list of passed in shops
         //Ignore shops that have been starred or where the user has a stamp
         List<HashMap<Shops, Double>> weightedShops = new ArrayList<>();
-        for(Shops shop : shopsRepo.findAll()){
+        for(Shops shop : shopsToRecommend){
             //If the shop isn't starred or purchased from
             if(!purchasedFromShops.contains(shop.getShopId()) && !favoriteShops.contains(shop.getShopId())){
                 double weight = 0;
@@ -138,11 +137,16 @@ public class RecommendationGenerator {
 
         Collections.sort(weightedShops, new Comparator<HashMap<Shops, Double>>(){
             public int compare(HashMap<Shops, Double> one, HashMap<Shops, Double> two) {
-                return one.entrySet().iterator().next().getValue().compareTo(two.entrySet().iterator().next().getValue());
+                return two.entrySet().iterator().next().getValue().compareTo(one.entrySet().iterator().next().getValue());
             }
         });
 
-        return weightedShops.toString();
+        //Only return the shop objects
+        List<Shops> recommendations = new ArrayList<>();
+        for(HashMap<Shops, Double> s: weightedShops){
+            recommendations.add(s.entrySet().iterator().next().getKey());
+        }
 
+        return recommendations;
     }
 }
