@@ -1,4 +1,3 @@
-let shopId;
 function toggleShop(shopId){
     params = 'shopId=' + shopId;
     //Sends list to server

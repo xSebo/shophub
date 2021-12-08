@@ -69,7 +69,7 @@ public class HomeController {
         int userId = jwtUtils.getLoggedInUserId(session).get();
 
         //System.out.println(shopsRepo.findAll());
-        List<Shops> allShops = shopsRepo.findAll();
+        List<Shops> allShops = shopsRepo.findActiveShops();
 
         List<Shops> favouriteShops = new ArrayList();
         List<Shops> normalShops = new ArrayList();

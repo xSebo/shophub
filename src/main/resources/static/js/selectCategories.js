@@ -55,9 +55,9 @@ function filterRewards(input){
     for(let reward of rewards){
         let title = reward.getElementsByClassName("title")[0].innerText
         if(title.toLowerCase().replace(" ","").includes(input.value.toString().toLowerCase().replace(" ", ""))){
-            reward.classList.remove("hidden")
+            reward.parentElement.classList.remove("hidden")
         }else{
-            reward.classList.add("hidden")
+            reward.parentElement.classList.add("hidden")
             added++;
         }
     }
