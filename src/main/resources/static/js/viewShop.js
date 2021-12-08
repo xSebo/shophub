@@ -61,7 +61,10 @@ function claimReward(rewardId){
     xhttp.onload = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             console.log(xhttp.responseText);
-            window.location.reload(true);
+            var modal = document.getElementById("rewardModal");
+            var code = document.getElementById("reward-code");
+            code.innerText = xhttp.responseText;
+            modal.classList.add("is-active");
         }
     }
     xhttp.onerror = function () {
@@ -70,3 +73,9 @@ function claimReward(rewardId){
     xhttp.send(params);
     return false;
 }
+
+
+function closeModal(){
+    window.location.reload(true);
+}
+

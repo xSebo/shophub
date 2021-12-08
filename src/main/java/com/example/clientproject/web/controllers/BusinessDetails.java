@@ -6,6 +6,8 @@ import com.example.clientproject.data.socials.Socials;
 import com.example.clientproject.data.socials.SocialsRepo;
 import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.stampBoards.StampBoardsRepo;
+import com.example.clientproject.data.userPermissions.UserPermissions;
+import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
 import com.example.clientproject.data.userStampBoards.UserStampBoards;
 import com.example.clientproject.data.userStampBoards.UserStampBoardsRepo;
 import com.example.clientproject.data.users.Users;
@@ -39,16 +41,20 @@ public class BusinessDetails {
 
     private SocialsRepo socialsRepo;
 
+    UserPermissionsRepo userPermissionsRepo;
+
 
     public BusinessDetails(ShopsRepo aShopRepo, StampBoardsRepo aStampBoard,
                            UsersRepo aUsersRepo, UserStampBoardService aUserStampService,
-                           JWTUtils ajwtUtils, SocialsRepo aSocialsRepo){
+                           JWTUtils ajwtUtils, SocialsRepo aSocialsRepo,
+                           UserPermissionsRepo upr){
         shopsRepo = aShopRepo;
         stampRepo = aStampBoard;
         usersRepo = aUsersRepo;
         jwtUtils = ajwtUtils;
         userStampService = aUserStampService;
         socialsRepo = aSocialsRepo;
+        userPermissionsRepo = upr;
     }
 
     @GetMapping("/businessDetails")
@@ -79,6 +85,20 @@ public class BusinessDetails {
         }
 
         List<Socials> socialMedia = socialsRepo.findByShopId(shop.getShopId());
+
+        //gets users permission level for shop
+        long shopPermissionLevel = 0;
+        List<UserPermissions> userShops = userPermissionsRepo.findByUserId(jwtUtils.getLoggedInUserId(session).get());
+        //loops through userPermissions and saves it to variable to be passed into model
+        for (UserPermissions u : userShops) {
+            if (u.getShop().getShopId() == shop.getShopId()) {
+                shopPermissionLevel = u.getAdminType().getAdminTypeId();
+            }
+        }
+        //creates an object to pass into model
+        ArrayList <Integer> userShopPermissionOBJ = new ArrayList<>();
+        userShopPermissionOBJ.add((int) shopPermissionLevel);
+        model.addAttribute("userPermission", userShopPermissionOBJ);
 
 
         model.addAttribute("socials", socialMedia);

@@ -18,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.nio.charset.Charset;
+import java.util.*;
 
 @RestController
 public class UpdateUserStampPosition {
@@ -61,9 +59,6 @@ public class UpdateUserStampPosition {
                 shopStampBoardSize = u.getShop().getStampBoard().getStampBoardSize();
             }
         }
-        System.out.println(shopPermissionLevel);
-        System.out.println(shopStampBoardId);
-        System.out.println(shopStampBoardSize);
         if(shopPermissionLevel > 1){//user has the correct level to add/subtract their own stampBoard place
             currentUserStampPos = userStampBoardService.getUserStampPos(jwtUtils.getLoggedInUserId(session).get(), (int) shopStampBoardId );
             if(Objects.equals(direction, "subtract")){
@@ -79,7 +74,7 @@ public class UpdateUserStampPosition {
     }
 
     @PostMapping("/reedeemReward")
-    public void reedeemStamps(@RequestParam(name="rewardId", required = true) int rewardId, HttpSession session){
+    public String reedeemStamps(@RequestParam(name="rewardId", required = true) int rewardId, HttpSession session){
         Optional<Rewards> reward = rewardsRepo.findByRewardId(Long.valueOf(rewardId));
         int stampBoardId = getStampBoardIdFromRewardId.getStampBoardId(rewardId);
         Optional<Users> user = usersRepo.findById(Long.valueOf(jwtUtils.getLoggedInUserId(session).get()));
@@ -96,9 +91,22 @@ public class UpdateUserStampPosition {
         if(userIsLinkedToStampBoard){
             if(userStampPos >= reward.get().getRewardStampLocation()){
                 userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), -reward.get().getRewardStampLocation(), userStampPos);
+                //credit to www.programiz.com for code generator
+                String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//creates a string of all characters
+                StringBuilder sb = new StringBuilder();
+                Random random = new Random();
+                for(int i = 0; i < 8; i++) {
+                    int index = random.nextInt(alphabet.length());
+                    char randomChar = alphabet.charAt(index);
+                    sb.append(randomChar);
+                }
+                String code = sb.toString().toUpperCase();
+                return code;
             }
         } else {
-            System.out.println("User is not linked to stampboard you are trying to claim a reward from");
+            System.out.println("User is not linked to stampboard they are trying to claim a reward from");
         }
+
+        return "no";
     }
 }
