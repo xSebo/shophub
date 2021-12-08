@@ -24,7 +24,7 @@ public class EmailValidator {
 
     @GetMapping("/emailInUse")
     public boolean emailInUse(@RequestParam(value = "email") String email) throws Exception{
-        Optional<UsersDTO> users = usersSearch.findByEmail(email);
+        Optional<UsersDTO> users = usersSearch.findByEmail(email.toLowerCase());
         return users.isPresent();
     }
 }
