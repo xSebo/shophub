@@ -29,7 +29,7 @@ async function submitInfo(shopId) {
     params += "&shopDescription=" + encodeURIComponent(document.getElementById("descriptionInput").value)
     params += "&bannerName=" + bannerName + "&logoName=" + logoName
 
-    xhttp.open("POST", '/updateSocials', true);
+    xhttp.open("POST", '/updateKeyInformation', true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onload = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
