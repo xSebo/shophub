@@ -68,7 +68,7 @@
 			</section>
 
 			<section id="shop-setup-section" class="admin-section">
-				<h1 class="title">Shop Setup</h1>
+				<h1 class="title" th:text="'Shop Setup ('+ ${shop.getShopName()} +')'"></h1>
 				<div th:replace="fragments/userSocials.html :: userSocial"/>
 				<br>
 				<th:block th:if="${highestShopLevel>=2}">
@@ -80,6 +80,7 @@
 
 
 			<section id="shop-rewards-section" class="admin-section">
+				<h1 class="title" th:text="'Shop Rewards ('+ ${shop.getShopName()} +')'"></h1>
 				<div th:replace="fragments/shop_rewards_settings_page.html :: rewards"/>
 			</section>
 		</main>
