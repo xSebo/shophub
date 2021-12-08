@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class BusinessRegisterSaver {
@@ -82,17 +83,24 @@ public class BusinessRegisterSaver {
         //System.out.println(shop.getStampBoard());
 
         shopsRepo.save(shop);
-        List<Tags> tagsList = tagsRepo.findAll();
+        List<String> tagsList = new ArrayList<>();
+        List<String> tagsLowerList = new ArrayList<>();
+        tagsRepo.findAll().forEach(x -> tagsList.add(x.getTagName()));
+        tagsRepo.findAll().forEach(x -> tagsLowerList.add(x.getTagName().toLowerCase()));
+
+        System.out.println(tagsLowerList);
+        business.getBusinessTags().forEach(x-> System.out.println(x));
 
         linkShop.linkUserShop(shop.getShopId(), userId, 2L);
 
         for(String t: business.getBusinessTags()){
-            if(tagsList.contains(new Tags(t))){
-                continue;
+            Tags tag;
+            if(tagsLowerList.contains(t.toLowerCase())){
+                tag = tagsRepo.findByTagNameIgnoreCase(t).get();
+            }else{
+                tag = new Tags(t);
+                tagsRepo.save(tag);
             }
-            //long id = 0;
-            Tags tag = new Tags(t);
-            tagsRepo.save(tag);
 
 
             query = "INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES ("+ shop.getShopId() +
