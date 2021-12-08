@@ -10,7 +10,7 @@ function submit(shopId, email={"value":""}){
         document.getElementById("staffManagement").innerHTML+=
             `<div id="staffManagement">
             <div class="staffManagementContainer">
-                <p class="subtitle is-6" style="width:50%; margin-bottom: 0">${emailValue}</p>
+                <p class="subtitle is-6" style="width:80%; margin-bottom: 0">${emailValue}</p>
                 <button class="button is-danger is-outlined" style="border-bottom: 1px solid #00b89c"
                         onclick="submit(${document.getElementById("shopId").value},this);">
                     <span class="icon is-small">

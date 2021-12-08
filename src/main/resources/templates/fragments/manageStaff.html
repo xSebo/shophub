@@ -21,7 +21,7 @@
     <div id="staffManagement"></div>
     <div id="staffManagement" th:each="user : ${staffMembers}">
         <div class="staffManagementContainer">
-        <p class="subtitle is-6" th:text="${user.userEmail}" style="width:50%; margin-bottom: 0"></p>
+        <p class="subtitle is-6" th:text="${user.userEmail}" style="width:80%; margin-bottom: 0"></p>
         <button class="button is-danger is-outlined" style="border-bottom: 1px solid #00b89c" th:onclick="'submit('+${shop.shopId}+',this);'">
             <span class="icon is-small">
                 <i class="fas fa-times is-danger"></i>
