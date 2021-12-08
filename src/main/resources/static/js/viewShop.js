@@ -56,7 +56,7 @@ function changeUserStampPos(increment, shopId){
 function claimReward(rewardId){
     params = 'rewardId=' + rewardId;
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", '/changeUserPos', true); // true is asynchronous
+    xhttp.open("POST", '/reedeemReward', true); // true is asynchronous
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onload = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {

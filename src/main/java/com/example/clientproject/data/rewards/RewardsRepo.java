@@ -26,7 +26,7 @@ public interface RewardsRepo extends JpaRepository<StampBoards, Long> {
      * @return - Optional object containing the Reward found, if it's present
      */
     @Query("select r from Rewards r where r.rewardId = ?1")
-    Optional<Rewards> findByRewardId(int rewardId);
+    Optional<Rewards> findByRewardId(long rewardId);
 
 
     /**
@@ -35,14 +35,6 @@ public interface RewardsRepo extends JpaRepository<StampBoards, Long> {
      * @return - Optional Integer containing the reward, if it's present
      */
     @Query("select r.rewardStampLocation from Rewards r where r.rewardId = ?1")
-    Optional<Integer> getRewardValueFromId(int rewardId);
-
-    /**
-     * Find relating stampBoardId by rewardId
-     * @param rewardId Id of relating stampBoardId to find
-     * @return - Optional Integer containing the Id, if it's present
-     */
-    @Query("select r.stampBoards.stampBoardId from Rewards r where r.rewardId = ?1")
-    Optional<Integer> getStampBoardIdById(int rewardId);
+    Optional<Integer> getRewardValueFromId(long rewardId);
 
 }

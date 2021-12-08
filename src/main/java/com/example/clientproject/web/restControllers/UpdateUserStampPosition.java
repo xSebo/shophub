@@ -9,6 +9,7 @@ import com.example.clientproject.data.userStampBoards.UserStampBoards;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.data.users.UsersRepo;
 import com.example.clientproject.service.Utils.JWTUtils;
+import com.example.clientproject.services.GetStampBoardIdFromRewardId;
 import com.example.clientproject.services.StampboardUpdater;
 import com.example.clientproject.services.UserStampBoardService;
 import com.example.clientproject.web.forms.UpdateStampboardForm;
@@ -29,15 +30,17 @@ public class UpdateUserStampPosition {
     UserPermissionsRepo userPermissionsRepo;
     RewardsRepo rewardsRepo;
     UsersRepo usersRepo;
+    GetStampBoardIdFromRewardId getStampBoardIdFromRewardId;
 
     public UpdateUserStampPosition(JWTUtils jwt, UserStampBoardService usbs,
                                    UserPermissionsRepo upr, RewardsRepo rr,
-                                   UsersRepo ur){ //need to add service for changing stamp pos
+                                   UsersRepo ur, GetStampBoardIdFromRewardId gsbifri){ //need to add service for changing stamp pos
         jwtUtils = jwt;
         userStampBoardService = usbs;
         userPermissionsRepo = upr;
         rewardsRepo = rr;
         usersRepo = ur;
+        getStampBoardIdFromRewardId = gsbifri;
     }
 
     @PostMapping("/changeUserPos")
@@ -75,26 +78,24 @@ public class UpdateUserStampPosition {
         }
     }
 
-    @PostMapping
+    @PostMapping("/reedeemReward")
     public void reedeemStamps(@RequestParam(name="rewardId", required = true) int rewardId, HttpSession session){
-        Optional<Rewards> reward = rewardsRepo.findByRewardId(rewardId);
-        Optional<Integer> stampBoardId = rewardsRepo.getStampBoardIdById(rewardId);
+        Optional<Rewards> reward = rewardsRepo.findByRewardId(Long.valueOf(rewardId));
+        int stampBoardId = getStampBoardIdFromRewardId.getStampBoardId(rewardId);
         Optional<Users> user = usersRepo.findById(Long.valueOf(jwtUtils.getLoggedInUserId(session).get()));
         Set<UserStampBoards> userStampBoards = user.get().getUserStampBoards();
         int userStampPos = 0;
-        long userStampBoardIdInLink = 0;
 
         boolean userIsLinkedToStampBoard = false;
         for(UserStampBoards u : userStampBoards){
-            if(stampBoardId.get() == u.getStampBoard().getStampBoardId()){
-                userStampBoardIdInLink = u.getStampBoard().getStampBoardId();
+            if(stampBoardId == u.getStampBoard().getStampBoardId()){
                 userStampPos = u.getUserStampPosition();
                 userIsLinkedToStampBoard = true;
             }
         }
         if(userIsLinkedToStampBoard){
             if(userStampPos >= reward.get().getRewardStampLocation()){
-                userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), -1, userStampPos);
+                userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), -reward.get().getRewardStampLocation(), userStampPos);
             }
         } else {
             System.out.println("User is not linked to stampboard you are trying to claim a reward from");
