@@ -142,6 +142,11 @@ function progress(){
         url.value = document.getElementById("business_register_url_prefix").value + url.value;
 
         document.getElementById("businessTags").value = tags;
+        if(!/^([0-9]+)$/.test(document.getElementById("earnings").value)){
+            document.getElementById("business_register_amount_help")
+                .innerHTML = "Please enter a whole number"
+            return
+        }
         document.getElementById("businessForm").submit();
     }
 
@@ -239,6 +244,7 @@ function addTag(e){
         inputField.value = ""
     }
 }
+
 function removeTag(e){
     let text = e.parentElement.children[0].innerHTML
     tags = tags.filter(tag =>{return tag!=text});

@@ -78,7 +78,7 @@ public class SignInController {
             if(shopId == 1){
                 shopId = userPermissionsRepo.findByUserId(userId).get(1).getShop().getShopId();
             }
-            return "redirect:/businessDetails?shopId="+shopId;
+            return "redirect:/redirect?url=businessDetails?shopId="+shopId;
         }
         List<Categories> categories = catRepo.findAll();
         model.addAttribute("loggedInUser", user.get());
