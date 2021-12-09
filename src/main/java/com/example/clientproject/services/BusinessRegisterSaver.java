@@ -98,7 +98,7 @@ public class BusinessRegisterSaver {
             if(tagsLowerList.contains(t.toLowerCase())){
                 tag = tagsRepo.findByTagNameIgnoreCase(t).get();
             }else{
-                tag = new Tags(t);
+                tag = new Tags(t.toLowerCase());
                 tagsRepo.save(tag);
             }
 

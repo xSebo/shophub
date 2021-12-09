@@ -30,4 +30,22 @@ public class UserLinked {
             }
         } return false;
     }
+
+    public boolean isAnyAdmin(int userId){
+        List<UserPermissions> allLinks = userPermRepo.findByUserId(userId);
+        for(UserPermissions u:allLinks){
+            if(u.getAdminType().getAdminTypeId() == 2){
+                return true;
+            }
+        }return false;
+    }
+
+    public int userAdminShopId(int userId){
+        List<UserPermissions> allLinks = userPermRepo.findByUserId(userId);
+        for(UserPermissions u:allLinks){
+            if(u.getAdminType().getAdminTypeId() == 2){
+                return (int) u.getShop().getShopId();
+            }
+        }return 0;
+    }
 }
