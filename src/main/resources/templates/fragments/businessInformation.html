@@ -4,7 +4,7 @@
     <script th:fragment="infoJs" src="js/businessInformation.js"></script>
 </head>
 <body th:fragment="keyInformation">
-<div style="border-bottom: #000000 1px solid; width:50%">
+<div style="width:50%">
     <h6 class="title is-6" style="margin-top: 5px; margin-bottom: 25px">Key Information</h6>
 
     <p class="subtitle is-6" style="margin-bottom:3px;margin-top: 10px">Shop Name</p>
@@ -49,5 +49,6 @@
 
     <button th:onclick="'submitInfo('+ ${shop.shopId} +');'" class="button is-link" style="margin-top:15px; margin-bottom:10px;">Save changes</button>
 </div>
+<p style="border-bottom: #000000 1px solid;"></p>
 </body>
 </html>
