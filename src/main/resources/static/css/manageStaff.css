@@ -11,3 +11,7 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.staffManagementContainer:last-child{
+    border-bottom: none!important;
+}
