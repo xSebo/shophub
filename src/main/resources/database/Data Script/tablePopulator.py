@@ -49,6 +49,21 @@ def createRewards():
     query = rewardsArray[random.randint(0,len(rewardsArray)-1)] + ',' + str(random.randint(3,10)) + ',' + str(current_stamp_id+1)
     return createInsert(query, "Rewards", "Reward_Name, Reward_Stamp_Location, Stamp_Board_Id")
 
+def linkTags(shopId):
+    finalArray = []
+    randomNo = random.randint(1,19)
+    tagIdArray = []
+
+    for i in range(1,20):
+        tagIdArray.append(i)
+
+    random.shuffle(tagIdArray)
+
+    for i in range(1, randomNo):
+        finalArray.append(createInsert((str(shopId) + ',' + str(tagIdArray[i])),"Shop_Tag_Links","Shop_Id, Tag_Id"))
+
+    return finalArray
+
 # Where amount is how many names to compile, and usertype is the type of user you'd like to generate (1,2,3)
 #
 # Returns a list of complete insert statements
@@ -176,11 +191,18 @@ def createSQLscript():
         current_stamp_id+=1
 
     # Shops
-
     companies = companyPopulator(amount)
     for each in companies:
         f.write(each)
         f.write("\n")
+
+    # Tags
+    tagLinkArray = []
+    for i in range(1, amount+1):
+        tagLinkArray = linkTags(i)
+        for i in range(0,len(tagLinkArray)):
+            f.write(tagLinkArray[i])
+            f.write("\n")
 
     f.close()
 
