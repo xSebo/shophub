@@ -41,7 +41,7 @@
           <div th:each="reward : ${stampBoard.rewards}" class="reward is-fullwidth">
             <p class="reward-text" th:text="${reward.rewardName}"></p>
             <button th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardNotReady">Cannot afford</button>
-            <button th:if="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardisReady">Click to claim!</button>
+            <button th:if="${UserStampPos[0]>=reward.rewardStampLocation}" class="button is-small buttonRewardisReady" th:onclick="claimReward([[${reward.rewardId}]])">Click to claim!</button>
             <progress class="progress is-small marginBottom7px is-success" th:value="${UserStampPos[0]}" th:max="${reward.rewardStampLocation}"></progress>
             <!-- TH:STYLE HAS NOT BEEN SET SO EXPECT AN ERROR -->
             <p class="stampProgressText" th:unless="${UserStampPos[0]>=reward.rewardStampLocation}" th:text="${reward.rewardStampLocation - UserStampPos[0]} + ' away from reward'"/>
@@ -75,7 +75,7 @@
                   </div>
                 </div>
 
-                <div th:if="${@loadSocials.getSocial(socials, 'facebook' != '')}" class="control">
+                <div th:if="${@loadSocials.getSocial(socials, 'facebook') != ''}" class="control">
                   <div class="tags has-addons">
                     <span class="tag is-large is-grey">
                       <span class="icon-text">
@@ -110,7 +110,7 @@
                         </span>
                       </span>
                     </span>
-                    <a th:href="'https://twitter.com/' + ${@loadSocials.getSocial(socials, 'instagram')}"><span class="tag is-large is-danger mousePointerWhenHovered">Instagram</span></a>
+                    <a th:href="'https://instagram.com/' + ${@loadSocials.getSocial(socials, 'instagram')}"><span class="tag is-large is-danger mousePointerWhenHovered">Instagram</span></a>
                   </div>
                 </div>
 
@@ -133,5 +133,24 @@
       <!-- <img th:src="${shop.shopImage}" alt=""> -->
       <!-- <h1 th:text="${stampBoard.stampBoardSize}"></h1> -->
     </div>
+    <div class="change-stamp-progress-container" th:if="${userPermission[0] > 1}">
+        <button class="button is-rounded is-info" th:onclick="changeUserStampPos('add', [[${shop.getShopId}]])">+</button>
+        <button class="button is-rounded is-info" th:onclick="changeUserStampPos('subtract', [[${shop.getShopId}]])">-</button>
+    </div>
+    <div class="modal" id="rewardModal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head text-align-center">
+          <p class="modal-card-title reward-claim-title">Claim your reward!</p>
+          <button class="delete" aria-label="close" onclick="closeModal()"></button>
+        </header>
+        <section class="custom-modal-card-body">
+          <div class="inherit-width text-align-center big-margin-top">reward code:</div>
+          <div class="inherit-width text-align-center reward-claim-code" id="reward-code">XKMSTVZ</div>
+
+        </section>
+      </div>
+    </div>
+    <span th:value="${shop.getShopId}" id="shopId"/>
 </body>
 </html>

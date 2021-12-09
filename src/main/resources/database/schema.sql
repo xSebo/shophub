@@ -255,6 +255,41 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Socials` (
                                                 
     ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Events`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Events` (
+    `Event_Id` INT NOT NULL AUTO_INCREMENT,
+    `Event_Name` VARCHAR(45) NOT NULL,
+    PRIMARY KEY(`Event_Id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Logs`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Logs` (
+    `Log_Id` INT NOT NULL AUTO_INCREMENT,
+    `Event_Id` INT NOT NULL,
+    `User_Id` INT NOT NULL,
+    `Log_Details` VARCHAR(150) NOT NULL,
+    `Log_Date_Time` DATETIME NOT NULL,
+    `Log_Super_Admin` TINYINT NOT NULL,
+    PRIMARY KEY(`Log_Id`, `Event_Id`, `User_Id`),
+    CONSTRAINT `fk_Events1`
+        FOREIGN KEY (`Event_Id`)
+            REFERENCES `mydb`.`Events` (`Event_Id`)
+            ON UPDATE NO ACTION
+            ON DELETE NO ACTION,
+    CONSTRAINT `fk_Users1`
+        FOREIGN KEY (`User_Id`)
+            REFERENCES `mydb`.`Users` (`User_Id`)
+            ON UPDATE NO ACTION
+            ON DELETE NO ACTION
+    )
+ENGINE = InnoDB;
+
     
 
 INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, 'None');
@@ -295,3 +330,16 @@ INSERT INTO Tags (Tag_Name) VALUES ('beauty');
 INSERT INTO Tags (Tag_Name) VALUES ('eco-friendly');
 INSERT INTO Tags (Tag_Name) VALUES ('decorations');
 INSERT INTO Tags (Tag_Name) VALUES ('photography');
+
+INSERT INTO Events (Event_Name) VALUES ('New Account Created');
+INSERT INTO Events (Event_Name) VALUES ('Failed Login');
+INSERT INTO Events (Event_Name) VALUES ('Successful Login');
+INSERT INTO Events (Event_Name) VALUES ('User Details Changed');
+INSERT INTO Events (Event_Name) VALUES ('User Removed');
+INSERT INTO Events (Event_Name) VALUES ('New Shop');
+INSERT INTO Events (Event_Name) VALUES ('Deleted Shop');
+INSERT INTO Events (Event_Name) VALUES ('New Favourite Business');
+INSERT INTO Events (Event_Name) VALUES ('New Shop User');
+INSERT INTO Events (Event_Name) VALUES ('Shop Details Changed');
+INSERT INTO Events (Event_Name) VALUES ('Shop Activity Toggled');
+INSERT INTO Events (Event_Name) VALUES ('Image Inserted');
