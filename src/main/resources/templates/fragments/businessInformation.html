@@ -11,7 +11,7 @@
     <input type="text" th:value="${shop.shopName}" id="nameInput" class="input">
 
     <p class="subtitle is-6" style="margin-bottom:3px;margin-top: 10px">Description</p>
-    <textarea class="textarea" id="descriptionInput" th:text="${shop.shopDescription}" cols="30" rows="10"></textarea>
+    <textarea class="textarea" id="descriptionInput" maxlength="250" th:text="${shop.shopDescription}" cols="30" rows="10"></textarea>
 
     <p class="subtitle is-6" style="margin-bottom:3px;margin-top: 10px">Banner</p>
     <img class="mb-3" id="bannerPreview" th:src="${shop.shopBanner}" style="margin-top: 5px; max-height: 100px">
