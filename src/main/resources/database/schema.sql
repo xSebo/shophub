@@ -330,3 +330,16 @@ INSERT INTO Tags (Tag_Name) VALUES ('beauty');
 INSERT INTO Tags (Tag_Name) VALUES ('eco-friendly');
 INSERT INTO Tags (Tag_Name) VALUES ('decorations');
 INSERT INTO Tags (Tag_Name) VALUES ('photography');
+
+INSERT INTO Events (Event_Name) VALUES ('New Account Created');
+INSERT INTO Events (Event_Name) VALUES ('Failed Login');
+INSERT INTO Events (Event_Name) VALUES ('Successful Login');
+INSERT INTO Events (Event_Name) VALUES ('User Details Changed');
+INSERT INTO Events (Event_Name) VALUES ('User Removed');
+INSERT INTO Events (Event_Name) VALUES ('New Shop');
+INSERT INTO Events (Event_Name) VALUES ('Deleted Shop');
+INSERT INTO Events (Event_Name) VALUES ('New Favourite Business');
+INSERT INTO Events (Event_Name) VALUES ('New Shop User');
+INSERT INTO Events (Event_Name) VALUES ('Shop Details Changed');
+INSERT INTO Events (Event_Name) VALUES ('Shop Activity Toggled');
+INSERT INTO Events (Event_Name) VALUES ('Image Inserted');

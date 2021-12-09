@@ -318,7 +318,25 @@ INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (1,'User');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (2,'Business Admin');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (3,'Super Admin');
 
-INSERT INTO Tags (Tag_Name) VALUES ('Football');
+INSERT INTO Tags (Tag_Name) VALUES ('football');
+INSERT INTO Tags (Tag_Name) VALUES ('fashion');
+INSERT INTO Tags (Tag_Name) VALUES ('electronics');
+INSERT INTO Tags (Tag_Name) VALUES ('coffee');
+INSERT INTO Tags (Tag_Name) VALUES ('art');
+INSERT INTO Tags (Tag_Name) VALUES ('pets');
+INSERT INTO Tags (Tag_Name) VALUES ('clothes');
+INSERT INTO Tags (Tag_Name) VALUES ('designer');
+INSERT INTO Tags (Tag_Name) VALUES ('groceries');
+INSERT INTO Tags (Tag_Name) VALUES ('cars');
+INSERT INTO Tags (Tag_Name) VALUES ('hiking');
+INSERT INTO Tags (Tag_Name) VALUES ('cooking');
+INSERT INTO Tags (Tag_Name) VALUES ('furniture');
+INSERT INTO Tags (Tag_Name) VALUES ('gaming');
+INSERT INTO Tags (Tag_Name) VALUES ('travelling');
+INSERT INTO Tags (Tag_Name) VALUES ('beauty');
+INSERT INTO Tags (Tag_Name) VALUES ('eco-friendly');
+INSERT INTO Tags (Tag_Name) VALUES ('decorations');
+INSERT INTO Tags (Tag_Name) VALUES ('photography');
 
 INSERT INTO Events (Event_Name) VALUES ('New Account Created');
 INSERT INTO Events (Event_Name) VALUES ('Failed Login');
