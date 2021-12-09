@@ -73,7 +73,7 @@
 				<div th:replace="fragments/businessInformation :: keyInformation"></div>
 				<div th:replace="fragments/userSocials.html :: userSocial"/>
 				<br>
-				<th:block th:if="${highestShopLevel>=2}">
+				<th:block th:if="${@checkUserOwner.checkOwner(loggedInUser.userId, shop.shopId)}">
 					<div th:replace="fragments/manageStaff.html :: manageStaffMembers"/>
 					<div th:replace="fragments/deleteShop.html :: deleteShop"/>
 					<div th:replace="fragments/toggleShop.html :: toggleShop"/>

@@ -6,6 +6,7 @@ import com.example.clientproject.data.socials.Socials;
 import com.example.clientproject.data.socials.SocialsRepo;
 import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.stampBoards.StampBoardsRepo;
+import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.userPermissions.UserPermissions;
 import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
 import com.example.clientproject.data.userStampBoards.UserStampBoards;
@@ -110,9 +111,18 @@ public class BusinessDetails {
         UserStampPosOBJ.add(UserStampPos);
         model.addAttribute("UserStampPos", UserStampPosOBJ);
 
+        String tags = "Tags: ";
+        for(int i=0; i<shop.getShopTags().size(); i++){
+            if(i != shop.getShopTags().size()-1){
+                tags+=shop.getShopTags().get(i).getTagName() + ", ";
+            }else{
+                tags += shop.getShopTags().get(i).getTagName();
+            }
+        }
 
         //model.addAttribute("stampBoard", stampBoard);
         model.addAttribute("loggedInUser", user.get());
+        model.addAttribute("tags", tags);
         model.addAttribute("shop", shop);
         model.addAttribute("stampBoard", stampBoard);
         return "shopDetails.html";

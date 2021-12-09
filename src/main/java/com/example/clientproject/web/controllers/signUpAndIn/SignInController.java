@@ -11,6 +11,7 @@ import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.services.BusinessRegisterDTO;
 import com.example.clientproject.services.BusinessRegisterSaver;
+import com.example.clientproject.services.UserLinked;
 import com.example.clientproject.services.UserShopLinked;
 import com.example.clientproject.web.forms.BusinessRegisterForm;
 import com.example.clientproject.web.forms.signUpAndIn.LoginForm;
@@ -35,20 +36,20 @@ public class SignInController {
 
     private JWTUtils jwtUtils;
 
-    private UserShopLinked userShopLinked;
+    private UserLinked userLinked;
 
     private UserPermissionsRepo userPermissionsRepo;
 
     private CategoriesRepo catRepo;
 
     public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness, JWTUtils ajwtUtils,
-                            UserShopLinked aUserShopLinked,
+                            UserLinked aUserShopLinked,
                             UserPermissionsRepo aUserPermissionsRepo,
                             CategoriesRepo aCatRepo) {
         usersSearch = aUsersSearch;
         saveBusiness = sBusiness;
         jwtUtils = ajwtUtils;
-        userShopLinked = aUserShopLinked;
+        userLinked = aUserShopLinked;
         userPermissionsRepo = aUserPermissionsRepo;
         catRepo = aCatRepo;
     }
@@ -72,13 +73,11 @@ public class SignInController {
         }
 
         //System.out.println(userShopLinked.hasShop(jwtUtils.getLoggedInUserId(session).get()));
-        if(userShopLinked.hasShop(jwtUtils.getLoggedInUserId(session).get())){
-            long userId = jwtUtils.getLoggedInUserId(session).get();
-            long shopId = userPermissionsRepo.findByUserId(userId).get(0).getShop().getShopId();
-            if(shopId == 1){
-                shopId = userPermissionsRepo.findByUserId(userId).get(1).getShop().getShopId();
-            }
-            return "redirect:/businessDetails?shopId="+shopId;
+        if(userLinked.isAnyAdmin(jwtUtils.getLoggedInUserId(session).get())){
+
+            int shopId = userLinked.userAdminShopId(jwtUtils.getLoggedInUserId(session).get());
+
+            return "redirect:/redirect?url=businessDetails?shopId="+shopId;
         }
         List<Categories> categories = catRepo.findAll();
         model.addAttribute("loggedInUser", user.get());

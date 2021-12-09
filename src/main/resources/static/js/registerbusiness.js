@@ -1,6 +1,15 @@
 var modalStage = 0
 var urlInput, urlPrefixInput, nameInput, descInput, tagsInput, amountInput = null;
 
+function keyPress(e) {
+    if(e.key == "Enter"){
+        e.preventDefault()
+        progress()
+    }if(e.key == "Tab"){
+        e.preventDefault()
+    }
+}
+
 function htmlDecode(input) {
     var doc = new DOMParser().parseFromString(input, "text/html");
     return doc.documentElement.textContent;
@@ -133,6 +142,11 @@ function progress(){
         url.value = document.getElementById("business_register_url_prefix").value + url.value;
 
         document.getElementById("businessTags").value = tags;
+        if(!/^([0-9]+)$/.test(document.getElementById("earnings").value)){
+            document.getElementById("business_register_amount_help")
+                .innerHTML = "Please enter a whole number"
+            return
+        }
         document.getElementById("businessForm").submit();
     }
 
@@ -200,6 +214,13 @@ function addTag(e){
     if(e.data=="," && tags.length != 20){
         let inputField = document.forms["businessForm"]["businessTagsInput"]
         let text = inputField.value.slice(0,-1);
+        if(text == ""){
+            document.getElementById("tagsHelp").innerHTML = "Tag cannot be blank"
+            document.getElementById("businessTagsInput").value = ""
+            return
+        }else{
+            document.getElementById("tagsHelp").innerHTML = ""
+        }
         document.getElementById("bulmaTags").innerHTML += `
         <div>
             <div class="control mr-3 mb-2">
@@ -230,6 +251,7 @@ function addTag(e){
         inputField.value = ""
     }
 }
+
 function removeTag(e){
     let text = e.parentElement.children[0].innerHTML
     tags = tags.filter(tag =>{return tag!=text});
