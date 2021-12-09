@@ -265,6 +265,40 @@ CREATE TABLE IF NOT EXISTS `User_Stamp_Boards` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `Events`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Events` (
+                                               `Event_Id` INT NOT NULL AUTO_INCREMENT,
+                                               `Event_Name` VARCHAR(45) NOT NULL,
+                                               PRIMARY KEY(`Event_Id`))
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Logs`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Logs` (
+                                             `Log_Id` INT NOT NULL AUTO_INCREMENT,
+                                             `Event_Id` INT NOT NULL,
+                                             `User_Id` INT NOT NULL,
+                                             `Log_Details` VARCHAR(150),
+                                             `Log_Date_Time` DATETIME NOT NULL,
+                                             `Log_Super_Admin` TINYINT NOT NULL,
+                                             PRIMARY KEY(`Log_Id`, `Event_Id`, `User_Id`),
+                                             CONSTRAINT `fk_Events1`
+                                                 FOREIGN KEY (`Event_Id`)
+                                                     REFERENCES `Events` (`Event_Id`)
+                                                     ON UPDATE NO ACTION
+                                                     ON DELETE NO ACTION,
+                                             CONSTRAINT `fk_Users1`
+                                                 FOREIGN KEY (`User_Id`)
+                                                     REFERENCES `Users` (`User_Id`)
+                                                     ON UPDATE NO ACTION
+                                                     ON DELETE NO ACTION
+)
+    ENGINE = InnoDB;
+
 INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, 'None');
 INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (2, 'GAuth');
 
@@ -285,3 +319,16 @@ INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (2,'Business Adm
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (3,'Super Admin');
 
 INSERT INTO Tags (Tag_Name) VALUES ('Football');
+
+INSERT INTO Events (Event_Name) VALUES ('New Account Created');
+INSERT INTO Events (Event_Name) VALUES ('Failed Login');
+INSERT INTO Events (Event_Name) VALUES ('Successful Login');
+INSERT INTO Events (Event_Name) VALUES ('User Details Changed');
+INSERT INTO Events (Event_Name) VALUES ('User Removed');
+INSERT INTO Events (Event_Name) VALUES ('New Shop');
+INSERT INTO Events (Event_Name) VALUES ('Deleted Shop');
+INSERT INTO Events (Event_Name) VALUES ('New Favourite Business');
+INSERT INTO Events (Event_Name) VALUES ('New Shop User');
+INSERT INTO Events (Event_Name) VALUES ('Shop Details Changed');
+INSERT INTO Events (Event_Name) VALUES ('Shop Activity Toggled');
+INSERT INTO Events (Event_Name) VALUES ('Image Inserted');
