@@ -92,10 +92,6 @@ public class Users {
     )
     private List<Tags> favouriteTags;
 
-    @OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="User_Id", nullable=false)
-    private Set<Logs> logs;
-
     public String toString(){
         return "User:" + this.getUserFirstName();
     }

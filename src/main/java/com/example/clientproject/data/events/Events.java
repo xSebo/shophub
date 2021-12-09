@@ -20,8 +20,4 @@ public class Events {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long eventId;
     private String eventName;
-
-    @OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="Event_Id", nullable = false)
-    private Set<Logs> logs;
 }
