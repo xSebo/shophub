@@ -3,7 +3,9 @@ import random
 import hashlib
 
 global current_user_id
-current_user_id = 2
+global current_stamp_id
+current_stamp_id = 1
+current_user_id = 1
 
 # Where pos = position on line, total = total elements in line, fileName is the file name and concat is to remove some
 # random text from surnames.csv
@@ -37,6 +39,31 @@ def createInsert(data, table, columns):
     tempString = 'INSERT INTO ' + table +  " (" + columns + ")" + ' VALUES ' + '(' + data + ');'
     return tempString
 
+def createStampBoard():
+    query = '10,"#ff0000","stamp.png"'
+    return createInsert(query, "Stamp_Boards", "Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon")
+
+def createRewards():
+    global current_stamp_id
+    rewardsArray = ['"10% off"','"5% off"','"2 for 1"','"£5 off"']
+    query = rewardsArray[random.randint(0,len(rewardsArray)-1)] + ',' + str(random.randint(3,10)) + ',' + str(current_stamp_id+1)
+    return createInsert(query, "Rewards", "Reward_Name, Reward_Stamp_Location, Stamp_Board_Id")
+
+def linkTags(shopId):
+    finalArray = []
+    randomNo = random.randint(1,19)
+    tagIdArray = []
+
+    for i in range(1,20):
+        tagIdArray.append(i)
+
+    random.shuffle(tagIdArray)
+
+    for i in range(1, randomNo):
+        finalArray.append(createInsert((str(shopId) + ',' + str(tagIdArray[i])),"Shop_Tag_Links","Shop_Id, Tag_Id"))
+
+    return finalArray
+
 # Where amount is how many names to compile, and usertype is the type of user you'd like to generate (1,2,3)
 #
 # Returns a list of complete insert statements
@@ -66,11 +93,11 @@ def namePopulator(amount, userType):
     for i in range(0, amount):
         twoFAMethod = random.randint(1, 2)
         email = newForenames[i] + newSurnames[i] + "@email.com"
-        stringInsert = '"' + newForenames[i] + '","' + newSurnames[i] + '","' + email + '","' + stdPassword + '","' + profilePic + '",' + str(twoFAMethod)
+        stringInsert = '"' + newForenames[i].lower() + '","' + newSurnames[i].lower() + '","' + email.lower() + '","' + stdPassword + '","' + profilePic + '",' + str(twoFAMethod)
         insertArray.append(createInsert(stringInsert, "Users", "User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id"))
 
     tempAmount = current_user_id
-    while current_user_id < (tempAmount+amount-1):
+    while current_user_id < (tempAmount+amount):
         # print(current_user_id)
         # print(current_user_id+amount)
         stringInsert = str(current_user_id) + ',' + '1' + ',' + str(userType)
@@ -115,8 +142,8 @@ def companyPopulator(amount):
 
         countryi = random.randint(0, len(countries)-1)
 
-        stringInsert = '"' + companyNames[i] + '","' + "" + '","' + websiteArray[i] + '","' + str(earnings) + '","' + countries[countryi] + '","' + "shopPic.png" + '",' + str(random.randint(0, 1)) + ',' + str(1)
-        insertArray.append(createInsert(stringInsert, "Shops", "Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Active, Stamp_Board_Id"))
+        stringInsert = '"' + companyNames[i] + '","' + "" + '","' + websiteArray[i].lower() + '","' + str(earnings) + '","' + countries[countryi].lower() + '","' + "shopPic.png" + '","' +"shopBanner.png" + '",' + str(random.randint(0, 1)) + ',' + str(i+2) + ',' + str(random.randint(2,7))
+        insertArray.append(createInsert(stringInsert, "Shops", "Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Banner, Shop_Active, Stamp_Board_Id, Category_Id"))
 
     return insertArray
 
@@ -133,6 +160,7 @@ def userWriter(f, amount, userType):
 
 # Generates sql and writes to file
 def createSQLscript():
+    global current_stamp_id
     f = open("script.sql", "r+")
     f.truncate()
     f.close()
@@ -152,12 +180,29 @@ def createSQLscript():
 
     f.write("\n\n")
 
-    # Shops
     amount = int(input("How many shops would you like to generate?: "))
+
+    # Stamp Boards
+    for i in range(0,amount):
+        f.write(createStampBoard())
+        f.write("\n")
+        f.write(createRewards())
+        f.write("\n")
+        current_stamp_id+=1
+
+    # Shops
     companies = companyPopulator(amount)
     for each in companies:
         f.write(each)
         f.write("\n")
+
+    # Tags
+    tagLinkArray = []
+    for i in range(1, amount+1):
+        tagLinkArray = linkTags(i)
+        for i in range(0,len(tagLinkArray)):
+            f.write(tagLinkArray[i])
+            f.write("\n")
 
     f.close()
 
