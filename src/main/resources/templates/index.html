@@ -75,10 +75,11 @@
 			</div>
 		</div>
 
-		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-wrap-wrap">
-			<div th:each="shop,i: ${normalShops}" th:include="fragments/business_card.html :: business_card"
-				 th:with="title=${shop.shopName}, reward_text='Free coffee at 6 stamps', reward_amount=4,
-				img_path=${shop.shopImage}, shopId=${shop.shopId}"></div>
+		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-wrap-wrap"
+			 id="business_card_container">
+		</div>
+		<div class="is-full-width is-flex is-justify-content-center is-align-items-center" id="loadMoreBtn" style="display: none!important;;">
+			<a onclick="loadNextPage()">Load More</a>
 		</div>
 
 	</div>
@@ -99,5 +100,6 @@
 		</div>
 	</div>
 	<script src="/js/searchBar.js"></script>
+	<script>doSearch(false);</script>
 </body>
 </html>
