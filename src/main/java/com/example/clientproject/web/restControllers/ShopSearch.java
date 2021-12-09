@@ -4,11 +4,14 @@ import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.tags.TagsRepo;
+import com.example.clientproject.services.RecommendationGenerator;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,10 +23,14 @@ public class ShopSearch {
     @Autowired
     TagsRepo tagsRepo;
 
+    @Autowired
+    RecommendationGenerator recommendationGenerator;
+
     @GetMapping("/shop/search")
     public String searchShops(@RequestParam(value = "q", required = false) String query,
                               @RequestParam(value = "p", required = false) Integer page,
-                              @RequestParam(value = "t", required = false) List<String> tags){
+                              @RequestParam(value = "t", required = false) List<String> tags,
+                              HttpSession session) throws Exception {
         final Integer ITEMS_PER_PAGE = 6;
 
         //Get all the active shops
@@ -83,12 +90,33 @@ public class ShopSearch {
             }
         }
 
+        //Sort in order of relevance
+        allShops = recommendationGenerator.getRecommendations(session, allShops);
+
         //Convert to required format
+        List<HashMap<String, String>> formattedShops = new ArrayList<>();
+        for(Shops shop : allShops){
+            HashMap<String,String> data = new HashMap<>();
+            data.put("name",shop.getShopName());
+            data.put("banner",shop.getShopBanner());
+            data.put("id", String.valueOf(shop.getShopId()));
+            data.put("category",shop.getCategory().getCategoryName());
+            data.put("website",shop.getShopWebsite());
+            Integer reward_count = shop.getStampBoard().getRewards().size();
+            data.put("reward_count",String.valueOf(reward_count));
+            if(reward_count != 0){
+                data.put("next_reward_name",shop.getStampBoard().getRewards().get(0).getRewardName());
+                data.put("next_reward_pos",String.valueOf(shop.getStampBoard().getRewards().get(0).getRewardStampLocation()));
+            }else{
+                data.put("next_reward_name","No Rewards");
+            }
+            formattedShops.add(data);
+        }
 
+        Gson gson = new Gson();
+        String json = gson.toJson(formattedShops);
 
-        //Add details such as the amount of rewards
-
-        return allShops.toString();
+        return json;
 
     }
 

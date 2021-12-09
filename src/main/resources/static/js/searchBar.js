@@ -52,6 +52,6 @@ function doSearch(){
         url += "&t=" + t.toString()
     }
     fetch(url)
-        .then(e=>e.text())
+        .then(e=>e.json())
         .then(data=>console.log(data))
 }
