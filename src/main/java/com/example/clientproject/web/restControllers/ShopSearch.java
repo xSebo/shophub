@@ -113,8 +113,12 @@ public class ShopSearch {
             formattedShops.add(data);
         }
 
+        Map<String,Object> returnMap = new HashMap<>();
+        returnMap.put("shops",formattedShops);
+        returnMap.put("hasNextPage", hasNextPage);
+
         Gson gson = new Gson();
-        String json = gson.toJson(formattedShops);
+        String json = gson.toJson(returnMap);
 
         return json;
 
