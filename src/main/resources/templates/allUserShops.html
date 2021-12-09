@@ -49,6 +49,8 @@
 					 total_reward_amount=${shop.getStampBoard.getRewards.size},
 					 img_path=${shop.shopImage},
 					 shopId=${shop.shopId}"></div>
+        <h1 class="subtitle is-5" th:if="${favouriteShops.size == 0 && activeShops.size == 0}"> Looks like you don't have any stamps yet, favourite a shop or make a purchase to start collecting!</h1>
+
 </div>
 
 

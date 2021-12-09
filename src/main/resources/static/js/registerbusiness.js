@@ -1,6 +1,15 @@
 var modalStage = 0
 var urlInput, urlPrefixInput, nameInput, descInput, tagsInput, amountInput = null;
 
+function keyPress(e) {
+    if(e.key == "Enter"){
+        e.preventDefault()
+        progress()
+    }if(e.key == "Tab"){
+        e.preventDefault()
+    }
+}
+
 function htmlDecode(input) {
     var doc = new DOMParser().parseFromString(input, "text/html");
     return doc.documentElement.textContent;

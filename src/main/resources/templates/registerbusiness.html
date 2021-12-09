@@ -28,7 +28,7 @@
             <div id="progressBar" class="progressBar">
                 <div style="width:20%"></div>
             </div>
-            <form name="businessForm" id="businessForm" action="/businessRegister" th:method="post" onsubmit="return false">
+            <form onkeydown="keyPress(event)" name="businessForm" id="businessForm" action="/businessRegister" th:method="post" onsubmit="return false">
             <section class="modal-card-body url-centering" id="modal_container">
                     <div id="modal_page1" class="modal_page">
                         <h5 class="title is-5" style="text-align:center">Enter your shop URL</h5>
