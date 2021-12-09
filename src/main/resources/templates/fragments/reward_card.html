@@ -28,7 +28,7 @@
                 <p th:text="${reward_amount_obtained} + '/' + ${total_reward_amount}"></p>
             </div>
             <div class="level-right">
-                <a th:href="'businessDetails?shopId=' + ${shop.getShopId()}">
+                <a th:href="'businessDetails?shopId=' + ${shopId}">
                 <button class="button is-rounded">
                     Explore
                     <span class="icon is-small is-left ml-1">
