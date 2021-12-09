@@ -62,15 +62,16 @@
 		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-direction-column mb-4">
 			<h1 class="title is-3">Where else can I earn rewards?</h1>
 			<div class="control has-icons-left mb-2" style="width: 60%;">
-				<input class="input" type="text" placeholder="Enter Brands or keywords e.g. Vegan, Clothing etc..">
+				<input class="input" type="text" placeholder="Enter Brands or keywords e.g. Vegan, Clothing etc.."
+				oninput="updateSearch(event)" onkeydown="addTag(event)" id="main-search">
 				<span class="icon is-small is-left">
 					<i class="fas fa-search"></i>
 				</span>
 			</div>
 			<!--Tags-->
-			<div class="field is-grouped is-grouped-multiline" style="width: 60%;">
-				<div th:each="tag: ${tags}" th:include="fragments/tag.html :: tag"
-					 th:with="text=${tag}"></div>
+			<div class="field is-grouped is-grouped-multiline" style="width: 60%;" id="search-tag-group">
+<!--				<div th:each="tag: ${tags}" th:include="fragments/tag.html :: tag"-->
+<!--					 th:with="text=${tag}"></div>-->
 			</div>
 		</div>
 
@@ -97,5 +98,6 @@
 			</div>
 		</div>
 	</div>
+	<script src="/js/searchBar.js"></script>
 </body>
 </html>
