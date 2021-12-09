@@ -75,10 +75,16 @@
                             </div>
                         </div>
                         <h5 class="title is-5 mt-2" style="text-align:center; margin-bottom: 2%">Add tags that describe your business</h5>
-                        <div class="is-flex is-justify-content-center" style="width:100%;">
+                        <p class="subtitle is-6 mt-1" style="text-align: center">Press comma after typing the tag</p>
+                        <div class="is-flex is-justify-content-center">
                             <!-- Need to fix this, shouldn't be full width of modal -->
-                            <input id="businessTagsInput" maxlength="50" style="width:75%;" class="input" oninput="addTag(event)"></input>
+                            <div class="is-flex is-flex-direction-column is-justify-content-center is-align-content-center"
+                            style="width:75%">
+                                <input id="businessTagsInput" maxlength="50" class="input" oninput="addTag(event)"></input>
+                                <p class="help is-danger" style="text-align: center" id="tagsHelp"></p>
+                            </div>
                             <input hidden name="businessTags" id="businessTags"/>
+
                         </div>
                         <div class = "field is-grouped is-grouped-multiline p-4" id="bulmaTags">
                             <div id="tagCount" style="display: none" class="mr-3">

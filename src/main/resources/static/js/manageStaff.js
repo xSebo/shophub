@@ -23,6 +23,8 @@ function submit(shopId, email={"value":""}){
         return
     }
 
+    document.getElementById("emailErrorField").innerHTML = ""
+
 
     let params = "shopId="+ shopId
     if(emailValue=="") {

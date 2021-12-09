@@ -214,6 +214,13 @@ function addTag(e){
     if(e.data=="," && tags.length != 20){
         let inputField = document.forms["businessForm"]["businessTagsInput"]
         let text = inputField.value.slice(0,-1);
+        if(text == ""){
+            document.getElementById("tagsHelp").innerHTML = "Tag cannot be blank"
+            document.getElementById("businessTagsInput").value = ""
+            return
+        }else{
+            document.getElementById("tagsHelp").innerHTML = ""
+        }
         document.getElementById("bulmaTags").innerHTML += `
         <div>
             <div class="control mr-3 mb-2">
