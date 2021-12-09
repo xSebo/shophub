@@ -3,24 +3,24 @@ function submit(shopId, email={"value":""}){
 
     if(email.parentElement.children[0].classList.contains("subtitle")){
         emailValue = email.parentElement.children[0].innerHTML
-        email.parentElement.parentElement.remove()
 
     }else{
         emailValue = email.parentElement.children[0].value
-        document.getElementById("staffManagement").innerHTML+=
-            `<div id="staffManagement">
-            <div class="staffManagementContainer">
-                <p class="subtitle is-6" style="width:50%; margin-bottom: 0">${emailValue}</p>
-                <button class="button is-danger is-outlined" style="border-bottom: 1px solid black"
-                        onclick="submit(${document.getElementById("shopId").value},this);">
-                    <span class="icon is-small">
-                        <i class="fas fa-times is-danger"></i>
-                    </span>
-                </button>
-            </div>
-            <p id="blackLine" class="subtitle is-6" style="border-bottom: 1px solid #00b89c; margin-bottom:1%; width:50%"></p>
-            </div>`
+        emailArray = []
+
+        document.getElementsByName("staffEmail").forEach(x => emailArray.push(x.innerHTML))
+
+        if(emailArray.includes(emailValue)){
+            document.getElementById("emailErrorField").innerHTML = "User already added"
+            return
+        }
     }
+
+    if(emailValue == ""){
+        document.getElementById("emailErrorField").innerHTML = "Field blank"
+        return
+    }
+
 
     let params = "shopId="+ shopId
     if(emailValue=="") {
@@ -33,7 +33,27 @@ function submit(shopId, email={"value":""}){
     xhttp.onload = function() {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             var response = xhttp.responseText
-            if (response == "success"){
+            if (response == "OK" || response == "USER REMOVED"){
+
+                if(email.parentElement.children[0].classList.contains("subtitle")){
+                    email.parentElement.parentElement.remove()
+
+                }else{
+                    document.getElementById("staffManagement").innerHTML+=
+                        `<div id="staffManagement">
+            <div class="staffManagementContainer">
+                <p class="subtitle is-6" style="width:50%; margin-bottom: 0">${emailValue}</p>
+                <button class="button is-danger is-outlined" style="border-bottom: 1px solid"
+                        onclick="submit(${document.getElementById("shopId").value},this);">
+                    <span class="icon is-small">
+                        <i class="fas fa-times is-danger"></i>
+                    </span>
+                </button>
+            </div>
+            <p id="blackLine" class="subtitle is-6" style="border-bottom: 1px solid #00b89c; margin-bottom:1%; width:50%"></p>
+            </div>`
+                }
+
             }else{
             }
         } else {
