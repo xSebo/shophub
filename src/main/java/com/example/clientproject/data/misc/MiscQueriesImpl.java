@@ -4,6 +4,7 @@ import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.service.LoggingService;
 import com.example.clientproject.service.dtos.UsersDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,6 +23,8 @@ import java.util.Map;
 public class MiscQueriesImpl implements MiscQueries{
     private final JdbcTemplate jdbcTemplate;
     private final RowMapper<UserFavouriteTags> userFavouriteTagsRowMapper;
+
+    @Autowired
     LoggingService loggingService;
 
     /**
