@@ -57,6 +57,11 @@ function doSearch(fromNextPageBtn){
             if(!fromNextPageBtn){
                 document.getElementById("business_card_container").innerHTML = "";
             }
+            if(data["shops"].length == 0){
+                document.getElementById("searchText").style.display="block";
+            }else{
+                document.getElementById("searchText").style.display="none";
+            }
             for(let shop of data["shops"]){
                 addShop(shop);
             }
