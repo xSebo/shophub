@@ -9,14 +9,17 @@ import javax.servlet.http.HttpSession;
 
 @Service
 public class ShopDeleter {
+    @Autowired
     JdbcTemplate jdbc;
+
+    @Autowired
     LoggingService loggingService;
 
     /**
      * @param shopId - the shopID of the shop that the stored procedure is going to delete
      */
     public void deleteShop(Integer shopId, HttpSession session){
-        String query = "CALL `mydb`.`deleteShop`('" + shopId + "');";
+        String query = "CALL `deleteShop`('" + shopId + "');";
         jdbc.execute(query);
         // Log the change
         loggingService.logEvent(

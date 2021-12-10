@@ -62,7 +62,7 @@ public class BusinessRegisterSaver {
 
     public void save(BusinessRegisterDTO business, long userId, HttpSession session){
 
-        String query = "INSERT INTO mydb.Stamp_Boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (8, '#ff0000', 'stamp.jpg')";
+        String query = "INSERT INTO Stamp_Boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (8, '#ff0000', 'stamp.jpg')";
         jdbc.execute(query);
         // Log the change
         loggingService.logEvent(
@@ -73,7 +73,7 @@ public class BusinessRegisterSaver {
         );
 
         long currentStampId = stampBoards.findAll().get(stampBoards.findAll().size()-1).getStampBoardId();
-        String rewardsQuery = "INSERT INTO mydb.Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES (\"10% off\", 4," +
+        String rewardsQuery = "INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES (\"10% off\", 4," +
                 currentStampId +  ")";
         //System.out.println(rewardsQuery);
         jdbc.execute(rewardsQuery);
@@ -141,7 +141,7 @@ public class BusinessRegisterSaver {
                 );
             }
 
-            query = "INSERT INTO mydb.Shop_Tag_Links (Shop_Id, Tag_Id) VALUES ("+ shop.getShopId() +
+            query = "INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES ("+ shop.getShopId() +
                     ","+tag.getTagId() + ")";
             jdbc.execute(query);
             // Log the change

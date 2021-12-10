@@ -73,7 +73,7 @@ public class UserSocialSave {
                         " in UserSocialSave.updateSocials()"
         );
 
-        query = "UPDATE mydb.Shops SET Shop_Website = '" +
+        query = "UPDATE Shops SET Shop_Website = '" +
                 usDTO.getShopUrl() +
                 "' WHERE Shop_Id = " + shopId;
         jdbc.execute(query);

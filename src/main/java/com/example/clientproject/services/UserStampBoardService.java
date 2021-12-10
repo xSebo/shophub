@@ -34,7 +34,7 @@ public class UserStampBoardService {
      */
 
     public int getUserStampPos(int userID, int stampBoardID){
-        String query = "SELECT User_Stamp_Position FROM mydb.user_stamp_boards WHERE User_Id = " + userID + " AND Stamp_Board_Id = " + stampBoardID + ";";
+        String query = "SELECT User_Stamp_Position FROM user_stamp_boards WHERE User_Id = " + userID + " AND Stamp_Board_Id = " + stampBoardID + ";";
         try{
             List<Map<String, Object>> rs = jdbc.queryForList(query);
 
@@ -48,7 +48,7 @@ public class UserStampBoardService {
 
     public void changeUserStampPosition(int userID, int incrementValue, int currentUserStampPos, int stampBoardId, HttpSession session){
         int newStampPos = currentUserStampPos + incrementValue;
-        String query = "UPDATE mydb.user_stamp_boards SET User_Stamp_Position = " + newStampPos + " WHERE User_Id = " + userID + " AND Stamp_Board_Id = " + stampBoardId + ";";
+        String query = "UPDATE user_stamp_boards SET User_Stamp_Position = " + newStampPos + " WHERE User_Id = " + userID + " AND Stamp_Board_Id = " + stampBoardId + ";";
         jdbc.execute(query);
         // Log the change
         loggingService.logEvent(
@@ -62,7 +62,7 @@ public class UserStampBoardService {
     }
 
     public void createStampRecord(int userID, int stampPosition, int stampBoardId, HttpSession session){
-        String query = "INSERT INTO mydb.user_stamp_boards (User_Id, Stamp_Board_Id, User_Stamp_Position) VALUES ("+userID+", "+stampBoardId+", "+ stampPosition +");";
+        String query = "INSERT INTO user_stamp_boards (User_Id, Stamp_Board_Id, User_Stamp_Position) VALUES ("+userID+", "+stampBoardId+", "+ stampPosition +");";
         jdbc.execute(query);
         // Log the change
         loggingService.logEvent(

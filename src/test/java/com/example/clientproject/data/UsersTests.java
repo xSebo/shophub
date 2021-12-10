@@ -30,7 +30,7 @@ public class UsersTests {
     @Test
     public void shouldGet21Users() throws Exception {
         List<Users> usersList = usersRepo.findAll();
-        assertEquals(21, usersList.size());
+        assertEquals(13, usersList.size());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class UsersTests {
         Users users = usersRepo.save(newUser);
 
         List<Users> usersList = usersRepo.findAll();
-        assertEquals(22, usersList.size());
+        assertEquals(14, usersList.size());
     }
 }
 

@@ -24,7 +24,7 @@ public class UserFavouriteTagSaver {
         String enableFKeyChecks = "SET FOREIGN_KEY_CHECKS=1;";
         jdbc.execute(disableFKeyChecks);
 
-        String query = "INSERT INTO mydb.user_favourite_tags (User_Id, Tag_Id) VALUES ("+ userID + ","+tagID + ")";
+        String query = "INSERT INTO user_favourite_tags (User_Id, Tag_Id) VALUES ("+ userID + ","+tagID + ")";
         jdbc.execute(query);
         jdbc.execute(enableFKeyChecks);
         // Log the changes

@@ -25,7 +25,7 @@ public class UserFavouriteDeleter {
      */
     public void delete(UserFavouriteDTO usfDTO, HttpSession session){
 
-        String query = "DELETE FROM mydb.User_Shop_Links WHERE (Shop_Id = " +
+        String query = "DELETE FROM User_Shop_Links WHERE (Shop_Id = " +
                 usfDTO.getShopId() +" AND User_Id = " +
                 usfDTO.getUserId() +")";
         jdbc.execute(query);

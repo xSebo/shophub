@@ -96,7 +96,7 @@ public class MiscQueriesImpl implements MiscQueries{
     public void updateUser(int userId, String field, Object value, HttpSession session) {
         switch (field) {
             case "User_First_Name": {
-                String sql = "UPDATE mydb.Users SET User_First_Name = ? WHERE User_Id = ?";
+                String sql = "UPDATE Users SET User_First_Name = ? WHERE User_Id = ?";
                 jdbcTemplate.update(
                         // Script
                         sql,
@@ -114,7 +114,7 @@ public class MiscQueriesImpl implements MiscQueries{
                 break;
             }
             case "User_Last_Name": {
-                String sql = "UPDATE mydb.Users SET User_Last_Name = ? WHERE User_Id = ?";
+                String sql = "UPDATE Users SET User_Last_Name = ? WHERE User_Id = ?";
                 jdbcTemplate.update(
                         // Script
                         sql,
@@ -132,7 +132,7 @@ public class MiscQueriesImpl implements MiscQueries{
                 break;
             }
             case "User_Email": {
-                String sql = "UPDATE mydb.Users SET User_Email = ? WHERE User_Id = ?";
+                String sql = "UPDATE Users SET User_Email = ? WHERE User_Id = ?";
                 jdbcTemplate.update(
                         // Script
                         sql,
@@ -150,7 +150,7 @@ public class MiscQueriesImpl implements MiscQueries{
                 break;
             }
             case "User_Profile_Picture": {
-                String sql = "UPDATE mydb.Users SET User_Profile_Picture = ? WHERE User_Id = ?";
+                String sql = "UPDATE Users SET User_Profile_Picture = ? WHERE User_Id = ?";
                 jdbcTemplate.update(
                         // Script
                         sql,
@@ -168,7 +168,7 @@ public class MiscQueriesImpl implements MiscQueries{
                 break;
             }
             case "User_Password": {
-                String sql = "UPDATE mydb.Users SET User_Password = ? WHERE User_Id = ?";
+                String sql = "UPDATE Users SET User_Password = ? WHERE User_Id = ?";
                 jdbcTemplate.update(
                         // Script
                         sql,
@@ -209,7 +209,7 @@ public class MiscQueriesImpl implements MiscQueries{
      */
     public List<UserFavouriteTags> findAllUserFavouriteTags() {
         return jdbcTemplate.query(
-                "select * from mydb.User_Favourite_Tags",
+                "select * from User_Favourite_Tags",
                 userFavouriteTagsRowMapper,
                 new Object[]{}
         );

@@ -25,7 +25,7 @@ public class ShopActiveService {
      * @return - an int of Shop activity 1 = active || 0 = not active
      */
     public int isShopActive(Integer shopId){
-        String query = "SELECT Shop_Active FROM mydb.shops WHERE Shop_Id = " + shopId + ";";
+        String query = "SELECT Shop_Active FROM shops WHERE Shop_Id = " + shopId + ";";
         try{
             List<Map<String, Object>> rs = jdbc.queryForList(query);
 
@@ -43,7 +43,7 @@ public class ShopActiveService {
 
     public void updateShopActive(Integer shopId, Integer active, HttpSession session){
         if(active == 0 || active == 1){ //only allows active values of 0 or 1
-            String query = "UPDATE mydb.shops SET Shop_Active = " + active + " WHERE Shop_Id = " + shopId + ";";
+            String query = "UPDATE shops SET Shop_Active = " + active + " WHERE Shop_Id = " + shopId + ";";
             jdbc.execute(query);
             // Log the change
             loggingService.logEvent(

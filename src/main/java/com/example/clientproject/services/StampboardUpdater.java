@@ -21,9 +21,9 @@ public class StampboardUpdater {
     //When using ensure you have validated authority first
 
     public void updateColour(Integer shopId, String colour, HttpSession session){
-        String query = "UPDATE mydb.stamp_boards SET Stamp_Board_Colour = '"+ colour +"' WHERE Stamp_Board_Id = (" +
-                "SELECT stamp_boards.Stamp_Board_Id FROM mydb.stamp_boards INNER JOIN " +
-                "mydb.shops on shops.Stamp_Board_Id = stamp_boards.Stamp_Board_Id where shops.Shop_Id = "+ shopId +" limit 1);";
+        String query = "UPDATE stamp_boards SET Stamp_Board_Colour = '"+ colour +"' WHERE Stamp_Board_Id = (" +
+                "SELECT stamp_boards.Stamp_Board_Id FROM stamp_boards INNER JOIN " +
+                "shops on shops.Stamp_Board_Id = stamp_boards.Stamp_Board_Id where shops.Shop_Id = "+ shopId +" limit 1);";
         jdbc.execute(query);
         // Log the change
         loggingService.logEvent(
@@ -36,8 +36,8 @@ public class StampboardUpdater {
     }
 
     public void updateRewards(Integer shopId, Map<String,Object> rewards, HttpSession session){
-        String deleteQuery = "delete from mydb.rewards where Stamp_Board_Id = (" +
-                "SELECT Stamp_Board_Id from mydb.shops where Shop_Id = "+shopId+");";
+        String deleteQuery = "delete from rewards where Stamp_Board_Id = (" +
+                "SELECT Stamp_Board_Id from shops where Shop_Id = "+shopId+");";
         jdbc.execute(deleteQuery);
         // Log the change
         loggingService.logEvent(
@@ -48,8 +48,8 @@ public class StampboardUpdater {
         );
 
         rewards.entrySet().forEach(r -> {
-            String insertQuery = "INSERT into mydb.rewards (Reward_Name, Reward_Stamp_Location,Stamp_Board_Id) values (\""+r.getValue()+"\", " +
-                    r.getKey()+",(SELECT Stamp_Board_Id from mydb.shops where Shop_Id = "+ shopId.toString() +"));";
+            String insertQuery = "INSERT into rewards (Reward_Name, Reward_Stamp_Location,Stamp_Board_Id) values (\""+r.getValue()+"\", " +
+                    r.getKey()+",(SELECT Stamp_Board_Id from shops where Shop_Id = "+ shopId.toString() +"));";
             jdbc.execute(insertQuery);
             // Log the change
             loggingService.logEvent(
@@ -62,9 +62,9 @@ public class StampboardUpdater {
     }
 
     public void updateStampboardSize(Integer shopId, Integer size, HttpSession session){
-        String query = "UPDATE mydb.stamp_boards SET Stamp_Board_Size = "+ size +" WHERE Stamp_Board_Id = (" +
-                "SELECT stamp_boards.Stamp_Board_Id FROM mydb.stamp_boards INNER JOIN " +
-                "mydb.shops on shops.Stamp_Board_Id = stamp_boards.Stamp_Board_Id where shops.Shop_Id = "+ shopId +" limit 1);";
+        String query = "UPDATE stamp_boards SET Stamp_Board_Size = "+ size +" WHERE Stamp_Board_Id = (" +
+                "SELECT stamp_boards.Stamp_Board_Id FROM stamp_boards INNER JOIN " +
+                "shops on shops.Stamp_Board_Id = stamp_boards.Stamp_Board_Id where shops.Shop_Id = "+ shopId +" limit 1);";
         jdbc.execute(query);
         // Log the change
         loggingService.logEvent(
@@ -77,9 +77,9 @@ public class StampboardUpdater {
     }
 
     public void updateIconURL(Integer shopId, String url, HttpSession session){
-        String query = "UPDATE mydb.stamp_boards SET Stamp_Board_Icon = '"+ url +"' WHERE Stamp_Board_Id = (" +
-                "SELECT stamp_boards.Stamp_Board_Id FROM mydb.stamp_boards INNER JOIN " +
-                "mydb.shops on shops.Stamp_Board_Id = stamp_boards.Stamp_Board_Id where shops.Shop_Id = "+ shopId +" limit 1);";
+        String query = "UPDATE stamp_boards SET Stamp_Board_Icon = '"+ url +"' WHERE Stamp_Board_Id = (" +
+                "SELECT stamp_boards.Stamp_Board_Id FROM stamp_boards INNER JOIN " +
+                "shops on shops.Stamp_Board_Id = stamp_boards.Stamp_Board_Id where shops.Shop_Id = "+ shopId +" limit 1);";
         jdbc.execute(query);
         // Log the change
         loggingService.logEvent(

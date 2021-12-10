@@ -43,6 +43,10 @@ public class LoggingService {
      * @param details - details of the event
      */
     public void logEvent(String event, HttpSession session, String details) {
+        if(!jwtUtils.getLoggedInUserRow(session).isPresent()){
+            return;
+        }
+
         // Instantiate a flagging variable
         boolean superAdminStatus;
         // If the session attribute "superAdmin" doesn't exist (super admin not logged in)

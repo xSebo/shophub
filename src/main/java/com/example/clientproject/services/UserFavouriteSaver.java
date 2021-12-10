@@ -25,7 +25,7 @@ public class UserFavouriteSaver {
      * @param session - session
      */
     public void save(UserFavouriteDTO urfDTO, HttpSession session){
-        String query = "INSERT INTO mydb.User_Shop_Links (Shop_Id, User_Id) VALUES ("+ urfDTO.getShopId() +
+        String query = "INSERT INTO User_Shop_Links (Shop_Id, User_Id) VALUES ("+ urfDTO.getShopId() +
                 ","+urfDTO.getUserId() + ")";
         jdbc.execute(query);
         // Log the change
