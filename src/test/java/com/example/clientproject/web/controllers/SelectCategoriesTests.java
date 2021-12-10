@@ -58,7 +58,7 @@ public class SelectCategoriesTests {
                 "", "",
                 LocalDateTime.now().format(formatter), twoFactorMethods);
         // Save the user
-        miscQueries.saveUser(newUser);
+        miscQueries.saveUser(newUser, null);
         // Get the user as a DTO object
         Optional<Users> usersOptional = usersRepo.findByUserEmail(newUser.getUserEmail());
 
@@ -69,11 +69,11 @@ public class SelectCategoriesTests {
             // Create a new "Tags" object with that name
             Tags newTag = new Tags(tagName);
             // Save a new tag with that name
-            miscQueries.saveTag(newTag);
+            miscQueries.saveTag(newTag, null);
             // Get the newly saved tag
             Optional<Tags> tagsOptional = tagsRepo.findByTagName(tagName);
             // Add a row to the "User_Favourite_Tags" table
-            miscQueries.saveUserFavouriteTags(usersOptional.get(), tagsOptional.get());
+            miscQueries.saveUserFavouriteTags(usersOptional.get(), tagsOptional.get(), null);
         }
 
         // Get the size of the table at the beginning

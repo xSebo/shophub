@@ -331,7 +331,7 @@ INSERT INTO Tags (Tag_Name) VALUES ('eco-friendly');
 INSERT INTO Tags (Tag_Name) VALUES ('decorations');
 INSERT INTO Tags (Tag_Name) VALUES ('photography');
 
-INSERT INTO Events (Event_Name) VALUES ('New Account Created');
+INSERT INTO Events (Event_Name) VALUES ('New User');
 INSERT INTO Events (Event_Name) VALUES ('Failed Login');
 INSERT INTO Events (Event_Name) VALUES ('Successful Login');
 INSERT INTO Events (Event_Name) VALUES ('User Details Changed');
@@ -357,3 +357,4 @@ INSERT INTO Events (Event_Name) VALUES ('UserShopLink Inserted');
 INSERT INTO Events (Event_Name) VALUES ('ShopWebsite Updated');
 INSERT INTO Events (Event_Name) VALUES ('UserStampBoard Updated');
 INSERT INTO Events (Event_Name) VALUES ('UserStampBoard Inserted');
+INSERT INTO Events (Event_Name) VALUES ('UserFavouriteTag Inserted');
