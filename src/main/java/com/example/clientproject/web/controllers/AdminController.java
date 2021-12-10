@@ -9,6 +9,7 @@ import com.example.clientproject.data.stampBoards.StampBoards;
 import com.example.clientproject.data.stampBoards.StampBoardsRepo;
 import com.example.clientproject.data.userPermissions.UserPermissions;
 import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
+import com.example.clientproject.service.customObjects.shopAdminObject;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.services.ShopDeleter;
@@ -21,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -75,7 +77,7 @@ public class AdminController {
         model.addAttribute("linkedShop", false);
 
         //Get Shops the user is associated with
-        if(highestPerm > 1 || userShopLinked.hasShop(user.get().getUserId())){
+        if(highestPerm == 2 || userShopLinked.hasShop(user.get().getUserId())){
             List<Integer> shops = userShopLinked.getByUserId(user.get().getUserId());
             //Check if user has defined a shop to look at in the url
             Shops shop;
@@ -98,7 +100,6 @@ public class AdminController {
             List<Users> linkedUsers = new ArrayList<>();
 
             //userPermissionsRepo.findAll().forEach(x -> System.out.println(x.getUser().getUserId() +":"+ x.getShop().getShopId()));
-
 
             for(UserPermissions u:linkedList){
                 if(u.getUser().getUserEmail().equalsIgnoreCase(user.get().getUserEmail())){
@@ -146,6 +147,22 @@ public class AdminController {
                     filteredCategorySortedShops.put(e.getKey().toString(), val);
                 }
             }
+
+            List<shopAdminObject> allInfoList = new ArrayList<>();
+            List<UserPermissions> allUsersPerms = userPermissionsRepo.findByAdminTypeId(2);
+            for(UserPermissions Owners : allUsersPerms){
+                Users businessOwner = Owners.getUser();
+                int businessOwnerId = (int) businessOwner.getUserId();
+                String businessOwnerName = businessOwner.getUserFirstName();
+                businessOwnerName = businessOwnerName + " " + businessOwner.getUserLastName();
+                shopAdminObject allInfo = new shopAdminObject(businessOwnerId, Owners.getShop().getShopName(), businessOwnerName);
+                //System.out.println(allInfo.getShopName() + allInfo.getUserName() + allInfo.getUserId());
+                allInfoList.add(allInfo);
+            }
+            model.addAttribute("allShopOwners",allInfoList);
+
+
+
 
 
             model.addAttribute("adminOfByCategory",filteredCategorySortedShops);
@@ -200,5 +217,19 @@ public class AdminController {
             return "redirect:/settings";
         }
         return "redirect:/settings";
+    }
+
+    @PostMapping("/changeAccount")
+    public String changeAccount (@RequestParam(name="userId", required = true) Integer userId, HttpSession session){
+        List<UserPermissions> allUserPerms = userPermissionsRepo.findAll();
+        for (UserPermissions u : allUserPerms) { //loops through userPermissions and checks if curren user is super admin
+            if (u.getUser().getUserId() == jwtUtils.getLoggedInUserId(session).get()) {
+                if (u.getAdminType().getAdminTypeId() == 3){
+                    jwtUtils.makeUserJWT(userId, session);
+                    return "redirect:/";
+                }
+            }
+        }
+        return "redirect:/";
     }
 }

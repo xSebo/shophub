@@ -40,4 +40,5 @@ public interface UserPermissionsRepo extends JpaRepository<UserPermissions, Long
      */
     @Query("select u from UserPermissions u where u.adminType.adminTypeId = ?1")
     List<UserPermissions> findByAdminTypeId(long adminTypeId);
+
 }
