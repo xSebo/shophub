@@ -9,11 +9,13 @@ import javax.servlet.http.HttpSession;
 
 @Service
 public class ShopDeleter {
-    @Autowired
     JdbcTemplate jdbc;
-
-    @Autowired
     LoggingService loggingService;
+
+    public ShopDeleter(JdbcTemplate jdbc, LoggingService loggingService) {
+        this.jdbc = jdbc;
+        this.loggingService = loggingService;
+    }
 
     /**
      * @param shopId - the shopID of the shop that the stored procedure is going to delete

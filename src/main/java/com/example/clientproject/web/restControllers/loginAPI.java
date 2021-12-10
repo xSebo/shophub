@@ -23,9 +23,10 @@ public class loginAPI {
     private JWTUtils jwtUtils;
     LoggingService loggingService;
 
-    public loginAPI(UsersSearch aUsersSearch, JWTUtils jwt) {
+    public loginAPI(UsersSearch aUsersSearch, JWTUtils jwt, LoggingService aLoggingService) {
         usersSearch = aUsersSearch;
         jwtUtils = jwt;
+        loggingService = aLoggingService;
     }
 
     @PostMapping("login_api")

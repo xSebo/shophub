@@ -43,7 +43,8 @@ public class LoggingService {
      * @param details - details of the event
      */
     public void logEvent(String event, HttpSession session, String details) {
-        if(!jwtUtils.getLoggedInUserRow(session).isPresent()){
+        // If the user attempting to log is not logged in
+        if (!jwtUtils.getLoggedInUserId(session).isPresent()) {
             return;
         }
 

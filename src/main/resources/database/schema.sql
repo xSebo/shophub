@@ -273,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Logs` (
     `Log_Id` INT NOT NULL AUTO_INCREMENT,
     `Event_Id` INT NOT NULL,
     `User_Id` INT NOT NULL,
-    `Log_Details` VARCHAR(150) NOT NULL,
+    `Log_Details` VARCHAR(250) NOT NULL,
     `Log_Date_Time` DATETIME NOT NULL,
     `Log_Super_Admin` TINYINT NOT NULL,
     PRIMARY KEY(`Log_Id`, `Event_Id`, `User_Id`),

@@ -6,6 +6,7 @@ import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.exceptions.ForbiddenErrorException;
+import com.example.clientproject.service.LoggingService;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
@@ -29,29 +30,26 @@ import java.util.*;
 @Controller
 public class SignInController {
     public static boolean loggedIn = false;
-
     private UsersSearch usersSearch;
-
     private BusinessRegisterSaver saveBusiness;
-
     private JWTUtils jwtUtils;
-
     private UserLinked userLinked;
-
     private UserPermissionsRepo userPermissionsRepo;
-
     private CategoriesRepo catRepo;
+    private LoggingService loggingService;
 
     public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness, JWTUtils ajwtUtils,
                             UserLinked aUserShopLinked,
                             UserPermissionsRepo aUserPermissionsRepo,
-                            CategoriesRepo aCatRepo) {
+                            CategoriesRepo aCatRepo,
+                            LoggingService aLoggingService) {
         usersSearch = aUsersSearch;
         saveBusiness = sBusiness;
         jwtUtils = ajwtUtils;
         userLinked = aUserShopLinked;
         userPermissionsRepo = aUserPermissionsRepo;
         catRepo = aCatRepo;
+        loggingService = aLoggingService;
     }
 
     @PostMapping("/businessRegister")
@@ -140,14 +138,34 @@ public class SignInController {
                         (int) usersDTOOptional.get().getUserId(),
                         session);
                 loggedIn = true;
+                // Log the successful login
+                loggingService.logEvent(
+                        "Successful Login",
+                        session,
+                        "Successful login with User Id: " + usersDTOOptional.get().getUserId()
+                );
             // Otherwise, throw an exception with the correct error message
             } else {
+                // Log the failed login
+                loggingService.logEvent(
+                        "Failed Login",
+                        session,
+                        "Failed login with User Email: " + usersDTOOptional.get().getUserEmail() +
+                                " due to incorrect password"
+                );
                 //Changed this as it is a security risk exposing which field is incorrect
                 //throw new ForbiddenErrorException("Password Incorrect");
                 throw new ForbiddenErrorException("Details Incorrect");
             }
         // Else - assumes that the email is incorrect
         } else {
+            // Log the successful login
+            loggingService.logEvent(
+                    "Failed Login",
+                    session,
+                    "Failed login with Email: " + loginForm.getLoginEmail() +
+                            " due to incorrect email"
+            );
             //Changed this as it is a security risk exposing which field is incorrect
             //throw new ForbiddenErrorException("Email Incorrect");
             throw new ForbiddenErrorException("Details Incorrect");

@@ -23,15 +23,13 @@ import java.util.Map;
 public class MiscQueriesImpl implements MiscQueries{
     private final JdbcTemplate jdbcTemplate;
     private final RowMapper<UserFavouriteTags> userFavouriteTagsRowMapper;
-
-    @Autowired
-    LoggingService loggingService;
+    private LoggingService loggingService;
 
     /**
      * Constructor
      * @param aJdbcTemplate - the JDBC Template to pass in
      */
-    public MiscQueriesImpl(JdbcTemplate aJdbcTemplate) {
+    public MiscQueriesImpl(JdbcTemplate aJdbcTemplate, LoggingService aLoggingService) {
         this.jdbcTemplate = aJdbcTemplate;
 
         userFavouriteTagsRowMapper = (rs, i) -> new UserFavouriteTags(
@@ -39,6 +37,8 @@ public class MiscQueriesImpl implements MiscQueries{
                 rs.getLong("User_Id"),
                 rs.getLong("Tag_Id")
         );
+
+        loggingService = aLoggingService;
     }
 
     /**
