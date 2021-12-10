@@ -48,7 +48,8 @@ public class UserSettings {
             miscQueries.updateUser(
                     userId,
                     "User_First_Name",
-                    nameEmailProfileChangeForm.getNewFirstName()
+                    nameEmailProfileChangeForm.getNewFirstName(),
+                    httpSession
             );
         }
 
@@ -59,7 +60,8 @@ public class UserSettings {
             miscQueries.updateUser(
                     userId,
                     "User_Last_Name",
-                    nameEmailProfileChangeForm.getNewLastName()
+                    nameEmailProfileChangeForm.getNewLastName(),
+                    httpSession
             );
         }
 
@@ -70,7 +72,8 @@ public class UserSettings {
             miscQueries.updateUser(
                     userId,
                     "User_Email",
-                    nameEmailProfileChangeForm.getNewEmail().toLowerCase()
+                    nameEmailProfileChangeForm.getNewEmail().toLowerCase(),
+                    httpSession
             );
         }
 
@@ -81,7 +84,8 @@ public class UserSettings {
             miscQueries.updateUser(
                     userId,
                     "User_Profile_Picture",
-                    nameEmailProfileChangeForm.getNewProfilePic()
+                    nameEmailProfileChangeForm.getNewProfilePic(),
+                    httpSession
             );
         }
 
@@ -130,7 +134,8 @@ public class UserSettings {
                 "User_Password",
                 passwordEncoder.encode(
                         passwordChangeForm.getNewPassword()
-                )
+                ),
+                httpSession
         );
 
         // Return a success message to the settings page

@@ -14,12 +14,15 @@ import java.util.*;
 
 @Service
 public class DashboardStampLoader {
-    @Autowired
     UsersRepo userRepo;
-    @Autowired
     ShopsRepo shopsRepo;
-    @Autowired
     UserFavouriteToggle toggleFavourite;
+
+    public DashboardStampLoader(UsersRepo userRepo, ShopsRepo shopsRepo, UserFavouriteToggle toggleFavourite) {
+        this.userRepo = userRepo;
+        this.shopsRepo = shopsRepo;
+        this.toggleFavourite = toggleFavourite;
+    }
 
     public Map<String, Object> getData(int userId) throws Exception {
         List<Map<String, Object>> combinedInfo = new ArrayList<>();

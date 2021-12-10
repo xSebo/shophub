@@ -31,7 +31,7 @@ public class DeleteShopTests {
     //in future make a jdbc service that will do the exact same thing as the stored procedure
     @Test
     public void shouldDeleteAllShopData() throws Exception{
-        shopDeleter.deleteShop(12);
+        shopDeleter.deleteShop(12, null);
         List<Shops> shopsList = shopsRepo.findAll();
         assertEquals(11, shopsList.size());
     }

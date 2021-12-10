@@ -9,14 +9,17 @@ import java.util.Map;
 
 @Service
 public class GetStampBoardIdFromRewardId {
-    @Autowired
     JdbcTemplate jdbc;
+
+    public GetStampBoardIdFromRewardId(JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
+    }
 
     /**
      * @param rewardId the rewardId of the stampBoardId you want to retrieve
      */
     public int getStampBoardId(Integer rewardId){
-        String query = "SELECT Stamp_Board_Id FROM rewards WHERE Reward_Id = " + rewardId + ";";
+        String query = "SELECT Stamp_Board_Id FROM mydb.rewards WHERE Reward_Id = " + rewardId + ";";
         try{
             List<Map<String, Object>> rs = jdbc.queryForList(query);
 

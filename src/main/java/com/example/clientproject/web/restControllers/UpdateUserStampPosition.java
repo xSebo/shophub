@@ -70,16 +70,16 @@ public class UpdateUserStampPosition {
             StampBoards stampBoard = shop.getStampBoard();
             if(Objects.equals(direction, "subtract")){
                 if(currentUserStampPos != 0){
-                    userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), -1, currentUserStampPos, (int) stampBoard.getStampBoardId());
+                    userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), -1, currentUserStampPos, (int) stampBoard.getStampBoardId(), session);
                 }
             } else if(Objects.equals(direction, "add")){
                 if(currentUserStampPos != shopStampBoardSize){
-                    userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), 1, currentUserStampPos, (int) stampBoard.getStampBoardId());
+                    userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), 1, currentUserStampPos, (int) stampBoard.getStampBoardId(), session);
                     currentUserStampPos = userStampBoardService.getUserStampPos(jwtUtils.getLoggedInUserId(session).get(), (int) shopStampBoardId );
                 }
                 if(currentUserStampPos == 0){
                     System.out.println("Attempting to create record for user");
-                    userStampBoardService.createStampRecord(jwtUtils.getLoggedInUserId(session).get(), 1, (int) shopStampBoardId);
+                    userStampBoardService.createStampRecord(jwtUtils.getLoggedInUserId(session).get(), 1, (int) shopStampBoardId, session);
                 }
             }
         }
@@ -102,7 +102,7 @@ public class UpdateUserStampPosition {
         }
         if(userIsLinkedToStampBoard){
             if(userStampPos >= reward.get().getRewardStampLocation()){
-                userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), -reward.get().getRewardStampLocation(), userStampPos, stampBoardId);
+                userStampBoardService.changeUserStampPosition(jwtUtils.getLoggedInUserId(session).get(), -reward.get().getRewardStampLocation(), userStampPos, stampBoardId, session);
                 //credit to www.programiz.com for code generator
                 String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//creates a string of all characters
                 StringBuilder sb = new StringBuilder();

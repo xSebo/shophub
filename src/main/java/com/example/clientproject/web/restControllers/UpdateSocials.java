@@ -46,7 +46,7 @@ public class UpdateSocials {
         if(!isLinked){
             throw new ForbiddenErrorException("User not authenticated");
         }
-        save.updateSocials(userSocialDTO);
+        save.updateSocials(userSocialDTO, session);
         return "OK";
     }
 }

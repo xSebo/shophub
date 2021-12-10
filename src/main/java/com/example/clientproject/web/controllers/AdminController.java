@@ -195,7 +195,7 @@ public class AdminController {
             }
             if (shopPermissionLevel == 2 || shopPermissionLevel == 3) {
                 System.out.println("shop is being deleted");
-                shopDeleter.deleteShop(shopId);
+                shopDeleter.deleteShop(shopId, session);
             }
             return "redirect:/settings";
         }
