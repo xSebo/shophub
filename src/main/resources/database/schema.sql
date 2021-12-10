@@ -351,3 +351,4 @@ INSERT INTO Events (Event_Name) VALUES ('New Social');
 INSERT INTO Events (Event_Name) VALUES ('New User Permission');
 INSERT INTO Events (Event_Name) VALUES ('Stamp Board Updated');
 INSERT INTO Events (Event_Name) VALUES ('Reward Deleted');
+INSERT INTO Events (Event_Name) VALUES ('Shop Updated');
