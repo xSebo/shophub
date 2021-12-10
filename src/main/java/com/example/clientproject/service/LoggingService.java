@@ -1,6 +1,7 @@
 package com.example.clientproject.service;
 
 import com.example.clientproject.data.events.Events;
+import com.example.clientproject.data.events.EventsRepo;
 import com.example.clientproject.data.logs.Logs;
 import com.example.clientproject.data.logs.LogsRepo;
 import com.example.clientproject.service.Utils.JWTUtils;
@@ -9,13 +10,15 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 /**
- * Service for all logging based methods
+ * Service for all logging related methods
  */
 @Service
 public class LoggingService {
     LogsRepo logsRepo;
+    EventsRepo eventsRepo;
     JWTUtils jwtUtils;
 
     /**
@@ -23,9 +26,14 @@ public class LoggingService {
      * @param aLogsRepo - object of type LogsRepo
      * @param aJWTUtils - object of type JWTUtils
      */
-    public LoggingService(LogsRepo aLogsRepo, JWTUtils aJWTUtils) {
+    public LoggingService(LogsRepo aLogsRepo, EventsRepo aEventRepo, JWTUtils aJWTUtils) {
         jwtUtils = aJWTUtils;
+        eventsRepo = aEventRepo;
         logsRepo = aLogsRepo;
+    }
+
+    public Optional<Events> findEventByName(String eventName) {
+        return eventsRepo.findByEventName(eventName);
     }
 
     /**
@@ -34,7 +42,7 @@ public class LoggingService {
      * @param session - the session
      * @param details - details of the event
      */
-    public void logEvent(Events event, HttpSession session, String details) {
+    public void logEvent(String event, HttpSession session, String details) {
         // Instantiate a flagging variable
         boolean superAdminStatus;
         // If the session attribute "superAdmin" doesn't exist (super admin not logged in)
@@ -56,7 +64,7 @@ public class LoggingService {
                 LocalDateTime.now().format(formatter),
                 superAdminStatus,
                 jwtUtils.getLoggedInUserRow(session).get(),
-                event
+                findEventByName(event).get()
         );
 
         // Save the new log
