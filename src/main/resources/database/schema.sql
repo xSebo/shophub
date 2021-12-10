@@ -355,3 +355,5 @@ INSERT INTO Events (Event_Name) VALUES ('Shop Updated');
 INSERT INTO Events (Event_Name) VALUES ('UserShopLink Deleted');
 INSERT INTO Events (Event_Name) VALUES ('UserShopLink Inserted');
 INSERT INTO Events (Event_Name) VALUES ('ShopWebsite Updated');
+INSERT INTO Events (Event_Name) VALUES ('UserStampBoard Updated');
+INSERT INTO Events (Event_Name) VALUES ('UserStampBoard Inserted');
