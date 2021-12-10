@@ -45,9 +45,9 @@ public class ToggleShopActive {
             if (shopPermissionLevel == 2 || shopPermissionLevel == 3) {
                 System.out.println("shop is being deleted");
                 if(shopActiveService.isShopActive(shopId) == 0){//if shop is currently un-active
-                    shopActiveService.updateShopActive(shopId, 1);//enables shop
+                    shopActiveService.updateShopActive(shopId, 1, session);//enables shop
                 } else if(shopActiveService.isShopActive(shopId) == 1){//if shop is currently active
-                    shopActiveService.updateShopActive(shopId, 0);//disables shop
+                    shopActiveService.updateShopActive(shopId, 0, session);//disables shop
                 } else {
                     System.out.println("an error has occured updating shop activity, shop may potentially have an active value other than 1 or 0");
                 }

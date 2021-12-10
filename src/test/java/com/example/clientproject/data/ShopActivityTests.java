@@ -37,7 +37,7 @@ public class ShopActivityTests {
     @Test
     public void activeShopsDecreasedBy1AfterMethodCalled(){
         List<Shops> activeShopsListBeforeChange = shopsRepo.findActiveShops();
-        shopActiveService.updateShopActive(6, 0);
+        shopActiveService.updateShopActive(6, 0, null);
         List<Shops> activeShopsListAfterChange = shopsRepo.findActiveShops();
         assertEquals(activeShopsListBeforeChange.size()-1, activeShopsListAfterChange.size());
         //size after change should be equal to size before change minus one
