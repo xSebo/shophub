@@ -353,3 +353,4 @@ INSERT INTO Events (Event_Name) VALUES ('Stamp Board Updated');
 INSERT INTO Events (Event_Name) VALUES ('Reward Deleted');
 INSERT INTO Events (Event_Name) VALUES ('Shop Updated');
 INSERT INTO Events (Event_Name) VALUES ('UserShopLink Deleted');
+INSERT INTO Events (Event_Name) VALUES ('UserShopLink Inserted');
