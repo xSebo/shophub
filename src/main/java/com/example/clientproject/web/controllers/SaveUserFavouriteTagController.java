@@ -38,7 +38,7 @@ public class SaveUserFavouriteTagController {
             //System.out.println(TagID_List.size());
             //System.out.println(TagID);
             int UserID = jwtUtils.getLoggedInUserId(session).get();
-            FavTagService.saveUserFavTag(UserID,TagID);
+            FavTagService.saveUserFavTag(UserID,TagID, session);
         }
         return("redirect:/");
     }
