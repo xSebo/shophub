@@ -1,6 +1,7 @@
 package com.example.clientproject.web.restControllers;
 
 import com.example.clientproject.exceptions.ForbiddenErrorException;
+import com.example.clientproject.service.LoggingService;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
@@ -20,6 +21,7 @@ import java.util.Optional;
 public class loginAPI {
     private UsersSearch usersSearch;
     private JWTUtils jwtUtils;
+    LoggingService loggingService;
 
     public loginAPI(UsersSearch aUsersSearch, JWTUtils jwt) {
         usersSearch = aUsersSearch;
@@ -51,14 +53,32 @@ public class loginAPI {
                 jwtUtils.makeUserJWT(
                         (int) usersDTOOptional.get().getUserId(),
                         session);
-                // Otherwise, throw an exception with the correct error message
+                // Log the successful login
+                loggingService.logEvent(
+                        "Successful Login",
+                        session,
+                        "Successful login for User with Id: " + usersDTOOptional.get().getUserId()
+                );
             } else {
+                // Log the Failed login
+                loggingService.logEvent(
+                        "Failed Login",
+                        session,
+                        "Failed login for User with Id: " + usersDTOOptional.get().getUserId()
+                );
                 //Changed this as it is a security risk exposing which field is incorrect
                 //throw new ForbiddenErrorException("Password Incorrect");
                 throw new ForbiddenErrorException("Details Incorrect");
+
             }
             // Else - assumes that the email is incorrect
         } else {
+            // Log the Failed login
+            loggingService.logEvent(
+                    "Failed Login",
+                    session,
+                    "Failed login for User with Email: " + loginForm.getLoginEmail()
+            );
             //Changed this as it is a security risk exposing which field is incorrect
             //throw new ForbiddenErrorException("Email Incorrect");
             throw new ForbiddenErrorException("Details Incorrect");
