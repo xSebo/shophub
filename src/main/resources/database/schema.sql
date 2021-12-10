@@ -348,3 +348,4 @@ INSERT INTO Events (Event_Name) VALUES ('New Reward');
 INSERT INTO Events (Event_Name) VALUES ('New Tag');
 INSERT INTO Events (Event_Name) VALUES ('New Shop Tag Link');
 INSERT INTO Events (Event_Name) VALUES ('New Social');
+INSERT INTO Events (Event_Name) VALUES ('New User Permission');

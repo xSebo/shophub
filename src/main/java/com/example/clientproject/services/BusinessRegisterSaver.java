@@ -123,7 +123,7 @@ public class BusinessRegisterSaver {
         System.out.println(tagsLowerList);
         business.getBusinessTags().forEach(x-> System.out.println(x));
 
-        linkShop.linkUserShop(shop.getShopId(), userId, 2L);
+        linkShop.linkUserShop(shop.getShopId(), userId, 2L, session);
 
         for(String t: business.getBusinessTags()){
             Tags tag;
