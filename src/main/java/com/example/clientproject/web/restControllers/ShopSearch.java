@@ -4,6 +4,9 @@ import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.tags.Tags;
 import com.example.clientproject.data.tags.TagsRepo;
+import com.example.clientproject.data.users.Users;
+import com.example.clientproject.service.Utils.JWTUtils;
+import com.example.clientproject.services.DashboardStampLoader;
 import com.example.clientproject.services.RecommendationGenerator;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,12 @@ public class ShopSearch {
     @Autowired
     RecommendationGenerator recommendationGenerator;
 
+    @Autowired
+    DashboardStampLoader stampLoader;
+
+    @Autowired
+    JWTUtils jwtUtils;
+
     @GetMapping("/shop/search")
     public String searchShops(@RequestParam(value = "q", required = false) String query,
                               @RequestParam(value = "p", required = false) Integer page,
@@ -35,6 +44,26 @@ public class ShopSearch {
 
         //Get all the active shops
         List<Shops> allShops = shopsRepo.findActiveShops();
+
+        Optional<Users> user = jwtUtils.getLoggedInUserRow(session);
+        if(user.isPresent()){
+            Map<String,Object> userInfo = stampLoader.getData((int) user.get().getUserId());
+
+            //Filter off shops that the user has stamps in
+            List<Shops> purchased = (List<Shops>)userInfo.get("purchased");
+            allShops = allShops
+                    .stream()
+                    .filter(s -> !purchased.contains(s))
+                    .collect(Collectors.toList());
+
+            //Filter off shops the user has favourited
+            List<Shops> favourited = (List<Shops>)userInfo.get("favourited");
+            allShops = allShops
+                    .stream()
+                    .filter(s -> !favourited.contains(s))
+                    .collect(Collectors.toList());
+        }
+
 
         //Filter the shops using the query provided
         if(query != null){
