@@ -343,3 +343,8 @@ INSERT INTO Events (Event_Name) VALUES ('New Shop User');
 INSERT INTO Events (Event_Name) VALUES ('Shop Details Changed');
 INSERT INTO Events (Event_Name) VALUES ('Shop Activity Toggled');
 INSERT INTO Events (Event_Name) VALUES ('Image Inserted');
+INSERT INTO Events (Event_Name) VALUES ('New Stamp Board');
+INSERT INTO Events (Event_Name) VALUES ('New Reward');
+INSERT INTO Events (Event_Name) VALUES ('New Tag');
+INSERT INTO Events (Event_Name) VALUES ('New Shop Tag Link');
+INSERT INTO Events (Event_Name) VALUES ('New Social');
