@@ -37,7 +37,7 @@ public class BusinessFavouriter {
             if(toggleFavourite.alreadyInDb(ufDTO)){
                 deleteFavourite.delete(ufDTO, session);
             }else{
-                saveFavourite.save(ufDTO);
+                saveFavourite.save(ufDTO, session);
             }
             return "OK";
         }catch(Exception e){

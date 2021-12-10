@@ -54,11 +54,11 @@ public class loginAPI {
                         (int) usersDTOOptional.get().getUserId(),
                         session);
                 // Log the successful login
-                loggingService.logEvent(
-                        "Successful Login",
-                        session,
-                        "Successful login for User with Id: " + usersDTOOptional.get().getUserId()
-                );
+//                loggingService.logEvent(
+//                        "Successful Login",
+//                        session,
+//                        "Successful login for User with Id: " + (int) usersDTOOptional.get().getUserId()
+//                );
             } else {
                 // Log the Failed login
                 loggingService.logEvent(

@@ -60,7 +60,7 @@ public class SignInController {
             System.out.println(bindingResult.getAllErrors());
             return "registerbusiness.html";
         }
-        saveBusiness.save(new BusinessRegisterDTO(brf), jwtUtils.getLoggedInUserId(session).get());
+        saveBusiness.save(new BusinessRegisterDTO(brf), jwtUtils.getLoggedInUserId(session).get(), session);
         return "redirect:/redirect?url=businessRegister";
     }
 
