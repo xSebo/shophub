@@ -68,7 +68,7 @@ public class StampboardUpdater {
         jdbc.execute(query);
         // Log the change
         loggingService.logEvent(
-                "StampBoard Updated",
+                "Stamp Board Updated",
                 session,
                 "StampBoard updated for Shop: " + shopId +
                         " with: field Stamp_BoardSize with value:" + size +
