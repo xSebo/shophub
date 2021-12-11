@@ -138,6 +138,3 @@ class LoginRegisterSuite:
 		except AssertionError as e:
 			error("Login in does not redirect")
 			#input()
-
-
-
