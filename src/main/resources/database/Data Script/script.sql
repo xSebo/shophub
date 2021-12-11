@@ -24,8 +24,14 @@ INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (13,1,3);
 
 
 
-INSERT INTO Stamp_Boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (10,'#ff0000','stamp.png');
+INSERT INTO Stamp_Boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (26,'#c6ee4b','imgs/vibezStamp.jpg');
 INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ('10% off',3,2);
+INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ('free drink',6,2);
+INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ('3 for 1 deal',8,2);
+INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ('£10 gift voucher',13,2);
+INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ('crate of cans for £15',17,2);
+INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ('free crate of cans',20,2);
+INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ('free crate of limited edition cans',26,2);
 INSERT INTO Stamp_Boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (10,'#ff0000','stamp.png');
 INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ('2 for 1',8,3);
 INSERT INTO Stamp_Boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (10,'#ff0000','stamp.png');
@@ -64,7 +70,8 @@ INSERT INTO Stamp_Boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon
 INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ('10% off',7,20);
 INSERT INTO Stamp_Boards (Stamp_Board_Size, Stamp_Board_Colour, Stamp_Board_Icon) VALUES (10,'#ff0000','stamp.png');
 INSERT INTO Rewards (Reward_Name, Reward_Stamp_Location, Stamp_Board_Id) VALUES ('5% off',3,21);
-INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Banner, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Hudson Group','','hudsongroup.com','21722','ge georgia','shopPic.png','shopBanner.png',1,2,2);
+INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Banner, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Vibez Drinks','','https://https://www.vibezdrinks.co.uk/','21722','ge georgia','imgs/vibezLogo.png','imgs/vibezdrinkbanner.png',1,2,2);
+INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Banner, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Hudson Group','','https://hudsongroup.com','21722','ge georgia','imgs/HudsongroupLogo.png','imgs/HudsonGroupBanner.png',1,2,2);
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Banner, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Wyman - Mertz','','wymanmertz.com','27121','ir iran islamic republic of','shopPic.png','shopBanner.png',0,3,4);
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Banner, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Sauer, Hoppe and Hartmann','','sauerhoppeandhartmann.com','12603','kp korea democratic peoples republic of','shopPic.png','shopBanner.png',1,4,2);
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Banner, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Flatley LLC','','flatleyllc.com','34968','tn tunisia','shopPic.png','shopBanner.png',1,5,6);
@@ -85,21 +92,9 @@ INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Sho
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Banner, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Senger - Ryan','','sengerryan.com','25887','iq iraq','shopPic.png','shopBanner.png',0,20,3);
 INSERT INTO Shops (Shop_Name, Shop_Description, Shop_Website, Shop_Earnings, Shop_Countries, Shop_Image, Shop_Banner, Shop_Active, Stamp_Board_Id, Category_Id) VALUES ('Fay - Koepp','','faykoepp.com','13482','gf french guiana','shopPic.png','shopBanner.png',1,21,2);
 INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (1,7);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,10);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,2);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,14);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,12);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,3);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,16);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,15);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,1);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,13);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,11);
 INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,9);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,5);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,4);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,18);
-INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,8);
+INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,17);
+INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (2,10);
 INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (3,19);
 INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (3,9);
 INSERT INTO Shop_Tag_Links (Shop_Id, Tag_Id) VALUES (3,5);

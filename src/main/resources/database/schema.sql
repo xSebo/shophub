@@ -330,6 +330,7 @@ INSERT INTO Tags (Tag_Name) VALUES ('beauty');
 INSERT INTO Tags (Tag_Name) VALUES ('eco-friendly');
 INSERT INTO Tags (Tag_Name) VALUES ('decorations');
 INSERT INTO Tags (Tag_Name) VALUES ('photography');
+INSERT INTO Tags (Tag_Name) VALUES ('vegan');
 
 INSERT INTO Events (Event_Name) VALUES ('New User');
 INSERT INTO Events (Event_Name) VALUES ('Failed Login');
