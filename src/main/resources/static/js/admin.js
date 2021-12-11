@@ -3,7 +3,7 @@ var isShopSelectOpen = {
     "profile":false,
     "shop-setup":true,
     "shop-rewards":true,
-    "super-admin":true
+    "super-admin":false
 }
 
 function toggle_tab(tab){
