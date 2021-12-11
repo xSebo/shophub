@@ -28,7 +28,6 @@ function saveNameEmailProfileChanges() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 // Set the filename as the response text
                 newProfileFilename = xhr.responseText;
-                alert(newProfileFilename)
 
                 // Create a params object
                 let params= "newFirstName=" + newFirstName.toString() +
