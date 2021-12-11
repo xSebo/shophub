@@ -38,7 +38,7 @@
                         <span class="control">
                             <p style="font-size:15px">Profile Picture</p>
                             <label class="file-label is-flex is-justify-content-flex-start is-align-items-center" for="newProfilePicture">
-                                <img style="width:50px; height:50px;" class="mr-2" th:src="${loggedInUser.getUserProfilePicture()}" alt="Old Profile Picture" id="profilePicPreview"><br>
+                                <img style="width:50px; height:50px; border-radius: 500px;" class="mr-2" th:src="${loggedInUser.getUserProfilePicture()}" alt="Old Profile Picture" id="profilePicPreview"><br>
                                 <input class="file-input mb-4" type="file" id="newProfilePicture" onchange="loadNewPicture(event)">
 
                                 <span class="file-cta">
