@@ -22,10 +22,6 @@ a.panel-block, label.panel-block {
     cursor: default !important;
 }
 
-a {
-    cursor: default !important;
-}
-
 .vertScrollbarIfOverflow{
     max-height: 300px;
     overflow-y: auto;
