@@ -57,6 +57,10 @@
 
                     <button class="button is-link signIn-Button mt-4" onclick="saveNameEmailProfileChanges()">Save Changes</button>
                 </div>
+
+                <h2 class="help is-success" style="display:none;" id="profileDetailsChangeSuccess">Details Change Successful</h2>
+                <h2 class="help is-danger" style="display:none;" id="profileDetailsChangeFailure">Details Change Failed</h2>
+
             </div>
 
             <hr style="color:black; height:3px; opacity:100%">
@@ -89,6 +93,9 @@
 
                     <button onclick="savePasswordChanges()" class="button is-link signIn-Button mt-4" id="passwordSubmitButton">Save Changes</button>
                 </div>
+
+                <h2 class="help is-success" style="display:none;" id="passwordChangeSuccess">Password Change Success</h2>
+                <h2 class="help is-danger" style="display:none;" id="passwordChangeFailure">Password Change Failure</h2>
             </div>
         </div>
     </body>
