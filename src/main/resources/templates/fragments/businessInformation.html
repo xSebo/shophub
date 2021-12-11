@@ -47,7 +47,8 @@
         </label>
     </div>
 
-    <button th:onclick="'submitInfo('+ ${shop.shopId} +');'" class="button is-link" style="margin-top:15px; margin-bottom:10px;">Save changes</button>
+    <button id="saveInfoButton" th:onclick="'submitInfo('+ ${shop.shopId} +');'" class="button is-link" style="margin-top:15px; margin-bottom:10px;">Save changes</button>
+    <p class="help is-success" id="infoSuccess"></p>
 </div>
 <p style="border-bottom: #000000 1px solid;"></p>
 </body>

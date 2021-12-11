@@ -15,14 +15,32 @@ async function submitFile(inputName) {
                 }
             };
             xhttp.send(formData);
+        }else{
+            reject("")
         }
     })
 }
 
 async function submitInfo(shopId) {
-    let bannerName = await submitFile("bannerInput");
-    let logoName = await submitFile("logoInput")
+
+    document.getElementById("saveInfoButton").classList.add("is-loading")
+
+    let bannerName, logoName
+    try{
+        bannerName = await submitFile("bannerInput");
+    }catch(e){
+        console.log(e)
+        bannerName = ""
+    }
+    try{
+        logoName = await submitFile("logoInput");
+    }catch(e){
+        console.log(e)
+        logoName = ""
+    }
     var xhttp = new XMLHttpRequest();
+
+
 
     let params = "shopId=" + shopId
     params += "&shopName=" + encodeURIComponent(document.getElementById("nameInput").value)
@@ -34,7 +52,9 @@ async function submitInfo(shopId) {
     xhttp.onload = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             var response = xhttp.responseText
-            if (response == "success") {
+            if (response == "OK") {
+                document.getElementById("saveInfoButton").classList.remove("is-loading")
+                document.getElementById("infoSuccess").innerHTML = "Changes Saved!"
             } else {
             }
         } else {
