@@ -148,23 +148,6 @@ public class AdminController {
                 }
             }
 
-            List<shopAdminObject> allInfoList = new ArrayList<>();
-            List<UserPermissions> allUsersPerms = userPermissionsRepo.findByAdminTypeId(2);
-            for(UserPermissions Owners : allUsersPerms){
-                Users businessOwner = Owners.getUser();
-                int businessOwnerId = (int) businessOwner.getUserId();
-                String businessOwnerName = businessOwner.getUserFirstName();
-                businessOwnerName = businessOwnerName + " " + businessOwner.getUserLastName();
-                shopAdminObject allInfo = new shopAdminObject(businessOwnerId, Owners.getShop().getShopName(), businessOwnerName);
-                //System.out.println(allInfo.getShopName() + allInfo.getUserName() + allInfo.getUserId());
-                allInfoList.add(allInfo);
-            }
-            model.addAttribute("allShopOwners",allInfoList);
-
-
-
-
-
             model.addAttribute("adminOfByCategory",filteredCategorySortedShops);
             model.addAttribute("linkedShop", userShopLinked.hasShop(user.get().getUserId()));
             model.addAttribute("highestShopLevel", highestShopLevel);
@@ -181,6 +164,23 @@ public class AdminController {
             StampBoards stampBoard = stampBoardsRepo.findById(shop.getStampBoard().getStampBoardId()).get();
             model.addAttribute("stampBoard",stampBoard);
 
+        }
+
+        if(highestPerm == 3){ //if user is superadmin
+            List<shopAdminObject> allInfoList = new ArrayList<>();
+            List<UserPermissions> allUsersPerms = userPermissionsRepo.findByAdminTypeId(2);
+            for(UserPermissions Owners : allUsersPerms){
+                Users businessOwner = Owners.getUser();
+                int businessOwnerId = (int) businessOwner.getUserId();
+                if(businessOwnerId != jwtUtils.getLoggedInUserId(session).get()){
+                    String businessOwnerName = businessOwner.getUserFirstName();
+                    businessOwnerName = businessOwnerName + " " + businessOwner.getUserLastName();
+                    shopAdminObject allInfo = new shopAdminObject(businessOwnerId, Owners.getShop().getShopName(), businessOwnerName);
+                    //System.out.println(allInfo.getShopName() + allInfo.getUserName() + allInfo.getUserId());
+                    allInfoList.add(allInfo);
+                }
+            }
+            model.addAttribute("allShopOwners",allInfoList);
         }
 
         model.addAttribute("highestPerm", highestPerm);

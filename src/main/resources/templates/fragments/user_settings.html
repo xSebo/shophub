@@ -12,25 +12,25 @@
             <h1 class="title">Profile Settings</h1>
 
             <div id="nameEmailProfile">
-                <h1 style="font-size:25px">Name, email and profile picture</h1>
+                <h2 class="title is-4 secondary mb-2">Name, email and profile picture</h2>
 
                 <div>
                     <div class="field">
                         <span class="control">
-                            <label style="font-size:15px" for="newFirstName">First Name</label><br>
-                            <input style="width:90%; border-radius:10px" class="input mb-4 is-medium" type="text" id="newFirstName" th:value="${loggedInUser.getUserFirstName()}">
+                            <label style="font-size:15px;" for="newFirstName">First Name</label><br>
+                            <input style="width:30%; border-radius:10px" class="input mb-4 is-medium" type="text" id="newFirstName" th:value="${loggedInUser.getUserFirstName()}">
 
                             <br>
 
                             <label style="font-size:15px" for="newLastName">Last Name</label><br>
-                            <input style="width:90%; border-radius:10px" class="input mb-4 is-medium" type="text" id="newLastName" th:value="${loggedInUser.getUserLastName()}">
+                            <input style="width:30%; border-radius:10px" class="input mb-4 is-medium" type="text" id="newLastName" th:value="${loggedInUser.getUserLastName()}">
                         </span>
                     </div>
 
                     <div class="field">
                         <span class="control">
                             <label style="font-size:15px" for="newEmail">Email</label><br>
-                            <input style="width:90%; border-radius:10px" class="input mb-4 is-medium" type="email" id="newEmail" th:value="${loggedInUser.getUserEmail()}">
+                            <input style="width:30%; border-radius:10px" class="input mb-4 is-medium" type="email" id="newEmail" th:value="${loggedInUser.getUserEmail()}">
                         </span>
                     </div>
 
@@ -55,14 +55,14 @@
                         </span>
                     </div>
 
-                    <button class="button is-rounded signIn-Button mt-4" onclick="saveNameEmailProfileChanges()">Submit</button>
+                    <button class="button is-link signIn-Button mt-4" onclick="saveNameEmailProfileChanges()">Save Changes</button>
                 </div>
             </div>
 
             <hr style="color:black; height:3px; opacity:100%">
 
             <div id="passwordChange">
-                <h1 style="font-size:25px">Change Password</h1>
+                <h2 class="title is-4 secondary mb-2">Change Password</h2>
                 <br>
 
                 <div>
@@ -87,7 +87,7 @@
 
                     <br>
 
-                    <button onclick="savePasswordChanges()" class="button is-rounded signIn-Button mt-4" id="passwordSubmitButton">Submit</button>
+                    <button onclick="savePasswordChanges()" class="button is-link signIn-Button mt-4" id="passwordSubmitButton">Save Changes</button>
                 </div>
             </div>
         </div>
