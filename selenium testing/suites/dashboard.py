@@ -16,7 +16,8 @@ class Dashboard:
 			self.testSearchByTermCorrectAmountOfResults,
 			self.testSearchByTermIgnoresCase,
 			self.testCanAddTagToSearch,
-			self.testSearchByTagReturnsCorrectAmount
+			self.testSearchByTagReturnsCorrectAmount,
+			self.testWhenStarPressedBusinessIsMovedToTop
 		]
 
 	def __str__(self):
@@ -128,4 +129,23 @@ class Dashboard:
 			input()
 
 	#Favourite businesses
+	def testWhenStarPressedBusinessIsMovedToTop(self):
+		driver = startTest(self.options)
+		login(driver)
 
+		star = driver.find_element(By.XPATH, '//*[@id="business_card_container"]/div[1]/div[2]')
+		driver.execute_script("arguments[0].click();", star)
+
+		driver.refresh()
+
+		time.sleep(1)
+
+		results = driver.find_elements(By.CLASS_NAME, "reward_card")
+
+		try:
+			assert len(results) == 1
+			success("Pressing the star moves the icon to favourited")
+			self.passed += 1
+		except AssertionError:
+			error("Items do not move when favourited")
+			input()		
