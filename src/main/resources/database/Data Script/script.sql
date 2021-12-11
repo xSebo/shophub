@@ -12,15 +12,6 @@ INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, U
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('freddie','lachy','freddielachy@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',2);
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('kerra','oneypenny','kerraoneypenny@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',1);
 INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (1,1,3);
-INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (2,1,1);
-INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (3,1,1);
-INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (4,1,1);
-INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (5,1,1);
-INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (6,1,1);
-INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (7,1,1);
-INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (8,1,1);
-INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (9,1,1);
-INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (10,1,1);
 
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('keeganjack','hieb','keeganjackhieb@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',2);
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('faren','krosschell','farenkrosschell@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',1);

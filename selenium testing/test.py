@@ -1,6 +1,7 @@
 from selenium.webdriver.chrome.options import Options
 from suites.loginRegister import LoginRegisterSuite
 from suites.categorySelection import CategorySelection
+from suites.dashboard import Dashboard
 from suites.nav import Nav
 from modules.main import * 
 import os
@@ -15,7 +16,8 @@ options.add_experimental_option('excludeSwitches', ['enable-logging'])
 suites = {
     "loginRegister":LoginRegisterSuite(options),
     "categorySelection":CategorySelection(options),
-    "nav":Nav(options)
+    "nav":Nav(options),
+    "dashboard":Dashboard(options)
 }
 
 def runAllSuites():
@@ -40,4 +42,4 @@ def runSuite(name):
         error("Suite does not exist")
 
 #runAllSuites()
-runSuite("nav")
+runSuite("dashboard")
