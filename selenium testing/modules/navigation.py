@@ -10,6 +10,9 @@ def goToLoginPage(driver):
 def goToRegisterPage(driver):
 	driver.get(BASE_URL + "/signUp")
 
+def goToHudsonShopPage(driver):
+	driver.get(BASE_URL + "/businessDetails?shopId=2")
+
 def loginDontSelectCategorys(driver):
 	goToLoginPage(driver)
 	inputElement = driver.find_element(By.ID,"loginEmail")
@@ -36,3 +39,47 @@ def login(driver):
 	except NoSuchElementException:
 		pass
 
+def loginAsBusinessOwner(driver):
+	goToLoginPage(driver)
+	inputElement = driver.find_element(By.ID,"loginEmail")
+	inputElement.send_keys('kerraoneypenny@email.com')
+
+	passElement = driver.find_element(By.ID,"loginPassword")
+	passElement.send_keys("password123")
+
+	btn = driver.find_element(By.XPATH,'//*[@id="loginForm"]/button')
+	btn.click()
+	time.sleep(1)
+	try:
+		driver.find_element(By.XPATH, "/html/body/div[3]")
+		driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/section/button[1]").click()
+		driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/section/button[2]").click()
+		driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/section/button[3]").click()
+		driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/footer/button").click()
+
+		time.sleep(1)
+		goToHudsonShopPage(driver)
+	except NoSuchElementException:
+		pass
+def loginAsBusinessOwner(driver):
+	goToLoginPage(driver)
+	inputElement = driver.find_element(By.ID,"loginEmail")
+	inputElement.send_keys('kerraoneypenny@email.com')
+
+	passElement = driver.find_element(By.ID,"loginPassword")
+	passElement.send_keys("password123")
+
+	btn = driver.find_element(By.XPATH,'//*[@id="loginForm"]/button')
+	btn.click()
+	time.sleep(1)
+	try:
+		driver.find_element(By.XPATH, "/html/body/div[3]")
+		driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/section/button[1]").click()
+		driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/section/button[2]").click()
+		driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/section/button[3]").click()
+		driver.find_element(By.XPATH, "/html/body/div[3]/div[2]/footer/button").click()
+
+		time.sleep(1)
+		goToHudsonShopPage(driver)
+	except NoSuchElementException:
+		pass
