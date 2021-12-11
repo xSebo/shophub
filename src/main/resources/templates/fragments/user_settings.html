@@ -37,8 +37,8 @@
                     <div class="field has-name">
                         <span class="control">
                             <p style="font-size:15px">Profile Picture</p>
-                            <label class="file-label" for="newProfilePicture">
-                                <img style="width:50px; height:50px;" th:src="${loggedInUser.getUserProfilePicture()}" alt="Old Profile Picture" id="profilePicPreview"><br>
+                            <label class="file-label is-flex is-justify-content-flex-start is-align-items-center" for="newProfilePicture">
+                                <img style="width:50px; height:50px; border-radius: 500px;" class="mr-2" th:src="${loggedInUser.getUserProfilePicture()}" alt="Old Profile Picture" id="profilePicPreview"><br>
                                 <input class="file-input mb-4" type="file" id="newProfilePicture" onchange="loadNewPicture(event)">
 
                                 <span class="file-cta">
@@ -57,6 +57,10 @@
 
                     <button class="button is-link signIn-Button mt-4" onclick="saveNameEmailProfileChanges()">Save Changes</button>
                 </div>
+
+                <h2 class="help is-success" style="display:none;" id="profileDetailsChangeSuccess">Details Change Successful</h2>
+                <h2 class="help is-danger" style="display:none;" id="profileDetailsChangeFailure">Details Change Failed</h2>
+
             </div>
 
             <hr style="color:black; height:3px; opacity:100%">
@@ -89,6 +93,9 @@
 
                     <button onclick="savePasswordChanges()" class="button is-link signIn-Button mt-4" id="passwordSubmitButton">Save Changes</button>
                 </div>
+
+                <h2 class="help is-success" style="display:none;" id="passwordChangeSuccess">Password Change Success</h2>
+                <h2 class="help is-danger" style="display:none;" id="passwordChangeFailure">Password Change Failure</h2>
             </div>
         </div>
     </body>

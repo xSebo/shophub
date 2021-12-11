@@ -49,10 +49,11 @@ function saveNameEmailProfileChanges() {
                         var response = xhttp.responseText
                         // If the text is "success"
                         if (response == "success"){
-                            // Alert the user that the change was successful
-                            alert("Details Change Success")
+                            document.getElementById("profileDetailsChangeFailure").style.display = "none";
+                            document.getElementById("profileDetailsChangeSuccess").style.display = "block";
                         }else{
-                        }
+                            document.getElementById("profileDetailsChangeSuccess").style.display = "none";
+                            document.getElementById("profileDetailsChangeFailure").style.display = "block";                        }
                         // Otherwise
                     } else {
                         console.error(xhttp.statusText);
@@ -82,14 +83,18 @@ function saveNameEmailProfileChanges() {
         // Logic for different responses
         xhttp.onload = function() {
             // If the status is ok (request succeeded
-            if (xhttp.readyState === 4 && xhttp.status === 200) {
-                // Get the response text
-                var response = xhttp.responseText
-                // If the text is "success"
-                if (response == "success"){
-                    // Alert the user that the change was successful
-                    alert("Details Change Success")
-                }else{
+            if (xhttp.readyState === 4) {
+                if (xhttp.status === 200) {
+                    // Get the response text
+                    var response = xhttp.responseText
+                    // If the text is "success"
+                    if (response == "success"){
+                        document.getElementById("profileDetailsChangeFailure").style.display = "none";
+                        document.getElementById("profileDetailsChangeSuccess").style.display = "block";
+                    }
+                } else {
+                    document.getElementById("profileDetailsChangeSuccess").style.display = "none";
+                    document.getElementById("profileDetailsChangeFailure").style.display = "block";
                 }
                 // Otherwise
             } else {
@@ -126,12 +131,17 @@ function savePasswordChanges() {
     // Logic for different responses
     xhttp.onload = function() {
         // If the status is ok (request succeeded
-        if (xhttp.readyState === 4 && xhttp.status === 200) {
-            // Get the response text
-            var response = xhttp.responseText
-            if (response == "success"){
-                alert("Password Change Success")
-            }else{
+        if (xhttp.readyState === 4) {
+            if (xhttp.status === 200) {
+                // Get the response text
+                var response = xhttp.responseText
+                if (response == "success"){
+                    document.getElementById("passwordChangeFailure").style.display = "none";
+                    document.getElementById("passwordChangeSuccess").style.display = "block";
+                }
+            } else {
+                document.getElementById("passwordChangeSuccess").style.display = "none";
+                document.getElementById("passwordChangeFailure").style.display = "block";
             }
         } else {
             console.error(xhttp.statusText);
