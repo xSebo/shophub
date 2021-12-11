@@ -8,6 +8,8 @@
 	<link th:replace="fragments/userSocials.html :: socialCss">
 	<link th:replace="fragments/userSocials.html :: socialJs">
 	<link th:replace="fragments/deleteShop.html :: delShopCSS">
+	<link th:replace="fragments/superAdmin.html :: superAdminCSS">
+	<link th:replace="fragments/superAdmin.html :: superAdminJs">
 	<link th:replace="fragments/deleteShop.html :: delShopJS">
 	<link th:replace="fragments/toggleShop.html :: toggleShopJS">
 	<link th:replace="fragments/businessInformation.html :: infoJs">
@@ -44,6 +46,12 @@
 				</div>
 				<p>Shop Rewards</p>
 			</div>
+			<div th:if="${highestPerm == 3}" class="admin-tab" onclick="toggle_tab('super-admin')" id="super-admin-tab">
+				<div class="baseIcon">
+					<i class="fab fa-angular fa-lg"></i>
+				</div>
+				<p>Super Admin</p>
+			</div>
 		</div>
 		<div class="sidebar closed" id="side_shop_select" th:if="${highestPerm > 1 || linkedShop}">
 			<th:block th:each="category: ${adminOfByCategory.entrySet()}">
@@ -79,11 +87,12 @@
 					<div th:replace="fragments/toggleShop.html :: toggleShop"/>
 				</th:block>
 			</section>
-
-
 			<section id="shop-rewards-section" class="admin-section">
 				<h1 class="title" th:text="'Shop Rewards ('+ ${shop.getShopName()} +')'"></h1>
 				<div th:replace="fragments/shop_rewards_settings_page.html :: rewards"/>
+			</section>
+			<section th:if="${highestPerm == 3}" id="super-admin-section" class="admin-section">
+				<div th:replace="fragments/superAdmin.html :: super-admin-page"/>
 			</section>
 		</main>
 		<main th:unless="${highestPerm > 1 || linkedShop}">
