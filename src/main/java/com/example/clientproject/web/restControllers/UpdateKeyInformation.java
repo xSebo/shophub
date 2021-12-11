@@ -28,7 +28,7 @@ public class UpdateKeyInformation {
             return "BAD SESSION";
         }
         try{
-            updateInfo.updateInfo(new KeyInfoDTO(keyInformationForm));
+            updateInfo.updateInfo(new KeyInfoDTO(keyInformationForm), session);
             return "OK";
         }catch (Exception e){
             e.printStackTrace();

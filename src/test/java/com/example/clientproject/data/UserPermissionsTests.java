@@ -48,7 +48,7 @@ public class UserPermissionsTests {
     @Test
     public void shouldGet18Permissions() {
         List<UserPermissions> userPermissionsList = userPermissionsRepo.findAll();
-        assertEquals(18, userPermissionsList.size());
+        assertEquals(13, userPermissionsList.size());
     }
 
     @Test
@@ -67,6 +67,6 @@ public class UserPermissionsTests {
         userPermissionsRepo.save(newUserPermission);
 
         List<UserPermissions> userPermissionsList = userPermissionsRepo.findAll();
-        assertEquals(19, userPermissionsList.size());
+        assertEquals(14, userPermissionsList.size());
     }
 }

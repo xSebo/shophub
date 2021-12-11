@@ -273,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Logs` (
     `Log_Id` INT NOT NULL AUTO_INCREMENT,
     `Event_Id` INT NOT NULL,
     `User_Id` INT NOT NULL,
-    `Log_Details` VARCHAR(150) NOT NULL,
+    `Log_Details` VARCHAR(250) NOT NULL,
     `Log_Date_Time` DATETIME NOT NULL,
     `Log_Super_Admin` TINYINT NOT NULL,
     PRIMARY KEY(`Log_Id`, `Event_Id`, `User_Id`),
@@ -331,7 +331,7 @@ INSERT INTO Tags (Tag_Name) VALUES ('eco-friendly');
 INSERT INTO Tags (Tag_Name) VALUES ('decorations');
 INSERT INTO Tags (Tag_Name) VALUES ('photography');
 
-INSERT INTO Events (Event_Name) VALUES ('New Account Created');
+INSERT INTO Events (Event_Name) VALUES ('New User');
 INSERT INTO Events (Event_Name) VALUES ('Failed Login');
 INSERT INTO Events (Event_Name) VALUES ('Successful Login');
 INSERT INTO Events (Event_Name) VALUES ('User Details Changed');
@@ -343,6 +343,23 @@ INSERT INTO Events (Event_Name) VALUES ('New Shop User');
 INSERT INTO Events (Event_Name) VALUES ('Shop Details Changed');
 INSERT INTO Events (Event_Name) VALUES ('Shop Activity Toggled');
 INSERT INTO Events (Event_Name) VALUES ('Image Inserted');
+INSERT INTO Events (Event_Name) VALUES ('New Stamp Board');
+INSERT INTO Events (Event_Name) VALUES ('New Reward');
+INSERT INTO Events (Event_Name) VALUES ('New Tag');
+INSERT INTO Events (Event_Name) VALUES ('New Shop Tag Link');
+INSERT INTO Events (Event_Name) VALUES ('New Social');
+INSERT INTO Events (Event_Name) VALUES ('New User Permission');
+INSERT INTO Events (Event_Name) VALUES ('Stamp Board Updated');
+INSERT INTO Events (Event_Name) VALUES ('Reward Deleted');
+INSERT INTO Events (Event_Name) VALUES ('Shop Updated');
+INSERT INTO Events (Event_Name) VALUES ('UserShopLink Deleted');
+INSERT INTO Events (Event_Name) VALUES ('UserShopLink Inserted');
+INSERT INTO Events (Event_Name) VALUES ('ShopWebsite Updated');
+INSERT INTO Events (Event_Name) VALUES ('UserStampBoard Updated');
+INSERT INTO Events (Event_Name) VALUES ('UserStampBoard Inserted');
+INSERT INTO Events (Event_Name) VALUES ('UserFavouriteTag Inserted');
+
+
 
 DROP PROCEDURE IF EXISTS `deleteShop`;
 DELIMITER $$

@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
@@ -58,7 +59,7 @@ public class SelectCategoriesTests {
                 "", "",
                 LocalDateTime.now().format(formatter), twoFactorMethods);
         // Save the user
-        miscQueries.saveUser(newUser);
+        miscQueries.saveUser(newUser, new MockHttpSession());
         // Get the user as a DTO object
         Optional<Users> usersOptional = usersRepo.findByUserEmail(newUser.getUserEmail());
 
@@ -69,11 +70,11 @@ public class SelectCategoriesTests {
             // Create a new "Tags" object with that name
             Tags newTag = new Tags(tagName);
             // Save a new tag with that name
-            miscQueries.saveTag(newTag);
+            miscQueries.saveTag(newTag, new MockHttpSession());
             // Get the newly saved tag
             Optional<Tags> tagsOptional = tagsRepo.findByTagName(tagName);
             // Add a row to the "User_Favourite_Tags" table
-            miscQueries.saveUserFavouriteTags(usersOptional.get(), tagsOptional.get());
+            miscQueries.saveUserFavouriteTags(usersOptional.get(), tagsOptional.get(), new MockHttpSession());
         }
 
         // Get the size of the table at the beginning

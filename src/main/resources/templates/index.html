@@ -62,23 +62,26 @@
 		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-direction-column mb-4">
 			<h1 class="title is-3">Where else can I earn rewards?</h1>
 			<div class="control has-icons-left mb-2" style="width: 60%;">
-				<input class="input" type="text" placeholder="Enter Brands or keywords e.g. Vegan, Clothing etc..">
+				<input class="input" type="text" placeholder="Enter Brands or keywords e.g. Vegan, Clothing etc.."
+				oninput="updateSearch(event)" onkeydown="addTag(event)" id="main-search">
 				<span class="icon is-small is-left">
 					<i class="fas fa-search"></i>
 				</span>
 			</div>
 			<!--Tags-->
-			<div class="field is-grouped is-grouped-multiline" style="width: 60%;">
-				<div th:each="tag: ${tags}" th:include="fragments/tag.html :: tag"
-					 th:with="text=${tag}"></div>
+			<div class="field is-grouped is-grouped-multiline" style="width: 60%;" id="search-tag-group">
+<!--				<div th:each="tag: ${tags}" th:include="fragments/tag.html :: tag"-->
+<!--					 th:with="text=${tag}"></div>-->
 			</div>
 		</div>
 
-		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-wrap-wrap">
-			<div th:each="shop,i: ${normalShops}" th:include="fragments/business_card.html :: business_card"
-				 th:with="title=${shop.shopName}, reward_text='Free coffee at 6 stamps', reward_amount=4,
-				img_path=${shop.shopImage}, shopId=${shop.shopId}"></div>
+		<div class="container is-full-width is-flex is-justify-content-center is-align-items-center is-flex-wrap-wrap"
+			 id="business_card_container">
 		</div>
+		<div class="is-full-width is-flex is-justify-content-center is-align-items-center" id="loadMoreBtn" style="display: none!important;;">
+			<a onclick="loadNextPage()">Load More</a>
+		</div>
+		<h1 class="subtitle is-5 is-full-width" style="text-align: center;display: none;" id="searchText">You've filtered too far!</h1>
 
 	</div>
 		<div th:if="${selectCategories}" class="modal is-active">
@@ -97,5 +100,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="/js/searchBar.js"></script>
+	<script>doSearch(false);</script>
 </body>
 </html>

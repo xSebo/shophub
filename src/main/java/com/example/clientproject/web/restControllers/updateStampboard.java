@@ -56,11 +56,11 @@ public class updateStampboard {
             throw new ForbiddenErrorException("Invalid Colour value");
         }
 
-        stampboardUpdater.updateColour(usf.getShopId(), usf.getColour());
-        stampboardUpdater.updateStampboardSize(usf.getShopId(), usf.getStampboardSize());
-        stampboardUpdater.updateRewards(usf.getShopId(), rewardsMap);
+        stampboardUpdater.updateColour(usf.getShopId(), usf.getColour(), session);
+        stampboardUpdater.updateStampboardSize(usf.getShopId(), usf.getStampboardSize(), session);
+        stampboardUpdater.updateRewards(usf.getShopId(), rewardsMap, session);
         if(usf.getIconFilePath().length() > 0){
-            stampboardUpdater.updateIconURL(usf.getShopId(), usf.getIconFilePath());
+            stampboardUpdater.updateIconURL(usf.getShopId(), usf.getIconFilePath(), session);
         }
         return "OK";
     }

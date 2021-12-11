@@ -26,7 +26,7 @@ public class SignUpTests {
 
     @ParameterizedTest
     @CsvSource({"Josh,Gill,joshgill2013@gmail.com,Password123",
-            "Shraya,BELUSKO,ShrayaBELUSKO@email.com,password123",
+            "Shraya,BELUSKO,randeepccovery@email.comm,password123",
             "John,Watkins,jwatkins@email.com,helloWorld123"})
     public void givenValidFormsExpectCorrectResult(
             String forename, String surname, String email, String password) throws Exception {

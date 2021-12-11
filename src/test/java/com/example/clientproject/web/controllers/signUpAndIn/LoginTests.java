@@ -33,9 +33,9 @@ public class LoginTests {
      * @param password - password
      */
     @ParameterizedTest
-    @CsvSource({"ShrayaBELUSKO@email.com,helloWorld", "ShrayaBELUSKO@email.com,password123", "Testing123@email.com,helloworld123"})
+    @CsvSource({"randeepccovery@email.com,helloWorld", "randeepccovery@email.com,password123", "Testing123@email.com,helloworld123"})
     public void correctResponseFromLoginRoute(String email, String password) throws Exception {
-        if (email.equals("ShrayaBELUSKO@email.com") && password.equals("password123")) {
+        if (email.equals("randeepccovery@email.com") && password.equals("password123")) {
             mockMvc.perform(post("/login")
                             .param("loginEmail", email)
                             .param("loginPassword", password)

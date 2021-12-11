@@ -143,7 +143,9 @@ public class JWTUtils {
     }
 
     public void logOutUser(HttpSession session){
-        if ((boolean) session.getAttribute("superAdmin")) {
+        if (session.getAttribute("superAdmin") == null) {
+            setSuperAdmin(session, false);
+        } else if ((boolean) session.getAttribute("superAdmin")) {
             setSuperAdmin(session, false);
         }
 

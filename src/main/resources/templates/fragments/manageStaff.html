@@ -17,18 +17,18 @@
             </span>
         </button>
     </div>
+    <p class="help is-danger" id="emailErrorField"></p>
     <p><br>Current Admins</p>
     <div id="staffManagement"></div>
     <div id="staffManagement" th:each="user : ${staffMembers}">
-        <div class="staffManagementContainer">
-        <p class="subtitle is-6" th:text="${user.userEmail}" style="width:50%; margin-bottom: 0"></p>
-        <button class="button is-danger is-outlined" style="border-bottom: 1px solid black" th:onclick="'submit('+${shop.shopId}+',this);'">
+        <div class="staffManagementContainer" style="margin-bottom:1%;">
+        <p class="subtitle is-6 staffEmail" name="staffEmail" th:text="${user.userEmail}" style="width:80%; margin-bottom: 0"></p>
+        <button class="button is-danger is-outlined" th:onclick="'submit('+${shop.shopId}+',this);'">
             <span class="icon is-small">
                 <i class="fas fa-times is-danger"></i>
             </span>
         </button>
         </div>
-        <p id="blackLine" class="subtitle is-6" style="border-bottom: 1px solid #00b89c; margin-bottom:1%; width:50%"> </p>
 
     </div>
     <input id="shopId" class="input is-hidden" th:value="${shop.shopId}">

@@ -9,8 +9,11 @@ import java.util.Map;
 
 @Service
 public class GetStampBoardIdFromRewardId {
-    @Autowired
     JdbcTemplate jdbc;
+
+    public GetStampBoardIdFromRewardId(JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
+    }
 
     /**
      * @param rewardId the rewardId of the stampBoardId you want to retrieve

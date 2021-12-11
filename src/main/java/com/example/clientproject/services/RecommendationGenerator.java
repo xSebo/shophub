@@ -22,22 +22,20 @@ import java.util.*;
 
 @Service
 public class RecommendationGenerator {
-    public JWTUtils jwtUtils;
-    public UserFavouriteToggle favouriteToggle;
-    public StampBoardsRepo stampBoardsRepo;
-    public UserStampBoardsRepo userStampBoardsRepo;
-
-    @Autowired
+    JWTUtils jwtUtils;
+    UserFavouriteToggle favouriteToggle;
+    StampBoardsRepo stampBoardsRepo;
+    UserStampBoardsRepo userStampBoardsRepo;
     UsersRepo usersRepo;
-
-    @Autowired
     ShopsRepo shopsRepo;
 
-    public RecommendationGenerator(JWTUtils jwt, UserFavouriteToggle uft, StampBoardsRepo sbr, UserStampBoardsRepo usbr){
-        jwtUtils = jwt;
-        favouriteToggle = uft;
-        stampBoardsRepo = sbr;
-        userStampBoardsRepo = usbr;
+    public RecommendationGenerator(JWTUtils jwtUtils, UserFavouriteToggle favouriteToggle, StampBoardsRepo stampBoardsRepo, UserStampBoardsRepo userStampBoardsRepo, UsersRepo usersRepo, ShopsRepo shopsRepo) {
+        this.jwtUtils = jwtUtils;
+        this.favouriteToggle = favouriteToggle;
+        this.stampBoardsRepo = stampBoardsRepo;
+        this.userStampBoardsRepo = userStampBoardsRepo;
+        this.usersRepo = usersRepo;
+        this.shopsRepo = shopsRepo;
     }
 
     public List<Shops> getRecommendations(HttpSession session, List<Shops> shopsToRecommend) throws Exception {
