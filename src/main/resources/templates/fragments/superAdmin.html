@@ -24,12 +24,12 @@
     </div>
     <div class="vertScrollbarIfOverflow">
     <a th:each="record : ${allShopOwners}" class="panel-block custom-record">
-      <div class="field" th:text="${record.getShopName}">
+      <div class="super-admin-field" th:text="${record.getShopName}">
         <span class="panel-icon">
           <i class="fas fa-shopping-cart" style="margin-top: 5px;"></i>
         </span>
       </div>
-      <div class="field" th:text="${record.getUserName}">Ethan Allen-Harris</div>
+      <div class="super-admin-field" th:text="${record.getUserName}">Ethan Allen-Harris</div>
       <button class="button is-success is-small is-rounded" th:onclick="changeAccount([[${record.getUserId}]])">Swap</button>
     </a>
     </div>
