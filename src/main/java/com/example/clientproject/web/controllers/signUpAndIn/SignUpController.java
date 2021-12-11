@@ -93,7 +93,7 @@ public class SignUpController {
 
             // Log the change
             loggingService.logEvent(
-                    "New User",
+                    "New Shop User",
                     httpSession,
                     "New user created with Email: " + newUser.getUserEmail() +
                             " in SignUpController.signUpPost()"
