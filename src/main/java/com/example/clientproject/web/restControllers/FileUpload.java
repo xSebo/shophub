@@ -1,6 +1,7 @@
 package com.example.clientproject.web.restControllers;
 
 import com.example.clientproject.exceptions.ForbiddenErrorException;
+import com.example.clientproject.service.Utils.RemoveRedundantFiles;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,9 +17,18 @@ import java.util.UUID;
 
 @RestController
 public class FileUpload {
+
+    private RemoveRedundantFiles removeFiles;
+
+    public FileUpload(RemoveRedundantFiles removeFile){
+        removeFiles = removeFile;
+    }
+
     String UPLOAD_FOLDER = "./src/main/resources/static/imgs/uploaded/";
     @PostMapping("/upload") // //new annotation since 4.3
     public String singleFileUpload(@RequestParam("file") MultipartFile file) {
+
+        removeFiles.deleteFiles();
 
         if (file.isEmpty()) {
             throw new ForbiddenErrorException("No file");
