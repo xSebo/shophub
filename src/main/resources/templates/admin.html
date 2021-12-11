@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/html">
 <head>
 	<title>ShopHub | Dashboard</title>
 	<link th:replace="fragments/libs.html :: bulma"/>
@@ -53,7 +53,22 @@
 				<p>Super Admin</p>
 			</div>
 		</div>
-		<div class="sidebar closed" id="side_shop_select" th:if="${highestPerm > 1 || linkedShop}">
+		<div class="sidebar" th:if="${highestPerm == 3 && !linkedShop}">
+			<div class="admin-tab active" onclick="toggle_tab('profile');" id="profile-tab">
+				<div class="baseIcon">
+					<i class="fas fa-user fa-lg"></i>
+				</div>
+				<p>Profile</p>
+			</div>
+			<div th:if="${highestPerm == 3}" class="admin-tab" onclick="toggle_tab('super-admin')" id="super-admin-tab">
+				<div class="baseIcon">
+					<i class="fab fa-angular fa-lg"></i>
+				</div>
+				<p>Super Admin</p>
+			</div>
+		</div>
+		<div class="sidebar closed" id="side_shop_select">
+			<th:block th:if="${linkedShop}">
 			<th:block th:each="category: ${adminOfByCategory.entrySet()}">
 				<div class="shop-tab-container">
 					<div class="shop-tab shop-category"  onclick="this.parentElement.classList.toggle('open')">
@@ -70,8 +85,9 @@
 					</th:block>
 				</div>
 			</th:block>
+			</th:block>
 		</div>
-		<main th:if="${highestPerm > 1 || linkedShop}">
+		<main th:if="${linkedShop}">
 			<section id="profile-section" class="admin-section active">
 				<div th:replace="fragments/user_settings.html :: settings_page"/>
 			</section>
@@ -98,6 +114,15 @@
 		<main th:unless="${highestPerm > 1 || linkedShop}">
 			<section class="admin-section active">
 				<div th:replace="fragments/user_settings.html :: settings_page"/>
+			</section>
+		</main>
+		<main th:if="${highestPerm == 3 && !linkedShop}">
+			<section id="profile-section" class="admin-section active">
+				<div th:replace="fragments/user_settings.html :: settings_page"/>
+			</section>
+
+			<section th:if="${highestPerm == 3}" id="super-admin-section" class="admin-section">
+				<div th:replace="fragments/superAdmin.html :: super-admin-page"/>
 			</section>
 		</main>
 	</div>
