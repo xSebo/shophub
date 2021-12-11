@@ -47,7 +47,7 @@ public class ShopActiveService {
             jdbc.execute(query);
             // Log the change
             loggingService.logEvent(
-                    "Shop Update",
+                    "Shop Updated",
                     session,
                     "Update to Shop: " + shopId +
                             " with field: Shop_Active with value: " + active +

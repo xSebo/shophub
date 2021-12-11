@@ -359,6 +359,7 @@ INSERT INTO Events (Event_Name) VALUES ('ShopWebsite Updated');
 INSERT INTO Events (Event_Name) VALUES ('UserStampBoard Updated');
 INSERT INTO Events (Event_Name) VALUES ('UserStampBoard Inserted');
 INSERT INTO Events (Event_Name) VALUES ('UserFavouriteTag Inserted');
+INSERT INTO Events (Event_Name) VALUES ('Social Updated');
 
 
 
