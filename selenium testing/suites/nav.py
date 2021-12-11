@@ -43,7 +43,7 @@ class Nav:
 		time.sleep(1)
 
 		try:
-			assert driver.current_url == "http://localhost:5000/login"
+			assert driver.current_url == BASE_URL + "/login"
 			success("Redirect on logout works correctly")
 			self.passed+=1
 		except AssertionError as e:

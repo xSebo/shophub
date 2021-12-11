@@ -1,6 +1,5 @@
 from modules.navigation import *
 from modules.main import *
-from modules.navigation import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -79,7 +78,7 @@ class LoginRegisterSuite:
 		time.sleep(1)
 
 		try:
-			assert driver.current_url == "http://localhost:5000/dashboard"
+			assert driver.current_url == BASE_URL + "/dashboard"
 			success("Register with valid details works")
 			self.passed+=1
 		except AssertionError as e:
@@ -133,7 +132,7 @@ class LoginRegisterSuite:
 		time.sleep(1)
 
 		try:
-			assert driver.current_url == "http://localhost:5000/"
+			assert driver.current_url == BASE_URL + "/"
 			success("Login in correctly redirects")
 			self.passed+=1
 		except AssertionError as e:
