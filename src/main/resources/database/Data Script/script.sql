@@ -17,6 +17,10 @@ INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, U
 SET FOREIGN_KEY_CHECKS=0;
 INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (3,2,2);
 INSERT INTO User_Permissions (User_ID, Shop_ID, Admin_Type_Id) VALUES (12,3,2);
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (2, 'tiktok', 'vibezdrink');
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (2, 'facebook', 'Vibezdrink');
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (2, 'twitter', 'vibezdrink');
+INSERT INTO socials (Shop_Id, Social_Platform, Social_Name) VALUES (2, 'instagram', 'vibezdrink');
 SET FOREIGN_KEY_CHECKS=1;
 
 INSERT INTO Users (User_First_Name, User_Last_Name, User_Email, User_Password, User_Profile_Picture, Two_Factor_Method_Id) VALUES ('aimen','enifer','aimenenifer@email.com','$2a$10$YnDtWkRyd3WfYb5CDHBNx.yfuWPW7dOg86NteaEAyaEmaRywfwueK','testImage.png',1);
