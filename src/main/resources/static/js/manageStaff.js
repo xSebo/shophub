@@ -54,7 +54,7 @@ function submit(shopId, email={"value":""}){
                     </span>
                 </button>
             </div>
-            <p id="blackLine" class="subtitle is-6" style="border-bottom: 1px solid; margin-bottom:1%; width:50%"></p>
+            <p id="blackLine" class="subtitle is-6" style="margin-bottom:1%; width:50%"></p>
             </div>`
                 }
 
