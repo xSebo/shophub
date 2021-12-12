@@ -17,7 +17,7 @@ class Stamps:
 		]
 
 	def __str__(self):
-		return "Stamps"
+		return "stamps"
 
 	def addStamp(self):
 		driver = startTest(self.options)
