@@ -28,7 +28,7 @@
             <div id="progressBar" class="progressBar">
                 <div style="width:20%"></div>
             </div>
-            <form name="businessForm" id="businessForm" action="/businessRegister" th:method="post" onsubmit="return false">
+            <form onkeydown="keyPress(event)" name="businessForm" id="businessForm" action="/businessRegister" th:method="post" onsubmit="return false">
             <section class="modal-card-body url-centering" id="modal_container">
                     <div id="modal_page1" class="modal_page">
                         <h5 class="title is-5" style="text-align:center">Enter your shop URL</h5>
@@ -61,7 +61,7 @@
                         </p>
                         <h5 class="title is-5" style="text-align:center; margin-bottom:5%; margin-top:5%">Description</h5>
                         <p class="control has-icons-left" style="min-width:50%; width:70%; margin:auto">
-                            <textarea class="textarea" name="business_register_desc" id="business_register_desc"></textarea>
+                            <textarea class="textarea" name="business_register_desc" id="business_register_desc" maxlength="250"></textarea>
                         </p>
                         <p class="is-danger help" style="text-align: center" id="business_register_desc_help"></p>
                     </div>
@@ -70,15 +70,21 @@
                         <div id="categoryContainer">
                             <div class="select">
                                 <select name="businessCategory">
-                                    <option th:each="category: ${categories}" th:text="${category}"></option>
+                                    <option th:each="category: ${categories}" th:text="${category.categoryName}"></option>
                                 </select>
                             </div>
                         </div>
                         <h5 class="title is-5 mt-2" style="text-align:center; margin-bottom: 2%">Add tags that describe your business</h5>
-                        <div class="is-flex is-justify-content-center" style="width:100%;">
+                        <p class="subtitle is-6 mt-1" style="text-align: center">Press comma after typing the tag</p>
+                        <div class="is-flex is-justify-content-center">
                             <!-- Need to fix this, shouldn't be full width of modal -->
-                            <input id="businessTagsInput" maxlength="50" style="width:75%;" class="input" oninput="addTag(event)"></input>
+                            <div class="is-flex is-flex-direction-column is-justify-content-center is-align-content-center"
+                            style="width:75%">
+                                <input id="businessTagsInput" maxlength="50" class="input" oninput="addTag(event)"></input>
+                                <p class="help is-danger" style="text-align: center" id="tagsHelp"></p>
+                            </div>
                             <input hidden name="businessTags" id="businessTags"/>
+
                         </div>
                         <div class = "field is-grouped is-grouped-multiline p-4" id="bulmaTags">
                             <div id="tagCount" style="display: none" class="mr-3">
@@ -99,7 +105,7 @@
                                         <input value="instagram.com/" class="input" disabled>
                                     </p>
                                     <p class="control">
-                                        <input class="input" name="instagram" type="url" style="width:100%; align-content:center">
+                                        <input class="input" name="instagram" type="text" style="width:100%; align-content:center">
                                     </p>
                                 </div>
         <!--                        <input class="input socialInput">-->
@@ -113,7 +119,7 @@
                                         <input value="facebook.com/" class="input" disabled>
                                     </p>
                                     <p class="control">
-                                        <input class="input" name="facebook" type="url" style="width:100%; align-content:center">
+                                        <input class="input" name="facebook" type="text" style="width:100%; align-content:center">
                                     </p>
                                 </div>
         <!--                        <input class="input socialInput">-->
@@ -127,7 +133,7 @@
                                         <input value="twitter.com/" class="input" disabled>
                                     </p>
                                     <p class="control">
-                                        <input class="input" name="twitter" type="url" style="width:100%; align-content:center">
+                                        <input class="input" name="twitter" type="text" style="width:100%; align-content:center">
                                     </p>
                                 </div>
         <!--                        <input class="input socialInput">-->
@@ -141,7 +147,7 @@
                                         <input value="tiktok.com/@" class="input" disabled>
                                     </p>
                                     <p class="control">
-                                        <input class="input" name="tiktok" type="url" style="width:100%; align-content:center">
+                                        <input class="input" name="tiktok" type="text" style="width:100%; align-content:center">
                                     </p>
                                 </div>
         <!--                        <input class="input socialInput">-->

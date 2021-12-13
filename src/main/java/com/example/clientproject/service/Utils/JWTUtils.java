@@ -1,5 +1,7 @@
 package com.example.clientproject.service.Utils;
 
+import com.example.clientproject.data.userPermissions.UserPermissions;
+import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.data.users.UsersRepo;
 import io.jsonwebtoken.Claims;
@@ -23,9 +25,11 @@ import java.util.Optional;
 public class JWTUtils {
 
     private UsersRepo usersRepo;
+    private UserPermissionsRepo userPermRepo;
 
-    public JWTUtils(UsersRepo ausersRepo){
-        usersRepo = ausersRepo;
+    public JWTUtils(UsersRepo aUsersRepo, UserPermissionsRepo aUserPermsRepo){
+        usersRepo = aUsersRepo;
+        userPermRepo = aUserPermsRepo;
     }
 
     private String SECRET_KEY;
@@ -91,6 +95,14 @@ public class JWTUtils {
                 jwtTimeToLive // used to calculate expiration (claim = exp)
         );
 
+        List<UserPermissions> userPermList = userPermRepo.findByUserId(userId);
+        for (UserPermissions u: userPermList) {
+            if (u.getAdminType().getAdminTypeId() == 3) {
+                setSuperAdmin(session, true);
+                break;
+            }
+        }
+
         session.setAttribute("loginCredJWT", jwt);
         return jwt.toString();
     }
@@ -131,6 +143,16 @@ public class JWTUtils {
     }
 
     public void logOutUser(HttpSession session){
+        if (session.getAttribute("superAdmin") == null) {
+            setSuperAdmin(session, false);
+        } else if ((boolean) session.getAttribute("superAdmin")) {
+            setSuperAdmin(session, false);
+        }
+
         session.removeAttribute("loginCredJWT");
+    }
+
+    public void setSuperAdmin(HttpSession session, boolean status) {
+        session.setAttribute("superAdmin", status);
     }
 }

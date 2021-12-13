@@ -85,6 +85,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`Stamp_Boards` (
                                                      `Stamp_Board_Id` INT NOT NULL AUTO_INCREMENT,
                                                      `Stamp_Board_Size` INT NOT NULL,
+                                                     `Stamp_Board_Colour` VARCHAR(7),
+                                                     `Stamp_Board_Icon` varchar(255),
                                                      PRIMARY KEY (`Stamp_Board_Id`))
     ENGINE = InnoDB;
 
@@ -128,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Shops` (
                                               `Shop_Earnings` INT NOT NULL,
                                               `Shop_Countries` VARCHAR(150) NOT NULL,
                                               `Shop_Image` VARCHAR(150),
+                                              `Shop_Banner` VARCHAR(150),
                                               `Shop_Active` TINYINT NOT NULL,
                                               `Stamp_Board_Id` INT NOT NULL,
                                               `Category_Id` INT NOT NULL,
@@ -234,6 +237,59 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User_Stamp_Boards` (
                                                                   ON DELETE NO ACTION
                                                                   ON UPDATE NO ACTION)
     ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Socials`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Socials` (
+                                              `Social_Id` INT NOT NULL AUTO_INCREMENT,
+                                              `Shop_Id` INT NOT NULL,
+                                              `Social_Platform` VARCHAR(45),
+                                              `Social_Name` VARCHAR(45),
+                                              PRIMARY KEY (`Social_Id`, `Shop_Id`),
+											  CONSTRAINT `fk_Socials1`
+													FOREIGN KEY (`Shop_Id`)
+														REFERENCES `mydb`.`Shops` (`Shop_Id`)
+																ON DELETE NO ACTION
+																ON UPDATE NO ACTION)
+                                                
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Events`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Events` (
+    `Event_Id` INT NOT NULL AUTO_INCREMENT,
+    `Event_Name` VARCHAR(45) NOT NULL,
+    PRIMARY KEY(`Event_Id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Logs`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Logs` (
+    `Log_Id` INT NOT NULL AUTO_INCREMENT,
+    `Event_Id` INT NOT NULL,
+    `User_Id` INT NOT NULL,
+    `Log_Details` VARCHAR(250) NOT NULL,
+    `Log_Date_Time` DATETIME NOT NULL,
+    `Log_Super_Admin` TINYINT NOT NULL,
+    PRIMARY KEY(`Log_Id`, `Event_Id`, `User_Id`),
+    CONSTRAINT `fk_Events1`
+        FOREIGN KEY (`Event_Id`)
+            REFERENCES `mydb`.`Events` (`Event_Id`)
+            ON UPDATE NO ACTION
+            ON DELETE NO ACTION,
+    CONSTRAINT `fk_Users1`
+        FOREIGN KEY (`User_Id`)
+            REFERENCES `mydb`.`Users` (`User_Id`)
+            ON UPDATE NO ACTION
+            ON DELETE NO ACTION
+    )
+ENGINE = InnoDB;
+
     
 
 INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, 'None');
@@ -255,22 +311,73 @@ INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (1,'User');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (2,'Business Admin');
 INSERT INTO Admin_Types (Admin_Type_Id, Admin_Type_Name) VALUES (3,'Super Admin');
 
-INSERT INTO Tags (Tag_Name) VALUES ('Football');
-INSERT INTO Tags (Tag_Name) VALUES ('Fashion');
-INSERT INTO Tags (Tag_Name) VALUES ('Electronics');
-INSERT INTO Tags (Tag_Name) VALUES ('Coffee');
-INSERT INTO Tags (Tag_Name) VALUES ('Art');
-INSERT INTO Tags (Tag_Name) VALUES ('Pets');
-INSERT INTO Tags (Tag_Name) VALUES ('Clothes');
-INSERT INTO Tags (Tag_Name) VALUES ('Designer');
-INSERT INTO Tags (Tag_Name) VALUES ('Groceries');
-INSERT INTO Tags (Tag_Name) VALUES ('Cars');
-INSERT INTO Tags (Tag_Name) VALUES ('Hiking');
-INSERT INTO Tags (Tag_Name) VALUES ('Cooking');
-INSERT INTO Tags (Tag_Name) VALUES ('Furniture');
-INSERT INTO Tags (Tag_Name) VALUES ('Gaming');
-INSERT INTO Tags (Tag_Name) VALUES ('Travelling');
-INSERT INTO Tags (Tag_Name) VALUES ('Beauty');
-INSERT INTO Tags (Tag_Name) VALUES ('Eco-friendly');
-INSERT INTO Tags (Tag_Name) VALUES ('Decorations');
-INSERT INTO Tags (Tag_Name) VALUES ('Photography');
+INSERT INTO Tags (Tag_Name) VALUES ('football');
+INSERT INTO Tags (Tag_Name) VALUES ('fashion');
+INSERT INTO Tags (Tag_Name) VALUES ('electronics');
+INSERT INTO Tags (Tag_Name) VALUES ('coffee');
+INSERT INTO Tags (Tag_Name) VALUES ('art');
+INSERT INTO Tags (Tag_Name) VALUES ('pets');
+INSERT INTO Tags (Tag_Name) VALUES ('clothes');
+INSERT INTO Tags (Tag_Name) VALUES ('designer');
+INSERT INTO Tags (Tag_Name) VALUES ('groceries');
+INSERT INTO Tags (Tag_Name) VALUES ('cars');
+INSERT INTO Tags (Tag_Name) VALUES ('hiking');
+INSERT INTO Tags (Tag_Name) VALUES ('cooking');
+INSERT INTO Tags (Tag_Name) VALUES ('furniture');
+INSERT INTO Tags (Tag_Name) VALUES ('gaming');
+INSERT INTO Tags (Tag_Name) VALUES ('travelling');
+INSERT INTO Tags (Tag_Name) VALUES ('beauty');
+INSERT INTO Tags (Tag_Name) VALUES ('eco-friendly');
+INSERT INTO Tags (Tag_Name) VALUES ('decorations');
+INSERT INTO Tags (Tag_Name) VALUES ('photography');
+INSERT INTO Tags (Tag_Name) VALUES ('vegan');
+
+INSERT INTO Events (Event_Name) VALUES ('New User');
+INSERT INTO Events (Event_Name) VALUES ('Failed Login');
+INSERT INTO Events (Event_Name) VALUES ('Successful Login');
+INSERT INTO Events (Event_Name) VALUES ('User Details Changed');
+INSERT INTO Events (Event_Name) VALUES ('User Removed');
+INSERT INTO Events (Event_Name) VALUES ('New Shop');
+INSERT INTO Events (Event_Name) VALUES ('Deleted Shop');
+INSERT INTO Events (Event_Name) VALUES ('New Favourite Business');
+INSERT INTO Events (Event_Name) VALUES ('New Shop User');
+INSERT INTO Events (Event_Name) VALUES ('Shop Details Changed');
+INSERT INTO Events (Event_Name) VALUES ('Shop Activity Toggled');
+INSERT INTO Events (Event_Name) VALUES ('Image Inserted');
+INSERT INTO Events (Event_Name) VALUES ('New Stamp Board');
+INSERT INTO Events (Event_Name) VALUES ('New Reward');
+INSERT INTO Events (Event_Name) VALUES ('New Tag');
+INSERT INTO Events (Event_Name) VALUES ('New Shop Tag Link');
+INSERT INTO Events (Event_Name) VALUES ('New Social');
+INSERT INTO Events (Event_Name) VALUES ('New User Permission');
+INSERT INTO Events (Event_Name) VALUES ('Stamp Board Updated');
+INSERT INTO Events (Event_Name) VALUES ('Reward Deleted');
+INSERT INTO Events (Event_Name) VALUES ('Shop Updated');
+INSERT INTO Events (Event_Name) VALUES ('UserShopLink Deleted');
+INSERT INTO Events (Event_Name) VALUES ('UserShopLink Inserted');
+INSERT INTO Events (Event_Name) VALUES ('ShopWebsite Updated');
+INSERT INTO Events (Event_Name) VALUES ('UserStampBoard Updated');
+INSERT INTO Events (Event_Name) VALUES ('UserStampBoard Inserted');
+INSERT INTO Events (Event_Name) VALUES ('UserFavouriteTag Inserted');
+INSERT INTO Events (Event_Name) VALUES ('Social Updated');
+
+
+
+DROP PROCEDURE IF EXISTS `deleteShop`;
+DELIMITER $$
+CREATE PROCEDURE `deleteShop`(in Shop_Id_In varchar(6))
+BEGIN
+DELETE FROM user_shop_links WHERE Shop_Id = Shop_Id_In;
+DELETE FROM socials WHERE Shop_Id = Shop_Id_In;
+DELETE FROM shop_tag_links WHERE Shop_Id = Shop_Id_In;
+DELETE FROM user_permissions WHERE Shop_Id = Shop_Id_In;
+SELECT @StampBoardID_var := Stamp_Board_Id FROM shops WHERE Shop_Id = Shop_Id_In;
+SET FOREIGN_KEY_CHECKS=0;
+DELETE FROM rewards WHERE Stamp_Board_Id = @StampBoardID_var;
+DELETE FROM stamp_boards WHERE Stamp_Board_Id = @StampBoardID_var;
+DELETE FROM user_stamp_boards WHERE Stamp_Board_Id = (SELECT Stamp_Board_Id FROM shops WHERE Shop_Id = Shop_Id_In); -- some reason this table wouldn't delete so I used this
+DELETE FROM shops WHERE Shop_Id = Shop_Id_In;
+SET FOREIGN_KEY_CHECKS=1;
+END $$
+
+DELIMITER ;

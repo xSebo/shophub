@@ -24,6 +24,7 @@ public class CategoriesTests {
     @Test
     public void shouldGet7Categories(){
         List<Categories> categoriesList = categoriesRepo.findAll();
+        System.out.println(categoriesList);
         assertEquals(7, categoriesList.size());
     }
 

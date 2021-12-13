@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link th:fragment="socialCss" rel="stylesheet" type="text/css" href="css/userSocials.css">
+    <script th:fragment="socialJs" src="js/userSocials.js"></script>
+</head>
+<body th:fragment="userSocial">
+<div class="wholeSocialContainer" style="width:100%">
+
+        <h6 class="title is-6" style="margin-bottom:5px; margin-top: 15px">Socials</h6>
+        <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-instagram"></i>
+                                </span>
+        <div class="field has-addons" style="display: flex;justify-content: center">
+            <p class="control">
+                <input value="instagram.com/" class="input" disabled>
+            </p>
+            <p class="control">
+                <input class="input" id="instagram" type="url" style="width:100%; align-content:center" th:value="${@loadSocials.getSocial(socials,'instagram')}">
+            </p>
+        </div>
+        <!--                        <input class="input socialInput">-->
+        </div>
+        <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-facebook-f"></i>
+                                </span>
+        <div class="field has-addons" style="display: flex;justify-content: center">
+            <p class="control">
+                <input value="facebook.com/" class="input" disabled>
+            </p>
+            <p class="control">
+                <input class="input" id="facebook" type="url" style="width:100%; align-content:center" th:value="${@loadSocials.getSocial(socials,'facebook')}">
+            </p>
+        </div>
+        <!--                        <input class="input socialInput">-->
+        </div>
+        <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-twitter"></i>
+                                </span>
+        <div class="field has-addons" style="display: flex;justify-content: center">
+            <p class="control">
+                <input value="twitter.com/" class="input" disabled>
+            </p>
+            <p class="control">
+                <input class="input" id="twitter" type="url" style="width:100%; align-content:center" th:value="${@loadSocials.getSocial(socials,'twitter')}">
+            </p>
+        </div>
+        <!--                        <input class="input socialInput">-->
+        </div>
+        <div class="socialContainer">
+                                <span class="icon is-large is-left">
+                                    <i class="fab fa-tiktok"></i>
+                                </span>
+        <div class="field has-addons" style="display: flex;justify-content: center">
+            <p class="control">
+                <input value="tiktok.com/@" class="input" disabled>
+            </p>
+            <p class="control">
+                <input class="input" id="tiktok" type="url" style="width:100%; align-content:center" th:value="${@loadSocials.getSocial(socials,'tiktok')}">
+            </p>
+        </div>
+    </div>
+    <h6 class="subtitle is-6" style="margin-bottom: 5px;margin-top: 20px;">Shop URL</h6>
+    <div class="field has-addons" style="display: flex;justify-content: center">
+        <div class="urlHolder">
+            <p class="control">
+            <span class="select">
+                <select id="shopUrlPrefix">
+                    <option>https://</option>
+                    <option>http://</option>
+                </select>
+            </span>
+            </p>
+        <p class="control">
+            <input id="shopUrl" class="input" type="url" th:value="${@loadSocials.removeHttps(shop.shopWebsite)}" style="width:100%">
+        </p>
+    </div>
+    </div>
+    <button class="button is-link" style="margin-top: 5px" th:onclick="'send('+${shop.shopId}+');'">Save changes</button>
+</div>
+<p style="border-bottom: 1px solid;"><br></p>
+
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 package com.example.clientproject.data.shops;
 
+import com.example.clientproject.data.stampBoards.StampBoards;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -76,4 +77,7 @@ public interface ShopsRepo extends JpaRepository<Shops, Long> {
      */
     @Query("select s from Shops s where s.category.categoryId = ?1")
     List<Shops> findByCategoryId(long categoryId);
+
+    @Query("SELECT s FROM Shops s where s.stampBoard.stampBoardId = ?1")
+    Shops findByStampboardId(long stampBoardId);
 }

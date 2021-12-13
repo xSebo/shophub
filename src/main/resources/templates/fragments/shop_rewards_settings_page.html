@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body th:fragment="rewards">
+<div>
+<h2 class="title is-4 secondary mb-2">Preview (1 Stamp Collected)</h2>
+<div class="container1 mb-5">
+    <div class="multi-page-container" id="stampboardContainer">
+        <th:block th:each="i: ${#numbers.sequence(1, stampBoard.stampBoardSize)}">
+            <th:block th:if="${i%8==1}" th:utext="'&lt;div class=&#34;stampBoard&#34; id=&#34;'+ ${@thymeMath.ceil(i,8)} +
+							'&#34; style=&#34;display:none;background-color:'+${stampBoard.stampBoardColour}+';&#34;&gt;'"/>
+            <th:block th:unless="${i==1}">
+                <div class="stamp" th:text="${i}" th:unless="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}"></div>
+                <div class="stamp" th:if="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}">
+                    <i class="fa fa-gift"></i>
+                </div>
+            </th:block>
+            <th:block th:if="${i==1}">
+                <img class="stamp" th:src="${stampBoard.stampBoardIcon}">
+            </th:block>
+            <th:block th:if="${i%8==0 || i==stampBoard.stampBoardSize}" th:utext="'&lt;/div&gt;'"/>
+        </th:block>
+    </div>
+    <div class="stampNavBar">
+        <div class="stampNavButton" onclick="pageNav(-1)"><i class="fas fa-angle-left"></i></div>
+        <div class="stampNavButton" onclick="pageNav(1)" ><i class="fas fa-angle-right"></i></div>
+    </div>
+</div>
+
+<h2 class="title is-4 secondary pb-4">Background Colour and Icon</h2>
+
+<h3 class="subtitle is-6 mb-3">Background Colour</h3>
+<input type="color" class="mb-5" id="colour-input" th:value="${stampBoard.stampBoardColour}"
+oninput="for(let item of document.getElementById('stampboardContainer').children){item.style.backgroundColor=this.value};">
+
+<h3 class="subtitle is-6 mb-3">Stamp Icon</h3>
+<img class="icon_preview mb-3" id="icon_preview" th:src="${stampBoard.stampBoardIcon}">
+<div class="file has-name mb-5">
+    <label class="file-label">
+        <input class="file-input" type="file" name="icon" accept="image/*" id="icon-input" onchange="loadFile(event)">
+        <span class="file-cta">
+        <span class="file-icon">
+            <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label">
+            Choose a file…
+        </span>
+    </span>
+        <span class="file-name" id="file-name">No File Selected</span>
+    </label>
+</div>
+<h2 class="title is-4 secondary">Stamp Positions</h2>
+<div id="stamp_position_container">
+<th:block th:each="i: ${#numbers.sequence(1, stampBoard.stampBoardSize)}">
+    <div class="is-flex is-flex-direction-row is-align-items-center mb-2">
+        <p class="mr-2" th:text="${i} + ' -'" style="width: 30px;"></p>
+        <span class="control stamp-position-input">
+            <th:block th:unless="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}">
+                <input type="text" class="input" placeholder="No reward" th:oninput="'updateReward(event,'+${i}+');'">
+            </th:block>
+            <th:block th:if="${#lists.contains(@thymeMath.reduceToLocs(stampBoard.rewards), i)}">
+                <input type="text" class="input" placeholder="No reward" th:oninput="'updateReward(event,'+${i}+');'"
+                       th:value="${@thymeMath.getRewardTextFromId(stampBoard.rewards,i)}">
+            </th:block>
+        </span>
+    </div>
+</th:block>
+</div>
+<div class="buttons mb-5">
+    <button class="button is-outlined is-success" onclick="addRow()"><i class="fa fa-plus"></i></button>
+    <button class="button is-outlined is-danger" onclick="removeRow()"><i class="fa fa-times"></i></button>
+</div>
+
+<button class="button is-link" th:onclick="'saveStampboardChanges(' + ${shop.shopId} + ')'" id="save-stamp-btn">Save Changes</button>
+<p class="help is-success" style="display: none" id="stampboard_change_text">Changes Saved</p>
+</div>
+</body>
+</html>

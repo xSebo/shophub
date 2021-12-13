@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/html">
+<head>
+	<title>ShopHub | Dashboard</title>
+	<link th:replace="fragments/libs.html :: bulma"/>
+	<link th:replace="fragments/libs.html :: fa"/>
+	<link th:replace="fragments/nav.html :: nav-css"/>
+	<link th:replace="fragments/userSocials.html :: socialCss">
+	<link th:replace="fragments/userSocials.html :: socialJs">
+	<link th:replace="fragments/deleteShop.html :: delShopCSS">
+	<link th:replace="fragments/superAdmin.html :: superAdminCSS">
+	<link th:replace="fragments/superAdmin.html :: superAdminJs">
+	<link th:replace="fragments/deleteShop.html :: delShopJS">
+	<link th:replace="fragments/toggleShop.html :: toggleShopJS">
+	<link th:replace="fragments/businessInformation.html :: infoJs">
+	<link rel="stylesheet" type="text/css" href="css/manageStaff.css"/>
+	<script src="js/manageStaff.js"></script>
+
+	<link rel="stylesheet" href="/css/admin.css">
+
+	<script type="text/javascript" src="/js/admin.js"></script>
+	<link rel="stylesheet" href="/static/css/admin.css">
+
+
+    <script type="text/javascript" src="js/userSettings.js"></script>
+</head>
+<body onload="document.getElementById('1').style.display = 'flex';">
+	<div th:replace="fragments/nav.html :: nav"></div>
+	<div id="adminPage">
+		<div class="sidebar" th:if="${linkedShop}">
+			<div class="admin-tab active" onclick="toggle_tab('profile');" id="profile-tab">
+				<div class="baseIcon">
+					<i class="fas fa-user fa-lg"></i>
+				</div>
+				<p>Profile</p>
+			</div>
+			<div class="admin-tab" onclick="toggle_tab('shop-setup')" id="shop-setup-tab">
+				<div class="baseIcon">
+					<i class="fas fa-shopping-basket fa-lg"></i>
+				</div>
+				<p>Shop Setup</p>
+			</div>
+			<div class="admin-tab" onclick="toggle_tab('shop-rewards')" id="shop-rewards-tab">
+				<div class="baseIcon">
+					<i class="fas fa-star fa-lg"></i>
+				</div>
+				<p>Shop Rewards</p>
+			</div>
+			<div th:if="${highestPerm == 3}" class="admin-tab" onclick="toggle_tab('super-admin')" id="super-admin-tab">
+				<div class="baseIcon">
+					<i class="fab fa-angular fa-lg"></i>
+				</div>
+				<p>Super Admin</p>
+			</div>
+		</div>
+		<div class="sidebar" th:if="${highestPerm == 3 && !linkedShop}">
+			<div class="admin-tab active" onclick="toggle_tab('profile');" id="profile-tab">
+				<div class="baseIcon">
+					<i class="fas fa-user fa-lg"></i>
+				</div>
+				<p>Profile</p>
+			</div>
+			<div th:if="${highestPerm == 3}" class="admin-tab" onclick="toggle_tab('super-admin')" id="super-admin-tab">
+				<div class="baseIcon">
+					<i class="fab fa-angular fa-lg"></i>
+				</div>
+				<p>Super Admin</p>
+			</div>
+		</div>
+		<div class="sidebar closed" id="side_shop_select">
+			<th:block th:if="${linkedShop}">
+			<th:block th:each="category: ${adminOfByCategory.entrySet()}">
+				<div class="shop-tab-container">
+					<div class="shop-tab shop-category"  onclick="this.parentElement.classList.toggle('open')">
+						<p th:text="${category.getKey()}"></p>
+						<div class="baseIcon">
+							<i class="fas fa-caret-down fa-lg"></i>
+						</div>
+					</div>
+					<th:block th:each="sh: ${category.getValue()}">
+						<div th:class="'shop-tab shop-name' + ${shop.getShopId() == sh.getShopId()?' active':''}"
+						th:onclick="'window.location.href=\'/settings?shopId='+${sh.getShopId()} + '&tab=shop-setup\''">
+							<p th:text="'- ' + ${sh.getShopName()}"></p>
+						</div>
+					</th:block>
+				</div>
+			</th:block>
+			</th:block>
+		</div>
+		<main th:if="${linkedShop}">
+			<section id="profile-section" class="admin-section active">
+				<div th:replace="fragments/user_settings.html :: settings_page"/>
+			</section>
+
+			<section id="shop-setup-section" class="admin-section">
+				<h1 class="title" th:text="'Shop Setup ('+ ${shop.getShopName()} +')'"></h1>
+				<div th:replace="fragments/businessInformation :: keyInformation"></div>
+				<div th:replace="fragments/userSocials.html :: userSocial"/>
+				<br>
+				<th:block th:if="${@checkUserOwner.checkOwner(loggedInUser.userId, shop.shopId)}">
+					<div th:replace="fragments/manageStaff.html :: manageStaffMembers"/>
+					<div th:replace="fragments/deleteShop.html :: deleteShop"/>
+					<div th:replace="fragments/toggleShop.html :: toggleShop"/>
+				</th:block>
+			</section>
+			<section id="shop-rewards-section" class="admin-section">
+				<h1 class="title" th:text="'Shop Rewards ('+ ${shop.getShopName()} +')'"></h1>
+				<div th:replace="fragments/shop_rewards_settings_page.html :: rewards"/>
+			</section>
+			<section th:if="${highestPerm == 3}" id="super-admin-section" class="admin-section">
+				<div th:replace="fragments/superAdmin.html :: super-admin-page"/>
+			</section>
+		</main>
+		<main th:unless="${highestPerm > 1 || linkedShop}">
+			<section class="admin-section active">
+				<div th:replace="fragments/user_settings.html :: settings_page"/>
+			</section>
+		</main>
+		<main th:if="${highestPerm == 3 && !linkedShop}">
+			<section id="profile-section" class="admin-section active">
+				<div th:replace="fragments/user_settings.html :: settings_page"/>
+			</section>
+
+			<section th:if="${highestPerm == 3}" id="super-admin-section" class="admin-section">
+				<div th:replace="fragments/superAdmin.html :: super-admin-page"/>
+			</section>
+		</main>
+	</div>
+	<script>checkTab();</script>
+</body>
+</html>

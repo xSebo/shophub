@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link th:replace="fragments/libs.html :: bulma"/>
+    <link th:replace="fragments/libs.html :: fa"/>
+    <link th:replace="fragments/nav.html :: nav-css"/>
+    <script th:replace="fragments/business_card.html :: card_js"/>
+    <script src="/js/selectCategories.js"></script>
+    <link rel="stylesheet" href="/css/reward_card.css">
+    <link rel="stylesheet" href="/css/business_container.css">
+    <meta charset="UTF-8">
+    <title>Your shops</title>
+
+</head>
+<body>
+<div th:replace="fragments/nav.html :: nav"></div>
+
+<div class="is-full-width is-flex is-justify-content-space-between is-align-content-center" style="margin: 20px;">
+    <a href="/"> < Back to dashboard</a>
+    <div class="control has-icons-left">
+        <input class="input" type="text" placeholder="Search" oninput="filterRewards(this)">
+        <span class="icon is-small is-left">
+							<i class="fas fa-search"></i>
+						</span>
+    </div>
+</div>
+
+<div class="is-flex is-flex-direction-row is-justify-content-space-around is-flex-wrap-wrap">
+        <!--Reward Card Here-->
+        <div th:each="shopMap: ${activeShops}" th:include="fragments/reward_card.html :: reward_card"
+             th:with="margin=true,
+                     title=${shopMap.get('Shop').shopName},
+					 stamps=${shopMap.get('UserStampBoard').userStampPosition},
+					 next_reward=${@claimableRewards.nextReward(shopMap.get('UserStampBoard'))},
+					 reward_amount_obtained=${@claimableRewards.totalClaimableRewards(shopMap.get('UserStampBoard'))},
+					 isFavourite=${@checkFavourite.isFavourite(shopMap.get('Shop').shopId,loggedInUser.userId)},
+					 total_reward_amount=${shopMap.get('Shop').getStampBoard.getRewards.size},
+					 img_path=${shopMap.get('Shop').shopImage},
+					 shopId=${shopMap.get('Shop').shopId}"></div>
+
+        <!--Reward Card Here-->
+        <div th:each="shop: ${favouriteShops}" th:include="fragments/reward_card.html :: reward_card"
+             th:with="margin=true,
+                     title=${shop.shopName},
+					 stamps=0,
+					 next_reward=${shop.getStampBoard.getRewards.get(0).rewardStampLocation},
+					 reward_amount_obtained=0,
+					 isFavourite=true,
+					 total_reward_amount=${shop.getStampBoard.getRewards.size},
+					 img_path=${shop.shopImage},
+					 shopId=${shop.shopId}"></div>
+        <h1 class="subtitle is-5" th:if="${favouriteShops.size == 0 && activeShops.size == 0}"> Looks like you don't have any stamps yet, favourite a shop or make a purchase to start collecting!</h1>
+
+</div>
+
+
+<!--
+<div th:replace="shopMap : ${activeShops}">
+    <h1 th:text="${shopMap.get('Shop').shopName}"></h1>
+</div>
+-->
+
+</body>
+</html>

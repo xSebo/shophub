@@ -1,14 +1,18 @@
 package com.example.clientproject.web.controllers.signUpAndIn;
 
+import com.example.clientproject.data.categories.Categories;
+import com.example.clientproject.data.categories.CategoriesRepo;
 import com.example.clientproject.data.shops.ShopsRepo;
 import com.example.clientproject.data.userPermissions.UserPermissionsRepo;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.exceptions.ForbiddenErrorException;
+import com.example.clientproject.service.LoggingService;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
 import com.example.clientproject.services.BusinessRegisterDTO;
 import com.example.clientproject.services.BusinessRegisterSaver;
+import com.example.clientproject.services.UserLinked;
 import com.example.clientproject.services.UserShopLinked;
 import com.example.clientproject.web.forms.BusinessRegisterForm;
 import com.example.clientproject.web.forms.signUpAndIn.LoginForm;
@@ -21,32 +25,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class SignInController {
     public static boolean loggedIn = false;
-
     private UsersSearch usersSearch;
-
     private BusinessRegisterSaver saveBusiness;
-
     private JWTUtils jwtUtils;
-
-    private UserShopLinked userShopLinked;
-
+    private UserLinked userLinked;
     private UserPermissionsRepo userPermissionsRepo;
+    private CategoriesRepo catRepo;
+    private LoggingService loggingService;
 
     public SignInController(UsersSearch aUsersSearch, BusinessRegisterSaver sBusiness, JWTUtils ajwtUtils,
-                            UserShopLinked aUserShopLinked,
-                            UserPermissionsRepo aUserPermissionsRepo) {
+                            UserLinked aUserShopLinked,
+                            UserPermissionsRepo aUserPermissionsRepo,
+                            CategoriesRepo aCatRepo,
+                            LoggingService aLoggingService) {
         usersSearch = aUsersSearch;
         saveBusiness = sBusiness;
         jwtUtils = ajwtUtils;
-        userShopLinked = aUserShopLinked;
+        userLinked = aUserShopLinked;
         userPermissionsRepo = aUserPermissionsRepo;
+        catRepo = aCatRepo;
+        loggingService = aLoggingService;
     }
 
     @PostMapping("/businessRegister")
@@ -55,7 +58,7 @@ public class SignInController {
             System.out.println(bindingResult.getAllErrors());
             return "registerbusiness.html";
         }
-        saveBusiness.save(new BusinessRegisterDTO(brf), jwtUtils.getLoggedInUserId(session).get());
+        saveBusiness.save(new BusinessRegisterDTO(brf), jwtUtils.getLoggedInUserId(session).get(), session);
         return "redirect:/redirect?url=businessRegister";
     }
 
@@ -67,12 +70,14 @@ public class SignInController {
             return "redirect:/login";
         }
 
-        if(userShopLinked.hasShop(jwtUtils.getLoggedInUserId(session).get())){
-            long userId = jwtUtils.getLoggedInUserId(session).get();
-            long shopId = userPermissionsRepo.findByUserId(userId).get(0).getShop().getShopId();
-            return "redirect:/businessDetails?shopId="+shopId;
+        //System.out.println(userShopLinked.hasShop(jwtUtils.getLoggedInUserId(session).get()));
+        if(userLinked.isAnyAdmin(jwtUtils.getLoggedInUserId(session).get())){
+
+            int shopId = userLinked.userAdminShopId(jwtUtils.getLoggedInUserId(session).get());
+
+            return "redirect:/redirect?url=businessDetails?shopId="+shopId;
         }
-        ArrayList<String> categories = new ArrayList<>(Arrays.asList("Food and drink","Animals","Alcohol"));
+        List<Categories> categories = catRepo.findAll();
         model.addAttribute("loggedInUser", user.get());
         model.addAttribute("categories", categories);
         model.addAttribute("loggedIn", loggedIn);
@@ -116,7 +121,7 @@ public class SignInController {
             return "account-login.html";
         }
 
-        Optional<UsersDTO> usersDTOOptional = usersSearch.findByEmail(loginForm.getLoginEmail());
+        Optional<UsersDTO> usersDTOOptional = usersSearch.findByEmail(loginForm.getLoginEmail().toLowerCase());
         // If the optional is present - the search found a user with that email
         if (usersDTOOptional.isPresent()) {
             // Check the password given (after encoding) and the user's DB password match
@@ -133,14 +138,34 @@ public class SignInController {
                         (int) usersDTOOptional.get().getUserId(),
                         session);
                 loggedIn = true;
+                // Log the successful login
+                loggingService.logEvent(
+                        "Successful Login",
+                        session,
+                        "Successful login with User Id: " + usersDTOOptional.get().getUserId()
+                );
             // Otherwise, throw an exception with the correct error message
             } else {
+                // Log the failed login
+                loggingService.logEvent(
+                        "Failed Login",
+                        session,
+                        "Failed login with User Email: " + usersDTOOptional.get().getUserEmail() +
+                                " due to incorrect password"
+                );
                 //Changed this as it is a security risk exposing which field is incorrect
                 //throw new ForbiddenErrorException("Password Incorrect");
                 throw new ForbiddenErrorException("Details Incorrect");
             }
         // Else - assumes that the email is incorrect
         } else {
+            // Log the successful login
+            loggingService.logEvent(
+                    "Failed Login",
+                    session,
+                    "Failed login with Email: " + loginForm.getLoginEmail() +
+                            " due to incorrect email"
+            );
             //Changed this as it is a security risk exposing which field is incorrect
             //throw new ForbiddenErrorException("Email Incorrect");
             throw new ForbiddenErrorException("Details Incorrect");

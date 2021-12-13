@@ -16,4 +16,5 @@ public class UserFavouriteDTO {
                 urf.getShopId()
         );
     }
+
 }

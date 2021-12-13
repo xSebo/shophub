@@ -1,0 +1,32 @@
+.text-align-center{
+    text-align: center;
+}
+
+.custom-panel{
+  width: 600px !important;
+}
+
+.custom-record{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: baseline;
+}
+
+.super-admin-field{
+  margin-top: 4px;
+  width: 200px;
+}
+
+a.panel-block, label.panel-block {
+    cursor: default !important;
+}
+
+.vertScrollbarIfOverflow{
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.custom-record.hidden{
+  display: none !important;
+}

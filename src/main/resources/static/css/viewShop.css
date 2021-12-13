@@ -4,3 +4,228 @@
   height: 60vh;
   top: 4vh;
 }
+
+.shopName{
+  font-size: 45px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card-styling{
+  width: 550px;
+  margin: 15px;
+}
+
+.businessImg{
+  height: 413px !important;
+  width: 550px !important;
+}
+
+.imageSize{
+  height: 150px !important;
+  width: 150px !important;
+}
+
+.socialMediaContainer{
+  float: left;
+  width: 320px;
+  height: 130px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.mousePointerWhenHovered{
+  cursor: pointer;
+}
+
+.websiteLinkText{
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+}
+
+.stampBoard{
+  width: 400px;
+  height: 195px;
+  background-color: grey;
+  border-radius: 30px 30px 0px 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.stamp{
+  margin: 15px;
+  margin-bottom: 0px;
+  height: 70px;
+  width: 70px;
+  border-radius: 35px;
+  text-align: center;
+  background-color: white;
+  font-size: 40px;
+  font-weight: lighter;
+}
+
+img.stamp{
+    height: 70px;
+    width: 70px;
+    padding: 10px;
+}
+
+.multi-page-container{
+  position: relative;
+}
+
+.container1{
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.stampNavBar{
+  width: 400px;
+  height: 35px;
+  align-items: stretch;
+  display: flex;
+}
+
+.stampNavBar>div {
+  flex: 1;
+  border-top-width: 2px;
+}
+
+
+.stampNavButton{
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  font-weight: bold;
+  background-color: grey;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.stampNavButton:hover{
+  color:black;
+  transform: scale(1.1);
+}
+
+.rewardsContainer{
+  width: 400px;
+  height: 550px;
+  border-radius: 0px 0px 30px 30px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.reward {
+  border-top-style: solid;
+  border-top-width: 1px;
+  height: 125px;
+}
+
+.buttonRewardNotReady{
+  background-color: rgb(216, 216, 216);
+  float: right;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.buttonRewardisReady{
+  background-color: #48c774;
+  float: right;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.stampProgressText{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 7px;
+}
+
+.reward-text{
+  font-size: 15px;
+  margin: 13px;
+  max-width: 200px;
+  font-weight: bold;
+  float: left;
+}
+
+.marginBottom7px{
+  margin-bottom: 7px;
+}
+
+.vertScrollbarIfOverflow{
+    max-height: 550px;
+    overflow-y: auto;
+}
+
+.fullscreen-flex-container {
+    display: flex;
+    justify-content: space-around;
+    height: 100vh;
+    flex-direction: row-reverse;
+}
+
+.left{
+  display: flex;
+  height: inherit;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.right{
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.change-stamp-progress-container{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 70%;
+  right: 3%;
+  width: 10px;
+}
+
+.reward-box{
+  width: inherit;
+
+}
+
+.text-align-center{
+  text-align: center;
+}
+
+.inherit-width{
+  width: inherit;
+}
+
+.reward-claim-title{
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.big-margin-top{
+  margin-top: 70px;
+}
+
+.reward-claim-code{
+  color: black;
+  font-weight: bold;
+  font-size: 60px;
+}
+
+.custom-modal-card-body{
+  background-color: #fff;
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 20px;
+  height: 400px;
+  border-radius: 0px 0px 10px 10px;
+}

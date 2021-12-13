@@ -1,5 +1,6 @@
 package com.example.clientproject.data.users;
 
+import com.example.clientproject.data.logs.Logs;
 import com.example.clientproject.data.shops.Shops;
 import com.example.clientproject.data.userStampBoards.UserStampBoards;
 import com.example.clientproject.data.tags.Tags;
@@ -90,5 +91,10 @@ public class Users {
             inverseJoinColumns = @JoinColumn(name="Tag_Id")
     )
     private List<Tags> favouriteTags;
+
+    public String toString(){
+        return "User:" + this.getUserFirstName();
+    }
+
 
 }

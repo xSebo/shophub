@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link th:replace="fragments/libs.html :: bulma"/>
+  <link th:replace="fragments/libs.html :: fa"/>
+  <link th:replace="fragments/nav.html :: nav-css"/>
+  <link th:fragment="superAdminCSS" rel="stylesheet" type="text/css" href="css/superAdmin.css">
+  <script th:fragment="superAdminJs" src="js/superAdmin.js"></script>
+  <title>Super Admin</title>
+</head>
+  <body th:fragment="super-admin-page">
+    <article class="panel is-info custom-panel">
+    <p class="panel-heading text-align-center">
+      Swap to shop admin account
+    </p>
+    <div class="panel-block">
+      <p class="control has-icons-left">
+        <input class="input is-info" type="text" placeholder="Search" oninput="searchBusinessOwners(event)" id="superAdminSearch">
+        <span class="icon is-left">
+          <i class="fas fa-search" aria-hidden="true"></i>
+        </span>
+      </p>
+    </div>
+    <div class="vertScrollbarIfOverflow">
+    <span th:each="record : ${allShopOwners}" class="panel-block custom-record">
+      <div class="super-admin-field" th:text="${record.getShopName}">
+        <span class="panel-icon">
+          <i class="fas fa-shopping-cart" style="margin-top: 5px;"></i>
+        </span>
+      </div>
+      <div class="super-admin-field" th:text="${record.getUserName}">Ethan Allen-Harris</div>
+      <button class="button is-success is-small is-rounded" th:onclick="changeAccount([[${record.getUserId}]])">Swap</button>
+    </span>
+    </div>
+  </article>
+</body>

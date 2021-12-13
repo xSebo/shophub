@@ -3,6 +3,7 @@ package com.example.clientproject.web.controllers.signUpAndIn;
 import com.example.clientproject.data.twoFactorMethods.TwoFactorMethods;
 import com.example.clientproject.data.users.Users;
 import com.example.clientproject.data.users.UsersRepo;
+import com.example.clientproject.service.LoggingService;
 import com.example.clientproject.service.Utils.JWTUtils;
 import com.example.clientproject.service.dtos.UsersDTO;
 import com.example.clientproject.service.searches.UsersSearch;
@@ -25,11 +26,13 @@ public class SignUpController {
     private UsersSearch usersSearch;
     private UsersRepo usersRepo;
     private JWTUtils jwtUtils;
+    private LoggingService loggingService;
 
-    public SignUpController(UsersSearch aUsersSearch, UsersRepo aUsersRepo, JWTUtils jwt) {
+    public SignUpController(UsersSearch aUsersSearch, UsersRepo aUsersRepo, JWTUtils jwt, LoggingService aLoggingService) {
         this.usersSearch = aUsersSearch;
         this.usersRepo = aUsersRepo;
         this.jwtUtils = jwt;
+        this.loggingService = aLoggingService;
     }
 
     @GetMapping("/signUp")
@@ -58,10 +61,8 @@ public class SignUpController {
         Optional<UsersDTO> usersDTOOptional = usersSearch.findByEmail(signUpForm.getNewUserEmail());
         // If one does
         if (usersDTOOptional.isPresent()) {
-            // Set a boolean flag to true
-            boolean emailInUse = true;
             // Add it to the model to alert the user
-            model.addAttribute("emailInUse", emailInUse);
+            model.addAttribute("emailInUse", true);
             // Return to the SignUp page
             return "signUp.html";
         // Otherwise
@@ -73,7 +74,7 @@ public class SignUpController {
             Users newUser = new Users(
                     signUpForm.getNewUserForename(),
                     signUpForm.getNewUserLastname(),
-                    signUpForm.getNewUserEmail(),
+                    signUpForm.getNewUserEmail().toLowerCase(),
                     passwordEncoder.encode(signUpForm.getNewUserPassword()),
                     signUpForm.getUserProfilePicture(),
                     new TwoFactorMethods(1, "None")
@@ -81,12 +82,22 @@ public class SignUpController {
 
             // Save the new user
             usersRepo.save(newUser);
+            System.out.println(newUser.getUserEmail());
+
             // Get the user
-            usersDTOOptional = usersSearch.findByEmail(signUpForm.getNewUserEmail());
+            usersDTOOptional = usersSearch.findByEmail(signUpForm.getNewUserEmail().toLowerCase());
             // Create a JWTSession
             jwtUtils.makeUserJWT(
                     (int) usersDTOOptional.get().getUserId(),
                     httpSession);
+
+            // Log the change
+            loggingService.logEvent(
+                    "New Shop User",
+                    httpSession,
+                    "New user created with Email: " + newUser.getUserEmail() +
+                            " in SignUpController.signUpPost()"
+            );
             // Redirect to the dashboard
             return "redirect:/dashboard";
         }

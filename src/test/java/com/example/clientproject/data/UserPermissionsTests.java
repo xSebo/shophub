@@ -48,12 +48,12 @@ public class UserPermissionsTests {
     @Test
     public void shouldGet18Permissions() {
         List<UserPermissions> userPermissionsList = userPermissionsRepo.findAll();
-        assertEquals(18, userPermissionsList.size());
+        assertEquals(13, userPermissionsList.size());
     }
 
     @Test
     public void shouldGet19PermissionsAfterInsert() throws Exception {
-        Shops newShop = new Shops("", "", "", 0, "", "", true, stampRepo.getById(1L), categoriesRepo.getById(1L));
+        Shops newShop = new Shops("", "", "", 0, "", "", "", true, stampRepo.getById(1L), categoriesRepo.getById(1L));
         shopsRepo.save(newShop);
         TwoFactorMethods twoFactorMethods = twoFactorMethodsRepo.findByTwoFactorMethodId(1).get();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -67,6 +67,6 @@ public class UserPermissionsTests {
         userPermissionsRepo.save(newUserPermission);
 
         List<UserPermissions> userPermissionsList = userPermissionsRepo.findAll();
-        assertEquals(19, userPermissionsList.size());
+        assertEquals(14, userPermissionsList.size());
     }
 }

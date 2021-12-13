@@ -4,6 +4,7 @@ import com.example.clientproject.data.stampBoards.StampBoards;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,9 +22,19 @@ public interface RewardsRepo extends JpaRepository<StampBoards, Long> {
 
     /**
      * Find a Reward by the name
-     * @param rewardName - name of the Reward to find
+     * @param rewardId Id of reward to find
      * @return - Optional object containing the Reward found, if it's present
      */
     @Query("select r from Rewards r where r.rewardId = ?1")
-    Optional<Rewards> findByRewardName(String rewardName);
+    Optional<Rewards> findByRewardId(long rewardId);
+
+
+    /**
+     * Find a Reward by the name
+     * @param rewardId Id of reward to find
+     * @return - Optional Integer containing the reward, if it's present
+     */
+    @Query("select r.rewardStampLocation from Rewards r where r.rewardId = ?1")
+    Optional<Integer> getRewardValueFromId(long rewardId);
+
 }

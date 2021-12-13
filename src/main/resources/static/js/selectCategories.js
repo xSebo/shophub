@@ -33,18 +33,43 @@ function submitCategories(listSize){
         xhttp.onload = function () {
             if (xhttp.readyState === 4 && xhttp.status === 200) {
                 console.log(xhttp.responseText);
+                window.location.reload(true);
             } else if (xhttp.readyState === 401) {
                 status.innerHTML = "Check the credentials and try again.";
             } else {
                 status.innerHTML = "There was an error try again later.";
             }
         };
-        xhttp.onerror = function () {
-            status.innerHTML = "There was an error. Please try again later.";
-        }
+            xhttp.onerror = function () {
+                status.innerHTML = "There was an error. Please try again later.";
+            }
         xhttp.send(params);
-        window.location.reload(true);
         return false;
     }
 
 }
+
+function filterRewards(input){
+    let added = 0;
+    let rewards = document.getElementsByClassName("reward_card");
+    for(let reward of rewards){
+        let title = reward.getElementsByClassName("title")[0].innerText
+        if(title.toLowerCase().replace(" ","").includes(input.value.toString().toLowerCase().replace(" ", ""))){
+            reward.parentElement.classList.remove("hidden")
+        }else{
+            reward.parentElement.classList.add("hidden")
+            added++;
+        }
+    }
+
+    if (added == rewards.length){
+        document.getElementById("filterText").style.display = "block";
+    }else{
+        document.getElementById("filterText").style.display = "none";
+    }
+}
+
+
+
+
+

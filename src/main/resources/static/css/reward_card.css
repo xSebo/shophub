@@ -5,6 +5,15 @@
     display: inline-flex;
     flex-direction: row;
     margin-right: 20px;
+    min-height: 198px;
+}
+
+.hidden{
+    display:none;
+}
+
+.reward_card.hidden{
+    display: none;
 }
 
 .reward_card_content{
@@ -13,6 +22,7 @@
     padding: 10px 15px;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
 }
 
 .reward_card_img{

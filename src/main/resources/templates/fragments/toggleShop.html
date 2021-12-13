@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/deleteShop.css">
+    <!-- I am using same css file as deleteShop.html because these are both very similarly styled -->
+    <script th:fragment="toggleShopJS" src="js/toggleShop.js"></script>
+</head>
+<body th:fragment="toggleShop">
+  <div class="content-container">
+    <p class="title-red">Toggle Live</p>
+    <p th:if="${shopActive[0] == 1}" class="info-text" id="status-text">Your site is currently LIVE, changing this will hide your site from all customers.</p>
+    <p th:if="${shopActive[0] == 0}" class="info-text" id="status-text">Your site is currently not LIVE, changing this will show your site to anyone on ShopHub.</p>
+    <button class="button is-danger is-small is-outlined" style="margin-top: 10px;" th:onclick="toggleShop([[${shop.shopId}]])">Toggle</button>
+  </div>
+  <p class="horizontal-line"><br></p>
+</body>
+
+</html>

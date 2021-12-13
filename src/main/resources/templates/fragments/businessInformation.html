@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script th:fragment="infoJs" src="js/businessInformation.js"></script>
+</head>
+<body th:fragment="keyInformation">
+<div style="width:50%">
+    <h6 class="title is-6" style="margin-top: 5px; margin-bottom: 25px">Key Information</h6>
+
+    <p class="subtitle is-6" style="margin-bottom:3px;margin-top: 10px">Shop Name</p>
+    <input type="text" th:value="${shop.shopName}" id="nameInput" class="input">
+
+    <p class="subtitle is-6" style="margin-bottom:3px;margin-top: 10px">Description</p>
+    <textarea class="textarea" id="descriptionInput" maxlength="250" th:text="${shop.shopDescription}" cols="30" rows="10"></textarea>
+
+    <p class="subtitle is-6" style="margin-bottom:3px;margin-top: 10px">Banner</p>
+    <img class="mb-3" id="bannerPreview" th:src="${shop.shopBanner}" style="margin-top: 5px; max-height: 100px">
+    <div class="file has-name mb-5">
+        <label class="file-label">
+            <input class="file-input" type="file" name="icon" accept="image/*" id="bannerInput" onchange="loadImagePreview(event, 'bannerPreview', 'bannerName')">
+            <span class="file-cta">
+        <span class="file-icon">
+            <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label">
+            Choose a banner…
+        </span>
+    </span>
+            <span class="file-name" id="bannerName">No File Selected</span>
+        </label>
+    </div>
+
+    <p class="subtitle is-6" style="margin-bottom:3px;margin-top: 10px">Logo</p>
+    <img class="mb-3" id="logoPreview" th:src="${shop.shopImage}" style="margin-top: 5px; max-height: 100px">
+    <div class="file has-name mb-5">
+        <label class="file-label">
+            <input class="file-input" type="file" name="icon" accept="image/*" id="logoInput" onchange="loadImagePreview(event, 'logoPreview', 'logoName')">
+            <span class="file-cta">
+        <span class="file-icon">
+            <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label">
+            Choose a logo…
+        </span>
+    </span>
+            <span class="file-name" id="logoName">No File Selected</span>
+        </label>
+    </div>
+
+    <button id="saveInfoButton" th:onclick="'submitInfo('+ ${shop.shopId} +');'" class="button is-link" style="margin-top:15px; margin-bottom:10px;">Save changes</button>
+    <p class="help is-success" id="infoSuccess"></p>
+</div>
+<p style="border-bottom: #000000 1px solid;"></p>
+</body>
+</html>

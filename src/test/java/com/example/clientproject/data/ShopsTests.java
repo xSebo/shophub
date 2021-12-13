@@ -30,22 +30,22 @@ public class ShopsTests {
     CategoriesRepo categoriesRepo;
 
     @Test
-    public void shouldGet11Shops() throws Exception {
+    public void shouldGet19Shops() throws Exception {
         List<Shops> shopsList = shopsRepo.findAll();
-        assertEquals(11, shopsList.size());
+        assertEquals(21, shopsList.size());
     }
 
     @Test
-    public void shouldGet12ShopsAfterInsert() throws Exception {
-        Shops newShop = new Shops("", "", "", 0, "", "", true, stampRepo.getById(1L), categoriesRepo.getById(1L));
+    public void shouldGet20ShopsAfterInsert() throws Exception {
+        Shops newShop = new Shops("", "", "", 0, "","", "", true, stampRepo.getById(1L), categoriesRepo.getById(1L));
         Shops shop = shopsRepo.save(newShop);
 
         List<Shops> shopsList = shopsRepo.findAll();
-        assertEquals(12, shopsList.size());
+        assertEquals(22, shopsList.size());
     }
 
     @ParameterizedTest
-    @CsvSource({"1,11","2,0","4,0"})
+    @CsvSource({"1,1","2,5","4,5","100,0"})
     public void shouldGetXShopsFromCategories(long categoryId, int numExpected) {
         List<Shops> shopsList = shopsRepo.findByCategoryId(categoryId);
         assertEquals(numExpected, shopsList.size());

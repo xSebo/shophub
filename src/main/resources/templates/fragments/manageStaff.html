@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link ref="stylesheet" type="text/css" href="css/manageStaff.css"/>
+    <script src="js/manageStaff.js"></script>
+</head>
+<body th:fragment="manageStaffMembers">
+<div class="wholeStaffContainer" style="width:100%">
+
+    <h6 class="title is-6">Site Admins</h6>
+    <p>Invite an admin</p>
+    <div class="emailInputContainer" style="width:50%">
+        <input id="emailAddress" class="input" placeholder="Email Address">
+        <button class="button" th:onclick="'submit('+${shop.shopId}+', this);'">
+            <span class="icon is-small">
+                <i class="fas fa-plus"></i>
+            </span>
+        </button>
+    </div>
+    <p class="help is-danger" id="emailErrorField"></p>
+    <p><br>Current Admins</p>
+    <div id="staffManagement"></div>
+    <div id="staffManagement" th:each="user : ${staffMembers}">
+        <div class="staffManagementContainer" style="margin-bottom:1%;">
+        <p class="subtitle is-6 staffEmail" name="staffEmail" th:text="${user.userEmail}" style="width:80%; margin-bottom: 0"></p>
+        <button class="button is-danger is-outlined" th:onclick="'submit('+${shop.shopId}+',this);'">
+            <span class="icon is-small">
+                <i class="fas fa-times is-danger"></i>
+            </span>
+        </button>
+        </div>
+
+    </div>
+    <input id="shopId" class="input is-hidden" th:value="${shop.shopId}">
+
+</div>
+</body>

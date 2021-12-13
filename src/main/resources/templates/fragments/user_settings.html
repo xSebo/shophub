@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link th:replace="fragments/libs.html :: bulma"/>
+        <link th:replace="fragments/libs.html :: fa"/>
+        <link th:replace="fragments/nav.html :: nav-css"/>
+    </head>
+
+    <body th:fragment="settings_page">
+        <div>
+            <h1 class="title">Profile Settings</h1>
+
+            <div id="nameEmailProfile">
+                <h2 class="title is-4 secondary mb-2">Name, email and profile picture</h2>
+
+                <div>
+                    <div class="field">
+                        <span class="control">
+                            <label style="font-size:15px;" for="newFirstName">First Name</label><br>
+                            <input style="width:30%; border-radius:10px" class="input mb-4 is-medium" type="text" id="newFirstName" th:value="${loggedInUser.getUserFirstName()}">
+
+                            <br>
+
+                            <label style="font-size:15px" for="newLastName">Last Name</label><br>
+                            <input style="width:30%; border-radius:10px" class="input mb-4 is-medium" type="text" id="newLastName" th:value="${loggedInUser.getUserLastName()}">
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <span class="control">
+                            <label style="font-size:15px" for="newEmail">Email</label><br>
+                            <input style="width:30%; border-radius:10px" class="input mb-4 is-medium" type="email" id="newEmail" th:value="${loggedInUser.getUserEmail()}">
+                        </span>
+                    </div>
+
+                    <div class="field has-name">
+                        <span class="control">
+                            <p style="font-size:15px">Profile Picture</p>
+                            <label class="file-label is-flex is-justify-content-flex-start is-align-items-center" for="newProfilePicture">
+                                <img style="width:50px; height:50px; border-radius: 500px;" class="mr-2" th:src="${loggedInUser.getUserProfilePicture()}" alt="Old Profile Picture" id="profilePicPreview"><br>
+                                <input class="file-input mb-4" type="file" id="newProfilePicture" onchange="loadNewPicture(event)">
+
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+
+                                    <span class="file-label">
+                                        Choose a file…
+                                    </span>
+                                </span>
+                                <span class="file-name" id="newPicFileName">No File Selected</span>
+                            </label>
+                        </span>
+                    </div>
+
+                    <button class="button is-link signIn-Button mt-4" onclick="saveNameEmailProfileChanges()">Save Changes</button>
+                </div>
+
+                <h2 class="help is-success" style="display:none;" id="profileDetailsChangeSuccess">Details Change Successful</h2>
+                <h2 class="help is-danger" style="display:none;" id="profileDetailsChangeFailure">Details Change Failed</h2>
+
+            </div>
+
+            <hr style="color:black; height:3px; opacity:100%">
+
+            <div id="passwordChange">
+                <h2 class="title is-4 secondary mb-2">Change Password</h2>
+                <br>
+
+                <div>
+                    <span class="control">
+                        <label style="font-size:15px" for="oldPassword">Old Password</label><br>
+                        <input style="width:30%; border-radius:10px" class="input mb-4 is-medium" type="password" id="oldPassword" name="oldPassword"/>
+                    </span>
+
+                    <br>
+
+                    <span class="control">
+                        <label style="font-size:15px" for="newPassword">New Password</label><br>
+                        <input style="width:30%; border-radius:10px" class="input mb-4 is-medium" type="password" id="newPassword" name="newPassword"/>
+                    </span>
+
+                    <br>
+
+                    <span class="control">
+                        <label style="font-size:15px" for="newPasswordConfirm">Confirm New Password</label><br>
+                        <input style="width:30%; border-radius:10px" class="input mb-4 is-medium" type="password" id="newPasswordConfirm" name="newPasswordConfirm"/>
+                    </span>
+
+                    <br>
+
+                    <button onclick="savePasswordChanges()" class="button is-link signIn-Button mt-4" id="passwordSubmitButton">Save Changes</button>
+                </div>
+
+                <h2 class="help is-success" style="display:none;" id="passwordChangeSuccess">Password Change Success</h2>
+                <h2 class="help is-danger" style="display:none;" id="passwordChangeFailure">Password Change Failure</h2>
+            </div>
+        </div>
+    </body>
+</html>

@@ -26,11 +26,11 @@
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link" th:inline="text">
                     [['Hi ' + ${loggedInUser.getUserFirstName()} + '!']]
-                    <div class="nav_profile_img" style="background-image: url('imgs/profile.jpg')"></div>
+                    <div class="nav_profile_img" th:style="'background-image: url(\''+${loggedInUser.getUserProfilePicture()}+'\')'"></div>
                 </a>
 
                 <div class="navbar-dropdown is-right">
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="/settings">
                         <span class="icon mr-2"><i class="fas fa-cog"></i></span>
                         Settings
                     </a>
