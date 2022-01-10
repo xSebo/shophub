@@ -18,9 +18,12 @@ public class ClientProjectApplication {
         SpringApplication.run(ClientProjectApplication.class, args);
     }
 
+
+//  https://github.com/dangeabunea/RomanianCoderExamples/blob/master/SpringBootSecurity/Jwt/src/main/java/rc/bootsecurity/BootSecurityApplication.java
+//  -------------------------------------------------------------------------------
     @Bean
     public ServletWebServerFactory servletContainer() {
-        // Enable SSL Trafic
+        // Enable SSL Traffic
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
             @Override
             protected void postProcessContext(Context context) {
@@ -52,6 +55,8 @@ redirected to HTTPS on 8443.
         connector.setRedirectPort(8443);
         return connector;
     }
+    //  -------------------------------------------------------------------------------
+
 
 }
 
