@@ -74,6 +74,15 @@ function saveNameEmailProfileChanges() {
         // Create a new XMLHttpRequest object
         var xhttp = new XMLHttpRequest();
 
+        newEmail = newEmail.toString()
+
+        const regexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (!newEmail.match(regexp)) {
+        // on error, we get into the condition
+            document.getElementById("submissionInfo").innerHTML = "Bad email!";
+            return;
+        }
+
         // Create a params object
         let params= "newFirstName=" + newFirstName.toString() +
             "&newLastName=" + newLastName.toString() +
