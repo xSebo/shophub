@@ -74,11 +74,12 @@ function saveNameEmailProfileChanges() {
         // Create a new XMLHttpRequest object
         var xhttp = new XMLHttpRequest();
 
+
+        //https://stackoverflow.com/questions/46155/whats-the-best-way-to-validate-an-email-address-in-javascript
         newEmail = newEmail.toString()
 
         const regexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (!newEmail.match(regexp)) {
-        // on error, we get into the condition
             document.getElementById("submissionInfo").innerHTML = "Bad email!";
             return;
         }
