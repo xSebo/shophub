@@ -4,7 +4,6 @@ from suites.categorySelection import CategorySelection
 from suites.dashboard import Dashboard
 from suites.stamps import Stamps
 from suites.nav import Nav
-from suites.superAdmin import SuperAdmin
 from modules.main import *
 import os
 os.system('color')
@@ -20,8 +19,7 @@ suites = {
     "categorySelection":CategorySelection(options),
     "nav":Nav(options),
     "dashboard":Dashboard(options),
-    "stamps":Stamps(options),
-    "superAdmin":SuperAdmin(options)
+    "stamps":Stamps(options)
 }
 
 def runAllSuites():
@@ -46,4 +44,4 @@ def runSuite(name):
         error("Suite does not exist")
 
 #runAllSuites()
-runSuite("superAdmin")
+runSuite("stamps")
