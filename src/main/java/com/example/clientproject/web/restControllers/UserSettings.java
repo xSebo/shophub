@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 public class UserSettings {
@@ -38,6 +40,18 @@ public class UserSettings {
     @PostMapping("/nameEmailProfilePicture/update")
     public String nameEmailProfilePictureChangePost(NameEmailProfileChangeForm nameEmailProfileChangeForm,
                                                     HttpSession httpSession) {
+
+
+
+//        https://stackoverflow.com/questions/18463848/how-to-tell-if-a-random-string-is-an-email-address-or-something-else/54122601
+        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+        Matcher mat = pattern.matcher(nameEmailProfileChangeForm.getNewEmail());
+
+        if(!mat.matches()){
+            return "BAD EMAIL";
+        }
+
+
         // Get the userId for the currently logged-in user
         int userId = jwtUtils.getLoggedInUserId(httpSession).get();
 

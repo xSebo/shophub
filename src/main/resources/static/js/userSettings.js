@@ -49,9 +49,11 @@ function saveNameEmailProfileChanges() {
                         var response = xhttp.responseText
                         // If the text is "success"
                         if (response == "success"){
+                            console.log("test1")
                             document.getElementById("profileDetailsChangeFailure").style.display = "none";
                             document.getElementById("profileDetailsChangeSuccess").style.display = "block";
                         }else{
+                            console.log("test2")
                             document.getElementById("profileDetailsChangeSuccess").style.display = "none";
                             document.getElementById("profileDetailsChangeFailure").style.display = "block";                        }
                         // Otherwise
@@ -89,10 +91,15 @@ function saveNameEmailProfileChanges() {
                     var response = xhttp.responseText
                     // If the text is "success"
                     if (response == "success"){
+                        document.getElementById("submissionInfo").innerHTML = "";
                         document.getElementById("profileDetailsChangeFailure").style.display = "none";
                         document.getElementById("profileDetailsChangeSuccess").style.display = "block";
                     }
+                    else{
+                        document.getElementById("submissionInfo").innerHTML = "Bad email!";
+                    }
                 } else {
+                    document.getElementById("submissionInfo").innerHTML = "";
                     document.getElementById("profileDetailsChangeSuccess").style.display = "none";
                     document.getElementById("profileDetailsChangeFailure").style.display = "block";
                 }
