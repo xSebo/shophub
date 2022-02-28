@@ -292,10 +292,10 @@ ENGINE = InnoDB;
 
     
 
-INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, 'None');
-INSERT INTO two_factor_methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (2, 'GAuth');
+INSERT INTO Two_Factor_Methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (1, 'None');
+INSERT INTO Two_Factor_Methods (`Two_Factor_Method_Id`, `Two_Factor_Method_Name`) VALUES (2, 'GAuth');
 
-INSERT INTO stamp_boards (Stamp_Board_Id, Stamp_Board_Size) VALUES (1, 0);
+INSERT INTO Stamp_Boards (Stamp_Board_Id, Stamp_Board_Size) VALUES (1, 0);
 
 INSERT INTO Categories (Category_Id, Category_Name) VALUES (1, '');
 INSERT INTO Categories (Category_Name) VALUES ('Hospitality');
@@ -367,16 +367,16 @@ DROP PROCEDURE IF EXISTS `deleteShop`;
 DELIMITER $$
 CREATE PROCEDURE `deleteShop`(in Shop_Id_In varchar(6))
 BEGIN
-DELETE FROM user_shop_links WHERE Shop_Id = Shop_Id_In;
-DELETE FROM socials WHERE Shop_Id = Shop_Id_In;
-DELETE FROM shop_tag_links WHERE Shop_Id = Shop_Id_In;
-DELETE FROM user_permissions WHERE Shop_Id = Shop_Id_In;
-SELECT @StampBoardID_var := Stamp_Board_Id FROM shops WHERE Shop_Id = Shop_Id_In;
+DELETE FROM User_Shop_Links WHERE Shop_Id = Shop_Id_In;
+DELETE FROM Socials WHERE Shop_Id = Shop_Id_In;
+DELETE FROM Shop_Tag_Links WHERE Shop_Id = Shop_Id_In;
+DELETE FROM User_Permissions WHERE Shop_Id = Shop_Id_In;
+SELECT @StampBoardID_var := Stamp_Board_Id FROM Shops WHERE Shop_Id = Shop_Id_In;
 SET FOREIGN_KEY_CHECKS=0;
-DELETE FROM rewards WHERE Stamp_Board_Id = @StampBoardID_var;
-DELETE FROM stamp_boards WHERE Stamp_Board_Id = @StampBoardID_var;
-DELETE FROM user_stamp_boards WHERE Stamp_Board_Id = (SELECT Stamp_Board_Id FROM shops WHERE Shop_Id = Shop_Id_In); -- some reason this table wouldn't delete so I used this
-DELETE FROM shops WHERE Shop_Id = Shop_Id_In;
+DELETE FROM Rewards WHERE Stamp_Board_Id = @StampBoardID_var;
+DELETE FROM Stamp_Boards WHERE Stamp_Board_Id = @StampBoardID_var;
+DELETE FROM User_Stamp_Boards WHERE Stamp_Board_Id = (SELECT Stamp_Board_Id FROM Shops WHERE Shop_Id = Shop_Id_In); -- some reason this table wouldn't delete so I used this
+DELETE FROM Shops WHERE Shop_Id = Shop_Id_In;
 SET FOREIGN_KEY_CHECKS=1;
 END $$
 
