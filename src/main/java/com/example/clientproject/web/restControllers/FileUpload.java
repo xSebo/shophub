@@ -28,7 +28,7 @@ public class FileUpload {
     @PostMapping("/upload") // //new annotation since 4.3
     public String singleFileUpload(@RequestParam("file") MultipartFile file) {
 
-        removeFiles.deleteFiles();
+        //removeFiles.deleteFiles();
 
         if (file.isEmpty()) {
             throw new ForbiddenErrorException("No file");

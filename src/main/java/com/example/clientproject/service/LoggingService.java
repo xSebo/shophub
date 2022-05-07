@@ -42,6 +42,40 @@ public class LoggingService {
      * @param session - the session
      * @param details - details of the event
      */
+
+    public Optional<Logs> createLog(String event, HttpSession session, String details){
+        // If the user attempting to log is not logged in
+        if (!jwtUtils.getLoggedInUserId(session).isPresent()) {
+            return Optional.empty();
+        }
+
+        // Instantiate a flagging variable
+        boolean superAdminStatus;
+        // If the session attribute "superAdmin" doesn't exist (super admin not logged in)
+        if (session.getAttribute("superAdmin") == null) {
+            // Set the flag to false
+            superAdminStatus = false;
+            // Else
+        } else {
+            // Set the flag to the state of the session attribute
+            superAdminStatus = (boolean) session.getAttribute("superAdmin");
+        }
+
+        // Instantiate a DateTimeFormatter with the correct format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        // Create a new Log object
+        Logs newLog = new Logs(
+                details,
+                LocalDateTime.now().format(formatter),
+                superAdminStatus,
+                jwtUtils.getLoggedInUserRow(session).get(),
+                findEventByName(event).get()
+        );
+        return Optional.of(newLog);
+
+    }
+
     public void logEvent(String event, HttpSession session, String details) {
         // If the user attempting to log is not logged in
         if (!jwtUtils.getLoggedInUserId(session).isPresent()) {

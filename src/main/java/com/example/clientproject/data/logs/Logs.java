@@ -40,4 +40,24 @@ public class Logs {
         user = aUser;
         event = aEvent;
     }
+
+    private int booleanConvert(boolean bool){
+        if(bool){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    public String toSql(boolean isFinal){
+        String query = "(" + event.getEventId() + "," +
+                user.getUserId() + ",'" + logDetails + "','" +
+                logDateTime + "'," + booleanConvert(logSuperAdmin) + ")";
+        if(isFinal){
+            query+=";";
+        }else{
+            query+=",";
+        }
+        return query;
+    }
 }
